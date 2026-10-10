@@ -1,1274 +1,475 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Student Toolkit AI | Learn Smarter</title>
-
-  <meta name="description"
-        content="Your education platform for textbooks, notes, sample papers, quizzes and AI-powered learning.">
-
-  <style>
-    :root {
-      --primary: #6555e8;
-      --primary-dark: #4938c5;
-      --background: #f6f7ff;
-      --text: #202344;
-      --muted: #727791;
-      --white: #ffffff;
-      --border: #e7e8f2;
-      --shadow: 0 12px 35px rgba(42, 43, 90, 0.07);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--background);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button, input, select {
-      font: inherit;
-    }
-
-    button, a {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .container {
-      width: min(1160px, 92%);
-      margin: auto;
-    }
-
-    /* HEADER */
-
-    header {
-      background: rgba(255, 255, 255, 0.96);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .navbar {
-      min-height: 76px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 21px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-
-    .logo-icon {
-      width: 43px;
-      height: 43px;
-      display: grid;
-      place-items: center;
-      background: var(--primary);
-      color: white;
-      border-radius: 14px;
-      font-size: 23px;
-    }
-
-    .logo span {
-      color: var(--primary);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    .nav-links a {
-      color: #525771;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-
-    .login-btn {
-      padding: 10px 17px;
-      border-radius: 10px;
-      background: var(--primary);
-      color: white !important;
-    }
-
-    /* HERO */
-
-    .hero {
-      padding: 76px 0 65px;
-      background:
-        radial-gradient(circle at 90% 10%, #e3e0ff 0, transparent 28%),
-        radial-gradient(circle at 5% 80%, #dff7ff 0, transparent 27%),
-        linear-gradient(135deg, #ffffff, #f0efff);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      align-items: center;
-      gap: 45px;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      padding: 7px 13px;
-      background: #eceaff;
-      color: var(--primary-dark);
-      border-radius: 30px;
-      font-size: 12px;
-      font-weight: 800;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-size: clamp(37px, 5vw, 60px);
-      line-height: 1.12;
-      letter-spacing: -2px;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-      color: var(--primary);
-    }
-
-    .hero-description {
-      max-width: 570px;
-      font-size: 17px;
-      color: var(--muted);
-      margin-bottom: 27px;
-    }
-
-    .button {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 9px;
-      padding: 13px 20px;
-      border: none;
-      border-radius: 12px;
-      background: var(--primary);
-      color: white;
-      font-weight: 800;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .button:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-    }
-
-    .button-outline {
-      background: white;
-      color: var(--text);
-      border: 1px solid var(--border);
-      margin-left: 8px;
-    }
-
-    .button-outline:hover {
-      background: #f3f2ff;
-      color: var(--primary);
-    }
-
-    .hero-note {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 17px;
-    }
-
-    .hero-visual {
-      background: white;
-      padding: 25px;
-      border-radius: 25px;
-      box-shadow: var(--shadow);
-      border: 1px solid #eeeeff;
-      transform: rotate(1deg);
-    }
-
-    .visual-heading {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 22px;
-    }
-
-    .visual-heading h3 {
-      font-size: 17px;
-    }
-
-    .online-badge {
-      font-size: 11px;
-      color: #168558;
-      background: #e4f9ef;
-      padding: 5px 9px;
-      border-radius: 20px;
-      font-weight: bold;
-    }
-
-    .visual-card {
-      padding: 16px;
-      border-radius: 15px;
-      margin-top: 12px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .visual-card:nth-child(2) {
-      background: #eeebff;
-    }
-
-    .visual-card:nth-child(3) {
-      background: #e7f7ff;
-    }
-
-    .visual-card:nth-child(4) {
-      background: #fff2df;
-    }
-
-    .visual-icon {
-      width: 46px;
-      height: 46px;
-      display: grid;
-      place-items: center;
-      border-radius: 13px;
-      background: white;
-      font-size: 23px;
-      flex-shrink: 0;
-    }
-
-    .visual-card h4 {
-      font-size: 14px;
-    }
-
-    .visual-card p {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    /* GENERAL SECTIONS */
-
-    section.content-section {
-      padding: 66px 0;
-      scroll-margin-top: 85px;
-    }
-
-    .section-heading {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 20px;
-      margin-bottom: 28px;
-    }
-
-    .section-heading h2 {
-      font-size: clamp(25px, 3vw, 34px);
-      letter-spacing: -0.8px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      margin-top: 5px;
-      max-width: 650px;
-    }
-
-    .section-tag {
-      color: var(--primary);
-      font-weight: 800;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    /* CLASS SELECTION */
-
-    .class-section {
-      background: white;
-    }
-
-    .class-groups {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 20px;
-    }
-
-    .class-group {
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 22px;
-      background: white;
-      transition: 0.25s;
-    }
-
-    .class-group:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow);
-    }
-
-    .class-group.colorful {
-      background: linear-gradient(150deg, #fff, #f1efff);
-    }
-
-    .class-group.middle {
-      background: linear-gradient(150deg, #fff, #eaf8ff);
-    }
-
-    .class-group.premium {
-      background: linear-gradient(150deg, #202344, #34365e);
-      color: white;
-      border-color: #34365e;
-    }
-
-    .group-icon {
-      font-size: 31px;
-      margin-bottom: 12px;
-    }
-
-    .class-group h3 {
-      font-size: 19px;
-      margin-bottom: 5px;
-    }
-
-    .class-group p {
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 17px;
-    }
-
-    .class-group.premium p {
-      color: #d5d7ed;
-    }
-
-    .class-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .class-button {
-      width: 43px;
-      height: 43px;
-      border: 1px solid #e2e1f8;
-      border-radius: 12px;
-      background: white;
-      color: #45446d;
-      font-weight: 800;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .class-button:hover,
-    .class-button.selected {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-      transform: scale(1.05);
-    }
-
-    .premium .class-button {
-      background: #383a61;
-      color: white;
-      border-color: #55577e;
-    }
-
-    .premium .class-button:hover,
-    .premium .class-button.selected {
-      background: #a8a1ff;
-      color: #202344;
-    }
-
-    .selected-class-box {
-      margin-top: 24px;
-      padding: 20px;
-      background: #f1efff;
-      border: 1px solid #e3dfff;
-      border-radius: 15px;
-      display: none;
-    }
-
-    .selected-class-box.active {
-      display: block;
-    }
-
-    .selected-class-box h3 {
-      margin-bottom: 5px;
-    }
-
-    .selected-class-box p {
-      color: #555a79;
-      margin-bottom: 14px;
-      font-size: 14px;
-    }
-
-    /* SEARCH */
-
-    .search-section {
-      background: #f6f7ff;
-    }
-
-    .search-bar {
-      display: flex;
-      gap: 10px;
-      max-width: 760px;
-      margin: 25px auto 0;
-      background: white;
-      padding: 9px;
-      border-radius: 15px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-
-    .search-bar input {
-      flex: 1;
-      min-width: 0;
-      border: none;
-      outline: none;
-      padding: 12px;
-      background: transparent;
-      color: var(--text);
-    }
-
-    .search-status {
-      max-width: 760px;
-      margin: 14px auto 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    /* RESOURCE CARDS */
-
-    .resource-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .resource-card {
-      background: white;
-      padding: 25px;
-      border: 1px solid var(--border);
-      border-radius: 19px;
-      transition: 0.25s;
-    }
-
-    .resource-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow);
-    }
-
-    .resource-card[hidden] {
-      display: none;
-    }
-
-    .resource-icon {
-      width: 55px;
-      height: 55px;
-      display: grid;
-      place-items: center;
-      border-radius: 16px;
-      font-size: 27px;
-      margin-bottom: 17px;
-    }
-
-    .purple {
-      background: #efedff;
-    }
-
-    .blue {
-      background: #e6f6ff;
-    }
-
-    .orange {
-      background: #fff1df;
-    }
-
-    .green {
-      background: #e5f9ef;
-    }
-
-    .pink {
-      background: #ffeaf3;
-    }
-
-    .yellow {
-      background: #fff8d9;
-    }
-
-    .resource-card h3 {
-      font-size: 19px;
-      margin-bottom: 7px;
-    }
-
-    .resource-card p {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 17px;
-    }
-
-    .text-link {
-      color: var(--primary);
-      font-weight: 800;
-      font-size: 14px;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
-    /* AI SECTION */
-
-    .ai-section {
-      background: white;
-    }
-
-    .ai-panel {
-      background: linear-gradient(120deg, #242548, #45407f);
-      color: white;
-      border-radius: 25px;
-      padding: 38px;
-      display: grid;
-      grid-template-columns: 1fr 0.9fr;
-      gap: 35px;
-      align-items: center;
-    }
-
-    .ai-panel .section-tag {
-      color: #bcb6ff;
-    }
-
-    .ai-panel h2 {
-      font-size: clamp(27px, 4vw, 38px);
-      line-height: 1.2;
-      margin: 12px 0;
-    }
-
-    .ai-panel p {
-      color: #e1e0f7;
-      margin-bottom: 20px;
-    }
-
-    .ai-panel .button {
-      background: white;
-      color: #393474;
-    }
-
-    .ai-preview {
-      background: white;
-      color: var(--text);
-      border-radius: 18px;
-      padding: 22px;
-    }
-
-    .ai-preview h3 {
-      margin-bottom: 5px;
-    }
-
-    .ai-preview > p {
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 15px;
-    }
-
-    .ai-preview textarea {
-      width: 100%;
-      height: 105px;
-      padding: 13px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      resize: vertical;
-      outline-color: var(--primary);
-      margin-bottom: 12px;
-    }
-
-    .ai-preview .button {
-      width: 100%;
-      background: var(--primary);
-      color: white;
-    }
-
-    .ai-message {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 12px;
-    }
-
-    /* FOOTER */
-
-    footer {
-      background: #202344;
-      color: white;
-      padding: 38px 0;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 18px;
-    }
-
-    footer p {
-      color: #c9cbe0;
-      font-size: 13px;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-      font-size: 13px;
-    }
-
-    .footer-links a:hover {
-      color: #c3beff;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 900px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-visual {
-        max-width: 570px;
-        width: 100%;
-        transform: none;
-      }
-
-      .class-groups {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .class-group.premium {
-        grid-column: 1 / -1;
-      }
-
-      .resource-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .ai-panel {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 620px) {
-      .navbar {
-        padding: 12px 0;
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .nav-links {
-        width: 100%;
-        gap: 15px;
-        overflow-x: auto;
-        padding-bottom: 5px;
-      }
-
-      .nav-links a {
-        white-space: nowrap;
-        font-size: 13px;
-      }
-
-      .login-btn {
-        display: none;
-      }
-
-      .hero {
-        padding: 48px 0;
-      }
-
-      .hero h1 {
-        letter-spacing: -1px;
-      }
-
-      .hero-description {
-        font-size: 15px;
-      }
-
-      .button-outline {
-        margin: 10px 0 0;
-      }
-
-      section.content-section {
-        padding: 45px 0;
-      }
-
-      .section-heading {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .class-groups,
-      .resource-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .class-group.premium {
-        grid-column: auto;
-      }
-
-      .search-bar {
-        flex-direction: column;
-      }
-
-      .search-bar .button {
-        width: 100%;
-      }
-
-      .ai-panel {
-        padding: 24px;
-      }
-
-      .footer-content {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Toolkit | Learn Better</title>
+<style>
+:root {
+  --primary: #5145e5;
+  --ink: #20213a;
+  --muted: #6b7280;
+  --bg: #f6f7ff;
+  --card: #ffffff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+}
+header {
+  background: white;
+  padding: 17px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  border-bottom: 1px solid #e8e8f2;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.logo { font-size: 23px; font-weight: 800; color: var(--primary); }
+.logo span { color: #f59e0b; }
+nav a {
+  text-decoration: none;
+  color: var(--ink);
+  margin-left: 18px;
+  font-weight: 600;
+  font-size: 14px;
+}
+.hero {
+  padding: 65px 6% 55px;
+  background: linear-gradient(125deg,#5145e5,#8875ff);
+  color: white;
+}
+.hero h1 { font-size: clamp(32px,5vw,54px); margin: 0 0 15px; }
+.hero p { font-size: 17px; line-height: 1.7; max-width: 650px; }
+.search {
+  display: flex;
+  gap: 10px;
+  max-width: 650px;
+  margin-top: 25px;
+}
+input, select, button {
+  font: inherit;
+  border-radius: 10px;
+  padding: 13px;
+}
+input, select {
+  border: 1px solid #dedff0;
+  background: white;
+  color: var(--ink);
+}
+.search input { flex: 1; min-width: 0; }
+button {
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:hover { filter: brightness(.94); }
+.hero button { background: #ffca64; color: #30234a; }
+main { max-width: 1150px; margin: auto; padding: 35px 20px 70px; }
+section { margin-bottom: 45px; }
+.section-title { font-size: 27px; margin-bottom: 8px; }
+.subtitle { color: var(--muted); line-height: 1.6; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(145px,1fr));
+  gap: 15px;
+  margin-top: 22px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid #e8e8f2;
+  border-radius: 17px;
+  padding: 21px;
+  box-shadow: 0 5px 20px #27275b08;
+}
+.class-card { cursor: pointer; transition: .2s; }
+.class-card:hover { transform: translateY(-4px); border-color: var(--primary); }
+.class-card .number { font-size: 29px; font-weight: 800; color: var(--primary); }
+.class-card h3 { margin: 12px 0 5px; }
+.class-card p { margin: 0; color: var(--muted); font-size: 13px; }
+.panel {
+  background: white;
+  border: 1px solid #e8e8f2;
+  border-radius: 18px;
+  padding: 25px;
+  margin-top: 20px;
+}
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+.toolbar select { min-width: 160px; flex: 1; }
+.tabs { display: flex; flex-wrap: wrap; gap: 9px; margin: 18px 0; }
+.tabs button { background: #ecebff; color: var(--primary); }
+.tabs button.active { background: var(--primary); color: white; }
+.content-box {
+  background: #fafaff;
+  border: 1px solid #e7e5ff;
+  padding: 22px;
+  border-radius: 13px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.content-box h3 { margin-top: 0; }
+.question { margin: 20px 0; padding: 16px; background: #fafaff; border-radius: 12px; }
+.question label { display: block; margin: 12px 0; cursor: pointer; }
+.question input { margin-right: 8px; }
+.notice { padding: 13px; background: #fff6dc; border-radius: 10px; line-height: 1.6; }
+.hidden { display: none !important; }
+footer { background: #20213a; color: white; padding: 30px 6%; text-align: center; line-height: 1.8; }
+.small { font-size: 13px; color: var(--muted); }
+@media(max-width:600px) {
+  header { align-items: flex-start; flex-direction: column; }
+  nav a { margin: 0 12px 0 0; }
+  .hero { padding-top: 42px; }
+  .search { flex-direction: column; }
+  .panel { padding: 17px; }
+}
+</style>
 </head>
-
 <body>
 
-  <!-- HEADER -->
+<header>
+  <div class="logo">Student<span>Toolkit</span> 📚</div>
+  <nav>
+    <a href="#classes">Classes</a>
+    <a href="#learning">Learning Room</a>
+    <a href="#quiz">Quiz</a>
+  </nav>
+</header>
 
-  <header>
-    <div class="container navbar">
+<div class="hero">
+  <h1>Your learning journey<br>starts here. 🚀</h1>
+  <p>Choose your class, explore subjects, read learning notes and practise questions — all in one place.</p>
+  <div class="search">
+    <input id="searchInput" type="search" placeholder="Search classes, subjects or learning topics...">
+    <button onclick="searchContent()">Search</button>
+  </div>
+</div>
 
-      <a href="#home" class="logo">
-        <div class="logo-icon">📚</div>
-        <div>Student Toolkit <span>AI</span></div>
-      </a>
+<main>
+  <section id="classes">
+    <h2 class="section-title">Choose Your Class</h2>
+    <p class="subtitle">Select your class to enter your learning room.</p>
+    <div class="grid" id="classGrid"></div>
+  </section>
 
-      <nav class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#classes">Classes</a>
-        <a href="#resources">Resources</a>
-        <a href="#ai">AI Assistant</a>
-        <a href="#about">About</a>
-      </nav>
+  <section id="learning">
+    <h2 class="section-title">Your Learning Room</h2>
+    <p class="subtitle">Choose a class and subject to explore available learning material.</p>
 
-      <a href="#classes" class="login-btn">Start Learning →</a>
+    <div class="panel">
+      <div class="toolbar">
+        <select id="classSelect" aria-label="Choose class" onchange="updateSubjects()">
+          <option value="">Choose class</option>
+        </select>
+        <select id="subjectSelect" aria-label="Choose subject" onchange="showNotes()">
+          <option value="">Choose subject</option>
+        </select>
+      </div>
 
+      <div class="tabs">
+        <button id="notesTab" class="active" onclick="showTab('notes')">📝 Notes</button>
+        <button id="quizTab" onclick="showTab('quiz')">🧠 Quiz</button>
+      </div>
+
+      <div id="notesContent" class="content-box">
+        <h3>Welcome to your Learning Room!</h3>
+        Select a class and subject above to explore available notes.
+      </div>
+
+      <div id="quizContent" class="content-box hidden">
+        <h3>Practice Quiz</h3>
+        Select a class and subject to see available questions.
+      </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-
-    <!-- HERO -->
-
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-
-        <div>
-          <div class="eyebrow">
-            YOUR LEARNING JOURNEY STARTS HERE
-          </div>
-
-          <h1>
-            Learn Smarter.<br>
-            <span>Achieve More.</span>
-          </h1>
-
-          <p class="hero-description">
-            Your learning destination for textbooks, chapter notes,
-            sample papers, previous-year questions, quizzes and AI-powered
-            study assistance.
-          </p>
-
-          <a href="#classes" class="button">
-            Choose Your Class →
-          </a>
-
-          <a href="#resources" class="button button-outline">
-            Explore Resources
-          </a>
-
-          <p class="hero-note">
-            Designed for Classes 1–12 · CBSE first · More boards to follow
-          </p>
-        </div>
-
-        <div class="hero-visual">
-
-          <div class="visual-heading">
-            <h3>Your Learning Space</h3>
-            <span class="online-badge">STUDY SMARTER</span>
-          </div>
-
-          <div class="visual-card">
-            <div class="visual-icon">📚</div>
-            <div>
-              <h4>Books & Notes</h4>
-              <p>Find learning resources by class and subject.</p>
-            </div>
-          </div>
-
-          <div class="visual-card">
-            <div class="visual-icon">📝</div>
-            <div>
-              <h4>Sample Papers & PYQs</h4>
-              <p>Prepare with exam-style questions.</p>
-            </div>
-          </div>
-
-          <div class="visual-card">
-            <div class="visual-icon">🤖</div>
-            <div>
-              <h4>AI Study Assistant</h4>
-              <p>Work towards understanding difficult concepts.</p>
-            </div>
-          </div>
-
-        </div>
-
+  <section id="quiz">
+    <h2 class="section-title">Practice and Improve</h2>
+    <p class="subtitle">Answer questions, submit your quiz and see your score instantly.</p>
+    <div class="panel">
+      <div id="quizArea">
+        <p>Choose a class and subject in the Learning Room, then select the Quiz tab.</p>
       </div>
-    </section>
-
-    <!-- CLASS SELECTION -->
-
-    <section class="content-section class-section" id="classes">
-      <div class="container">
-
-        <div class="section-heading">
-          <div>
-            <div class="section-tag">YOUR CLASS, YOUR WAY</div>
-            <h2>Where are you in your learning journey?</h2>
-            <p>
-              Select your class to get started. We'll tailor the learning
-              experience to your school level.
-            </p>
-          </div>
-        </div>
-
-        <div class="class-groups">
-
-          <div class="class-group colorful">
-            <div class="group-icon">🌈</div>
-            <h3>Primary School</h3>
-            <p>Classes 1–5 · Colourful, simple and engaging learning.</p>
-
-            <div class="class-buttons">
-              <button class="class-button" data-class="1">1</button>
-              <button class="class-button" data-class="2">2</button>
-              <button class="class-button" data-class="3">3</button>
-              <button class="class-button" data-class="4">4</button>
-              <button class="class-button" data-class="5">5</button>
-            </div>
-          </div>
-
-          <div class="class-group middle">
-            <div class="group-icon">🚀</div>
-            <h3>Middle School</h3>
-            <p>Classes 6–9 · Explore subjects, practise and build skills.</p>
-
-            <div class="class-buttons">
-              <button class="class-button" data-class="6">6</button>
-              <button class="class-button" data-class="7">7</button>
-              <button class="class-button" data-class="8">8</button>
-              <button class="class-button" data-class="9">9</button>
-            </div>
-          </div>
-
-          <div class="class-group premium">
-            <div class="group-icon">🎯</div>
-            <h3>Board Exam Zone</h3>
-            <p>Classes 10–12 · A focused, premium exam-preparation experience.</p>
-
-            <div class="class-buttons">
-              <button class="class-button" data-class="10">10</button>
-              <button class="class-button" data-class="11">11</button>
-              <button class="class-button" data-class="12">12</button>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="selected-class-box" id="selected-class-box">
-          <h3 id="selected-class-title">Your class</h3>
-          <p id="selected-class-description"></p>
-          <a href="#resources" class="button" id="selected-class-link">
-            Explore Study Resources →
-          </a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SEARCH -->
-
-    <section class="content-section search-section" id="search">
-      <div class="container">
-
-        <div style="text-align:center">
-          <div class="section-tag">FIND IT FASTER</div>
-          <h2 style="font-size:32px; margin-top:7px;">
-            What do you want to study?
-          </h2>
-          <p style="color:var(--muted); margin-top:7px;">
-            Search the available resource categories below.
-          </p>
-        </div>
-
-        <form class="search-bar" id="search-form">
-          <input
-            id="search-input"
-            type="search"
-            placeholder="Try Mathematics, NCERT, PYQs, quiz..."
-            aria-label="Search resource categories"
-          >
-          <button class="button" type="submit">Search →</button>
-        </form>
-
-        <p class="search-status" id="search-status" aria-live="polite"></p>
-
-      </div>
-    </section>
-
-    <!-- RESOURCES -->
-
-    <section class="content-section" id="resources">
-      <div class="container">
-
-        <div class="section-heading">
-          <div>
-            <div class="section-tag">YOUR STUDY TOOLKIT</div>
-            <h2>Everything you need to learn</h2>
-            <p>
-              Explore the learning areas we're building for students.
-              Choose a category to get started.
-            </p>
-          </div>
-        </div>
-
-        <div class="resource-grid">
-
-          <article class="resource-card" data-search="ncert books textbooks pdf">
-            <div class="resource-icon purple">📚</div>
-            <h3>NCERT Books</h3>
-            <p>Find official textbook resources organised by class, subject and chapter.</p>
-            <a class="text-link"
-               href="https://ncert.nic.in/textbook.php"
-               target="_blank" rel="noopener noreferrer">
-              Visit NCERT Textbooks ↗
-            </a>
-          </article>
-
-          <article class="resource-card" data-search="notes revision chapter summaries">
-            <div class="resource-icon blue">📝</div>
-            <h3>Study Notes</h3>
-            <p>Our planned notes library will organise revision material by class and subject.</p>
-            <button class="text-link" data-feature="Study Notes">
-              Explore Notes →
-            </button>
-          </article>
-
-          <article class="resource-card" data-search="sample papers practice question papers">
-            <div class="resource-icon orange">📄</div>
-            <h3>Sample Papers</h3>
-            <p>Find official sample-paper resources to help prepare for examinations.</p>
-            <a class="text-link"
-               href="https://cbseacademic.nic.in/"
-               target="_blank" rel="noopener noreferrer">
-              Visit CBSE Academic ↗
-            </a>
-          </article>
-
-          <article class="resource-card" data-search="pyq previous year questions past papers">
-            <div class="resource-icon green">📅</div>
-            <h3>Previous Year Questions</h3>
-            <p>We plan to organise available question-paper resources by board, class and subject.</p>
-            <button class="text-link" data-feature="Previous Year Questions">
-              Explore PYQs →
-            </button>
-          </article>
-
-          <article class="resource-card" data-search="quiz mcq multiple choice questions practice">
-            <div class="resource-icon pink">🧠</div>
-            <h3>Quiz Practice</h3>
-            <p>Practise subject knowledge with interactive questions and feedback.</p>
-            <button class="text-link" data-feature="Quiz Practice">
-              Open Quiz Area →
-            </button>
-          </article>
-
-          <article class="resource-card" data-search="mock tests exams timed test score">
-            <div class="resource-icon yellow">🏆</div>
-            <h3>Mock Tests</h3>
-            <p>Our planned test area will help students practise and review their performance.</p>
-            <button class="text-link" data-feature="Mock Tests">
-              Explore Mock Tests →
-            </button>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- AI ASSISTANT -->
-
-    <section class="content-section ai-section" id="ai">
-      <div class="container">
-
-        <div class="ai-panel">
-
-          <div>
-            <div class="section-tag">YOUR FUTURE STUDY COMPANION</div>
-
-            <h2>Meet your AI Study Assistant</h2>
-
-            <p>
-              Imagine asking a difficult question and receiving a clear,
-              step-by-step explanation in simple language. That's one of
-              the key features we're planning for Student Toolkit AI.
-            </p>
-
-            <p>
-              The full assistant will require a connected AI service.
-              This first version is a preview, not a live AI solver.
-            </p>
-
-            <a href="#classes" class="button">
-              Choose Your Class →
-            </a>
-          </div>
-
-          <div class="ai-preview">
-            <h3>🤖 Ask a Study Question</h3>
-
-            <p>
-              Preview the question box for our future AI assistant.
-            </p>
-
-            <textarea
-              id="ai-question"
-              placeholder="Example: Explain inverse proportion with an example..."
-              aria-label="Enter a sample question"
-            ></textarea>
-
-            <button class="button" id="ai-ask-button">
-              Prepare My Question →
-            </button>
-
-            <p class="ai-message" id="ai-message" aria-live="polite">
-              AI answers will become available after we connect an AI service.
-            </p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-
-    <section class="content-section" id="about">
-      <div class="container" style="text-align:center; max-width:760px;">
-
-        <div class="section-tag">OUR MISSION</div>
-
-        <h2 style="font-size:32px; margin:10px 0;">
-          Education, organised in one place.
-        </h2>
-
-        <p style="color:var(--muted);">
-          Student Toolkit AI aims to make learning resources easier to
-          discover and use. We'll start with CBSE resources and expand
-          our verified resource directory to support other boards.
-        </p>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-
-  <footer>
-    <div class="container footer-content">
-
-      <div>
-        <div class="logo">
-          📚 Student Toolkit <span style="color:#bcb6ff;">AI</span>
-        </div>
-
-        <p style="margin-top:10px;">
-          Learn something new every day.
-        </p>
-      </div>
-
-      <div class="footer-links">
-        <a href="#home">Home</a>
-        <a href="#classes">Choose Class</a>
-        <a href="#resources">Resources</a>
-        <a href="https://ncert.nic.in/textbook.php"
-           target="_blank" rel="noopener noreferrer">NCERT</a>
-        <a href="https://cbseacademic.nic.in/"
-           target="_blank" rel="noopener noreferrer">CBSE</a>
-      </div>
-
-      <p>© 2026 Student Toolkit AI</p>
-
     </div>
-  </footer>
+  </section>
 
-  <script>
-    // CLASS SELECTION
+  <section>
+    <h2 class="section-title">Helpful Learning Resources</h2>
+    <p class="subtitle">These official resources open on their respective websites.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>📚 NCERT Textbooks</h3>
+        <p class="subtitle">Find official textbooks and chapters.</p>
+        <p><a href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener">Visit NCERT Textbooks ↗</a></p>
+      </div>
+      <div class="card">
+        <h3>🎓 CBSE Academics</h3>
+        <p class="subtitle">Explore curriculum and official academic resources.</p>
+        <p><a href="https://cbseacademic.nic.in/" target="_blank" rel="noopener">Visit CBSE Academics ↗</a></p>
+      </div>
+    </div>
+  </section>
+</main>
 
-    const classButtons = document.querySelectorAll(".class-button");
-    const selectedBox = document.getElementById("selected-class-box");
-    const selectedTitle = document.getElementById("selected-class-title");
-    const selectedDescription =
-      document.getElementById("selected-class-description");
+<footer>
+  <strong>Student Toolkit</strong><br>
+  Learn at your own pace. Practise every day. Keep improving!<br>
+  <span class="small" style="color:#d4d4e8">An independent learning project. Not affiliated with NCERT or CBSE.</span>
+</footer>
 
-    let currentClass = null;
+<script>
+const subjectsByClass = {
+  1: ["Mathematics", "English", "Environmental Studies"],
+  2: ["Mathematics", "English", "Environmental Studies"],
+  3: ["Mathematics", "English", "Environmental Studies"],
+  4: ["Mathematics", "English", "Environmental Studies"],
+  5: ["Mathematics", "English", "Environmental Studies"],
+  6: ["Mathematics", "Science", "English", "Social Science"],
+  7: ["Mathematics", "Science", "English", "Social Science"],
+  8: ["Mathematics", "Science", "English", "Social Science"],
+  9: ["Mathematics", "Science", "English", "Social Science"],
+  10: ["Mathematics", "Science", "English", "Social Science"],
+  11: ["Mathematics", "Physics", "Chemistry", "Biology", "English"],
+  12: ["Mathematics", "Physics", "Chemistry", "Biology", "English"]
+};
 
-    classButtons.forEach(function(button) {
-      button.addEventListener("click", function() {
-        currentClass = Number(this.dataset.class);
+const learningData = {
+  Mathematics: {
+    title: "Introduction to Mathematics",
+    notes: "Mathematics helps us understand numbers, patterns and relationships. Practise each concept step by step, write down your calculations, and check your answers.",
+    questions: [
+      {q:"What is 7 + 5?", options:["10","11","12","13"], answer:2},
+      {q:"What is 9 × 3?", options:["18","27","36","21"], answer:1},
+      {q:"What is half of 20?", options:["5","10","15","20"], answer:1}
+    ]
+  },
+  Science: {
+    title: "Introduction to Science",
+    notes: "Science helps us understand the natural world through observation, questions and experiments. Living things grow and need resources. Matter can exist as solids, liquids and gases.",
+    questions: [
+      {q:"Which part of a plant usually absorbs water from the soil?", options:["Flower","Root","Fruit","Leaf"], answer:1},
+      {q:"Which of these is a state of matter?", options:["Energy","Sound","Liquid","Light"], answer:2},
+      {q:"Which star is closest to Earth?", options:["Sirius","The Sun","Polaris","Vega"], answer:1}
+    ]
+  },
+  English: {
+    title: "Introduction to English",
+    notes: "English learning includes reading, writing, grammar and vocabulary. A sentence usually expresses a complete thought. Begin sentences with capital letters and use suitable punctuation.",
+    questions: [
+      {q:"Which word is a noun?", options:["Quickly","Beautiful","Teacher","Run"], answer:2},
+      {q:"Choose the correct plural of 'child'.", options:["Childs","Children","Childes","Childrens"], answer:1},
+      {q:"Which punctuation mark ends a question?", options:["Full stop","Comma","Question mark","Colon"], answer:2}
+    ]
+  },
+  "Social Science": {
+    title: "Introduction to Social Science",
+    notes: "Social Science explores people, places, history, government and society. Geography studies places and environments. History studies events and societies of the past. Civics examines government and citizenship.",
+    questions: [
+      {q:"Which subject studies maps and places?", options:["Geography","Grammar","Chemistry","Algebra"], answer:0},
+      {q:"Which is a natural feature?", options:["Bridge","Mountain","Road","Building"], answer:1},
+      {q:"What does history study?", options:["Only numbers","Past events","Only plants","Weather only"], answer:1}
+    ]
+  },
+  Physics: {
+    title: "Introduction to Physics",
+    notes: "Physics studies matter, energy, motion and forces. Speed describes the distance travelled per unit of time. The SI unit of speed is metres per second (m/s).",
+    questions: [
+      {q:"What is the SI unit of force?", options:["Joule","Newton","Watt","Metre"], answer:1},
+      {q:"Speed is calculated using which formula?", options:["Time ÷ distance","Distance ÷ time","Distance × time","Mass ÷ time"], answer:1},
+      {q:"Which is a unit of energy?", options:["Joule","Kilogram","Second","Ampere"], answer:0}
+    ]
+  },
+  Chemistry: {
+    title: "Introduction to Chemistry",
+    notes: "Chemistry studies matter, its properties and how substances change. An atom is a basic unit of a chemical element. Elements contain one type of atom; compounds contain chemically combined elements.",
+    questions: [
+      {q:"What is the chemical formula of water?", options:["CO₂","O₂","H₂O","NaCl"], answer:2},
+      {q:"Which is a chemical element?", options:["Oxygen","Water","Air","Salt water"], answer:0},
+      {q:"What is the chemical symbol for oxygen?", options:["Ox","O","Og","On"], answer:1}
+    ]
+  },
+  Biology: {
+    title: "Introduction to Biology",
+    notes: "Biology is the study of living organisms. Cells are the basic structural and functional units of life. Plants make food through photosynthesis, using light energy, water and carbon dioxide.",
+    questions: [
+      {q:"What is the basic unit of life?", options:["Organ","Cell","Tissue","Bone"], answer:1},
+      {q:"Which pigment helps plants absorb light?", options:["Haemoglobin","Chlorophyll","Melanin","Keratin"], answer:1},
+      {q:"Which organ pumps blood around the human body?", options:["Lung","Brain","Heart","Stomach"], answer:2}
+    ]
+  },
+  "Environmental Studies": {
+    title: "Introduction to Environmental Studies",
+    notes: "Environmental Studies teaches us about nature and how to care for our surroundings. Saving water, reducing waste, planting trees and protecting wildlife can help the environment.",
+    questions: [
+      {q:"Which action saves water?", options:["Leaving taps open","Fixing leaking taps","Wasting drinking water","Washing roads daily"], answer:1},
+      {q:"Which is a renewable energy source?", options:["Sunlight","Coal","Petrol","Diesel"], answer:0},
+      {q:"Which should generally go in a recycling bin?", options:["Clean paper","Mixed food waste","Wet mud","Liquid chemicals"], answer:0}
+    ]
+  }
+};
 
-        classButtons.forEach(function(item) {
-          item.classList.remove("selected");
-        });
+for (let i=1; i<=12; i++) {
+  const option = document.createElement("option");
+  option.value = i;
+  option.textContent = "Class " + i;
+  document.getElementById("classSelect").appendChild(option);
 
-        this.classList.add("selected");
+  const card = document.createElement("div");
+  card.className = "card class-card";
+  card.dataset.search = ("class " + i).toLowerCase();
+  card.innerHTML = `<div class="number">${String(i).padStart(2,"0")}</div>
+    <h3>Class ${i}</h3><p>Explore learning materials →</p>`;
+  card.onclick = () => {
+    document.getElementById("classSelect").value = i;
+    updateSubjects();
+    document.getElementById("learning").scrollIntoView({behavior:"smooth"});
+  };
+  document.getElementById("classGrid").appendChild(card);
+}
 
-        selectedTitle.textContent = "Welcome, Class " + currentClass + " student!";
+function updateSubjects() {
+  const classNumber = document.getElementById("classSelect").value;
+  const subjectSelect = document.getElementById("subjectSelect");
+  subjectSelect.innerHTML = '<option value="">Choose subject</option>';
 
-        if (currentClass <= 9) {
-          selectedDescription.textContent =
-            "Your learning area will use a colourful, easy-to-follow design " +
-            "with subject resources and practice activities.";
-        } else {
-          selectedDescription.textContent =
-            "Your premium exam-preparation area will focus on textbooks, " +
-            "sample papers, previous-year questions and mock-test preparation.";
-        }
-
-        selectedBox.classList.add("active");
-        selectedBox.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest"
-        });
-      });
+  if (classNumber) {
+    subjectsByClass[classNumber].forEach(subject => {
+      const option = document.createElement("option");
+      option.value = subject;
+      option.textContent = subject;
+      subjectSelect.appendChild(option);
     });
+  }
 
-    // RESOURCE SEARCH
+  document.getElementById("notesContent").innerHTML =
+    "<h3>Choose a subject</h3>Select a subject to view the available learning notes.";
+  document.getElementById("quizContent").innerHTML =
+    "<h3>Practice Quiz</h3>Select a subject to load its practice questions.";
+  document.getElementById("quizArea").innerHTML =
+    "<p>Select a subject, then open the Quiz tab.</p>";
+}
 
-    const searchInput = document.getElementById("search-input");
-    const searchForm = document.getElementById("search-form");
-    const resourceCards = document.querySelectorAll(".resource-card");
-    const searchStatus = document.getElementById("search-status");
+function showNotes() {
+  const subject = document.getElementById("subjectSelect").value;
+  if (!subject) return;
 
-    function searchResources(event) {
-      if (event) {
-        event.preventDefault();
-      }
+  const data = learningData[subject];
+  document.getElementById("notesContent").innerHTML = `
+    <h3>${data.title}</h3>
+    <p>${data.notes}</p>
+    <div class="notice"><strong>Study tip:</strong> Write a short summary in your own words, then try the quiz to practise.</div>
+    <p class="small">These are introductory sample notes, not a complete chapter or official textbook solution.</p>`;
 
-      const query = searchInput.value.trim().toLowerCase();
-      let count = 0;
+  renderQuiz(data);
+}
 
-      resourceCards.forEach(function(card) {
-        const searchableText =
-          (card.innerText + " " + (card.dataset.search || "")).toLowerCase();
+function renderQuiz(data) {
+  let html = `<h3>Test Your Understanding</h3>
+    <p>Choose one answer for each question and submit your quiz.</p>
+    <form id="practiceForm">`;
 
-        const matches = searchableText.includes(query);
+  data.questions.forEach((q,i) => {
+    html += `<div class="question"><strong>${i+1}. ${q.q}</strong>`;
+    q.options.forEach((option,j) => {
+      html += `<label><input type="radio" name="q${i}" value="${j}"> ${option}</label>`;
+    });
+    html += `</div>`;
+  });
 
-        card.hidden = !matches;
+  html += `<button type="submit">Submit Quiz</button></form>
+    <div id="quizResult" aria-live="polite"></div>`;
 
-        if (matches) {
-          count++;
-        }
+  document.getElementById("quizContent").innerHTML = html;
+  document.getElementById("quizArea").innerHTML = html;
+
+  ["quizContent","quizArea"].forEach(containerId => {
+    const form = document.querySelector(`#${containerId} form`);
+    if (!form) return;
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      let score = 0;
+      let unanswered = 0;
+
+      data.questions.forEach((q,i) => {
+        const selected = form.querySelector(`input[name="q${i}"]:checked`);
+        if (!selected) unanswered++;
+        else if (Number(selected.value) === q.answer) score++;
       });
 
-      if (!query) {
-        searchStatus.textContent = "Showing all resource categories.";
-      } else if (count > 0) {
-        searchStatus.textContent =
-          count + " matching resource category/categories found.";
-      } else {
-        searchStatus.textContent =
-          "No matching categories found. Try another search.";
-      }
+      const result = form.parentElement.querySelector("#quizResult");
+      result.innerHTML = `<div class="notice" style="margin-top:18px">
+        <h3>Quiz Result</h3>
+        <p>You scored <strong>${score} out of ${data.questions.length}</strong>.</p>
+        <p>${unanswered ? unanswered + " question(s) were left unanswered. " : ""}
+        ${score === data.questions.length ? "Excellent work! 🎉" :
+          score >= 2 ? "Good effort! Review any difficult questions and try again." :
+          "Keep practising! Read the notes again and give it another try."}</p>
+      </div>`;
+    });
+  });
+}
 
-      document.getElementById("resources").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+function showTab(tab) {
+  document.getElementById("notesContent").classList.toggle("hidden", tab !== "notes");
+  document.getElementById("quizContent").classList.toggle("hidden", tab !== "quiz");
+  document.getElementById("notesTab").classList.toggle("active", tab === "notes");
+  document.getElementById("quizTab").classList.toggle("active", tab === "quiz");
+}
+
+function searchContent() {
+  const query = document.getElementById("searchInput").value.trim().toLowerCase();
+  if (!query) {
+    alert("Type a class, subject or topic to search.");
+    return;
+  }
+
+  const cards = [...document.querySelectorAll(".class-card")];
+  const matchingClasses = cards.filter(card => card.dataset.search.includes(query));
+
+  if (matchingClasses.length) {
+    cards.forEach(card => card.classList.toggle("hidden", !matchingClasses.includes(card)));
+    document.getElementById("classes").scrollIntoView({behavior:"smooth"});
+    return;
+  }
+
+  cards.forEach(card => card.classList.remove("hidden"));
+
+  const subjectMatch = Object.keys(learningData).find(subject =>
+    subject.toLowerCase().includes(query) ||
+    learningData[subject].title.toLowerCase().includes(query) ||
+    learningData[subject].notes.toLowerCase().includes(query)
+  );
+
+  if (subjectMatch) {
+    const classSelect = document.getElementById("classSelect");
+    const subjectSelect = document.getElementById("subjectSelect");
+    if (!classSelect.value) classSelect.value = "6";
+    updateSubjects();
+
+    if ([...subjectSelect.options].some(option => option.value === subjectMatch)) {
+      subjectSelect.value = subjectMatch;
+      showNotes();
+      showTab("notes");
+      document.getElementById("learning").scrollIntoView({behavior:"smooth"});
+    } else {
+      alert("The topic matches " + subjectMatch + ", but that subject isn't listed for the selected class. Please choose a class that offers it.");
     }
+  } else {
+    alert("No matching topic found in the current sample materials. Try Mathematics, Science, English, Physics or Biology.");
+  }
+}
 
-    searchForm.addEventListener("submit", searchResources);
-
-    searchInput.addEventListener("input", function() {
-      if (this.value.trim() === "") {
-        resourceCards.forEach(function(card) {
-          card.hidden = false;
-        });
-
-        searchStatus.textContent = "Showing all resource categories.";
-      }
-    });
-
-    // FEATURE PLACEHOLDERS
-
-    document.querySelectorAll("[data-feature]").forEach(function(button) {
-      button.addEventListener("click", function() {
-        const feature = this.dataset.feature;
-
-        alert(
-          feature +
-          " is planned for a future stage. We'll build this feature " +
-          "after the homepage is working."
-        );
-      });
-    });
-
-    // AI QUESTION PREVIEW
-
-    document.getElementById("ai-ask-button").addEventListener("click", function() {
-      const question = document.getElementById("ai-question").value.trim();
-      const message = document.getElementById("ai-message");
-
-      if (!question) {
-        message.textContent = "Please type a question first.";
-        return;
-      }
-
-      message.textContent =
-        "Your question has been entered. A real AI answer will be available " +
-        "after we connect the AI service in a later stage.";
-    });
-  </script>
-
+document.getElementById("searchInput").addEventListener("keydown", event => {
+  if (event.key === "Enter") searchContent();
+});
+</script>
 </body>
 </html>
