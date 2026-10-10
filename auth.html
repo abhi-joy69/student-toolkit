@@ -1,574 +1,771 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Toolkit | Student Account</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#6654e8">
+<title>Sign In | Student Toolkit</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+:root {
+  --primary: #6554e8;
+  --dark: #28214f;
+  --ink: #25243b;
+  --muted: #77788c;
+  --border: #e6e6f0;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f1f5ff;
-      color: #172554;
-    }
+* { box-sizing: border-box; }
 
-    header {
-      background: #243cdb;
-      color: white;
-      padding: 22px;
-      text-align: center;
-    }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: var(--ink);
+  background: #f7f7fc;
+}
 
-    header h1 {
-      margin: 0 0 8px;
-    }
+a { text-decoration: none; color: inherit; }
+button, input { font: inherit; }
 
-    .container {
-      width: min(900px, 94%);
-      margin: 25px auto;
-    }
+.topbar {
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6%;
+  background: white;
+  border-bottom: 1px solid var(--border);
+}
 
-    .card {
-      background: white;
-      padding: 24px;
-      border-radius: 16px;
-      margin-bottom: 20px;
-      box-shadow: 0 5px 20px #17255412;
-    }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
 
-    input, select, button {
-      width: 100%;
-      padding: 12px;
-      margin: 7px 0;
-      border: 1px solid #ccd5ee;
-      border-radius: 8px;
-      font-size: 15px;
-    }
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: white;
+  border-radius: 15px;
+  font-size: 21px;
+  background: linear-gradient(135deg, #8172ff, #5440cf);
+}
 
-    button {
-      border: none;
-      background: #243cdb;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.brand-name {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -.6px;
+}
 
-    button:hover {
-      opacity: 0.88;
-    }
+.brand-name span { color: var(--primary); }
 
-    .secondary {
-      background: #e8edff;
-      color: #243cdb;
-    }
+.back-link {
+  color: #65657a;
+  font-size: 13px;
+  font-weight: 700;
+}
 
-    .danger {
-      background: #dc2626;
-    }
+.back-link i { margin-right: 6px; }
 
-    .hidden {
-      display: none;
-    }
+.page {
+  width: min(1050px, 92%);
+  min-height: calc(100vh - 125px);
+  margin: 25px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  border-radius: 27px;
+  background: white;
+  box-shadow: 0 22px 70px rgba(40, 33, 90, .09);
+}
 
-    .task {
-      border: 1px solid #e0e7ff;
-      padding: 14px;
-      margin-top: 12px;
-      border-radius: 10px;
-    }
+.visual {
+  position: relative;
+  overflow: hidden;
+  min-height: 630px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 45px;
+  color: white;
+  background:
+    radial-gradient(ellipse at 10% 10%, #8778ff77, transparent 45%),
+    radial-gradient(ellipse at 100% 90%, #a291ff55, transparent 40%),
+    linear-gradient(145deg, #26204f, #5140b6);
+}
 
-    .task-title {
-      font-weight: bold;
-      overflow-wrap: anywhere;
-    }
+.visual::before,
+.visual::after {
+  content: "";
+  position: absolute;
+  border: 1px solid #ffffff21;
+  border-radius: 50%;
+  pointer-events: none;
+}
 
-    .task-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
+.visual::before {
+  width: 360px;
+  height: 360px;
+  right: -180px;
+  top: 90px;
+}
 
-    .task-actions button {
-      flex: 1;
-      min-width: 100px;
-    }
+.visual::after {
+  width: 270px;
+  height: 270px;
+  right: -135px;
+  top: 135px;
+}
 
-    .status {
-      display: inline-block;
-      background: #e8edff;
-      padding: 5px 9px;
-      border-radius: 6px;
-      margin-top: 8px;
-      font-size: 13px;
-    }
+.visual-content { position: relative; z-index: 1; }
 
-    #message {
-      padding: 12px;
-      border-radius: 8px;
-      overflow-wrap: anywhere;
-    }
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  border: 1px solid #ffffff36;
+  background: #ffffff12;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 700;
+}
 
-    .success {
-      background: #dcfce7;
-      color: #166534;
-    }
+.visual h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(36px, 4vw, 48px);
+  line-height: 1.12;
+  letter-spacing: -1.8px;
+  margin: 25px 0 16px;
+}
 
-    .error {
-      background: #fee2e2;
-      color: #991b1b;
-    }
+.visual h1 span { color: #c8beff; }
 
-    .muted {
-      color: #64748b;
-      font-size: 14px;
-    }
+.visual p {
+  color: #e0dcf8;
+  line-height: 1.9;
+  font-size: 13px;
+  max-width: 350px;
+}
 
-    a {
-      color: #243cdb;
-    }
-  </style>
+.artwork {
+  position: relative;
+  height: 195px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.art-circle {
+  width: 172px;
+  height: 172px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #9c8cff, #6954df);
+  box-shadow: 0 25px 65px #100b382e;
+}
+
+.art-circle i { font-size: 75px; color: white; }
+
+.float-card {
+  position: absolute;
+  padding: 13px 15px;
+  border: 1px solid #ffffff65;
+  border-radius: 15px;
+  background: #ffffffed;
+  color: #302951;
+  box-shadow: 0 12px 28px #130f3c30;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.float-card i { color: var(--primary); margin-right: 6px; }
+.float-one { top: 15px; left: 0; transform: rotate(-5deg); }
+.float-two { bottom: 9px; right: 0; transform: rotate(4deg); }
+
+.benefits {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 12px;
+  color: #f1edff;
+  font-size: 12px;
+}
+
+.benefits i { margin-right: 9px; color: #b6f4d2; }
+
+.form-side {
+  padding: 43px clamp(24px, 4vw, 54px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-topline {
+  text-transform: uppercase;
+  color: var(--primary);
+  letter-spacing: 1.5px;
+  font-size: 10px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.form-side h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 33px;
+  letter-spacing: -1px;
+  margin: 0 0 9px;
+}
+
+.subheading {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 0 0 25px;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 5px;
+  gap: 5px;
+  background: #f1f0fa;
+  border-radius: 13px;
+  margin-bottom: 23px;
+}
+
+.tab {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 7px;
+  color: #77758d;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.tab.active {
+  background: white;
+  color: var(--primary);
+  box-shadow: 0 2px 8px #2c235d10;
+}
+
+.field { margin-bottom: 16px; }
+
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 750;
+  margin-bottom: 8px;
+}
+
+.input-wrap { position: relative; }
+
+.input-wrap > i {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: #9492aa;
+  font-size: 14px;
+}
+
+.input-wrap input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #e2e1ed;
+  outline: none;
+  border-radius: 12px;
+  padding: 0 43px 0 41px;
+  font-size: 12px;
+  color: var(--ink);
+  background: #fff;
+  transition: border .2s, box-shadow .2s;
+}
+
+.input-wrap input:focus {
+  border-color: #9c90ff;
+  box-shadow: 0 0 0 4px #7161e815;
+}
+
+.input-wrap input::placeholder { color: #aaa9b8; }
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #9290a5;
+  padding: 5px;
+}
+
+.form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--muted);
+  margin: 2px 0 20px;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.remember input { accent-color: var(--primary); }
+
+.inline-link {
+  color: var(--primary);
+  font-weight: 750;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 49px;
+  border: 0;
+  border-radius: 12px;
+  color: white;
+  background: linear-gradient(120deg, #7766f1, #5540cf);
+  box-shadow: 0 8px 18px #6554e82a;
+  font-size: 13px;
+  font-weight: 800;
+  transition: transform .2s;
+}
+
+.submit-btn:hover { transform: translateY(-2px); }
+.submit-btn:disabled { opacity: .6; cursor: wait; transform: none; }
+
+.submit-btn i { margin-left: 8px; }
+
+.status {
+  display: none;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.status.error { display: block; color: #a52d40; background: #fff0f2; }
+.status.success { display: block; color: #176a48; background: #eaf9f1; }
+.status.info { display: block; color: #5948a8; background: #f0edff; }
+
+.form-footer {
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 23px;
+}
+
+.form-footer i { color: #26965f; margin-right: 5px; }
+
+.bottom-note {
+  text-align: center;
+  color: #89889a;
+  font-size: 11px;
+  padding: 0 15px 20px;
+}
+
+@media (max-width: 800px) {
+  .page { grid-template-columns: 1fr; max-width: 520px; }
+  .visual { min-height: auto; padding: 29px; }
+  .visual h1 { font-size: 36px; margin-top: 18px; }
+  .visual p { margin-bottom: 10px; }
+  .artwork { height: 150px; }
+  .art-circle { width: 125px; height: 125px; }
+  .art-circle i { font-size: 56px; }
+  .float-one { left: 5px; }
+  .float-two { right: 5px; }
+  .benefits { grid-template-columns: 1fr; }
+  .form-side { padding: 33px 27px; }
+}
+
+@media (max-width: 420px) {
+  .topbar { padding: 0 4%; height: 70px; }
+  .brand-name { font-size: 17px; }
+  .back-link { font-size: 11px; }
+  .page { width: 94%; margin: 15px auto; border-radius: 20px; }
+  .visual { padding: 24px; }
+  .form-side { padding: 29px 21px; }
+  .form-side h2 { font-size: 29px; }
+}
+</style>
 </head>
 
 <body>
-  <header>
-    <h1>🎓 Student Toolkit</h1>
-    <p>Your personal student dashboard</p>
-  </header>
 
-  <main class="container">
+<header class="topbar">
+  <a href="index.html" class="brand">
+    <div class="brand-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+    <div class="brand-name">Student<span>Toolkit</span></div>
+  </a>
 
-    <div id="setupError" class="card hidden">
-      <h2>Setup required</h2>
-      <p id="setupErrorText"></p>
+  <a href="index.html" class="back-link">
+    <i class="fa-solid fa-arrow-left"></i> Back to Home
+  </a>
+</header>
+
+<main class="page">
+
+  <section class="visual">
+    <div class="visual-content">
+      <div class="pill"><i class="fa-solid fa-sparkles"></i> YOUR LEARNING SPACE</div>
+      <h1>Big dreams.<br>Small steps.<br><span>Great results.</span></h1>
+      <p>
+        Make every study session count. Keep your learning journey
+        organised and take the next step towards your goals.
+      </p>
     </div>
 
-    <div id="authSection" class="card">
-      <h2 id="authTitle">Create your student account</h2>
+    <div class="artwork" aria-hidden="true">
+      <div class="art-circle"><i class="fa-solid fa-graduation-cap"></i></div>
+      <div class="float-card float-one"><i class="fa-solid fa-book-open"></i> Keep learning</div>
+      <div class="float-card float-two"><i class="fa-solid fa-star"></i> You can do it!</div>
+    </div>
 
-      <p class="muted">
-        Register to save your personal tasks and access them when you log in again.
-      </p>
+    <div class="benefits">
+      <div><i class="fa-solid fa-circle-check"></i> One place for your learning journey</div>
+      <div><i class="fa-solid fa-circle-check"></i> A simple space designed for students</div>
+      <div><i class="fa-solid fa-circle-check"></i> Take the next step at your own pace</div>
+    </div>
+  </section>
 
-      <form id="authForm">
+  <section class="form-side">
+    <div class="form-topline">Welcome to Student Toolkit</div>
+    <h2 id="formTitle">Welcome back!</h2>
+    <p class="subheading" id="formSubtitle">
+      Sign in to continue your learning journey.
+    </p>
+
+    <div class="tabs" role="tablist" aria-label="Account options">
+      <button class="tab active" id="loginTab" type="button" role="tab" aria-selected="true">
+        <i class="fa-solid fa-right-to-bracket"></i> Sign In
+      </button>
+      <button class="tab" id="signupTab" type="button" role="tab" aria-selected="false">
+        <i class="fa-solid fa-user-plus"></i> Create Account
+      </button>
+    </div>
+
+    <form id="authForm">
+      <div class="field">
         <label for="email">Email address</label>
-        <input
-          id="email"
-          type="email"
-          autocomplete="email"
-          placeholder="Enter your email"
-          required
-        >
+        <div class="input-wrap">
+          <i class="fa-regular fa-envelope"></i>
+          <input id="email" type="email" placeholder="you@example.com"
+            autocomplete="email" required>
+        </div>
+      </div>
 
+      <div class="field">
         <label for="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          autocomplete="current-password"
-          minlength="8"
-          placeholder="At least 8 characters"
-          required
-        >
+        <div class="input-wrap">
+          <i class="fa-solid fa-lock"></i>
+          <input id="password" type="password" placeholder="Enter your password"
+            autocomplete="current-password" minlength="6" required>
+          <button type="button" class="password-toggle" id="togglePassword"
+            aria-label="Show password">
+            <i class="fa-regular fa-eye"></i>
+          </button>
+        </div>
+      </div>
 
-        <button id="submitAuth" type="submit">Create Account</button>
-      </form>
+      <div class="form-options" id="formOptions">
+        <label class="remember">
+          <input type="checkbox" id="remember">
+          Remember on this device
+        </label>
+        <button class="inline-link" id="forgotPassword" type="button">Forgot password?</button>
+      </div>
 
-      <button id="toggleAuth" class="secondary" type="button">
-        Already have an account? Log in
+      <button class="submit-btn" id="submitButton" type="submit">
+        Sign In <i class="fa-solid fa-arrow-right"></i>
       </button>
 
-      <p id="message" class="hidden" role="status" aria-live="polite"></p>
+      <div class="status" id="statusMessage" role="status" aria-live="polite"></div>
+    </form>
 
-      <p class="muted">
-        Use an email address you can access. If email confirmation is enabled,
-        you must confirm your email before logging in.
-      </p>
+    <div class="form-footer">
+      <i class="fa-solid fa-shield-halved"></i>
+      Your account is protected by Supabase authentication.
     </div>
+  </section>
 
-    <section id="dashboard" class="hidden">
-      <div class="card">
-        <h2>👋 Welcome to your dashboard!</h2>
-        <p id="userEmail"></p>
-        <button id="logout" class="danger" type="button">Log Out</button>
-      </div>
+</main>
 
-      <div class="card">
-        <h2>📝 My Task Organizer</h2>
-        <p class="muted">
-          These tasks belong to your account. Other students cannot access
-          them through the database's user-level security rules.
-        </p>
+<div class="bottom-note">
+  © <span id="year"></span> Student Toolkit · Learn smarter every day.
+</div>
 
-        <form id="taskForm">
-          <label for="taskTitle">Task name</label>
-          <input
-            id="taskTitle"
-            type="text"
-            maxlength="200"
-            placeholder="e.g. Complete Mathematics homework"
-            required
-          >
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-          <label for="taskStatus">Task status</label>
-          <select id="taskStatus">
-            <option>Pending</option>
-            <option>Remaining</option>
-            <option>Complete</option>
-          </select>
+<script>
+/*
+  IMPORTANT:
+  Put your EXISTING Supabase Project URL and Publishable Key below.
+  The project URL must be the base URL, usually ending in .supabase.co.
+  Do not add /rest/v1/ to the end.
+  Never put a secret or service-role key in this public file.
+*/
+const SUPABASE_URL = "https://skhgyzsnacojdljchzxr.supabase.co/rest/v1/";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_-DI-cpV_UGIgETXRPFSyCQ_gXGHIsu3";
 
-          <button id="saveTask" type="submit">Add Task</button>
-          <button id="cancelEdit" class="secondary hidden" type="button">
-            Cancel Edit
-          </button>
-        </form>
-      </div>
+let supabaseClient = null;
 
-      <div class="card">
-        <h2>📚 My Tasks</h2>
-        <p id="taskSummary">Loading tasks...</p>
-        <div id="taskList"></div>
-      </div>
-    </section>
+const form = document.getElementById('authForm');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const submitButton = document.getElementById('submitButton');
+const statusMessage = document.getElementById('statusMessage');
+const loginTab = document.getElementById('loginTab');
+const signupTab = document.getElementById('signupTab');
+const formTitle = document.getElementById('formTitle');
+const formSubtitle = document.getElementById('formSubtitle');
+const formOptions = document.getElementById('formOptions');
+const forgotPassword = document.getElementById('forgotPassword');
 
-    <p><a href="./index.html">← Back to Student Toolkit Home</a></p>
-  </main>
+let mode = 'login';
 
-  <script>
-    // STEP A: Replace these two placeholders with your own details.
-    const SUPABASE_URL = "https://skhgyzsnacojdljchzxr.supabase.co/rest/v1/";
-    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_-DI-cpV_UGIgETXRPFSyCQ_gXGHIsu3";
+document.getElementById('year').textContent = new Date().getFullYear();
 
-    const setupError = document.getElementById("setupError");
-    const setupErrorText = document.getElementById("setupErrorText");
-    const authSection = document.getElementById("authSection");
-    const dashboard = document.getElementById("dashboard");
-    const message = document.getElementById("message");
-    const authTitle = document.getElementById("authTitle");
-    const submitAuth = document.getElementById("submitAuth");
-    const toggleAuth = document.getElementById("toggleAuth");
+function showStatus(message, type = 'info') {
+  statusMessage.textContent = message;
+  statusMessage.className = 'status ' + type;
+}
 
-    let supabaseClient;
-    let isLoginMode = false;
-    let currentUser = null;
-    let editingTaskId = null;
+function clearStatus() {
+  statusMessage.textContent = '';
+  statusMessage.className = 'status';
+}
 
-    function showMessage(text, isError = false) {
-      message.textContent = text;
-      message.className = isError ? "error" : "success";
-      message.classList.remove("hidden");
+function setMode(nextMode) {
+  mode = nextMode;
+  clearStatus();
+
+  const signingUp = mode === 'signup';
+
+  loginTab.classList.toggle('active', !signingUp);
+  signupTab.classList.toggle('active', signingUp);
+
+  loginTab.setAttribute('aria-selected', String(!signingUp));
+  signupTab.setAttribute('aria-selected', String(signingUp));
+
+  formTitle.textContent = signingUp ? 'Create your account' : 'Welcome back!';
+  formSubtitle.textContent = signingUp
+    ? 'Join Student Toolkit and start your learning journey.'
+    : 'Sign in to continue your learning journey.';
+
+  submitButton.innerHTML = signingUp
+    ? 'Create Account <i class="fa-solid fa-arrow-right"></i>'
+    : 'Sign In <i class="fa-solid fa-arrow-right"></i>';
+
+  passwordInput.autocomplete = signingUp ? 'new-password' : 'current-password';
+  passwordInput.minLength = signingUp ? 8 : 6;
+
+  formOptions.style.display = signingUp ? 'none' : 'flex';
+}
+
+loginTab.addEventListener('click', () => setMode('login'));
+signupTab.addEventListener('click', () => setMode('signup'));
+
+document.getElementById('togglePassword').addEventListener('click', event => {
+  const button = event.currentTarget;
+  const show = passwordInput.type === 'password';
+
+  passwordInput.type = show ? 'text' : 'password';
+  button.innerHTML = show
+    ? '<i class="fa-regular fa-eye-slash"></i>'
+    : '<i class="fa-regular fa-eye"></i>';
+
+  button.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+});
+
+function initializeSupabase() {
+  if (
+    SUPABASE_URL.includes('PASTE_') ||
+    SUPABASE_PUBLISHABLE_KEY.includes('PASTE_')
+  ) {
+    showStatus(
+      'Supabase is not configured yet. Add your existing Project URL and Publishable Key in this file.',
+      'error'
+    );
+    return false;
+  }
+
+  try {
+    const parsedUrl = new URL(SUPABASE_URL);
+
+    if (
+      !['https:', 'http:'].includes(parsedUrl.protocol) ||
+      !parsedUrl.hostname.endsWith('.supabase.co') ||
+      parsedUrl.pathname !== '/' ||
+      parsedUrl.search ||
+      parsedUrl.hash
+    ) {
+      showStatus(
+        'Check your Supabase Project URL in Project Settings. Use the base project URL, not a URL ending in /rest/v1/.',
+        'error'
+      );
+      return false;
     }
 
-    function clearMessage() {
-      message.textContent = "";
-      message.className = "hidden";
+    if (!window.supabase || !window.supabase.createClient) {
+      showStatus(
+        'The authentication library could not load. Check your internet connection and reload the page.',
+        'error'
+      );
+      return false;
     }
 
-    function showSetupError(text) {
-      setupErrorText.textContent = text;
-      setupError.classList.remove("hidden");
-      authSection.classList.add("hidden");
-      dashboard.classList.add("hidden");
-    }
-
-    function updateAuthMode() {
-      clearMessage();
-
-      authTitle.textContent = isLoginMode
-        ? "Log in to your account"
-        : "Create your student account";
-
-      submitAuth.textContent = isLoginMode
-        ? "Log In"
-        : "Create Account";
-
-      toggleAuth.textContent = isLoginMode
-        ? "New student? Create an account"
-        : "Already have an account? Log in";
-
-      document.getElementById("password").autocomplete =
-        isLoginMode ? "current-password" : "new-password";
-    }
-
-    toggleAuth.addEventListener("click", () => {
-      isLoginMode = !isLoginMode;
-      updateAuthMode();
-    });
-
-    document.getElementById("authForm").addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      if (!supabaseClient) return;
-
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-
-      submitAuth.disabled = true;
-      clearMessage();
-
-      try {
-        if (isLoginMode) {
-          const { error } = await supabaseClient.auth.signInWithPassword({
-            email,
-            password
-          });
-
-          if (error) throw error;
-
-          showMessage("Login successful!");
-        } else {
-          const { data, error } = await supabaseClient.auth.signUp({
-            email,
-            password,
-            options: {
-              emailRedirectTo: window.location.origin +
-                window.location.pathname
-            }
-          });
-
-          if (error) throw error;
-
-          if (data.session) {
-            showMessage("Account created successfully!");
-          } else {
-            showMessage(
-              "Registration received! Check your email for a confirmation link."
-            );
-          }
+    supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY,
+      {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true
         }
-      } catch (error) {
-        showMessage(error.message || "Something went wrong.", true);
-      } finally {
-        submitAuth.disabled = false;
       }
-    });
+    );
 
-    async function refreshScreen() {
-      const { data, error } = await supabaseClient.auth.getSession();
+    return true;
+  } catch {
+    showStatus('The Supabase configuration is invalid. Please check the URL and key.', 'error');
+    return false;
+  }
+}
 
-      if (error) {
-        showMessage(error.message, true);
-        return;
-      }
+form.addEventListener('submit', async event => {
+  event.preventDefault();
+  clearStatus();
 
-      currentUser = data.session ? data.session.user : null;
+  if (!initializeSupabase()) return;
 
-      if (currentUser) {
-        authSection.classList.add("hidden");
-        dashboard.classList.remove("hidden");
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
 
-        document.getElementById("userEmail").textContent =
-          "Logged in as: " + currentUser.email;
+  if (!email || !password) {
+    showStatus('Please enter your email address and password.', 'error');
+    return;
+  }
 
-        await loadTasks();
+  if (mode === 'signup' && password.length < 8) {
+    showStatus('For a new account, use a password with at least 8 characters.', 'error');
+    return;
+  }
+
+  submitButton.disabled = true;
+  submitButton.textContent = mode === 'signup'
+    ? 'Creating account...'
+    : 'Signing in...';
+
+  try {
+    let result;
+
+    if (mode === 'signup') {
+      result = await supabaseClient.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: window.location.origin + window.location.pathname
+        }
+      });
+    } else {
+      result = await supabaseClient.auth.signInWithPassword({
+        email,
+        password
+      });
+    }
+
+    if (result.error) throw result.error;
+
+    if (mode === 'signup') {
+      if (result.data.session) {
+        showStatus('Your account has been created. You are signed in!', 'success');
+        setTimeout(() => window.location.href = 'index.html', 1200);
       } else {
-        dashboard.classList.add("hidden");
-        authSection.classList.remove("hidden");
-        document.getElementById("taskList").replaceChildren();
-        document.getElementById("taskSummary").textContent = "";
+        showStatus(
+          'Account created! Check your email for the verification link, then return here to sign in.',
+          'success'
+        );
       }
+    } else {
+      showStatus('Sign-in successful! Opening Student Toolkit...', 'success');
+      setTimeout(() => window.location.href = 'index.html', 900);
     }
+  } catch (error) {
+    showStatus(
+      error.message || 'Something went wrong. Please try again.',
+      'error'
+    );
+  } finally {
+    submitButton.disabled = false;
+    submitButton.innerHTML = mode === 'signup'
+      ? 'Create Account <i class="fa-solid fa-arrow-right"></i>'
+      : 'Sign In <i class="fa-solid fa-arrow-right"></i>';
+  }
+});
 
-    async function loadTasks() {
-      if (!currentUser) return;
+forgotPassword.addEventListener('click', async () => {
+  clearStatus();
 
-      const list = document.getElementById("taskList");
-      const summary = document.getElementById("taskSummary");
+  if (!initializeSupabase()) return;
 
-      list.textContent = "Loading...";
+  const email = emailInput.value.trim();
 
-      try {
-        const { data, error } = await supabaseClient
-          .from("student_tasks")
-          .select("id, title, status, created_at")
-          .eq("user_id", currentUser.id)
-          .order("created_at", { ascending: false });
+  if (!email) {
+    showStatus('Enter your email address first, then click Forgot password?', 'info');
+    emailInput.focus();
+    return;
+  }
 
-        if (error) throw error;
-
-        list.replaceChildren();
-
-        const tasks = data || [];
-        const completeCount = tasks.filter(
-          task => task.status === "Complete"
-        ).length;
-
-        summary.textContent =
-          `${tasks.length} tasks · ${completeCount} complete · ` +
-          `${tasks.length - completeCount} not complete`;
-
-        if (tasks.length === 0) {
-          const empty = document.createElement("p");
-          empty.className = "muted";
-          empty.textContent = "No tasks yet. Add your first task above!";
-          list.appendChild(empty);
-          return;
-        }
-
-        tasks.forEach(task => {
-          const card = document.createElement("div");
-          card.className = "task";
-
-          const title = document.createElement("div");
-          title.className = "task-title";
-          title.textContent = task.title;
-
-          const status = document.createElement("span");
-          status.className = "status";
-          status.textContent = task.status;
-
-          const actions = document.createElement("div");
-          actions.className = "task-actions";
-
-          const editButton = document.createElement("button");
-          editButton.type = "button";
-          editButton.textContent = "Edit";
-          editButton.className = "secondary";
-          editButton.addEventListener("click", () => startEdit(task));
-
-          const deleteButton = document.createElement("button");
-          deleteButton.type = "button";
-          deleteButton.textContent = "Delete";
-          deleteButton.className = "danger";
-          deleteButton.addEventListener("click", () => deleteTask(task.id));
-
-          actions.append(editButton, deleteButton);
-          card.append(title, status, actions);
-          list.appendChild(card);
-        });
-      } catch (error) {
-        list.textContent = "Could not load tasks: " + error.message;
-      }
-    }
-
-    function startEdit(task) {
-      editingTaskId = task.id;
-      document.getElementById("taskTitle").value = task.title;
-      document.getElementById("taskStatus").value = task.status;
-      document.getElementById("saveTask").textContent = "Save Changes";
-      document.getElementById("cancelEdit").classList.remove("hidden");
-      document.getElementById("taskTitle").focus();
-    }
-
-    function resetTaskForm() {
-      editingTaskId = null;
-      document.getElementById("taskForm").reset();
-      document.getElementById("saveTask").textContent = "Add Task";
-      document.getElementById("cancelEdit").classList.add("hidden");
-    }
-
-    document.getElementById("cancelEdit").addEventListener("click", resetTaskForm);
-
-    document.getElementById("taskForm").addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      if (!currentUser) return;
-
-      const title = document.getElementById("taskTitle").value.trim();
-      const status = document.getElementById("taskStatus").value;
-      const saveButton = document.getElementById("saveTask");
-
-      if (!title) return;
-
-      saveButton.disabled = true;
-
-      try {
-        let result;
-
-        if (editingTaskId) {
-          result = await supabaseClient
-            .from("student_tasks")
-            .update({ title, status })
-            .eq("id", editingTaskId)
-            .eq("user_id", currentUser.id);
-        } else {
-          result = await supabaseClient
-            .from("student_tasks")
-            .insert({
-              user_id: currentUser.id,
-              title,
-              status
-            });
-        }
-
-        if (result.error) throw result.error;
-
-        resetTaskForm();
-        await loadTasks();
-      } catch (error) {
-        alert("Could not save task: " + error.message);
-      } finally {
-        saveButton.disabled = false;
-      }
+  try {
+    const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + window.location.pathname
     });
 
-    async function deleteTask(taskId) {
-      if (!currentUser) return;
+    if (error) throw error;
 
-      if (!window.confirm("Delete this task?")) return;
+    showStatus(
+      'If password recovery is enabled for your project, check your email for the recovery link.',
+      'success'
+    );
+  } catch (error) {
+    showStatus(error.message || 'Unable to request password recovery.', 'error');
+  }
+});
 
-      try {
-        const { error } = await supabaseClient
-          .from("student_tasks")
-          .delete()
-          .eq("id", taskId)
-          .eq("user_id", currentUser.id);
+const params = new URLSearchParams(window.location.search);
 
-        if (error) throw error;
+if (window.location.hash === '#signup' || params.get('mode') === 'signup') {
+  setMode('signup');
+} else {
+  setMode('login');
+}
+</script>
 
-        await loadTasks();
-      } catch (error) {
-        alert("Could not delete task: " + error.message);
-      }
-    }
-
-    document.getElementById("logout").addEventListener("click", async () => {
-      const { error } = await supabaseClient.auth.signOut();
-
-      if (error) {
-        alert("Could not log out: " + error.message);
-        return;
-      }
-
-      resetTaskForm();
-      await refreshScreen();
-    });
-
-    async function startApp() {
-      if (
-        SUPABASE_URL.includes("PASTE_") ||
-        SUPABASE_PUBLISHABLE_KEY.includes("PASTE_")
-      ) {
-        showSetupError(
-          "The Supabase connection details have not been added yet. " +
-          "Replace both placeholders in the code before using this page."
-        );
-        return;
-      }
-
-      try {
-        supabaseClient = window.supabase.createClient(
-          SUPABASE_URL,
-          SUPABASE_PUBLISHABLE_KEY
-        );
-
-        supabaseClient.auth.onAuthStateChange(() => {
-          setTimeout(() => refreshScreen(), 0);
-        });
-
-        await refreshScreen();
-      } catch (error) {
-        showSetupError("Could not initialize Supabase: " + error.message);
-      }
-    }
-
-    startApp();
-  </script>
 </body>
 </html>
