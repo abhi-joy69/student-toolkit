@@ -3,57 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#5b43d6">
+<meta name="theme-color" content="#087f73">
 <title>Student Toolkit | Learn Smarter</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root{
-  --primary:#5b43d6;
-  --primary-dark:#3926a5;
-  --heading:#292044;
-  --text:#45415b;
-  --muted:#77738c;
-  --background:#f7f6fc;
+  --primary:#087f73;
+  --primary-dark:#075b53;
+  --primary-light:#dff5ef;
+  --heading:#153b38;
+  --text:#465b57;
+  --muted:#748680;
+  --background:#f5f8f3;
   --white:#ffffff;
-  --border:#e7e3f2;
-  --green:#188653;
+  --border:#dfe9e1;
+  --green:#16845d;
   --radius:20px;
-  --shadow:0 10px 30px rgba(48,32,105,.08);
+  --shadow:0 12px 32px rgba(24,79,63,.09);
 }
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:100px}
 body{
   margin:0;
-  font-family:'Inter',sans-serif;
+  font-family:'DM Sans',sans-serif;
   background:var(--background);
   color:var(--text);
   line-height:1.65;
 }
 h1,h2,h3,h4,.brand-name{
-  font-family:'Poppins',sans-serif;
+  font-family:'Manrope',sans-serif;
   color:var(--heading);
 }
 a{color:inherit;text-decoration:none}
 button,input,select{font:inherit}
 button{cursor:pointer}
+button:disabled{opacity:.6;cursor:not-allowed}
 .container{width:min(1160px,92%);margin:auto}
 section{scroll-margin-top:100px}
 
 .top-note{
   padding:8px 12px;
-  background:#251b48;
-  color:#fff;
+  background:#123d35;
+  color:white;
   text-align:center;
   font-size:12px;
 }
-.top-note i{color:#c9baff;margin-right:7px}
+.top-note i{color:#9ee8d1;margin-right:7px}
 
 .navbar{
   position:sticky;
@@ -76,7 +78,7 @@ section{scroll-margin-top:100px}
   display:grid;place-items:center;
   color:white;font-size:21px;
   border-radius:14px;
-  background:linear-gradient(135deg,#8874ff,#4e35c4);
+  background:linear-gradient(135deg,#25b99c,#087f73);
 }
 .brand-name{
   font-size:19px;font-weight:800;
@@ -86,12 +88,12 @@ section{scroll-margin-top:100px}
 .brand-caption{
   color:var(--muted);font-size:9px;
   letter-spacing:1.1px;text-transform:uppercase;
-  font-weight:700;
+  font-weight:800;
 }
 .nav-links{display:flex;align-items:center;gap:17px}
 .nav-links a{
-  font-size:12px;font-weight:700;
-  color:#514b69;transition:color .2s;
+  font-size:12px;font-weight:800;
+  color:#435c55;transition:color .2s;
 }
 .nav-links a:hover{color:var(--primary)}
 .nav-links i{color:var(--primary);margin-right:4px}
@@ -102,15 +104,15 @@ section{scroll-margin-top:100px}
   justify-content:center;gap:8px;
   padding:11px 15px;border:0;
   border-radius:11px;font-size:12px;
-  font-weight:750;transition:.2s;
+  font-weight:800;transition:.2s;
 }
 .btn:hover{transform:translateY(-2px)}
 .btn-primary{
-  background:linear-gradient(135deg,#725bea,#4f36c7);
-  color:white;box-shadow:0 5px 14px #5b43d626;
+  background:linear-gradient(135deg,#139b87,#087468);
+  color:white;box-shadow:0 5px 14px #087f7326;
 }
 .btn-light{
-  background:white;color:var(--primary);
+  background:white;color:var(--primary-dark);
   border:1px solid var(--border);
 }
 .btn-white{background:white;color:var(--primary-dark)}
@@ -118,15 +120,14 @@ section{scroll-margin-top:100px}
 .menu-toggle{
   display:none;width:42px;height:42px;
   border:0;border-radius:11px;
-  color:var(--primary);background:#efebff;
+  color:var(--primary);background:#e4f5ed;
 }
-
 .profile-pill{
   display:flex;align-items:center;gap:7px;
-  padding:9px 11px;border:1px solid #ded6ff;
-  border-radius:11px;background:#f0edff;
+  padding:9px 11px;border:1px solid #cce8dc;
+  border-radius:11px;background:#e7f7ef;
   color:var(--primary-dark);font-size:12px;
-  font-weight:750;max-width:145px;
+  font-weight:800;max-width:145px;
 }
 .profile-pill span{
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
@@ -138,7 +139,7 @@ section{scroll-margin-top:100px}
   min-height:440px;overflow:hidden;
   display:flex;align-items:center;
   padding:55px;border-radius:28px;
-  background:#24194c;color:white;
+  background:#123b35;color:white;
 }
 .hero-video{
   position:absolute;inset:0;
@@ -148,32 +149,32 @@ section{scroll-margin-top:100px}
 .hero-box:before{
   content:"";position:absolute;inset:0;z-index:-1;
   background:linear-gradient(90deg,
-  rgba(27,19,66,.97),rgba(38,26,91,.88) 55%,
-  rgba(44,30,100,.35));
+  rgba(12,48,41,.97),rgba(12,65,54,.87) 55%,
+  rgba(11,83,67,.38));
 }
 .hero-content{max-width:650px}
 .eyebrow{
   display:inline-flex;align-items:center;gap:8px;
   padding:7px 12px;border:1px solid #ffffff42;
   border-radius:30px;background:#ffffff12;
-  color:#f5f2ff;font-size:11px;font-weight:750;
+  color:#f0fff9;font-size:11px;font-weight:800;
   margin-bottom:17px;
 }
-.eyebrow i{color:#c7baff}
+.eyebrow i{color:#a8f0d8}
 .hero h1{
   color:white;font-size:clamp(38px,5vw,63px);
   line-height:1.12;letter-spacing:-2px;
   margin:0 0 18px;
 }
-.hero h1 span{color:#c3b7ff}
+.hero h1 span{color:#9ee8d1}
 .hero p{
-  color:#e4def8;max-width:525px;
+  color:#e1f4eb;max-width:525px;
   font-size:14px;line-height:1.9;margin-bottom:25px;
 }
 .hero-buttons{display:flex;gap:11px;flex-wrap:wrap}
 .hero-trust{
   display:flex;gap:17px;flex-wrap:wrap;
-  margin-top:25px;color:#eee9ff;font-size:11px;
+  margin-top:25px;color:#eaf9f2;font-size:11px;
 }
 .hero-trust i{color:#a8efc9;margin-right:5px}
 
@@ -193,7 +194,7 @@ section{scroll-margin-top:100px}
   margin:0 0 7px;
 }
 .section-heading p{color:var(--muted);font-size:13px;margin:0}
-.text-link{font-size:12px;font-weight:750;color:var(--primary)}
+.text-link{font-size:12px;font-weight:800;color:var(--primary)}
 
 .search-panel{
   display:flex;align-items:center;gap:12px;
@@ -206,48 +207,30 @@ section{scroll-margin-top:100px}
   flex:1;min-width:0;border:0;outline:0;
   color:var(--heading);background:transparent;
 }
-.grid{display:grid;gap:16px}
-.classes-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
-.class-card{
-  display:block;text-align:center;
-  padding:20px 10px;background:white;
-  border:1px solid var(--border);border-radius:17px;
-  transition:transform .2s,border-color .2s,box-shadow .2s;
-}
-.class-card:hover,.material-card:hover,.tool-card:hover{
-  transform:translateY(-4px);
-  border-color:#c9beff;box-shadow:var(--shadow);
-}
-.class-number{
-  width:46px;height:46px;display:grid;
-  place-items:center;margin:0 auto 10px;
-  border-radius:14px;background:#eeebff;
-  color:#5940d1;font-size:19px;font-weight:800;
-  font-family:'Poppins',sans-serif;
-}
-.class-card:nth-child(3n+2) .class-number{background:#e4f8ed;color:#168553}
-.class-card:nth-child(3n) .class-number{background:#fff0e4;color:#bd6428}
-.class-card strong{display:block;color:var(--heading);font-size:12px}
-.class-card small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
 
-.tools-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.grid{display:grid;gap:16px}
+.tools-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 .tool-card{
   background:white;border:1px solid var(--border);
   border-radius:var(--radius);padding:24px;
   transition:transform .2s,border-color .2s,box-shadow .2s;
+}
+.tool-card:hover,.material-card:hover{
+  transform:translateY(-4px);
+  border-color:#a9d9c7;box-shadow:var(--shadow);
 }
 .tool-icon{
   width:49px;height:49px;border-radius:15px;
   display:grid;place-items:center;font-size:21px;
   margin-bottom:16px;
 }
-.purple{background:#efebff;color:#6046dc}
-.green{background:#e5f7ec;color:#188653}
-.orange{background:#fff0e4;color:#c36c2b}
-.blue{background:#e8f1ff;color:#3476d4}
+.purple{background:#e2f5ee;color:#087f73}
+.green{background:#e1f5e8;color:#16845d}
+.orange{background:#fff1dd;color:#ad6921}
+.blue{background:#e4f1f8;color:#32749b}
 .tool-card h3{font-size:18px;margin:0 0 8px}
 .tool-card p{font-size:12px;line-height:1.8;color:var(--muted);margin:0 0 17px}
-.card-action{color:var(--primary);font-size:12px;font-weight:750}
+.card-action{color:var(--primary);font-size:12px;font-weight:800}
 .card-action i{margin-left:5px}
 
 .material-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -255,7 +238,7 @@ section{scroll-margin-top:100px}
   display:flex;align-items:center;gap:14px;
   padding:19px;background:white;
   border:1px solid var(--border);border-radius:17px;
-  cursor:pointer;transition:.2s;
+  transition:.2s;min-width:0;
 }
 .material-icon{
   flex-shrink:0;width:49px;height:49px;
@@ -270,71 +253,61 @@ section{scroll-margin-top:100px}
   background:#fff1d8;color:#875719;
   font-size:9px;font-weight:800;
 }
-.resource-toolbar{
-  display:flex;align-items:center;
-  flex-wrap:wrap;gap:10px;margin-bottom:18px;
-}
-.resource-toolbar label{font-size:12px;font-weight:750}
-.resource-toolbar select{
-  padding:10px 12px;border:1px solid var(--border);
-  border-radius:10px;background:white;color:var(--heading);
-}
 .notice{
   display:none;margin-top:13px;padding:12px 14px;
   border-radius:11px;background:#fff3d8;
   color:#77521a;font-size:12px;
 }
 .notice.show{display:block}
-.notice.success{background:#e4f8ed;color:#176c46}
+.notice.success{background:#e1f5e8;color:#176c46}
 .notice.error{background:#ffebeb;color:#a52f3d}
 
 .cta{
   padding:38px;border-radius:25px;
-  background:linear-gradient(125deg,#251b50,#6247d9);
+  background:linear-gradient(125deg,#123d35,#0c8774);
   display:flex;align-items:center;justify-content:space-between;
   gap:25px;color:white;
 }
 .cta h2{color:white;font-size:29px;line-height:1.25;margin:0 0 9px}
-.cta p{color:#e4ddff;font-size:13px;margin:0}
+.cta p{color:#e1f5ed;font-size:13px;margin:0}
 
-.footer{margin-top:40px;background:#211a3c;color:white;padding:45px 0 20px}
+.footer{margin-top:40px;background:#12352f;color:white;padding:45px 0 20px}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:35px}
 .footer .brand-name{color:white}
-.footer .brand-caption{color:#c8c0e2}
-.footer-about{color:#c7c0db;font-size:12px;max-width:380px;margin-top:16px}
+.footer .brand-caption{color:#c5e0d4}
+.footer-about{color:#c5d9cf;font-size:12px;max-width:380px;margin-top:16px}
 .footer h4{color:white;font-size:13px;margin:0 0 13px}
 .footer-links{display:grid;gap:9px}
-.footer-links a{font-size:12px;color:#c7c0db}
+.footer-links a{font-size:12px;color:#c5d9cf}
 .footer-links a:hover{color:white}
 .footer-bottom{
   border-top:1px solid #ffffff22;margin-top:30px;padding-top:18px;
   display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
-  color:#b5adc9;font-size:10px;
+  color:#b5c9bf;font-size:10px;
 }
-
 .task-row{
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-  padding:12px;background:#f7f5ff;border-radius:12px;
+  padding:12px;background:#f0f7f1;border-radius:12px;
 }
-.task-title{flex:1;min-width:110px;font-size:12px;font-weight:650;overflow-wrap:anywhere}
+.task-title{flex:1;min-width:110px;font-size:12px;font-weight:700;overflow-wrap:anywhere}
 
 .modal-backdrop{
   display:none;position:fixed;inset:0;z-index:3000;
   align-items:center;justify-content:center;padding:16px;
-  background:#19132f9c;
+  background:#142c279c;
 }
 .modal-backdrop.open{display:flex}
 .modal{
   width:min(570px,100%);max-height:90vh;overflow:auto;
   background:white;border-radius:22px;padding:25px;
-  box-shadow:0 25px 80px #17132f55;
+  box-shadow:0 25px 80px #102b2355;
 }
 .modal h2{font-size:24px;margin:0 0 8px}
 .modal>p{font-size:12px;color:var(--muted)}
 .modal-form{display:grid;grid-template-columns:1fr 1fr;gap:13px}
 .form-field{display:grid;gap:6px}
-.form-field label{font-size:11px;font-weight:750;color:var(--heading)}
-.form-field input,.form-field select{
+.form-field label{font-size:11px;font-weight:800;color:var(--heading)}
+.form-field input:not([type=checkbox]),.form-field select{
   width:100%;padding:11px;border:1px solid var(--border);
   border-radius:10px;background:white;color:var(--heading);
 }
@@ -350,7 +323,6 @@ section{scroll-margin-top:100px}
 @media(max-width:1050px){
   .nav-links{gap:10px}
   .nav-links a{font-size:11px}
-  .classes-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
   .tools-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:760px){
@@ -379,8 +351,6 @@ section{scroll-margin-top:100px}
 @media(max-width:430px){
   .brand-name{font-size:16px}
   .brand-icon{width:38px;height:38px}
-  .classes-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-  .class-card{padding:15px 6px}
   .tools-grid{grid-template-columns:1fr}
   .hero h1{font-size:38px;letter-spacing:-1px}
   .hero-box{padding:25px 19px}
@@ -398,7 +368,7 @@ section{scroll-margin-top:100px}
 <body>
 
 <div class="top-note">
-  <i class="fa-solid fa-sparkles"></i>
+  <i class="fa-solid fa-leaf"></i>
   Your learning journey starts here — explore, practise and grow.
 </div>
 
@@ -414,10 +384,10 @@ section{scroll-margin-top:100px}
 
     <nav class="nav-links" id="navLinks">
       <a href="#home"><i class="fa-solid fa-house"></i> Home</a>
-      <a href="#classes"><i class="fa-solid fa-book-open"></i> Classes</a>
-      <a href="#materials"><i class="fa-solid fa-folder-open"></i> Materials</a>
+      <a href="#materials"><i class="fa-solid fa-book-open"></i> My Materials</a>
       <a href="#tools"><i class="fa-solid fa-wand-magic-sparkles"></i> Study Tools</a>
-      <a href="#senior"><i class="fa-solid fa-arrow-up-right-from-square"></i> Senior Classes</a>
+      <a href="#organizer"><i class="fa-solid fa-list-check"></i> My Tasks</a>
+      <a href="#senior"><i class="fa-solid fa-arrow-up-right-from-square"></i> CBSE</a>
     </nav>
 
     <div class="nav-actions" id="navActions">
@@ -444,18 +414,18 @@ section{scroll-margin-top:100px}
       </video>
 
       <div class="hero-content">
-        <div class="eyebrow"><i class="fa-solid fa-star"></i> YOUR ALL-IN-ONE STUDY COMPANION</div>
+        <div class="eyebrow"><i class="fa-solid fa-leaf"></i> YOUR ALL-IN-ONE STUDY COMPANION</div>
         <h1>Study smarter.<br>Achieve <span>more.</span></h1>
-        <p>Everything you need for your learning journey in one place. Explore study resources, practise questions, revise important concepts and organise your daily tasks.</p>
+        <p>Your personal learning space. Find your class resources, explore study materials and organise your daily academic goals in one place.</p>
 
         <div class="hero-buttons">
-          <a href="#classes" class="btn btn-white"><i class="fa-solid fa-book-open"></i> Explore Classes</a>
+          <a href="#materials" class="btn btn-white"><i class="fa-solid fa-book-open"></i> My Study Library</a>
           <a href="#tools" class="btn btn-glass"><i class="fa-solid fa-rocket"></i> Explore Study Tools</a>
         </div>
 
         <div class="hero-trust">
           <span><i class="fa-solid fa-circle-check"></i> Student-friendly</span>
-          <span><i class="fa-solid fa-circle-check"></i> Easy to explore</span>
+          <span><i class="fa-solid fa-circle-check"></i> Personalised learning</span>
           <span><i class="fa-solid fa-circle-check"></i> Learn at your pace</span>
         </div>
       </div>
@@ -466,23 +436,27 @@ section{scroll-margin-top:100px}
 <section class="container" aria-label="Search study resources">
   <div class="search-panel">
     <i class="fa-solid fa-magnifying-glass"></i>
-    <input id="siteSearch" type="search" placeholder="Search classes, NCERT, PYQs, quizzes..." aria-label="Search resources">
+    <input id="siteSearch" type="search" placeholder="Search textbooks, NCERT, PYQs, revision notes..." aria-label="Search resources">
     <button class="btn btn-primary" id="searchButton">Search <i class="fa-solid fa-arrow-right"></i></button>
   </div>
   <div class="notice" id="searchNotice" role="status"></div>
 </section>
 
-<section class="section" id="classes">
+<section class="section" id="materials">
   <div class="container">
     <div class="section-heading">
       <div>
-        <div class="section-kicker">Find your classroom</div>
-        <h2>Choose your class</h2>
-        <p>Select a class to explore the available study resources.</p>
+        <div class="section-kicker">Your personalised library</div>
+        <h2 id="materialsTitle">Your Study Library</h2>
+        <p id="materialsSubtitle">Sign in and save your student profile to see your class resources.</p>
       </div>
-      <a class="text-link" href="#materials">Explore resources <i class="fa-solid fa-arrow-right"></i></a>
+      <button class="btn btn-light" id="editProfileTop" type="button" style="display:none">
+        <i class="fa-solid fa-user-pen"></i> Edit Profile
+      </button>
     </div>
-    <div class="grid classes-grid" id="classGrid"></div>
+
+    <div class="grid material-grid" id="materialGrid"></div>
+    <div class="notice" id="resourceNotice" role="status"></div>
   </div>
 </section>
 
@@ -492,87 +466,31 @@ section{scroll-margin-top:100px}
       <div>
         <div class="section-kicker">Your learning workspace</div>
         <h2>Everything to study better</h2>
-        <p>Helpful tools to practise, revise and stay organised.</p>
+        <p>Helpful tools to organise your learning and find the right resources.</p>
       </div>
     </div>
 
     <div class="grid tools-grid">
       <article class="tool-card">
-        <div class="tool-icon purple"><i class="fa-solid fa-brain"></i></div>
-        <h3>Practice Quiz</h3>
-        <p>Answer a sample question and check your knowledge.</p>
-        <a href="#quiz" class="card-action protected-link">Try a quiz <i class="fa-solid fa-arrow-right"></i></a>
-      </article>
-
-      <article class="tool-card">
-        <div class="tool-icon green"><i class="fa-solid fa-book-open-reader"></i></div>
+        <div class="tool-icon purple"><i class="fa-solid fa-book-open-reader"></i></div>
         <h3>Study Materials</h3>
-        <p>Explore textbooks, NCERT solutions and revision categories.</p>
-        <a href="#materials" class="card-action">Explore materials <i class="fa-solid fa-arrow-right"></i></a>
+        <p>Explore textbooks, NCERT solutions, test papers and revision categories for your class.</p>
+        <a href="#materials" class="card-action">Explore my materials <i class="fa-solid fa-arrow-right"></i></a>
       </article>
 
       <article class="tool-card">
-        <div class="tool-icon orange"><i class="fa-solid fa-list-check"></i></div>
+        <div class="tool-icon green"><i class="fa-solid fa-list-check"></i></div>
         <h3>Task Organizer</h3>
-        <p>Add study tasks and track your progress.</p>
+        <p>Add study tasks, update their status and keep track of what you need to complete.</p>
         <a href="#organizer" class="card-action protected-link">Organise tasks <i class="fa-solid fa-arrow-right"></i></a>
       </article>
 
       <article class="tool-card">
-        <div class="tool-icon blue"><i class="fa-solid fa-user-graduate"></i></div>
+        <div class="tool-icon orange"><i class="fa-solid fa-user-graduate"></i></div>
         <h3>Your Account</h3>
-        <p>View your student profile and learning preferences.</p>
-        <a href="auth.html#signup" class="card-action" id="accountToolLink">Create an account <i class="fa-solid fa-arrow-right"></i></a>
+        <p>View and update your name, class, board and learning preferences.</p>
+        <a href="#profile" class="card-action" id="accountToolLink">Sign in to your account <i class="fa-solid fa-arrow-right"></i></a>
       </article>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="materials">
-  <div class="container">
-    <div class="section-heading">
-      <div>
-        <div class="section-kicker">Prepare with confidence</div>
-        <h2 id="materialsTitle">Your study library</h2>
-        <p id="materialsSubtitle">Choose a class to see its resource categories.</p>
-      </div>
-    </div>
-
-    <div class="resource-toolbar">
-      <label for="classSelect"><i class="fa-solid fa-graduation-cap"></i> Select class</label>
-      <select id="classSelect">
-        <option value="">Choose a class</option>
-      </select>
-    </div>
-
-    <div class="grid material-grid" id="materialGrid"></div>
-    <div class="notice" id="resourceNotice" role="status"></div>
-  </div>
-</section>
-
-<section class="section" id="quiz">
-  <div class="container">
-    <div class="section-heading">
-      <div>
-        <div class="section-kicker">Practice makes progress</div>
-        <h2>Try a quick quiz</h2>
-        <p>Answer this sample mathematics question.</p>
-      </div>
-    </div>
-
-    <div class="tool-card" style="max-width:760px;margin:auto">
-      <div class="tool-icon purple"><i class="fa-solid fa-lightbulb"></i></div>
-      <h3 style="font-size:21px">What is 12 × 8?</h3>
-
-      <div id="quizOptions" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px">
-        <button class="btn btn-light quiz-option" data-answer="84">84</button>
-        <button class="btn btn-light quiz-option" data-answer="96">96</button>
-        <button class="btn btn-light quiz-option" data-answer="88">88</button>
-        <button class="btn btn-light quiz-option" data-answer="108">108</button>
-      </div>
-
-      <p id="quizFeedback" role="status" style="font-weight:700"></p>
-      <button id="quizReset" class="btn btn-primary" style="display:none">Try again <i class="fa-solid fa-rotate-right"></i></button>
     </div>
   </div>
 </section>
@@ -593,7 +511,7 @@ section{scroll-margin-top:100px}
         <button class="btn btn-primary" type="submit"><i class="fa-solid fa-plus"></i> Add Task</button>
       </form>
       <div id="taskList" style="display:grid;gap:10px;margin-top:18px"></div>
-      <p id="taskEmpty" style="color:var(--muted);font-size:12px">Your study tasks will appear here.</p>
+      <p id="taskEmpty" style="color:var(--muted);font-size:12px">Sign in to organise your study tasks.</p>
     </div>
   </div>
 </section>
@@ -602,9 +520,9 @@ section{scroll-margin-top:100px}
   <div class="container">
     <div class="cta">
       <div>
-        <div class="section-kicker" style="color:#d6ccff">Keep learning</div>
+        <div class="section-kicker" style="color:#c5f3e3">Keep learning</div>
         <h2>Ready for your next chapter?</h2>
-        <p>Explore official CBSE academic resources for senior classes.</p>
+        <p>Visit the official CBSE Academic website for curriculum and academic resources.</p>
       </div>
       <a class="btn btn-white" href="https://cbseacademic.nic.in/" target="_blank" rel="noopener noreferrer">CBSE Academic <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
     </div>
@@ -624,16 +542,15 @@ section{scroll-margin-top:100px}
             <div class="brand-caption">Learn smarter every day</div>
           </div>
         </a>
-        <p class="footer-about">A student-focused learning workspace for study resources, practice and everyday academic organisation.</p>
+        <p class="footer-about">A student-focused learning workspace for study resources, personal learning and everyday academic organisation.</p>
       </div>
 
       <div>
         <h4>Explore</h4>
         <div class="footer-links">
-          <a href="#classes">Classes 1–10</a>
-          <a href="#materials">Study Materials</a>
-          <a href="#quiz" class="protected-link">Practice Quiz</a>
+          <a href="#materials">My Study Materials</a>
           <a href="#organizer" class="protected-link">Task Organizer</a>
+          <a href="#senior">CBSE Academic</a>
         </div>
       </div>
 
@@ -656,7 +573,7 @@ section{scroll-margin-top:100px}
 <div class="modal-backdrop" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
   <div class="modal">
     <h2 id="profileTitle">Welcome to Student Toolkit! 🎓</h2>
-    <p>Tell us a little about yourself so we can personalise your learning experience.</p>
+    <p>Tell us about yourself so we can personalise your learning experience.</p>
 
     <form id="profileForm">
       <div class="modal-form">
@@ -670,11 +587,16 @@ section{scroll-margin-top:100px}
           <label for="studentClass">Your class</label>
           <select id="studentClass" name="class" required>
             <option value="">Select class</option>
-            <option value="1">Class 1</option><option value="2">Class 2</option>
-            <option value="3">Class 3</option><option value="4">Class 4</option>
-            <option value="5">Class 5</option><option value="6">Class 6</option>
-            <option value="7">Class 7</option><option value="8">Class 8</option>
-            <option value="9">Class 9</option><option value="10">Class 10</option>
+            <option value="1">Class 1</option>
+            <option value="2">Class 2</option>
+            <option value="3">Class 3</option>
+            <option value="4">Class 4</option>
+            <option value="5">Class 5</option>
+            <option value="6">Class 6</option>
+            <option value="7">Class 7</option>
+            <option value="8">Class 8</option>
+            <option value="9">Class 9</option>
+            <option value="10">Class 10</option>
             <option value="senior">Senior Classes</option>
           </select>
         </div>
@@ -718,8 +640,8 @@ section{scroll-margin-top:100px}
       <div class="notice" id="profileNotice" role="status"></div>
 
       <div class="modal-actions">
-        <button type="button" class="btn btn-light" id="profileLater">Later</button>
-        <button type="submit" class="btn btn-primary" id="profileSave">Save & Continue <i class="fa-solid fa-arrow-right"></i></button>
+        <button type="button" class="btn btn-light" id="profileLater">Close</button>
+        <button type="submit" class="btn btn-primary" id="profileSave">Save Profile <i class="fa-solid fa-arrow-right"></i></button>
       </div>
     </form>
   </div>
@@ -728,23 +650,18 @@ section{scroll-margin-top:100px}
 <script>
 /* =========================================================
    1. SUPABASE CONFIGURATION
-   Use the same project URL and publishable key as auth.html.
-   Never put a service-role or secret key in this file.
+   Use the same project and publishable key as auth.html.
+   Never put a service-role or secret key in frontend code.
 ========================================================= */
 
-const SUPABASE_URL = "https://skhgyzsnacojdljchzxr.supabase.co/rest/v1/";
+const SUPABASE_URL = "https://skhgyzsnacojdljchzxr.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_-DI-cpV_UGIgETXRPFSyCQ_gXGHIsu3";
 
 let supabaseClient = null;
 let currentUser = null;
+let profileLoadToken = 0;
 
-if (
-  window.supabase &&
-  SUPABASE_URL.startsWith("https://") &&
-  !SUPABASE_URL.includes("PASTE_YOUR") &&
-  SUPABASE_PUBLISHABLE_KEY &&
-  !SUPABASE_PUBLISHABLE_KEY.includes("PASTE_YOUR")
-) {
+if (window.supabase && SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY) {
   supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_PUBLISHABLE_KEY
@@ -752,7 +669,7 @@ if (
 }
 
 /* =========================================================
-   2. NAVIGATION AND MOBILE MENU
+   2. NAVIGATION
 ========================================================= */
 
 const navLinks = document.getElementById("navLinks");
@@ -777,15 +694,16 @@ navLinks.querySelectorAll("a").forEach(link => {
 document.getElementById("year").textContent = new Date().getFullYear();
 
 /* =========================================================
-   3. CLASSES AND RESOURCE CATEGORIES
+   3. RESOURCE CATEGORIES
 ========================================================= */
 
-const classGrid = document.getElementById("classGrid");
-const classSelect = document.getElementById("classSelect");
 const materialGrid = document.getElementById("materialGrid");
 const resourceNotice = document.getElementById("resourceNotice");
+const materialsTitle = document.getElementById("materialsTitle");
+const materialsSubtitle = document.getElementById("materialsSubtitle");
 
-let selectedClass = 10;
+let selectedClass = null;
+let currentProfile = null;
 
 const classResources = {
   1: ["Textbooks", "NCERT Solutions", "Test Papers"],
@@ -820,82 +738,95 @@ function hideNotice(element) {
   element.textContent = "";
 }
 
-function renderClasses() {
-  for (let i = 1; i <= 10; i++) {
-    const option = document.createElement("option");
-    option.value = String(i);
-    option.textContent = "Class " + i;
-    classSelect.appendChild(option);
-
-    const card = document.createElement("a");
-    card.href = "#materials";
-    card.className = "class-card";
-    card.dataset.search = "class " + i;
-
-    const number = document.createElement("div");
-    number.className = "class-number";
-    number.textContent = i;
-
-    const name = document.createElement("strong");
-    name.textContent = "Class " + i;
-
-    const small = document.createElement("small");
-    small.textContent = "Explore resources";
-
-    card.append(number, name, small);
-    card.addEventListener("click", () => chooseClass(i));
-    classGrid.appendChild(card);
-  }
-
-  const seniorOption = document.createElement("option");
-  seniorOption.value = "senior";
-  seniorOption.textContent = "Senior Classes";
-  classSelect.appendChild(seniorOption);
-
-  const seniorCard = document.createElement("a");
-  seniorCard.href = "https://cbseacademic.nic.in/";
-  seniorCard.target = "_blank";
-  seniorCard.rel = "noopener noreferrer";
-  seniorCard.className = "class-card";
-  seniorCard.dataset.search = "senior classes cbse";
-
-  const seniorNumber = document.createElement("div");
-  seniorNumber.className = "class-number";
-  seniorNumber.innerHTML = '<i class="fa-solid fa-graduation-cap"></i>';
-
-  const seniorName = document.createElement("strong");
-  seniorName.textContent = "Senior Classes";
-
-  const seniorSmall = document.createElement("small");
-  seniorSmall.textContent = "CBSE Academic";
-
-  seniorCard.append(seniorNumber, seniorName, seniorSmall);
-  classGrid.appendChild(seniorCard);
-}
-
-function chooseClass(classNumber) {
-  selectedClass = Number(classNumber);
-  classSelect.value = String(selectedClass);
-
-  document.getElementById("materialsTitle").textContent =
-    "Class " + selectedClass + " Study Library";
-
-  document.getElementById("materialsSubtitle").textContent =
-    "Explore the available resource categories for Class " + selectedClass + ".";
-
-  renderResources();
-  hideNotice(resourceNotice);
+function showLibraryMessage(title, message) {
+  materialsTitle.textContent = title;
+  materialsSubtitle.textContent = message;
+  materialGrid.replaceChildren();
 }
 
 function renderResources() {
   materialGrid.replaceChildren();
+  hideNotice(resourceNotice);
 
-  const resources = classResources[selectedClass] || [];
+  if (!currentUser) {
+    showLibraryMessage(
+      "Your Study Library",
+      "Sign in and save your profile to see your personalised class resources."
+    );
+
+    const button = document.createElement("a");
+    button.className = "material-card";
+    button.href = "auth.html";
+    button.innerHTML =
+      '<div class="material-icon green"><i class="fa-solid fa-user-lock"></i></div>' +
+      '<div><h3>Sign in to continue</h3><p>Access your personalised study library.</p></div>';
+
+    materialGrid.appendChild(button);
+    return;
+  }
+
+  if (!currentProfile || !currentProfile.class) {
+    showLibraryMessage(
+      "Complete Your Profile",
+      "Save your class in your profile to see the right study resources."
+    );
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "material-card";
+    button.innerHTML =
+      '<div class="material-icon green"><i class="fa-solid fa-user-pen"></i></div>' +
+      '<div><h3>Complete your student profile</h3><p>Choose your class once to personalise this library.</p></div>';
+
+    button.addEventListener("click", () => openProfile(currentProfile || {}));
+    materialGrid.appendChild(button);
+    return;
+  }
+
+  const classValue = String(currentProfile.class);
+  selectedClass = classValue;
+
+  if (classValue === "senior") {
+    showLibraryMessage(
+      "Senior Classes Study Library",
+      "Your profile is set to Senior Classes."
+    );
+
+    const link = document.createElement("a");
+    link.className = "material-card";
+    link.href = "https://cbseacademic.nic.in/";
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.innerHTML =
+      '<div class="material-icon green"><i class="fa-solid fa-graduation-cap"></i></div>' +
+      '<div><h3>CBSE Academic Resources</h3><p>Open the official CBSE Academic website.</p></div>';
+
+    materialGrid.appendChild(link);
+    return;
+  }
+
+  const classNumber = Number(classValue);
+  const resources = classResources[classNumber];
+
+  if (!resources) {
+    showLibraryMessage(
+      "Your Study Library",
+      "Please update your class in your profile."
+    );
+    return;
+  }
+
+  showLibraryMessage(
+    "Class " + classNumber + " Study Library",
+    "These resources are personalised for the class saved in your profile."
+  );
 
   resources.forEach(name => {
     const card = document.createElement("article");
     card.className = "material-card";
-    card.dataset.search = name.toLowerCase() + " class " + selectedClass;
+    card.dataset.search = (
+      name + " class " + classNumber
+    ).toLowerCase();
 
     const info = resourceIcons[name] || ["fa-folder-open", "purple"];
 
@@ -909,7 +840,7 @@ function renderResources() {
     title.textContent = name;
 
     const description = document.createElement("p");
-    description.textContent = "Class " + selectedClass + " • Study resources";
+    description.textContent = "Class " + classNumber + " • Study resources";
 
     const status = document.createElement("span");
     status.className = "resource-status";
@@ -923,27 +854,13 @@ function renderResources() {
 
       showNotice(
         resourceNotice,
-        "The " + name + " category for Class " + selectedClass +
-        " is displayed, but its actual PDF or download link has not been added yet."
+        "The " + name + " category is ready, but its actual PDF or download link has not been added yet."
       );
     });
 
     materialGrid.appendChild(card);
   });
 }
-
-classSelect.addEventListener("change", () => {
-  if (classSelect.value === "senior") {
-    window.open("https://cbseacademic.nic.in/", "_blank", "noopener,noreferrer");
-    classSelect.value = String(selectedClass);
-    return;
-  }
-
-  if (classSelect.value) chooseClass(classSelect.value);
-});
-
-renderClasses();
-chooseClass(10);
 
 /* =========================================================
    4. SEARCH
@@ -959,32 +876,38 @@ function performSearch() {
   });
 
   if (!query) {
-    showNotice(notice, "Type a search term, such as Class 10, NCERT Solutions, PYQs or Quiz.");
+    showNotice(notice, "Type a search term, such as Textbooks, NCERT Solutions, PYQs or Class 10.");
     return;
   }
 
   const elements = [
-    ...document.querySelectorAll(".class-card"),
     ...document.querySelectorAll(".material-card"),
     ...document.querySelectorAll(".tool-card")
   ];
 
   const matches = elements.filter(element =>
-    (element.innerText + " " + (element.dataset.search || "")).toLowerCase().includes(query)
+    (element.innerText + " " + (element.dataset.search || ""))
+      .toLowerCase()
+      .includes(query)
   );
 
   if (!matches.length) {
-    showNotice(notice, "No matching item found. Try Class 10, Textbooks, NCERT, PYQs or Quiz.");
+    showNotice(notice, "No matching item found. Try Textbooks, NCERT, PYQs or Revision Notes.");
     return;
   }
 
   matches.forEach(element => {
     element.classList.add("search-match");
-    element.style.outline = "2px solid #8d7bff";
+    element.style.outline = "2px solid #40b79b";
   });
 
-  showNotice(notice, "Found " + matches.length + " matching item(s). The results are highlighted below.", "success");
-  matches[0].scrollIntoView({ behavior: "smooth", block: "center" });
+  showNotice(
+    notice,
+    "Found " + matches.length + " matching item(s). The results are highlighted below.",
+    "success"
+  );
+
+  matches[0].scrollIntoView({behavior:"smooth",block:"center"});
 }
 
 document.getElementById("searchButton").addEventListener("click", performSearch);
@@ -994,39 +917,7 @@ document.getElementById("siteSearch").addEventListener("keydown", event => {
 });
 
 /* =========================================================
-   5. SAMPLE QUIZ
-========================================================= */
-
-const quizOptions = document.querySelectorAll(".quiz-option");
-const quizFeedback = document.getElementById("quizFeedback");
-const quizReset = document.getElementById("quizReset");
-
-quizOptions.forEach(button => {
-  button.addEventListener("click", () => {
-    if (!requireLogin()) return;
-
-    quizOptions.forEach(option => option.disabled = true);
-
-    if (button.dataset.answer === "96") {
-      quizFeedback.textContent = "Excellent! 12 × 8 = 96.";
-      quizFeedback.style.color = "#188653";
-    } else {
-      quizFeedback.textContent = "Not quite. The answer is 96 because 12 × 8 = 96.";
-      quizFeedback.style.color = "#bd493f";
-    }
-
-    quizReset.style.display = "inline-flex";
-  });
-});
-
-quizReset.addEventListener("click", () => {
-  quizOptions.forEach(option => option.disabled = false);
-  quizFeedback.textContent = "";
-  quizReset.style.display = "none";
-});
-
-/* =========================================================
-   6. STUDENT TASK ORGANIZER
+   5. STUDENT TASK ORGANIZER
 ========================================================= */
 
 const taskForm = document.getElementById("taskForm");
@@ -1064,6 +955,13 @@ function renderTasks() {
   taskList.replaceChildren();
   taskEmpty.style.display = tasks.length ? "none" : "block";
 
+  if (!currentUser) {
+    taskEmpty.textContent = "Sign in to organise your study tasks.";
+    return;
+  }
+
+  taskEmpty.textContent = "Your study tasks will appear here.";
+
   tasks.forEach((task, index) => {
     const row = document.createElement("div");
     row.className = "task-row";
@@ -1075,7 +973,7 @@ function renderTasks() {
     const status = document.createElement("select");
     status.setAttribute("aria-label", "Task status");
     status.style.cssText =
-      "padding:8px;border:1px solid #e5e1fa;border-radius:9px;background:white;font-size:11px";
+      "padding:8px;border:1px solid #dfe9e1;border-radius:9px;background:white;font-size:11px";
 
     ["Pending", "In Progress", "Complete"].forEach(value => {
       const option = document.createElement("option");
@@ -1092,6 +990,7 @@ function renderTasks() {
 
     const remove = document.createElement("button");
     remove.className = "btn btn-light";
+    remove.type = "button";
     remove.setAttribute("aria-label", "Delete task");
     remove.innerHTML = '<i class="fa-solid fa-trash"></i>';
 
@@ -1113,18 +1012,19 @@ taskForm.addEventListener("submit", event => {
   const title = taskInput.value.trim();
   if (!title) return;
 
-  tasks.push({ title, status: "Pending" });
+  tasks.push({title, status:"Pending"});
   taskInput.value = "";
   saveTasks();
 });
 
 /* =========================================================
-   7. STUDENT PROFILE
+   6. STUDENT PROFILE
 ========================================================= */
 
 const profileModal = document.getElementById("profileModal");
 const profileForm = document.getElementById("profileForm");
 const profileNotice = document.getElementById("profileNotice");
+const profileSave = document.getElementById("profileSave");
 
 function profileKey() {
   return currentUser
@@ -1132,21 +1032,65 @@ function profileKey() {
     : "studentToolkitGuestProfile";
 }
 
+function normaliseGoals(goals) {
+  if (Array.isArray(goals)) return goals;
+
+  if (typeof goals === "string" && goals.trim()) {
+    try {
+      const parsed = JSON.parse(goals);
+      if (Array.isArray(parsed)) return parsed;
+    } catch {}
+
+    return goals.split(",").map(item => item.trim()).filter(Boolean);
+  }
+
+  return [];
+}
+
+function normaliseProfile(profile) {
+  if (!profile) return null;
+
+  return {
+    name: profile.name || "",
+    class: String(profile.class ?? profile.class_name ?? ""),
+    board: profile.board || "",
+    goals: normaliseGoals(profile.goals),
+    discovery: profile.discovery || "",
+    updated_at: profile.updated_at || ""
+  };
+}
+
 function readProfile() {
   try {
-    return JSON.parse(localStorage.getItem(profileKey()) || "null");
+    const stored = JSON.parse(localStorage.getItem(profileKey()) || "null");
+    return normaliseProfile(stored);
   } catch {
     return null;
   }
 }
 
-function openProfile(profile = {}) {
-  profileForm.elements.name.value = profile.name || "";
-  profileForm.elements.class.value = profile.class || "";
-  profileForm.elements.board.value = profile.board || "";
-  profileForm.elements.discovery.value = profile.discovery || "";
+function storeProfile(profile) {
+  currentProfile = normaliseProfile(profile);
 
-  const goals = Array.isArray(profile.goals) ? profile.goals : [];
+  try {
+    localStorage.setItem(profileKey(), JSON.stringify(currentProfile));
+  } catch (error) {
+    console.warn("Could not save the profile locally:", error);
+  }
+
+  updateProfileName(currentProfile?.name);
+  renderResources();
+}
+
+function openProfile(profile = {}) {
+  const data = normaliseProfile(profile) || {};
+
+  profileForm.elements.name.value = data.name || "";
+  profileForm.elements.class.value = data.class || "";
+  profileForm.elements.board.value = data.board || "";
+  profileForm.elements.discovery.value = data.discovery || "";
+
+  const goals = data.goals || [];
 
   profileForm.querySelectorAll('input[name="goals"]').forEach(input => {
     input.checked = goals.includes(input.value);
@@ -1162,9 +1106,41 @@ function closeProfile() {
 
 document.getElementById("profileLater").addEventListener("click", closeProfile);
 
+document.getElementById("editProfileTop").addEventListener("click", () => {
+  if (requireLogin()) openProfile(currentProfile || {});
+});
+
 profileModal.addEventListener("click", event => {
   if (event.target === profileModal) closeProfile();
 });
+
+async function loadProfile(user) {
+  if (!user || !supabaseClient) return null;
+
+  try {
+    const {data, error} = await supabaseClient
+      .from("student_profiles")
+      .select("id,name,class_name,board,goals,discovery,updated_at")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    if (error) {
+      console.warn("Online profile could not be loaded:", error.message);
+      return readProfile();
+    }
+
+    if (data) {
+      const profile = normaliseProfile(data);
+      storeProfile(profile);
+      return profile;
+    }
+
+    return readProfile();
+  } catch (error) {
+    console.warn("Profile loading failed:", error);
+    return readProfile();
+  }
+}
 
 profileForm.addEventListener("submit", async event => {
   event.preventDefault();
@@ -1190,35 +1166,35 @@ profileForm.addEventListener("submit", async event => {
     return;
   }
 
-  const saveButton = document.getElementById("profileSave");
-  saveButton.disabled = true;
-  saveButton.textContent = "Saving...";
+  profileSave.disabled = true;
+  profileSave.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
 
   try {
-    localStorage.setItem(profileKey(), JSON.stringify(profile));
-
     /*
-      Optional online profile saving:
-      This requires a student_profiles table with an id column
-      linked to auth.users, and appropriate RLS policies.
+      Save locally first. The database goals column created earlier
+      is TEXT, so store the selected goals as a comma-separated string.
     */
+    storeProfile(profile);
+
     if (supabaseClient) {
-      const { error } = await supabaseClient
+      const {error} = await supabaseClient
         .from("student_profiles")
         .upsert({
           id: currentUser.id,
           name: profile.name,
           class_name: profile.class,
           board: profile.board,
-          goals: profile.goals,
+          goals: profile.goals.join(", "),
           discovery: profile.discovery,
           updated_at: profile.updated_at
-        }, { onConflict: "id" });
+        }, {onConflict:"id"});
 
       if (error) {
+        console.error("Online profile save failed:", error.message);
+
         showNotice(
           profileNotice,
-          "Your profile was saved in this browser. Online saving requires the student_profiles table and correct RLS policies.",
+          "Your profile is saved in this browser, but online saving failed. Check the student_profiles table and its RLS policies.",
           "error"
         );
         return;
@@ -1226,17 +1202,20 @@ profileForm.addEventListener("submit", async event => {
     }
 
     updateProfileName(profile.name);
+    renderResources();
     closeProfile();
-  } catch {
+  } catch (error) {
+    console.error("Profile save failed:", error);
     showNotice(profileNotice, "Could not save your profile. Please try again.", "error");
   } finally {
-    saveButton.disabled = false;
-    saveButton.innerHTML = 'Save & Continue <i class="fa-solid fa-arrow-right"></i>';
+    profileSave.disabled = false;
+    profileSave.innerHTML = 'Save Profile <i class="fa-solid fa-arrow-right"></i>';
   }
 });
 
 function updateProfileName(name) {
   const pill = document.getElementById("profileButton");
+
   if (pill) {
     pill.querySelector("span").textContent = name || "Student";
     pill.title = "Edit student profile";
@@ -1244,7 +1223,7 @@ function updateProfileName(name) {
 }
 
 /* =========================================================
-   8. LOGIN, SESSION DETECTION AND LOGOUT
+   7. LOGIN, SESSION DETECTION AND LOGOUT
 ========================================================= */
 
 function requireLogin() {
@@ -1252,6 +1231,7 @@ function requireLogin() {
     window.location.href = "auth.html";
     return false;
   }
+
   return true;
 }
 
@@ -1281,15 +1261,28 @@ function updateNavigation(user) {
       }
     : null;
 
+  document.getElementById("footerSignIn").onclick = user
+    ? event => {
+        event.preventDefault();
+        openProfile(currentProfile || {});
+      }
+    : null;
+
   if (!user) {
     signIn.style.display = "";
     getStarted.style.display = "";
 
-    document.getElementById("accountToolLink").textContent = "Create an account →";
-    document.getElementById("accountToolLink").href = "auth.html#signup";
+    document.getElementById("accountToolLink").textContent = "Sign in to your account →";
+    document.getElementById("accountToolLink").href = "auth.html";
 
     document.getElementById("profileButton")?.remove();
     document.getElementById("logoutButton")?.remove();
+
+    document.getElementById("editProfileTop").style.display = "none";
+
+    currentProfile = null;
+    selectedClass = null;
+    renderResources();
 
     tasks = [];
     renderTasks();
@@ -1299,55 +1292,67 @@ function updateNavigation(user) {
   signIn.style.display = "none";
   getStarted.style.display = "none";
 
-  let profile = readProfile();
+  let profileButton = document.getElementById("profileButton");
 
-  const profileButton = document.getElementById("profileButton") ||
-    document.createElement("button");
-
-  profileButton.id = "profileButton";
-  profileButton.className = "profile-pill";
-  profileButton.type = "button";
-  profileButton.innerHTML =
-    '<i class="fa-solid fa-circle-user"></i><span></span>';
-
-  profileButton.querySelector("span").textContent =
-    profile?.name || user.user_metadata?.full_name || user.email || "Student";
-
-  profileButton.title = "Edit student profile";
-  profileButton.onclick = () => openProfile(readProfile() || {});
-
-  if (!profileButton.isConnected) {
+  if (!profileButton) {
+    profileButton = document.createElement("button");
+    profileButton.id = "profileButton";
+    profileButton.className = "profile-pill";
+    profileButton.type = "button";
+    profileButton.innerHTML =
+      '<i class="fa-solid fa-circle-user"></i><span></span>';
     actions.insertBefore(profileButton, navToggle);
   }
 
-  const logoutButton = document.getElementById("logoutButton") ||
-    document.createElement("button");
+  profileButton.querySelector("span").textContent =
+    currentProfile?.name || user.user_metadata?.full_name || "My Profile";
 
-  logoutButton.id = "logoutButton";
-  logoutButton.className = "btn btn-light";
-  logoutButton.type = "button";
-  logoutButton.innerHTML =
-    '<i class="fa-solid fa-right-from-bracket"></i> Log Out';
-  logoutButton.onclick = signOut;
+  profileButton.title = "Edit student profile";
+  profileButton.onclick = () => openProfile(currentProfile || {});
 
-  if (!logoutButton.isConnected) {
+  let logoutButton = document.getElementById("logoutButton");
+
+  if (!logoutButton) {
+    logoutButton = document.createElement("button");
+    logoutButton.id = "logoutButton";
+    logoutButton.className = "btn btn-light";
+    logoutButton.type = "button";
+    logoutButton.innerHTML =
+      '<i class="fa-solid fa-right-from-bracket"></i> Log Out';
     actions.insertBefore(logoutButton, navToggle);
   }
 
+  logoutButton.onclick = signOut;
+
   document.getElementById("accountToolLink").textContent = "Edit student profile →";
   document.getElementById("accountToolLink").href = "#profile";
+
+  document.getElementById("editProfileTop").style.display = "inline-flex";
 
   tasks = readTasks();
   renderTasks();
 }
 
+document.getElementById("accountToolLink").addEventListener("click", event => {
+  if (currentUser && event.currentTarget.getAttribute("href") === "#profile") {
+    event.preventDefault();
+    openProfile(currentProfile || {});
+  }
+});
+
+document.querySelectorAll(".protected-link").forEach(link => {
+  link.addEventListener("click", event => {
+    if (!requireLogin()) event.preventDefault();
+  });
+});
+
 async function signOut() {
   if (!supabaseClient) {
-    alert("Supabase is not configured yet.");
+    alert("Supabase is not configured.");
     return;
   }
 
-  const { error } = await supabaseClient.auth.signOut();
+  const {error} = await supabaseClient.auth.signOut();
 
   if (error) {
     alert("Could not sign out. Please try again.");
@@ -1355,37 +1360,18 @@ async function signOut() {
   }
 
   currentUser = null;
+  currentProfile = null;
   window.location.reload();
 }
-
-document.getElementById("accountToolLink").addEventListener("click", event => {
-  if (currentUser && event.currentTarget.getAttribute("href") === "#profile") {
-    event.preventDefault();
-    openProfile(readProfile() || {});
-  }
-});
-
-document.getElementById("footerSignIn").addEventListener("click", event => {
-  if (currentUser) {
-    event.preventDefault();
-    openProfile(readProfile() || {});
-  }
-});
-
-/* Require login for the interactive quiz and task organizer. */
-document.querySelectorAll(".protected-link").forEach(link => {
-  link.addEventListener("click", event => {
-    if (!requireLogin()) event.preventDefault();
-  });
-});
 
 async function initialiseAuthentication() {
   if (!supabaseClient) {
     updateNavigation(null);
+    renderResources();
     return;
   }
 
-  const { data, error } = await supabaseClient.auth.getSession();
+  const {data, error} = await supabaseClient.auth.getSession();
 
   if (error) {
     console.error("Could not read the Supabase session:", error.message);
@@ -1396,28 +1382,60 @@ async function initialiseAuthentication() {
   const user = data.session?.user || null;
   updateNavigation(user);
 
-  if (user && !readProfile()) {
-    openProfile({});
+  if (!user) {
+    renderResources();
+    return;
+  }
+
+  const token = ++profileLoadToken;
+  const profile = await loadProfile(user);
+
+  if (token !== profileLoadToken || currentUser?.id !== user.id) return;
+
+  if (profile) {
+    storeProfile(profile);
+  } else {
+    currentProfile = null;
+    renderResources();
+    openProfile({
+      name: user.user_metadata?.full_name || ""
+    });
   }
 
   supabaseClient.auth.onAuthStateChange((event, session) => {
     const nextUser = session?.user || null;
 
-    updateNavigation(nextUser);
-
-    if (event === "SIGNED_IN" && nextUser) {
-      if (!readProfile()) {
-        openProfile({});
-      }
+    if (event === "SIGNED_OUT") {
+      profileLoadToken++;
+      currentUser = null;
+      currentProfile = null;
+      updateNavigation(null);
+      return;
     }
 
-    if (event === "SIGNED_OUT") {
-      currentUser = null;
-      updateNavigation(null);
+    if (nextUser && nextUser.id !== currentUser?.id) {
+      updateNavigation(nextUser);
+
+      setTimeout(async () => {
+        const profile = await loadProfile(nextUser);
+
+        if (currentUser?.id !== nextUser.id) return;
+
+        if (profile) {
+          storeProfile(profile);
+        } else {
+          currentProfile = null;
+          renderResources();
+          openProfile({
+            name: nextUser.user_metadata?.full_name || ""
+          });
+        }
+      }, 0);
     }
   });
 }
 
+renderResources();
 initialiseAuthentication();
 </script>
 
