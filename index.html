@@ -159,6 +159,93 @@ footer {
   main { padding: 12px; }
   .hero { padding: 20px; }
 }
+ /* HERO VIDEO BANNER */
+.hero-video-banner {
+position: relative;
+min-height: 480px;
+display: flex;
+align-items: center;
+overflow: hidden;
+border-radius: 18px;
+margin: 20px auto;
+background: #10213b;
+color: white;
+}
+
+.hero-video-banner video {
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+z-index: 0;
+}
+
+.hero-video-overlay {
+position: absolute;
+inset: 0;
+background: linear-gradient(
+90deg,
+rgba(7, 18, 40, 0.88),
+rgba(7, 18, 40, 0.48)
+);
+z-index: 1;
+}
+
+.hero-video-content {
+position: relative;
+z-index: 2;
+max-width: 720px;
+padding: 60px 7%;
+}
+
+.hero-video-content h1 {
+font-size: clamp(2rem, 5vw, 3.7rem);
+line-height: 1.12;
+margin: 0 0 18px;
+color: #fff;
+}
+
+.hero-video-content p {
+font-size: 1.08rem;
+line-height: 1.7;
+color: #edf3ff;
+margin-bottom: 26px;
+}
+
+.hero-video-buttons {
+display: flex;
+flex-wrap: wrap;
+gap: 12px;
+}
+
+.hero-video-buttons a {
+display: inline-block;
+padding: 13px 22px;
+border-radius: 9px;
+text-decoration: none;
+font-weight: 700;
+background: #ffcc4d;
+color: #17243b;
+}
+
+.hero-video-buttons a.secondary {
+background: transparent;
+border: 1px solid white;
+color: white;
+}
+
+@media (max-width: 600px) {
+.hero-video-banner {
+min-height: 430px;
+border-radius: 12px;
+}
+
+.hero-video-content {
+padding: 35px 24px;
+}
+}
+ 
 </style>
 </head>
 <body>
