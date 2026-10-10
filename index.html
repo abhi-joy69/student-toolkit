@@ -1438,6 +1438,34 @@ async function initialiseAuthentication() {
 renderResources();
 initialiseAuthentication();
 </script>
+  <script>
+async function callStudentAI(payload) {
+  const functionUrl = "https://skhgyzsnacojdljchzxr.supabase.co/functions/v1/swift-action";
+
+  try {
+    const response = await fetch(functionUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": "",sb_publishable_-DI-cpV_UGIgETXRPFSyCQ_gXGHIsu3
+        "Authorization": "Bearer YOUR_SUPABASE_PUBLISHABLE_KEY"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "AI request failed.");
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Student AI error:", error);
+    throw error;
+  }
+}
+</script>
 
 </body>
 </html>
