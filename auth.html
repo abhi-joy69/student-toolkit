@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Toolkit | Student Account</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f5ff;
+      color: #172554;
+    }
+
+    header {
+      background: #243cdb;
+      color: white;
+      padding: 22px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    .container {
+      width: min(900px, 94%);
+      margin: 25px auto;
+    }
+
+    .card {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 20px #17255412;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 7px 0;
+      border: 1px solid #ccd5ee;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    button {
+      border: none;
+      background: #243cdb;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.88;
+    }
+
+    .secondary {
+      background: #e8edff;
+      color: #243cdb;
+    }
+
+    .danger {
+      background: #dc2626;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .task {
+      border: 1px solid #e0e7ff;
+      padding: 14px;
+      margin-top: 12px;
+      border-radius: 10px;
+    }
+
+    .task-title {
+      font-weight: bold;
+      overflow-wrap: anywhere;
+    }
+
+    .task-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .task-actions button {
+      flex: 1;
+      min-width: 100px;
+    }
+
+    .status {
+      display: inline-block;
+      background: #e8edff;
+      padding: 5px 9px;
+      border-radius: 6px;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
+    #message {
+      padding: 12px;
+      border-radius: 8px;
+      overflow-wrap: anywhere;
+    }
+
+    .success {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .muted {
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    a {
+      color: #243cdb;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>🎓 Student Toolkit</h1>
+    <p>Your personal student dashboard</p>
+  </header>
+
+  <main class="container">
+
+    <div id="setupError" class="card hidden">
+      <h2>Setup required</h2>
+      <p id="setupErrorText"></p>
+    </div>
+
+    <div id="authSection" class="card">
+      <h2 id="authTitle">Create your student account</h2>
+
+      <p class="muted">
+        Register to save your personal tasks and access them when you log in again.
+      </p>
+
+      <form id="authForm">
+        <label for="email">Email address</label>
+        <input
+          id="email"
+          type="email"
+          autocomplete="email"
+          placeholder="Enter your email"
+          required
+        >
+
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          autocomplete="current-password"
+          minlength="8"
+          placeholder="At least 8 characters"
+          required
+        >
+
+        <button id="submitAuth" type="submit">Create Account</button>
+      </form>
+
+      <button id="toggleAuth" class="secondary" type="button">
+        Already have an account? Log in
+      </button>
+
+      <p id="message" class="hidden" role="status" aria-live="polite"></p>
+
+      <p class="muted">
+        Use an email address you can access. If email confirmation is enabled,
+        you must confirm your email before logging in.
+      </p>
+    </div>
+
+    <section id="dashboard" class="hidden">
+      <div class="card">
+        <h2>👋 Welcome to your dashboard!</h2>
+        <p id="userEmail"></p>
+        <button id="logout" class="danger" type="button">Log Out</button>
+      </div>
+
+      <div class="card">
+        <h2>📝 My Task Organizer</h2>
+        <p class="muted">
+          These tasks belong to your account. Other students cannot access
+          them through the database's user-level security rules.
+        </p>
+
+        <form id="taskForm">
+          <label for="taskTitle">Task name</label>
+          <input
+            id="taskTitle"
+            type="text"
+            maxlength="200"
+            placeholder="e.g. Complete Mathematics homework"
+            required
+          >
+
+          <label for="taskStatus">Task status</label>
+          <select id="taskStatus">
+            <option>Pending</option>
+            <option>Remaining</option>
+            <option>Complete</option>
+          </select>
+
+          <button id="saveTask" type="submit">Add Task</button>
+          <button id="cancelEdit" class="secondary hidden" type="button">
+            Cancel Edit
+          </button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>📚 My Tasks</h2>
+        <p id="taskSummary">Loading tasks...</p>
+        <div id="taskList"></div>
+      </div>
+    </section>
+
+    <p><a href="./index.html">← Back to Student Toolkit Home</a></p>
+  </main>
+
+  <script>
+    // STEP A: Replace these two placeholders with your own details.
+    const SUPABASE_URL = "https://skhgyzsnacojdljchzxr.supabase.co/rest/v1/";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_-DI-cpV_UGIgETXRPFSyCQ_gXGHIsu3";
+
+    const setupError = document.getElementById("setupError");
+    const setupErrorText = document.getElementById("setupErrorText");
+    const authSection = document.getElementById("authSection");
+    const dashboard = document.getElementById("dashboard");
+    const message = document.getElementById("message");
+    const authTitle = document.getElementById("authTitle");
+    const submitAuth = document.getElementById("submitAuth");
+    const toggleAuth = document.getElementById("toggleAuth");
+
+    let supabaseClient;
+    let isLoginMode = false;
+    let currentUser = null;
+    let editingTaskId = null;
+
+    function showMessage(text, isError = false) {
+      message.textContent = text;
+      message.className = isError ? "error" : "success";
+      message.classList.remove("hidden");
+    }
+
+    function clearMessage() {
+      message.textContent = "";
+      message.className = "hidden";
+    }
+
+    function showSetupError(text) {
+      setupErrorText.textContent = text;
+      setupError.classList.remove("hidden");
+      authSection.classList.add("hidden");
+      dashboard.classList.add("hidden");
+    }
+
+    function updateAuthMode() {
+      clearMessage();
+
+      authTitle.textContent = isLoginMode
+        ? "Log in to your account"
+        : "Create your student account";
+
+      submitAuth.textContent = isLoginMode
+        ? "Log In"
+        : "Create Account";
+
+      toggleAuth.textContent = isLoginMode
+        ? "New student? Create an account"
+        : "Already have an account? Log in";
+
+      document.getElementById("password").autocomplete =
+        isLoginMode ? "current-password" : "new-password";
+    }
+
+    toggleAuth.addEventListener("click", () => {
+      isLoginMode = !isLoginMode;
+      updateAuthMode();
+    });
+
+    document.getElementById("authForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!supabaseClient) return;
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      submitAuth.disabled = true;
+      clearMessage();
+
+      try {
+        if (isLoginMode) {
+          const { error } = await supabaseClient.auth.signInWithPassword({
+            email,
+            password
+          });
+
+          if (error) throw error;
+
+          showMessage("Login successful!");
+        } else {
+          const { data, error } = await supabaseClient.auth.signUp({
+            email,
+            password,
+            options: {
+              emailRedirectTo: window.location.origin +
+                window.location.pathname
+            }
+          });
+
+          if (error) throw error;
+
+          if (data.session) {
+            showMessage("Account created successfully!");
+          } else {
+            showMessage(
+              "Registration received! Check your email for a confirmation link."
+            );
+          }
+        }
+      } catch (error) {
+        showMessage(error.message || "Something went wrong.", true);
+      } finally {
+        submitAuth.disabled = false;
+      }
+    });
+
+    async function refreshScreen() {
+      const { data, error } = await supabaseClient.auth.getSession();
+
+      if (error) {
+        showMessage(error.message, true);
+        return;
+      }
+
+      currentUser = data.session ? data.session.user : null;
+
+      if (currentUser) {
+        authSection.classList.add("hidden");
+        dashboard.classList.remove("hidden");
+
+        document.getElementById("userEmail").textContent =
+          "Logged in as: " + currentUser.email;
+
+        await loadTasks();
+      } else {
+        dashboard.classList.add("hidden");
+        authSection.classList.remove("hidden");
+        document.getElementById("taskList").replaceChildren();
+        document.getElementById("taskSummary").textContent = "";
+      }
+    }
+
+    async function loadTasks() {
+      if (!currentUser) return;
+
+      const list = document.getElementById("taskList");
+      const summary = document.getElementById("taskSummary");
+
+      list.textContent = "Loading...";
+
+      try {
+        const { data, error } = await supabaseClient
+          .from("student_tasks")
+          .select("id, title, status, created_at")
+          .eq("user_id", currentUser.id)
+          .order("created_at", { ascending: false });
+
+        if (error) throw error;
+
+        list.replaceChildren();
+
+        const tasks = data || [];
+        const completeCount = tasks.filter(
+          task => task.status === "Complete"
+        ).length;
+
+        summary.textContent =
+          `${tasks.length} tasks · ${completeCount} complete · ` +
+          `${tasks.length - completeCount} not complete`;
+
+        if (tasks.length === 0) {
+          const empty = document.createElement("p");
+          empty.className = "muted";
+          empty.textContent = "No tasks yet. Add your first task above!";
+          list.appendChild(empty);
+          return;
+        }
+
+        tasks.forEach(task => {
+          const card = document.createElement("div");
+          card.className = "task";
+
+          const title = document.createElement("div");
+          title.className = "task-title";
+          title.textContent = task.title;
+
+          const status = document.createElement("span");
+          status.className = "status";
+          status.textContent = task.status;
+
+          const actions = document.createElement("div");
+          actions.className = "task-actions";
+
+          const editButton = document.createElement("button");
+          editButton.type = "button";
+          editButton.textContent = "Edit";
+          editButton.className = "secondary";
+          editButton.addEventListener("click", () => startEdit(task));
+
+          const deleteButton = document.createElement("button");
+          deleteButton.type = "button";
+          deleteButton.textContent = "Delete";
+          deleteButton.className = "danger";
+          deleteButton.addEventListener("click", () => deleteTask(task.id));
+
+          actions.append(editButton, deleteButton);
+          card.append(title, status, actions);
+          list.appendChild(card);
+        });
+      } catch (error) {
+        list.textContent = "Could not load tasks: " + error.message;
+      }
+    }
+
+    function startEdit(task) {
+      editingTaskId = task.id;
+      document.getElementById("taskTitle").value = task.title;
+      document.getElementById("taskStatus").value = task.status;
+      document.getElementById("saveTask").textContent = "Save Changes";
+      document.getElementById("cancelEdit").classList.remove("hidden");
+      document.getElementById("taskTitle").focus();
+    }
+
+    function resetTaskForm() {
+      editingTaskId = null;
+      document.getElementById("taskForm").reset();
+      document.getElementById("saveTask").textContent = "Add Task";
+      document.getElementById("cancelEdit").classList.add("hidden");
+    }
+
+    document.getElementById("cancelEdit").addEventListener("click", resetTaskForm);
+
+    document.getElementById("taskForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!currentUser) return;
+
+      const title = document.getElementById("taskTitle").value.trim();
+      const status = document.getElementById("taskStatus").value;
+      const saveButton = document.getElementById("saveTask");
+
+      if (!title) return;
+
+      saveButton.disabled = true;
+
+      try {
+        let result;
+
+        if (editingTaskId) {
+          result = await supabaseClient
+            .from("student_tasks")
+            .update({ title, status })
+            .eq("id", editingTaskId)
+            .eq("user_id", currentUser.id);
+        } else {
+          result = await supabaseClient
+            .from("student_tasks")
+            .insert({
+              user_id: currentUser.id,
+              title,
+              status
+            });
+        }
+
+        if (result.error) throw result.error;
+
+        resetTaskForm();
+        await loadTasks();
+      } catch (error) {
+        alert("Could not save task: " + error.message);
+      } finally {
+        saveButton.disabled = false;
+      }
+    });
+
+    async function deleteTask(taskId) {
+      if (!currentUser) return;
+
+      if (!window.confirm("Delete this task?")) return;
+
+      try {
+        const { error } = await supabaseClient
+          .from("student_tasks")
+          .delete()
+          .eq("id", taskId)
+          .eq("user_id", currentUser.id);
+
+        if (error) throw error;
+
+        await loadTasks();
+      } catch (error) {
+        alert("Could not delete task: " + error.message);
+      }
+    }
+
+    document.getElementById("logout").addEventListener("click", async () => {
+      const { error } = await supabaseClient.auth.signOut();
+
+      if (error) {
+        alert("Could not log out: " + error.message);
+        return;
+      }
+
+      resetTaskForm();
+      await refreshScreen();
+    });
+
+    async function startApp() {
+      if (
+        SUPABASE_URL.includes("PASTE_") ||
+        SUPABASE_PUBLISHABLE_KEY.includes("PASTE_")
+      ) {
+        showSetupError(
+          "The Supabase connection details have not been added yet. " +
+          "Replace both placeholders in the code before using this page."
+        );
+        return;
+      }
+
+      try {
+        supabaseClient = window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_PUBLISHABLE_KEY
+        );
+
+        supabaseClient.auth.onAuthStateChange(() => {
+          setTimeout(() => refreshScreen(), 0);
+        });
+
+        await refreshScreen();
+      } catch (error) {
+        showSetupError("Could not initialize Supabase: " + error.message);
+      }
+    }
+
+    startApp();
+  </script>
+</body>
+</html>
