@@ -3,473 +3,546 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Toolkit | Learn Better</title>
+<title>Student Toolkit</title>
 <style>
 :root {
-  --primary: #5145e5;
-  --ink: #20213a;
-  --muted: #6b7280;
-  --bg: #f6f7ff;
+  --primary: #5546e8;
+  --background: #f5f6fc;
   --card: #ffffff;
+  --text: #20243a;
 }
 * { box-sizing: border-box; }
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  color: var(--ink);
-  background: var(--bg);
+  font-family: Arial, sans-serif;
+  background: var(--background);
+  color: var(--text);
 }
 header {
-  background: white;
-  padding: 17px 6%;
+  background: linear-gradient(120deg, #5546e8, #9470f5);
+  color: white;
+  padding: 28px 18px;
+  text-align: center;
+}
+header h1 { margin: 0 0 8px; }
+header p { margin: 0; }
+nav {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  border-bottom: 1px solid #e8e8f2;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: white;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 5;
+  box-shadow: 0 2px 8px #0000000d;
 }
-.logo { font-size: 23px; font-weight: 800; color: var(--primary); }
-.logo span { color: #f59e0b; }
-nav a {
-  text-decoration: none;
-  color: var(--ink);
-  margin-left: 18px;
-  font-weight: 600;
-  font-size: 14px;
-}
-.hero {
-  padding: 65px 6% 55px;
-  background: linear-gradient(125deg,#5145e5,#8875ff);
-  color: white;
-}
-.hero h1 { font-size: clamp(32px,5vw,54px); margin: 0 0 15px; }
-.hero p { font-size: 17px; line-height: 1.7; max-width: 650px; }
-.search {
-  display: flex;
-  gap: 10px;
-  max-width: 650px;
-  margin-top: 25px;
-}
-input, select, button {
+button, select, input, textarea {
   font: inherit;
-  border-radius: 10px;
-  padding: 13px;
 }
-input, select {
-  border: 1px solid #dedff0;
-  background: white;
-  color: var(--ink);
-}
-.search input { flex: 1; min-width: 0; }
-button {
-  border: none;
-  background: var(--primary);
-  color: white;
-  font-weight: 700;
+nav button, .primary {
+  border: 0;
+  border-radius: 9px;
+  padding: 11px 15px;
   cursor: pointer;
 }
-button:hover { filter: brightness(.94); }
-.hero button { background: #ffca64; color: #30234a; }
-main { max-width: 1150px; margin: auto; padding: 35px 20px 70px; }
-section { margin-bottom: 45px; }
-.section-title { font-size: 27px; margin-bottom: 8px; }
-.subtitle { color: var(--muted); line-height: 1.6; }
+nav button {
+  background: #eeedff;
+  color: #4034b9;
+}
+nav button:hover, .primary {
+  background: var(--primary);
+  color: white;
+}
+main {
+  max-width: 1050px;
+  padding: 20px;
+  margin: auto;
+}
+.page { display: none; }
+.page.active { display: block; }
+.hero {
+  padding: 28px;
+  border-radius: 18px;
+  background: white;
+  box-shadow: 0 4px 18px #20243a0a;
+}
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(145px,1fr));
-  gap: 15px;
-  margin-top: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
 }
 .card {
   background: var(--card);
-  border: 1px solid #e8e8f2;
-  border-radius: 17px;
-  padding: 21px;
-  box-shadow: 0 5px 20px #27275b08;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 16px #20243a0a;
+  margin-bottom: 16px;
 }
-.class-card { cursor: pointer; transition: .2s; }
-.class-card:hover { transform: translateY(-4px); border-color: var(--primary); }
-.class-card .number { font-size: 29px; font-weight: 800; color: var(--primary); }
-.class-card h3 { margin: 12px 0 5px; }
-.class-card p { margin: 0; color: var(--muted); font-size: 13px; }
-.panel {
+.card h3 { margin-top: 0; }
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d9dced;
+  border-radius: 8px;
+  margin: 6px 0 12px;
   background: white;
-  border: 1px solid #e8e8f2;
-  border-radius: 18px;
+}
+.primary { cursor: pointer; }
+.secondary {
+  border: 1px solid #ddd;
+  background: white;
+  padding: 9px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 14px;
+  border: 1px solid #e6e7f0;
+  border-radius: 10px;
+  margin-top: 10px;
+  background: white;
+}
+.task-title { font-weight: bold; overflow-wrap: anywhere; }
+.badge {
+  display: inline-block;
+  padding: 6px 9px;
+  border-radius: 7px;
+  font-size: 13px;
+}
+.pending { background: #ffe7e7; color: #a52323; }
+.remaining { background: #fff1cc; color: #865800; }
+.complete { background: #dcf8e7; color: #176a3a; }
+.task-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.task-actions button {
+  padding: 7px;
+  border: 0;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 16px 0;
+}
+.stat {
+  background: white;
+  padding: 15px 8px;
+  text-align: center;
+  border-radius: 12px;
+}
+.stat strong {
+  display: block;
+  font-size: 25px;
+  margin-bottom: 5px;
+}
+.small { color: #696d80; font-size: 14px; }
+footer {
+  text-align: center;
   padding: 25px;
-  margin-top: 20px;
+  color: #73778a;
 }
-.toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
-.toolbar select { min-width: 160px; flex: 1; }
-.tabs { display: flex; flex-wrap: wrap; gap: 9px; margin: 18px 0; }
-.tabs button { background: #ecebff; color: var(--primary); }
-.tabs button.active { background: var(--primary); color: white; }
-.content-box {
-  background: #fafaff;
-  border: 1px solid #e7e5ff;
-  padding: 22px;
-  border-radius: 13px;
-  line-height: 1.8;
-  overflow-wrap: anywhere;
-}
-.content-box h3 { margin-top: 0; }
-.question { margin: 20px 0; padding: 16px; background: #fafaff; border-radius: 12px; }
-.question label { display: block; margin: 12px 0; cursor: pointer; }
-.question input { margin-right: 8px; }
-.notice { padding: 13px; background: #fff6dc; border-radius: 10px; line-height: 1.6; }
-.hidden { display: none !important; }
-footer { background: #20213a; color: white; padding: 30px 6%; text-align: center; line-height: 1.8; }
-.small { font-size: 13px; color: var(--muted); }
-@media(max-width:600px) {
-  header { align-items: flex-start; flex-direction: column; }
-  nav a { margin: 0 12px 0 0; }
-  .hero { padding-top: 42px; }
-  .search { flex-direction: column; }
-  .panel { padding: 17px; }
+@media(max-width:500px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  main { padding: 12px; }
+  .hero { padding: 20px; }
 }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">Student<span>Toolkit</span> 📚</div>
-  <nav>
-    <a href="#classes">Classes</a>
-    <a href="#learning">Learning Room</a>
-    <a href="#quiz">Quiz</a>
-  </nav>
+  <h1>📚 Student Toolkit</h1>
+  <p>Your study space. Your goals. Your progress.</p>
 </header>
 
-<div class="hero">
-  <h1>Your learning journey<br>starts here. 🚀</h1>
-  <p>Choose your class, explore subjects, read learning notes and practise questions — all in one place.</p>
-  <div class="search">
-    <input id="searchInput" type="search" placeholder="Search classes, subjects or learning topics...">
-    <button onclick="searchContent()">Search</button>
-  </div>
-</div>
+<nav>
+  <button onclick="showPage('home')">🏠 Home</button>
+  <button onclick="showPage('materials')">📚 Study Materials</button>
+  <button onclick="showPage('quiz')">🎯 Quiz Center</button>
+  <button onclick="showPage('tasks')">✅ Task Organizer</button>
+  <button onclick="showPage('doubts')">🤔 Doubt Solver</button>
+</nav>
 
 <main>
-  <section id="classes">
-    <h2 class="section-title">Choose Your Class</h2>
-    <p class="subtitle">Select your class to enter your learning room.</p>
-    <div class="grid" id="classGrid"></div>
-  </section>
 
-  <section id="learning">
-    <h2 class="section-title">Your Learning Room</h2>
-    <p class="subtitle">Choose a class and subject to explore available learning material.</p>
+<section id="home" class="page active">
+  <div class="hero">
+    <h2>Welcome to your Student Toolkit! 🎓</h2>
+    <p>Organize your study tasks, practise quizzes, and find your learning materials.</p>
+    <button class="primary" onclick="showPage('tasks')">Open Task Organizer</button>
+    <button class="primary" onclick="showPage('quiz')">Start a Quiz</button>
+  </div>
 
-    <div class="panel">
-      <div class="toolbar">
-        <select id="classSelect" aria-label="Choose class" onchange="updateSubjects()">
-          <option value="">Choose class</option>
-        </select>
-        <select id="subjectSelect" aria-label="Choose subject" onchange="showNotes()">
-          <option value="">Choose subject</option>
-        </select>
-      </div>
-
-      <div class="tabs">
-        <button id="notesTab" class="active" onclick="showTab('notes')">📝 Notes</button>
-        <button id="quizTab" onclick="showTab('quiz')">🧠 Quiz</button>
-      </div>
-
-      <div id="notesContent" class="content-box">
-        <h3>Welcome to your Learning Room!</h3>
-        Select a class and subject above to explore available notes.
-      </div>
-
-      <div id="quizContent" class="content-box hidden">
-        <h3>Practice Quiz</h3>
-        Select a class and subject to see available questions.
-      </div>
+  <div class="grid">
+    <div class="card">
+      <h3>📚 Study Materials</h3>
+      <p>Find textbooks, sample papers, PYQs, and revision notes.</p>
+      <button class="primary" onclick="showPage('materials')">Explore</button>
     </div>
-  </section>
-
-  <section id="quiz">
-    <h2 class="section-title">Practice and Improve</h2>
-    <p class="subtitle">Answer questions, submit your quiz and see your score instantly.</p>
-    <div class="panel">
-      <div id="quizArea">
-        <p>Choose a class and subject in the Learning Room, then select the Quiz tab.</p>
-      </div>
+    <div class="card">
+      <h3>🎯 Quiz Center</h3>
+      <p>Choose your class, difficulty, and number of questions.</p>
+      <button class="primary" onclick="showPage('quiz')">Practise Now</button>
     </div>
-  </section>
-
-  <section>
-    <h2 class="section-title">Helpful Learning Resources</h2>
-    <p class="subtitle">These official resources open on their respective websites.</p>
-    <div class="grid">
-      <div class="card">
-        <h3>📚 NCERT Textbooks</h3>
-        <p class="subtitle">Find official textbooks and chapters.</p>
-        <p><a href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener">Visit NCERT Textbooks ↗</a></p>
-      </div>
-      <div class="card">
-        <h3>🎓 CBSE Academics</h3>
-        <p class="subtitle">Explore curriculum and official academic resources.</p>
-        <p><a href="https://cbseacademic.nic.in/" target="_blank" rel="noopener">Visit CBSE Academics ↗</a></p>
-      </div>
+    <div class="card">
+      <h3>✅ Task Tracker</h3>
+      <p>Add tasks and update them as Pending, Remaining, or Complete.</p>
+      <button class="primary" onclick="showPage('tasks')">Manage Tasks</button>
     </div>
-  </section>
+    <div class="card">
+      <h3>🤔 Doubt Solver</h3>
+      <p>Get ready to explore a question-answering study assistant.</p>
+      <button class="primary" onclick="showPage('doubts')">Open</button>
+    </div>
+  </div>
+</section>
+
+<section id="materials" class="page">
+  <div class="card">
+    <h2>📚 Study Materials</h2>
+    <p>Choose a class to find learning materials.</p>
+    <label for="materialClass">Select class</label>
+    <select id="materialClass" onchange="showMaterials()">
+      <option value="">Choose a class</option>
+    </select>
+    <div id="materialContent"></div>
+  </div>
+</section>
+
+<section id="quiz" class="page">
+  <div class="card">
+    <h2>🎯 Quiz Center</h2>
+    <p>Choose your quiz settings.</p>
+
+    <label for="quizClass">Class</label>
+    <select id="quizClass"></select>
+
+    <label for="quizSubject">Subject</label>
+    <select id="quizSubject">
+      <option>Mathematics</option>
+      <option>Science</option>
+      <option>English</option>
+      <option>Social Science</option>
+      <option>General Knowledge</option>
+    </select>
+
+    <label for="difficulty">Difficulty</label>
+    <select id="difficulty">
+      <option>Easy</option>
+      <option>Medium</option>
+      <option>Hard</option>
+    </select>
+
+    <label for="questionCount">Number of questions</label>
+    <select id="questionCount">
+      <option>5</option>
+      <option>10</option>
+      <option>20</option>
+      <option>30</option>
+      <option>50</option>
+    </select>
+
+    <label for="questionType">Question type</label>
+    <select id="questionType">
+      <option>MCQ</option>
+      <option>Numerical</option>
+      <option>Mixed</option>
+    </select>
+
+    <label for="quizTimer">Time limit</label>
+    <select id="quizTimer">
+      <option value="5">5 minutes</option>
+      <option value="10">10 minutes</option>
+      <option value="20">20 minutes</option>
+      <option value="30">30 minutes</option>
+      <option value="0">No timer</option>
+    </select>
+
+    <button class="primary" onclick="startQuiz()">Start Quiz</button>
+    <div id="quizArea" style="margin-top:20px"></div>
+  </div>
+  <div class="card">
+    <h3>Quiz results</h3>
+    <div id="quizResults">Your results will appear here after a quiz.</div>
+  </div>
+</section>
+
+<section id="tasks" class="page">
+  <div class="hero">
+    <h2>✅ Task Organizer & Tracker</h2>
+    <p>Add your tasks and control their status yourself.</p>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <h3 id="taskFormTitle">Add a task</h3>
+    <form id="taskForm">
+      <label for="taskInput">Task name</label>
+      <input id="taskInput" maxlength="200"
+        placeholder="e.g. Complete Chapter 5" required>
+
+      <button class="primary" type="submit" id="saveTaskButton">Add Task</button>
+      <button class="secondary" type="button"
+        id="cancelEditButton" onclick="cancelEdit()" hidden>Cancel</button>
+    </form>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><strong id="totalCount">0</strong>Total</div>
+    <div class="stat"><strong id="pendingCount">0</strong>🔴 Pending</div>
+    <div class="stat"><strong id="remainingCount">0</strong>🟡 Remaining</div>
+    <div class="stat"><strong id="completeCount">0</strong>🟢 Complete</div>
+  </div>
+
+  <div class="card">
+    <h3>Your tasks</h3>
+    <label for="taskFilter">Show tasks</label>
+    <select id="taskFilter" onchange="renderTasks()">
+      <option value="All">All tasks</option>
+      <option value="Pending">Pending</option>
+      <option value="Remaining">Remaining</option>
+      <option value="Complete">Complete</option>
+    </select>
+    <div id="taskList"></div>
+    <p id="emptyTasks" class="small">No tasks yet. Add your first task above!</p>
+  </div>
+</section>
+
+<section id="doubts" class="page">
+  <div class="card">
+    <h2>🤔 Doubt Solver</h2>
+    <p>Ask a question you need help understanding.</p>
+    <textarea id="doubtInput" rows="5"
+      placeholder="Type your question here..."></textarea>
+    <button class="primary" onclick="submitDoubt()">Submit Question</button>
+    <div id="doubtResult" style="margin-top:15px"></div>
+    <p class="small">
+      The AI answer service is not connected yet. A secure AI service and
+      backend must be configured before this feature can answer questions.
+    </p>
+  </div>
+</section>
+
 </main>
 
 <footer>
-  <strong>Student Toolkit</strong><br>
-  Learn at your own pace. Practise every day. Keep improving!<br>
-  <span class="small" style="color:#d4d4e8">An independent learning project. Not affiliated with NCERT or CBSE.</span>
+  Student Toolkit · Learn, practise, and keep progressing.
 </footer>
 
 <script>
-const subjectsByClass = {
-  1: ["Mathematics", "English", "Environmental Studies"],
-  2: ["Mathematics", "English", "Environmental Studies"],
-  3: ["Mathematics", "English", "Environmental Studies"],
-  4: ["Mathematics", "English", "Environmental Studies"],
-  5: ["Mathematics", "English", "Environmental Studies"],
-  6: ["Mathematics", "Science", "English", "Social Science"],
-  7: ["Mathematics", "Science", "English", "Social Science"],
-  8: ["Mathematics", "Science", "English", "Social Science"],
-  9: ["Mathematics", "Science", "English", "Social Science"],
-  10: ["Mathematics", "Science", "English", "Social Science"],
-  11: ["Mathematics", "Physics", "Chemistry", "Biology", "English"],
-  12: ["Mathematics", "Physics", "Chemistry", "Biology", "English"]
-};
-
-const learningData = {
-  Mathematics: {
-    title: "Introduction to Mathematics",
-    notes: "Mathematics helps us understand numbers, patterns and relationships. Practise each concept step by step, write down your calculations, and check your answers.",
-    questions: [
-      {q:"What is 7 + 5?", options:["10","11","12","13"], answer:2},
-      {q:"What is 9 × 3?", options:["18","27","36","21"], answer:1},
-      {q:"What is half of 20?", options:["5","10","15","20"], answer:1}
-    ]
-  },
-  Science: {
-    title: "Introduction to Science",
-    notes: "Science helps us understand the natural world through observation, questions and experiments. Living things grow and need resources. Matter can exist as solids, liquids and gases.",
-    questions: [
-      {q:"Which part of a plant usually absorbs water from the soil?", options:["Flower","Root","Fruit","Leaf"], answer:1},
-      {q:"Which of these is a state of matter?", options:["Energy","Sound","Liquid","Light"], answer:2},
-      {q:"Which star is closest to Earth?", options:["Sirius","The Sun","Polaris","Vega"], answer:1}
-    ]
-  },
-  English: {
-    title: "Introduction to English",
-    notes: "English learning includes reading, writing, grammar and vocabulary. A sentence usually expresses a complete thought. Begin sentences with capital letters and use suitable punctuation.",
-    questions: [
-      {q:"Which word is a noun?", options:["Quickly","Beautiful","Teacher","Run"], answer:2},
-      {q:"Choose the correct plural of 'child'.", options:["Childs","Children","Childes","Childrens"], answer:1},
-      {q:"Which punctuation mark ends a question?", options:["Full stop","Comma","Question mark","Colon"], answer:2}
-    ]
-  },
-  "Social Science": {
-    title: "Introduction to Social Science",
-    notes: "Social Science explores people, places, history, government and society. Geography studies places and environments. History studies events and societies of the past. Civics examines government and citizenship.",
-    questions: [
-      {q:"Which subject studies maps and places?", options:["Geography","Grammar","Chemistry","Algebra"], answer:0},
-      {q:"Which is a natural feature?", options:["Bridge","Mountain","Road","Building"], answer:1},
-      {q:"What does history study?", options:["Only numbers","Past events","Only plants","Weather only"], answer:1}
-    ]
-  },
-  Physics: {
-    title: "Introduction to Physics",
-    notes: "Physics studies matter, energy, motion and forces. Speed describes the distance travelled per unit of time. The SI unit of speed is metres per second (m/s).",
-    questions: [
-      {q:"What is the SI unit of force?", options:["Joule","Newton","Watt","Metre"], answer:1},
-      {q:"Speed is calculated using which formula?", options:["Time ÷ distance","Distance ÷ time","Distance × time","Mass ÷ time"], answer:1},
-      {q:"Which is a unit of energy?", options:["Joule","Kilogram","Second","Ampere"], answer:0}
-    ]
-  },
-  Chemistry: {
-    title: "Introduction to Chemistry",
-    notes: "Chemistry studies matter, its properties and how substances change. An atom is a basic unit of a chemical element. Elements contain one type of atom; compounds contain chemically combined elements.",
-    questions: [
-      {q:"What is the chemical formula of water?", options:["CO₂","O₂","H₂O","NaCl"], answer:2},
-      {q:"Which is a chemical element?", options:["Oxygen","Water","Air","Salt water"], answer:0},
-      {q:"What is the chemical symbol for oxygen?", options:["Ox","O","Og","On"], answer:1}
-    ]
-  },
-  Biology: {
-    title: "Introduction to Biology",
-    notes: "Biology is the study of living organisms. Cells are the basic structural and functional units of life. Plants make food through photosynthesis, using light energy, water and carbon dioxide.",
-    questions: [
-      {q:"What is the basic unit of life?", options:["Organ","Cell","Tissue","Bone"], answer:1},
-      {q:"Which pigment helps plants absorb light?", options:["Haemoglobin","Chlorophyll","Melanin","Keratin"], answer:1},
-      {q:"Which organ pumps blood around the human body?", options:["Lung","Brain","Heart","Stomach"], answer:2}
-    ]
-  },
-  "Environmental Studies": {
-    title: "Introduction to Environmental Studies",
-    notes: "Environmental Studies teaches us about nature and how to care for our surroundings. Saving water, reducing waste, planting trees and protecting wildlife can help the environment.",
-    questions: [
-      {q:"Which action saves water?", options:["Leaving taps open","Fixing leaking taps","Wasting drinking water","Washing roads daily"], answer:1},
-      {q:"Which is a renewable energy source?", options:["Sunlight","Coal","Petrol","Diesel"], answer:0},
-      {q:"Which should generally go in a recycling bin?", options:["Clean paper","Mixed food waste","Wet mud","Liquid chemicals"], answer:0}
-    ]
-  }
-};
-
-for (let i=1; i<=12; i++) {
-  const option = document.createElement("option");
-  option.value = i;
-  option.textContent = "Class " + i;
-  document.getElementById("classSelect").appendChild(option);
-
-  const card = document.createElement("div");
-  card.className = "card class-card";
-  card.dataset.search = ("class " + i).toLowerCase();
-  card.innerHTML = `<div class="number">${String(i).padStart(2,"0")}</div>
-    <h3>Class ${i}</h3><p>Explore learning materials →</p>`;
-  card.onclick = () => {
-    document.getElementById("classSelect").value = i;
-    updateSubjects();
-    document.getElementById("learning").scrollIntoView({behavior:"smooth"});
-  };
-  document.getElementById("classGrid").appendChild(card);
-}
-
-function updateSubjects() {
-  const classNumber = document.getElementById("classSelect").value;
-  const subjectSelect = document.getElementById("subjectSelect");
-  subjectSelect.innerHTML = '<option value="">Choose subject</option>';
-
-  if (classNumber) {
-    subjectsByClass[classNumber].forEach(subject => {
-      const option = document.createElement("option");
-      option.value = subject;
-      option.textContent = subject;
-      subjectSelect.appendChild(option);
-    });
-  }
-
-  document.getElementById("notesContent").innerHTML =
-    "<h3>Choose a subject</h3>Select a subject to view the available learning notes.";
-  document.getElementById("quizContent").innerHTML =
-    "<h3>Practice Quiz</h3>Select a subject to load its practice questions.";
-  document.getElementById("quizArea").innerHTML =
-    "<p>Select a subject, then open the Quiz tab.</p>";
-}
-
-function showNotes() {
-  const subject = document.getElementById("subjectSelect").value;
-  if (!subject) return;
-
-  const data = learningData[subject];
-  document.getElementById("notesContent").innerHTML = `
-    <h3>${data.title}</h3>
-    <p>${data.notes}</p>
-    <div class="notice"><strong>Study tip:</strong> Write a short summary in your own words, then try the quiz to practise.</div>
-    <p class="small">These are introductory sample notes, not a complete chapter or official textbook solution.</p>`;
-
-  renderQuiz(data);
-}
-
-function renderQuiz(data) {
-  let html = `<h3>Test Your Understanding</h3>
-    <p>Choose one answer for each question and submit your quiz.</p>
-    <form id="practiceForm">`;
-
-  data.questions.forEach((q,i) => {
-    html += `<div class="question"><strong>${i+1}. ${q.q}</strong>`;
-    q.options.forEach((option,j) => {
-      html += `<label><input type="radio" name="q${i}" value="${j}"> ${option}</label>`;
-    });
-    html += `</div>`;
-  });
-
-  html += `<button type="submit">Submit Quiz</button></form>
-    <div id="quizResult" aria-live="polite"></div>`;
-
-  document.getElementById("quizContent").innerHTML = html;
-  document.getElementById("quizArea").innerHTML = html;
-
-  ["quizContent","quizArea"].forEach(containerId => {
-    const form = document.querySelector(`#${containerId} form`);
-    if (!form) return;
-
-    form.addEventListener("submit", event => {
-      event.preventDefault();
-      let score = 0;
-      let unanswered = 0;
-
-      data.questions.forEach((q,i) => {
-        const selected = form.querySelector(`input[name="q${i}"]:checked`);
-        if (!selected) unanswered++;
-        else if (Number(selected.value) === q.answer) score++;
-      });
-
-      const result = form.parentElement.querySelector("#quizResult");
-      result.innerHTML = `<div class="notice" style="margin-top:18px">
-        <h3>Quiz Result</h3>
-        <p>You scored <strong>${score} out of ${data.questions.length}</strong>.</p>
-        <p>${unanswered ? unanswered + " question(s) were left unanswered. " : ""}
-        ${score === data.questions.length ? "Excellent work! 🎉" :
-          score >= 2 ? "Good effort! Review any difficult questions and try again." :
-          "Keep practising! Read the notes again and give it another try."}</p>
-      </div>`;
-    });
-  });
-}
-
-function showTab(tab) {
-  document.getElementById("notesContent").classList.toggle("hidden", tab !== "notes");
-  document.getElementById("quizContent").classList.toggle("hidden", tab !== "quiz");
-  document.getElementById("notesTab").classList.toggle("active", tab === "notes");
-  document.getElementById("quizTab").classList.toggle("active", tab === "quiz");
-}
-
-function searchContent() {
-  const query = document.getElementById("searchInput").value.trim().toLowerCase();
-  if (!query) {
-    alert("Type a class, subject or topic to search.");
-    return;
-  }
-
-  const cards = [...document.querySelectorAll(".class-card")];
-  const matchingClasses = cards.filter(card => card.dataset.search.includes(query));
-
-  if (matchingClasses.length) {
-    cards.forEach(card => card.classList.toggle("hidden", !matchingClasses.includes(card)));
-    document.getElementById("classes").scrollIntoView({behavior:"smooth"});
-    return;
-  }
-
-  cards.forEach(card => card.classList.remove("hidden"));
-
-  const subjectMatch = Object.keys(learningData).find(subject =>
-    subject.toLowerCase().includes(query) ||
-    learningData[subject].title.toLowerCase().includes(query) ||
-    learningData[subject].notes.toLowerCase().includes(query)
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(page =>
+    page.classList.remove('active')
   );
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
 
-  if (subjectMatch) {
-    const classSelect = document.getElementById("classSelect");
-    const subjectSelect = document.getElementById("subjectSelect");
-    if (!classSelect.value) classSelect.value = "6";
-    updateSubjects();
+for (let i = 1; i <= 12; i++) {
+  document.getElementById('quizClass').add(new Option('Class ' + i, i));
+  document.getElementById('materialClass').add(new Option('Class ' + i, i));
+}
 
-    if ([...subjectSelect.options].some(option => option.value === subjectMatch)) {
-      subjectSelect.value = subjectMatch;
-      showNotes();
-      showTab("notes");
-      document.getElementById("learning").scrollIntoView({behavior:"smooth"});
-    } else {
-      alert("The topic matches " + subjectMatch + ", but that subject isn't listed for the selected class. Please choose a class that offers it.");
-    }
+function showMaterials() {
+  const cls = document.getElementById('materialClass').value;
+  const box = document.getElementById('materialContent');
+  if (!cls) {
+    box.innerHTML = '';
+    return;
+  }
+  if (Number(cls) >= 11) {
+    box.innerHTML = `
+      <h3>Class ${cls}</h3>
+      <p>You can add your chosen educational portal links here.</p>
+      <p>Portal links have not been configured yet.</p>`;
   } else {
-    alert("No matching topic found in the current sample materials. Try Mathematics, Science, English, Physics or Biology.");
+    box.innerHTML = `
+      <h3>Class ${cls}</h3>
+      <p>Material categories:</p>
+      <ul>
+        <li>Textbooks</li>
+        <li>Sample Papers</li>
+        <li>Previous Year Questions (PYQs)</li>
+        <li>Last-Minute Revision Notes</li>
+      </ul>
+      <p class="small">
+        Your PDF files still need to be organized and hosted before
+        they can be opened here.
+      </p>`;
   }
 }
 
-document.getElementById("searchInput").addEventListener("keydown", event => {
-  if (event.key === "Enter") searchContent();
+// Task Organizer
+let tasks = [];
+try {
+  tasks = JSON.parse(localStorage.getItem('studentToolkitTasks') || '[]');
+  if (!Array.isArray(tasks)) tasks = [];
+} catch {
+  tasks = [];
+}
+
+let editingId = null;
+
+function saveTasks() {
+  try {
+    localStorage.setItem('studentToolkitTasks', JSON.stringify(tasks));
+  } catch {
+    alert('Your browser could not save the tasks. Check browser storage settings.');
+  }
+}
+
+document.getElementById('taskForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const input = document.getElementById('taskInput');
+  const title = input.value.trim();
+  if (!title) return;
+
+  if (editingId !== null) {
+    const task = tasks.find(t => t.id === editingId);
+    if (task) task.title = title;
+  } else {
+    tasks.unshift({
+      id: Date.now() + Math.random(),
+      title,
+      status: 'Pending'
+    });
+  }
+
+  saveTasks();
+  cancelEdit();
+  renderTasks();
 });
+
+function editTask(id) {
+  const task = tasks.find(t => t.id === id);
+  if (!task) return;
+  editingId = id;
+  document.getElementById('taskInput').value = task.title;
+  document.getElementById('taskFormTitle').textContent = 'Edit task';
+  document.getElementById('saveTaskButton').textContent = 'Save Changes';
+  document.getElementById('cancelEditButton').hidden = false;
+  document.getElementById('taskInput').focus();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function cancelEdit() {
+  editingId = null;
+  document.getElementById('taskForm').reset();
+  document.getElementById('taskFormTitle').textContent = 'Add a task';
+  document.getElementById('saveTaskButton').textContent = 'Add Task';
+  document.getElementById('cancelEditButton').hidden = true;
+}
+
+function changeStatus(id, status) {
+  const task = tasks.find(t => t.id === id);
+  if (!task) return;
+  task.status = status;
+  saveTasks();
+  renderTasks();
+}
+
+function deleteTask(id) {
+  if (!confirm('Delete this task?')) return;
+  tasks = tasks.filter(t => t.id !== id);
+  if (editingId === id) cancelEdit();
+  saveTasks();
+  renderTasks();
+}
+
+function renderTasks() {
+  const filter = document.getElementById('taskFilter').value;
+  const list = document.getElementById('taskList');
+  const visible = tasks.filter(t => filter === 'All' || t.status === filter);
+
+  document.getElementById('totalCount').textContent = tasks.length;
+  document.getElementById('pendingCount').textContent =
+    tasks.filter(t => t.status === 'Pending').length;
+  document.getElementById('remainingCount').textContent =
+    tasks.filter(t => t.status === 'Remaining').length;
+  document.getElementById('completeCount').textContent =
+    tasks.filter(t => t.status === 'Complete').length;
+
+  document.getElementById('emptyTasks').hidden = visible.length > 0;
+
+  list.innerHTML = visible.map(task => {
+    const safeTitle = escapeHTML(task.title);
+    const cls = task.status.toLowerCase();
+    return `
+      <div class="task">
+        <div>
+          <div class="task-title">${safeTitle}</div>
+          <span class="badge ${cls}">${task.status}</span>
+        </div>
+        <div class="task-actions">
+          <select aria-label="Task status"
+            onchange="changeStatus(${task.id}, this.value)">
+            ${['Pending','Remaining','Complete'].map(s =>
+              `<option ${task.status === s ? 'selected' : ''}
+                value="${s}">${s}</option>`
+            ).join('')}
+          </select>
+          <button onclick="editTask(${task.id})">✏️ Edit</button>
+          <button onclick="deleteTask(${task.id})">🗑️ Delete</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, c => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;',
+    '"':'&quot;', "'":'&#39;'
+  })[c]);
+}
+
+// Quiz setup interface
+function startQuiz() {
+  const cls = document.getElementById('quizClass').value;
+  const subject = document.getElementById('quizSubject').value;
+  const difficulty = document.getElementById('difficulty').value;
+  const count = document.getElementById('questionCount').value;
+  const type = document.getElementById('questionType').value;
+  const timer = document.getElementById('quizTimer').value;
+
+  document.getElementById('quizArea').innerHTML = `
+    <h3>Quiz settings saved</h3>
+    <p>Class: ${cls} · Subject: ${subject}</p>
+    <p>Difficulty: ${difficulty} · Questions: ${count}</p>
+    <p>Type: ${type} · Timer: ${timer ? timer + ' minutes' : 'None'}</p>
+    <p class="small">
+      The quiz screen is ready, but a real question bank and scoring
+      engine still need to be added for each class and subject.
+    </p>`;
+  document.getElementById('quizResults').textContent =
+    'No quiz has been completed yet.';
+}
+
+function submitDoubt() {
+  const question = document.getElementById('doubtInput').value.trim();
+  const result = document.getElementById('doubtResult');
+  if (!question) {
+    result.textContent = 'Please type your question first.';
+    return;
+  }
+  result.textContent =
+    'Your question has been entered. The AI service is not connected yet, ' +
+    'so this website cannot generate an AI answer until that setup is completed.';
+}
+
+renderTasks();
 </script>
+
 </body>
 </html>
