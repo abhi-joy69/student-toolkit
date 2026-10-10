@@ -1,127 +1,134 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101c3a">
-<meta name="description" content="Student Toolkit: study materials, sample papers, previous year questions, revision notes and quizzes for students.">
+<meta name="theme-color" content="#6655e8">
+<meta name="description" content="Student Toolkit — study materials, practice quizzes, revision resources and student productivity tools.">
 <title>Student Toolkit | Learn Smarter</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <style>
 :root {
-  --navy: #101c3a;
-  --blue: #3859e8;
-  --purple: #7356e8;
-  --yellow: #ffd166;
-  --light: #f5f7fc;
-  --text: #202944;
-  --muted: #6d7892;
+  --primary: #6554e8;
+  --primary-dark: #4c3bc9;
+  --ink: #20213a;
+  --muted: #72748b;
+  --bg: #f7f8fc;
   --white: #fff;
-  --border: #e6eaf3;
-  --shadow: 0 12px 35px rgba(25, 42, 86, .08);
+  --border: #e9eaf3;
+  --radius: 22px;
+  --shadow: 0 12px 35px rgba(40, 35, 100, .07);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 90px;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  font-family: Inter, "Segoe UI", Arial, sans-serif;
-  background: var(--light);
-  color: var(--text);
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: var(--ink);
+  background: var(--bg);
   line-height: 1.6;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button, input, select {
-  font: inherit;
-}
-
-button, .btn {
-  cursor: pointer;
-}
-
-button:focus-visible, a:focus-visible,
-input:focus-visible, select:focus-visible {
-  outline: 3px solid #8aa1ff;
-  outline-offset: 3px;
-}
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+button { cursor: pointer; }
 
 .container {
-  width: min(1180px, 92%);
+  width: min(1160px, 92%);
   margin: auto;
 }
 
-/* NAVIGATION */
+.top-note {
+  background: #292447;
+  color: white;
+  text-align: center;
+  padding: 8px 12px;
+  font-size: 12px;
+  letter-spacing: .2px;
+}
+
+.top-note i { color: #c7bcff; margin-right: 7px; }
 
 .navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(255,255,255,.97);
-  backdrop-filter: blur(14px);
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
 }
 
 .nav-inner {
-  min-height: 76px;
+  min-height: 82px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 22px;
+  gap: 20px;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 21px;
-  font-weight: 850;
-  white-space: nowrap;
-  color: var(--navy);
+  gap: 11px;
+  flex-shrink: 0;
 }
 
 .brand-icon {
-  width: 43px;
-  height: 43px;
+  width: 45px;
+  height: 45px;
   display: grid;
   place-items: center;
   color: white;
-  background: linear-gradient(135deg, var(--blue), var(--purple));
-  border-radius: 14px;
-  font-size: 23px;
+  font-size: 22px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #8173ff, #5541d4);
+  box-shadow: 0 7px 18px #6554e83b;
 }
 
-.brand span span {
-  color: var(--blue);
+.brand-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -.7px;
+}
+
+.brand-name span { color: var(--primary); }
+
+.brand-caption {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-top: -4px;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 22px;
 }
 
 .nav-links a {
-  font-size: 14px;
+  color: #55566c;
+  font-size: 13px;
   font-weight: 650;
-  color: #4d5873;
+  transition: color .2s;
 }
 
-.nav-links a:hover {
-  color: var(--blue);
+.nav-links a:hover { color: var(--primary); }
+
+.nav-links a i {
+  margin-right: 5px;
+  color: var(--primary);
 }
 
 .nav-actions {
@@ -132,83 +139,85 @@ input:focus-visible, select:focus-visible {
 
 .btn {
   display: inline-flex;
-  justify-content: center;
   align-items: center;
-  gap: 8px;
-  padding: 11px 17px;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  font-size: 14px;
+  justify-content: center;
+  gap: 9px;
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 17px;
   font-weight: 750;
-  transition: .2s;
+  font-size: 13px;
+  transition: transform .2s, box-shadow .2s, background .2s;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-}
+.btn:hover { transform: translateY(-2px); }
 
 .btn-primary {
-  background: var(--blue);
   color: white;
-  box-shadow: 0 7px 17px rgba(56,89,232,.2);
+  background: linear-gradient(135deg, #7665f3, #5945d4);
+  box-shadow: 0 7px 18px #6554e82b;
 }
 
-.btn-outline {
-  border-color: var(--border);
+.btn-primary:hover {
+  box-shadow: 0 11px 24px #6554e83b;
+}
+
+.btn-light {
   background: white;
-  color: var(--navy);
-}
-
-.btn-yellow {
-  background: var(--yellow);
-  color: #18213b;
+  color: var(--primary);
+  border: 1px solid var(--border);
 }
 
 .menu-toggle {
   display: none;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  padding: 8px 12px;
+  background: #f0edff;
+  border: 0;
+  color: var(--primary);
+  border-radius: 12px;
+  width: 43px;
+  height: 43px;
+  font-size: 19px;
 }
 
-/* VIDEO HERO */
-
 .hero {
+  padding: 38px 0 45px;
+}
+
+.hero-box {
   position: relative;
-  isolation: isolate;
-  min-height: 570px;
+  overflow: hidden;
+  min-height: 450px;
   display: flex;
   align-items: center;
-  overflow: hidden;
-  background: #101c3a;
+  padding: 65px;
+  border-radius: 30px;
+  background: #201b4a;
   color: white;
+  isolation: isolate;
 }
 
 .hero-video {
   position: absolute;
-  z-index: -2;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: -2;
 }
 
-.hero-overlay {
+.hero-box::before {
+  content: "";
   position: absolute;
-  z-index: -1;
   inset: 0;
+  z-index: -1;
   background:
-    linear-gradient(90deg,
-      rgba(9,19,44,.96) 0%,
-      rgba(14,26,59,.82) 53%,
-      rgba(21,31,67,.46) 100%);
+    linear-gradient(90deg, rgba(23,19,64,.97) 0%, rgba(39,29,93,.88) 47%, rgba(42,30,94,.35) 100%);
 }
 
 .hero-content {
-  padding-top: 78px;
-  padding-bottom: 85px;
-  max-width: 800px;
+  position: relative;
+  z-index: 2;
+  max-width: 660px;
 }
 
 .eyebrow {
@@ -216,545 +225,282 @@ input:focus-visible, select:focus-visible {
   align-items: center;
   gap: 8px;
   padding: 8px 13px;
-  border-radius: 50px;
-  border: 1px solid rgba(255,255,255,.25);
-  background: rgba(255,255,255,.09);
-  color: #e6eaff;
-  font-size: 13px;
+  border: 1px solid #ffffff36;
+  background: #ffffff12;
+  border-radius: 30px;
+  font-size: 12px;
   font-weight: 700;
-  margin-bottom: 22px;
+  margin-bottom: 19px;
 }
+
+.eyebrow i { color: #c6bbff; }
 
 .hero h1 {
-  font-size: clamp(38px, 6vw, 68px);
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(38px, 5.2vw, 65px);
   line-height: 1.08;
-  letter-spacing: -2px;
-  margin-bottom: 23px;
+  letter-spacing: -2.3px;
+  margin: 0 0 20px;
 }
 
-.hero h1 span {
-  color: var(--yellow);
-}
+.hero h1 span { color: #bcb1ff; }
 
-.hero-description {
-  max-width: 650px;
-  font-size: 17px;
-  color: #e1e7f8;
-  margin-bottom: 28px;
+.hero p {
+  color: #e0ddf5;
+  max-width: 520px;
+  font-size: 15px;
+  line-height: 1.9;
+  margin: 0 0 27px;
 }
 
 .hero-buttons {
   display: flex;
-  flex-wrap: wrap;
-  gap: 13px;
-}
-
-.hero .btn {
-  padding: 14px 21px;
-}
-
-.hero .btn-outline {
-  background: rgba(255,255,255,.09);
-  border-color: rgba(255,255,255,.38);
-  color: white;
-}
-
-.hero-note {
-  margin-top: 22px;
-  font-size: 13px;
-  color: #d0d8ef;
-}
-
-/* SEARCH */
-
-.search-wrap {
-  position: relative;
-  z-index: 5;
-  margin-top: -35px;
-}
-
-.search-box {
-  display: flex;
-  align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-white {
   background: white;
-  padding: 13px;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  border-radius: 16px;
+  color: #4334bc;
+  padding: 14px 20px;
 }
 
-.search-icon {
-  font-size: 22px;
-  padding-left: 10px;
+.btn-glass {
+  color: white;
+  background: #ffffff15;
+  border: 1px solid #ffffff4a;
+  padding: 14px 20px;
 }
 
-.search-box input {
-  min-width: 0;
-  flex: 1;
-  padding: 11px 5px;
-  border: 0;
-  outline: 0;
-  color: var(--text);
-  background: transparent;
+.hero-trust {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  color: #e4e0fa;
+  font-size: 12px;
+  margin-top: 27px;
 }
 
-.search-box input:focus-visible {
-  outline: none;
-}
+.hero-trust i { color: #b9f2d1; margin-right: 5px; }
 
-.search-box button {
-  border: 0;
-}
-
-/* GENERAL SECTIONS */
-
-.section {
-  padding: 76px 0;
-}
-
-.section-white {
-  background: white;
-}
+.section { padding: 45px 0; }
 
 .section-heading {
   display: flex;
   align-items: end;
   justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 30px;
-}
-
-.section-label {
-  font-size: 12px;
-  font-weight: 850;
-  text-transform: uppercase;
-  letter-spacing: 1.6px;
-  color: var(--blue);
-  margin-bottom: 9px;
+  gap: 18px;
+  margin-bottom: 25px;
 }
 
 .section-heading h2 {
-  font-size: clamp(27px, 4vw, 39px);
-  letter-spacing: -1px;
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(26px, 3vw, 35px);
   line-height: 1.2;
-  color: var(--navy);
+  letter-spacing: -1px;
+  margin: 0 0 8px;
 }
 
 .section-heading p {
-  max-width: 580px;
   color: var(--muted);
-  margin-top: 10px;
+  margin: 0;
+  font-size: 14px;
+}
+
+.section-kicker {
+  color: var(--primary);
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
 }
 
 .text-link {
-  color: var(--blue);
+  color: var(--primary);
+  font-size: 13px;
   font-weight: 750;
   white-space: nowrap;
 }
 
+.search-panel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 11px 12px 11px 19px;
+  border-radius: 17px;
+  margin-top: -2px;
+}
+
+.search-panel > i { color: var(--primary); font-size: 18px; }
+
+.search-panel input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  padding: 9px 0;
+  color: var(--ink);
+  background: transparent;
+}
+
+.search-panel button { flex-shrink: 0; }
+
 .grid {
   display: grid;
-  gap: 20px;
+  gap: 17px;
 }
 
-.class-grid {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
+.classes-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 
 .class-card {
-  padding: 25px 15px;
-  border: 1px solid var(--border);
-  border-radius: 17px;
+  display: block;
   background: white;
+  padding: 21px 12px;
   text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 18px;
   transition: .22s;
-  cursor: pointer;
 }
 
 .class-card:hover {
+  border-color: #c7c0ff;
   transform: translateY(-5px);
-  border-color: #b9c6ff;
   box-shadow: var(--shadow);
 }
 
-.class-card .number {
+.class-number {
+  width: 47px;
+  height: 47px;
+  margin: 0 auto 11px;
   display: grid;
   place-items: center;
-  width: 52px;
-  height: 52px;
-  margin: 0 auto 13px;
   border-radius: 15px;
-  background: #eef1ff;
-  color: var(--blue);
-  font-size: 22px;
-  font-weight: 850;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 19px;
+  color: #5746d5;
+  background: #eeebff;
 }
 
-.class-card h3 {
-  font-size: 17px;
-  margin-bottom: 4px;
+.class-card:nth-child(3n+2) .class-number {
+  background: #e7f8ef;
+  color: #24885b;
 }
 
-.class-card p {
-  font-size: 12px;
+.class-card:nth-child(3n) .class-number {
+  background: #fff0e7;
+  color: #cb703b;
+}
+
+.class-card strong {
+  display: block;
+  font-size: 13px;
+}
+
+.class-card small {
+  display: block;
+  font-size: 10px;
   color: var(--muted);
+  margin-top: 4px;
 }
 
-/* MATERIALS */
+.tools-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
-.material-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+.tool-card {
+  position: relative;
+  overflow: hidden;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 25px;
+  transition: .22s;
 }
+
+.tool-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: #d4ceff;
+}
+
+.tool-icon {
+  width: 51px;
+  height: 51px;
+  border-radius: 17px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  margin-bottom: 19px;
+}
+
+.purple { background: #efedff; color: #6654e8; }
+.green { background: #e6f8ee; color: #26935c; }
+.orange { background: #fff0e5; color: #d67a35; }
+.blue { background: #e6f1ff; color: #387cdb; }
+
+.tool-card h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 19px;
+  margin: 0 0 8px;
+}
+
+.tool-card p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 0 0 19px;
+}
+
+.card-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary);
+  font-weight: 750;
+  font-size: 12px;
+}
+
+.material-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
 .material-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 22px;
   background: white;
-  padding: 25px;
   border: 1px solid var(--border);
-  border-radius: 17px;
+  border-radius: 19px;
   transition: .2s;
 }
 
 .material-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow);
 }
 
 .material-icon {
-  width: 54px;
-  height: 54px;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  flex-shrink: 0;
   display: grid;
   place-items: center;
-  border-radius: 15px;
-  font-size: 25px;
-  margin-bottom: 19px;
-  background: #eef1ff;
+  font-size: 21px;
+  background: #eeebff;
+  color: var(--primary);
 }
 
-.material-card:nth-child(2) .material-icon {
-  background: #e7f8ef;
-}
-
-.material-card:nth-child(3) .material-icon {
-  background: #fff2d9;
-}
-
-.material-card:nth-child(4) .material-icon {
-  background: #f3eaff;
-}
-
-.material-card h3 {
-  font-size: 18px;
-  margin-bottom: 8px;
-}
-
-.material-card p {
-  color: var(--muted);
-  font-size: 14px;
-  margin-bottom: 17px;
-}
-
-.material-card a {
-  color: var(--blue);
-  font-size: 14px;
-  font-weight: 800;
-}
-
-/* QUIZ */
-
-.quiz-layout {
-  display: grid;
-  grid-template-columns: .9fr 1.1fr;
-  gap: 35px;
-  align-items: start;
-}
-
-.quiz-info {
-  padding-top: 15px;
-}
-
-.quiz-info h2 {
-  font-size: clamp(30px, 4vw, 43px);
-  line-height: 1.17;
-  margin-bottom: 17px;
-  color: var(--navy);
-}
-
-.quiz-info p {
-  color: var(--muted);
-  margin-bottom: 20px;
-}
-
-.feature-list {
-  list-style: none;
-  display: grid;
-  gap: 12px;
-}
-
-.feature-list li {
-  display: flex;
-  gap: 10px;
-  align-items: start;
-}
-
-.feature-list li span {
-  color: #15945a;
-  font-weight: 900;
-}
-
-.quiz-box {
-  padding: 27px;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  box-shadow: var(--shadow);
-}
-
-.quiz-box h3 {
-  font-size: 22px;
-  margin-bottom: 6px;
-}
-
-.quiz-subtitle {
-  color: var(--muted);
-  font-size: 13px;
-  margin-bottom: 22px;
-}
-
-.form-group {
-  margin-bottom: 16px;
-}
-
-.form-group label {
-  display: block;
-  font-size: 13px;
-  font-weight: 750;
-  margin-bottom: 7px;
-}
-
-.form-group select,
-.form-group input {
-  width: 100%;
-  padding: 12px;
-  background: #fafbff;
-  border: 1px solid #dfe4f0;
-  border-radius: 10px;
-  color: var(--text);
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 13px;
-}
-
-.full-width {
-  width: 100%;
-  border: 0;
-}
-
-.quiz-question {
-  padding: 20px 0;
-  border-top: 1px solid var(--border);
-}
-
-.quiz-progress {
-  color: var(--muted);
-  font-size: 13px;
-  margin-bottom: 10px;
-}
-
-.quiz-question h4 {
-  font-size: 19px;
-  margin-bottom: 18px;
-}
-
-.answer-option {
-  display: block;
-  width: 100%;
-  padding: 13px;
-  text-align: left;
-  border: 1px solid var(--border);
-  background: #fff;
-  color: var(--text);
-  border-radius: 10px;
-  margin: 9px 0;
-}
-
-.answer-option:hover:not(:disabled) {
-  border-color: var(--blue);
-  background: #f5f7ff;
-}
-
-.answer-option.correct {
-  background: #e5f8ec;
-  border-color: #26a269;
-}
-
-.answer-option.incorrect {
-  background: #fff0f0;
-  border-color: #e45a5a;
-}
-
-.quiz-feedback {
-  margin: 13px 0;
-  font-size: 14px;
-}
-
-.quiz-actions {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 17px;
-}
-
-.quiz-result {
-  padding: 20px;
-  background: #f1f4ff;
-  border-radius: 13px;
-  text-align: center;
-}
-
-.quiz-result strong {
-  display: block;
-  font-size: 38px;
-  color: var(--blue);
-}
-
-/* TASK ORGANIZER */
-
-.task-layout {
-  display: grid;
-  grid-template-columns: .8fr 1.2fr;
-  gap: 28px;
-}
-
-.task-panel {
-  background: white;
-  border: 1px solid var(--border);
-  padding: 24px;
-  border-radius: 17px;
-}
-
-.task-panel h3 {
-  margin-bottom: 15px;
-}
-
-.task-input-row {
-  display: flex;
-  gap: 9px;
-}
-
-.task-input-row input {
-  flex: 1;
-  min-width: 0;
-  border: 1px solid #dfe4f0;
-  padding: 12px;
-  border-radius: 10px;
-}
-
-.task-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.task-stat {
-  background: #f4f6ff;
-  padding: 15px 9px;
-  border-radius: 12px;
-  text-align: center;
-}
-
-.task-stat strong {
-  display: block;
-  font-size: 23px;
-  color: var(--blue);
-}
-
-.task-stat span {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.task-list {
-  display: grid;
-  gap: 10px;
-}
-
-.task-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 13px;
-  border: 1px solid var(--border);
-  border-radius: 11px;
-}
-
-.task-item .task-title {
-  flex: 1;
-  overflow-wrap: anywhere;
-}
-
-.task-item select {
-  max-width: 125px;
-  padding: 7px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-}
-
-.task-item button {
-  border: 0;
-  background: transparent;
-  color: #d64b4b;
-  font-weight: 800;
-}
-
-.task-item.is-complete .task-title {
-  text-decoration: line-through;
-  color: var(--muted);
-}
-
-.empty-state {
-  color: var(--muted);
-  text-align: center;
-  padding: 25px 10px;
-}
-
-/* CLASS MATERIAL SEARCH RESULTS */
-
-.search-results {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.search-result {
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 16px;
-  background: white;
-}
-
-.search-result p {
-  color: var(--muted);
-  font-size: 13px;
-  margin: 5px 0 10px;
-}
-
-.search-result a {
-  color: var(--blue);
-  font-weight: 750;
-}
-
-/* CTA */
+.material-card h3 { font-size: 14px; margin: 0 0 5px; }
+.material-card p { color: var(--muted); font-size: 11px; margin: 0; }
 
 .cta {
-  padding: 55px;
-  border-radius: 24px;
-  background: linear-gradient(130deg, #263fba, #7550e8);
+  background: linear-gradient(125deg, #29215d, #6350dd);
+  border-radius: 27px;
+  padding: 40px;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -763,241 +509,115 @@ input:focus-visible, select:focus-visible {
 }
 
 .cta h2 {
-  font-size: clamp(26px, 4vw, 39px);
+  font-family: 'Outfit', sans-serif;
+  font-size: 30px;
   line-height: 1.2;
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 }
 
-.cta p {
-  color: #e9eaff;
-}
+.cta p { color: #e0dcff; font-size: 13px; margin: 0; }
 
-/* FOOTER */
-
-footer {
-  background: #10182e;
+.footer {
+  margin-top: 45px;
+  background: #201d3b;
   color: white;
   padding: 48px 0 22px;
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
-  gap: 35px;
-  padding-bottom: 35px;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
 }
 
-.footer-brand p {
-  max-width: 350px;
-  color: #b9c2d9;
-  margin-top: 14px;
-  font-size: 14px;
+.footer .brand-caption { color: #c6c1e2; }
+
+.footer-about {
+  color: #c3c0d8;
+  max-width: 380px;
+  font-size: 13px;
+  margin-top: 17px;
 }
 
-.footer-col h4 {
-  margin-bottom: 13px;
-}
+.footer h4 { margin: 0 0 15px; font-size: 13px; }
 
-.footer-col a {
-  display: block;
-  color: #b9c2d9;
-  margin: 8px 0;
-  font-size: 14px;
-}
+.footer-links { display: grid; gap: 10px; }
 
-.footer-col a:hover {
-  color: white;
-}
+.footer-links a { color: #c3c0d8; font-size: 12px; }
+.footer-links a:hover { color: white; }
 
 .footer-bottom {
-  border-top: 1px solid #303a53;
+  border-top: 1px solid #ffffff20;
+  margin-top: 35px;
   padding-top: 20px;
+  color: #aaa5c8;
+  font-size: 11px;
   display: flex;
   justify-content: space-between;
   gap: 15px;
-  color: #b9c2d9;
-  font-size: 12px;
+  flex-wrap: wrap;
 }
 
-/* RESPONSIVE */
+.notice {
+  display: none;
+  padding: 13px 15px;
+  border-radius: 12px;
+  margin-top: 15px;
+  background: #fff3d9;
+  color: #775018;
+  font-size: 13px;
+}
 
-@media (max-width: 1000px) {
-  .nav-links {
-    gap: 13px;
-  }
-
-  .nav-links a {
-    font-size: 12px;
-  }
-
-  .class-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .material-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+@media (max-width: 1050px) {
+  .nav-links { gap: 13px; }
+  .nav-links a { font-size: 12px; }
+  .classes-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .tools-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 760px) {
-  .nav-inner {
-    min-height: 68px;
-    flex-wrap: wrap;
-    padding: 10px 0;
-  }
-
-  .menu-toggle {
-    display: inline-block;
-  }
-
+  .nav-inner { min-height: 70px; }
+  .menu-toggle { display: block; }
   .nav-links {
     display: none;
-    order: 3;
-    flex-basis: 100%;
-    flex-direction: column;
+    position: absolute;
+    left: 4%;
+    right: 4%;
+    top: calc(100% + 8px);
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    padding: 17px;
+    box-shadow: var(--shadow);
     align-items: stretch;
-    padding: 12px 0;
-  }
-
-  .nav-links.open {
-    display: flex;
-  }
-
-  .nav-links a {
-    font-size: 14px;
-    padding: 8px 0;
-  }
-
-  .nav-actions {
-    margin-left: auto;
-  }
-
-  .nav-actions .btn {
-    padding: 9px 11px;
-    font-size: 12px;
-  }
-
-  .brand {
-    font-size: 17px;
-  }
-
-  .brand-icon {
-    width: 37px;
-    height: 37px;
-  }
-
-  .hero {
-    min-height: 525px;
-  }
-
-  .hero-content {
-    padding-top: 65px;
-    padding-bottom: 75px;
-  }
-
-  .hero h1 {
-    letter-spacing: -1px;
-  }
-
-  .hero-description {
-    font-size: 15px;
-  }
-
-  .section {
-    padding: 55px 0;
-  }
-
-  .section-heading {
-    align-items: start;
-    flex-direction: column;
-  }
-
-  .quiz-layout,
-  .task-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .cta {
-    padding: 30px;
-    flex-direction: column;
-    align-items: start;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .footer-brand {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (max-width: 480px) {
-  .nav-actions .btn-outline {
-    display: none;
-  }
-
-  .hero-buttons .btn {
-    width: 100%;
-  }
-
-  .class-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .material-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .search-box {
-    flex-wrap: wrap;
-  }
-
-  .search-box input {
-    width: 70%;
-  }
-
-  .search-box button {
-    width: 100%;
-  }
-
-  .form-row {
-    grid-template-columns: 1fr;
     gap: 0;
   }
-
-  .quiz-box {
-    padding: 18px;
+  .nav-links.open { display: flex; flex-direction: column; }
+  .nav-links a { padding: 12px 7px; font-size: 14px; }
+  .nav-actions .btn-light { display: none; }
+  .brand-name { font-size: 18px; }
+  .brand-icon { width: 41px; height: 41px; }
+  .hero { padding-top: 22px; }
+  .hero-box { min-height: 470px; padding: 32px 23px; border-radius: 23px; }
+  .hero-box::before {
+    background: linear-gradient(90deg, rgba(23,19,64,.94), rgba(39,29,93,.79));
   }
-
-  .task-input-row {
-    flex-direction: column;
-  }
-
-  .task-item {
-    flex-wrap: wrap;
-  }
-
-  .task-item .task-title {
-    min-width: 55%;
-  }
-
-  .search-results {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-brand {
-    grid-column: auto;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-  }
+  .hero h1 { letter-spacing: -1.4px; }
+  .hero p { font-size: 13px; }
+  .section { padding: 32px 0; }
+  .section-heading { align-items: start; flex-direction: column; }
+  .classes-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .class-card { padding: 15px 5px; }
+  .class-number { width: 40px; height: 40px; }
+  .tools-grid, .material-grid { grid-template-columns: 1fr; }
+  .tool-card { padding: 22px; }
+  .search-panel { flex-wrap: wrap; }
+  .search-panel input { width: calc(100% - 40px); flex: 1; }
+  .search-panel button { width: 100%; }
+  .cta { padding: 28px 23px; flex-direction: column; align-items: flex-start; }
+  .cta h2 { font-size: 26px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .footer-grid > div:first-child { grid-column: 1 / -1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1005,1098 +625,557 @@ footer {
     scroll-behavior: auto !important;
     transition: none !important;
   }
-
-  .hero-video {
-    display: none;
-  }
 }
 </style>
-
 </head>
 
 <body>
 
-<!-- NAVIGATION -->
+<div class="top-note">
+  <i class="fa-solid fa-sparkles"></i>
+  Your learning journey starts here — explore, practise and grow.
+</div>
 
 <header class="navbar">
   <div class="container nav-inner">
-    <a class="brand" href="#home" aria-label="Student Toolkit homepage">
-      <span class="brand-icon">✦</span>
-      <span>Student <span>Toolkit</span></span>
+
+    <a href="index.html" class="brand" aria-label="Student Toolkit Home">
+      <div class="brand-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+      <div>
+        <div class="brand-name">Student<span>Toolkit</span></div>
+        <div class="brand-caption">Learn smarter every day</div>
+      </div>
     </a>
 
-```
-<button class="menu-toggle" id="menuToggle" aria-expanded="false"
-  aria-controls="navLinks" aria-label="Toggle navigation">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home"><i class="fa-solid fa-house"></i>Home</a>
+      <a href="#classes"><i class="fa-solid fa-book-open"></i>Classes</a>
+      <a href="#materials"><i class="fa-solid fa-folder-open"></i>Materials</a>
+      <a href="#tools"><i class="fa-solid fa-wand-magic-sparkles"></i>Study Tools</a>
+      <a href="#senior"><i class="fa-solid fa-arrow-up-right-from-square"></i>Senior Classes</a>
+    </nav>
 
-<nav class="nav-links" id="navLinks">
-  <a href="#home">Home</a>
-  <a href="#classes">Classes</a>
-  <a href="#materials">Study Materials</a>
-  <a href="#quiz">Quiz</a>
-  <a href="#tasks">Task Organizer</a>
-</nav>
-
-<div class="nav-actions">
-  <a class="btn btn-outline" href="auth.html">Sign In</a>
-  <a class="btn btn-primary" href="auth.html">Get Started ↗</a>
-</div>
-```
+    <div class="nav-actions">
+      <a class="btn btn-light" href="auth.html">
+        <i class="fa-regular fa-user"></i> Sign In
+      </a>
+      <a class="btn btn-primary" href="auth.html#signup">
+        Get Started <i class="fa-solid fa-arrow-right"></i>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
 
   </div>
 </header>
 
 <main>
 
-<!-- VIDEO BANNER -->
-
 <section class="hero" id="home">
-  <video class="hero-video"
-    autoplay muted loop playsinline preload="metadata"
-    poster=""
-    aria-hidden="true">
-    <source
-      src="https://videos.pexels.com/video-files/5198157/5198157-hd_1920_1080_25fps.mp4"
-      type="video/mp4">
-  </video>
+  <div class="container">
+    <div class="hero-box">
 
-  <div class="hero-overlay"></div>
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+        poster=""
+        aria-hidden="true">
+        <source src="https://videos.pexels.com/video-files/5198157/5198157-hd_1920_1080_25fps.mp4" type="video/mp4">
+      </video>
 
-  <div class="container hero-content">
-    <div class="eyebrow">✦ YOUR LEARNING COMPANION</div>
+      <div class="hero-content">
+        <div class="eyebrow">
+          <i class="fa-solid fa-star"></i>
+          YOUR ALL-IN-ONE STUDY COMPANION
+        </div>
 
-```
-<h1>Your Learning Journey<br>Starts <span>Here.</span></h1>
+        <h1>Study smarter.<br>Achieve <span>more.</span></h1>
 
-<p class="hero-description">
-  Discover study materials, sample papers, previous year questions,
-  revision notes and interactive quizzes—all in one place.
-  Learn at your own pace and prepare with confidence.
-</p>
+        <p>
+          Everything you need for your learning journey in one place.
+          Explore study resources, practise questions, revise important
+          concepts and organise your daily tasks.
+        </p>
 
-<div class="hero-buttons">
-  <a class="btn btn-yellow" href="#materials">Explore Materials →</a>
-  <a class="btn btn-outline" href="#quiz">Try a Quiz ↗</a>
-</div>
+        <div class="hero-buttons">
+          <a href="#classes" class="btn btn-white">
+            <i class="fa-solid fa-book-open"></i> Explore Classes
+          </a>
+          <a href="#tools" class="btn btn-glass">
+            <i class="fa-solid fa-rocket"></i> Explore Study Tools
+          </a>
+        </div>
 
-<p class="hero-note">📚 Classes 1–12 · Practice · Revise · Learn</p>
-```
+        <div class="hero-trust">
+          <span><i class="fa-solid fa-circle-check"></i> Student-friendly</span>
+          <span><i class="fa-solid fa-circle-check"></i> Easy to explore</span>
+          <span><i class="fa-solid fa-circle-check"></i> Learn at your pace</span>
+        </div>
+      </div>
 
+    </div>
   </div>
 </section>
 
-<!-- SEARCH -->
-
-<div class="container search-wrap">
-  <form class="search-box" id="searchForm">
-    <span class="search-icon" aria-hidden="true">⌕</span>
+<section class="container" aria-label="Find study resources">
+  <div class="search-panel">
+    <i class="fa-solid fa-magnifying-glass"></i>
     <input id="siteSearch" type="search"
-      placeholder="Search classes, subjects, notes or question papers..."
-      aria-label="Search study materials">
-    <button class="btn btn-primary" type="submit">Search Materials</button>
-  </form>
-  <div id="searchResults" aria-live="polite"></div>
-</div>
-
-<!-- CLASSES -->
+      placeholder="Search classes, quizzes, PYQs, revision notes..."
+      aria-label="Search this website">
+    <button class="btn btn-primary" id="searchButton">
+      Search <i class="fa-solid fa-arrow-right"></i>
+    </button>
+  </div>
+  <div class="notice" id="searchNotice" role="status"></div>
+</section>
 
 <section class="section" id="classes">
   <div class="container">
     <div class="section-heading">
       <div>
-        <div class="section-label">FIND YOUR CLASS</div>
-        <h2>Learning for every grade</h2>
-        <p>Select your class to explore the relevant study resources.</p>
+        <div class="section-kicker">Find your classroom</div>
+        <h2>Choose your class</h2>
+        <p>Start with your class and explore the learning resources available.</p>
       </div>
+      <a class="text-link" href="#materials">Explore resources <i class="fa-solid fa-arrow-right"></i></a>
     </div>
 
-```
-<div class="grid class-grid">
-  <a class="class-card" href="#materials" data-class="1">
-    <div class="number">01</div><h3>Class 1</h3><p>Explore resources →</p>
-  </a>
-  <a class="class-card" href="#materials" data-class="2">
-    <div class="number">02</div><h3>Class 2</h3><p>Explore resources →</p>
-  </a>
-  <a class="class-card" href="#materials" data-class="3">
-    <div class="number">03</div><h3>Class 3</h3><p>Explore resources →</p>
-  </a>
-  <a class="class-card" href="#materials" data-class="4">
-    <div class="number">04</div><h3>Class 4</h3><p>Explore resources →</p>
-  </a>
-  <a class="class-card" href="#materials" data-class="5">
-    <div class="number">05</div><h3>Class 5</h3><p>Explore resources →</p>
-  </a>
-  <a class="class-card" href="#materials" data-class="6">
-    <div class="number">06</div><h3>Class 6</h3><p>Explore resources →</p>
-  </a>
-  <a class="class-card" href="#materials" data-class="7">
-    <div class="number">07</div><h3>Class 7</h3><p>Explore resources →</p>
-  </a>
-  <a class="class-card" href="#materials" data-class="8">
-    <div class="number">08</div><h3>Class 8</h3><p>Explore resources →</p>
-  </a>
-  <a class="class-card" href="#materials" data-class="9">
-    <div class="number">09</div><h3>Class 9</h3><p>Explore resources →</p>
-  </a>
-  <a class="class-card" href="#materials" data-class="10">
-    <div class="number">10</div><h3>Class 10</h3><p>Explore resources →</p>
-  </a>
-  <a class="class-card" href="#senior-classes" data-class="11">
-    <div class="number">11</div><h3>Class 11</h3><p>Senior secondary →</p>
-  </a>
-  <a class="class-card" href="#senior-classes" data-class="12">
-    <div class="number">12</div><h3>Class 12</h3><p>Senior secondary →</p>
-  </a>
-</div>
-```
-
+    <div class="grid classes-grid" id="classGrid"></div>
   </div>
 </section>
 
-<!-- STUDY MATERIALS -->
-
-<section class="section section-white" id="materials">
+<section class="section" id="tools">
   <div class="container">
     <div class="section-heading">
       <div>
-        <div class="section-label">YOUR STUDY LIBRARY</div>
-        <h2>Everything you need to prepare</h2>
-        <p>Find your resources by choosing the type of material you need.</p>
+        <div class="section-kicker">Your learning workspace</div>
+        <h2>Everything to study better</h2>
+        <p>Simple tools to help you practise, revise and stay organised.</p>
       </div>
     </div>
 
-```
-<div class="grid material-grid">
-  <article class="material-card">
-    <div class="material-icon">📚</div>
-    <h3>Textbooks</h3>
-    <p>Find textbooks and chapter-wise learning resources.</p>
-    <a href="#resource-list" data-category="textbooks">Explore Textbooks →</a>
-  </article>
+    <div class="grid tools-grid">
 
-  <article class="material-card">
-    <div class="material-icon">📝</div>
-    <h3>Sample Papers</h3>
-    <p>Practise exam-style questions and assess your preparation.</p>
-    <a href="#resource-list" data-category="sample-papers">Explore Sample Papers →</a>
-  </article>
+      <article class="tool-card">
+        <div class="tool-icon purple"><i class="fa-solid fa-brain"></i></div>
+        <h3>Practice Quiz</h3>
+        <p>Test your knowledge with practice questions and check your answers.</p>
+        <a href="#quiz" class="card-action">Try a sample quiz <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
 
-  <article class="material-card">
-    <div class="material-icon">🎯</div>
-    <h3>Previous Year Questions</h3>
-    <p>Practise previous year questions for exam preparation.</p>
-    <a href="#resource-list" data-category="pyqs">Explore PYQs →</a>
-  </article>
+      <article class="tool-card">
+        <div class="tool-icon green"><i class="fa-solid fa-book-open-reader"></i></div>
+        <h3>Study Materials</h3>
+        <p>Find textbook, sample paper, PYQ and revision-resource categories.</p>
+        <a href="#materials" class="card-action">Explore materials <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
 
-  <article class="material-card">
-    <div class="material-icon">⚡</div>
-    <h3>Revision Notes</h3>
-    <p>Review important concepts before your examinations.</p>
-    <a href="#resource-list" data-category="revision-notes">Explore Notes →</a>
-  </article>
-</div>
+      <article class="tool-card">
+        <div class="tool-icon orange"><i class="fa-solid fa-list-check"></i></div>
+        <h3>Task Organizer</h3>
+        <p>Write down study tasks and track their status in this browser.</p>
+        <a href="#organizer" class="card-action">Organise tasks <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
 
-<div id="resource-list" style="margin-top:38px">
-  <div class="section-heading">
-    <div>
-      <div class="section-label">RESOURCE FINDER</div>
-      <h2 style="font-size:26px">Find your study resources</h2>
-      <p>Choose your class and resource type.</p>
+      <article class="tool-card">
+        <div class="tool-icon blue"><i class="fa-solid fa-user-graduate"></i></div>
+        <h3>Your Account</h3>
+        <p>Open the account page to sign in or create an account.</p>
+        <a href="auth.html#signup" class="card-action">Create an account <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+
     </div>
-  </div>
-
-  <div class="form-row">
-    <div class="form-group">
-      <label for="resourceClass">Select class</label>
-      <select id="resourceClass">
-        <option value="10">Class 10</option>
-        <option value="9">Class 9</option>
-        <option value="8">Class 8</option>
-        <option value="7">Class 7</option>
-        <option value="6">Class 6</option>
-        <option value="5">Class 5</option>
-        <option value="4">Class 4</option>
-        <option value="3">Class 3</option>
-        <option value="2">Class 2</option>
-        <option value="1">Class 1</option>
-        <option value="11">Class 11</option>
-        <option value="12">Class 12</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="resourceCategory">Resource type</label>
-      <select id="resourceCategory">
-        <option value="textbooks">Textbooks</option>
-        <option value="sample-papers">Sample Papers</option>
-        <option value="pyqs">Previous Year Questions</option>
-        <option value="revision-notes">Revision Notes</option>
-      </select>
-    </div>
-  </div>
-
-  <div id="resourceMessage" class="task-panel">
-    <h3>Class 10 resources</h3>
-    <p>
-      Your resource categories are ready. Add your actual PDF or
-      Google Drive links in the resource configuration in the code
-      to make the corresponding downloads available here.
-    </p>
-  </div>
-</div>
-```
-
   </div>
 </section>
 
-<!-- QUIZ -->
+<section class="section" id="materials">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <div class="section-kicker">Prepare with confidence</div>
+        <h2>Your study library</h2>
+        <p>Choose a resource category. Individual files must be linked to open them.</p>
+      </div>
+    </div>
+
+    <div class="grid material-grid">
+
+      <a href="#resourceHelp" class="material-card" data-category="textbooks">
+        <div class="material-icon"><i class="fa-solid fa-book"></i></div>
+        <div>
+          <h3>Textbooks</h3>
+          <p>Browse textbook resources</p>
+        </div>
+      </a>
+
+      <a href="#resourceHelp" class="material-card" data-category="sample papers">
+        <div class="material-icon" style="background:#e5f7ec;color:#26895a">
+          <i class="fa-solid fa-file-circle-check"></i>
+        </div>
+        <div>
+          <h3>Sample Papers</h3>
+          <p>Prepare with practice papers</p>
+        </div>
+      </a>
+
+      <a href="#resourceHelp" class="material-card" data-category="pyq previous year questions">
+        <div class="material-icon" style="background:#fff0e6;color:#d27434">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+        </div>
+        <div>
+          <h3>Previous Year Questions</h3>
+          <p>Practise past questions</p>
+        </div>
+      </a>
+
+      <a href="#resourceHelp" class="material-card" data-category="revision last minute notes">
+        <div class="material-icon" style="background:#e6f1ff;color:#3978cf">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <div>
+          <h3>Last-Minute Revision</h3>
+          <p>Review key concepts quickly</p>
+        </div>
+      </a>
+
+      <a href="#quiz" class="material-card">
+        <div class="material-icon" style="background:#fce8f4;color:#bf438a">
+          <i class="fa-solid fa-circle-question"></i>
+        </div>
+        <div>
+          <h3>Practice Questions</h3>
+          <p>Try a sample question</p>
+        </div>
+      </a>
+
+      <a href="#senior" class="material-card">
+        <div class="material-icon"><i class="fa-solid fa-up-right-from-square"></i></div>
+        <div>
+          <h3>Senior Classes</h3>
+          <p>Explore external learning resources</p>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="notice" id="resourceHelp">
+      <strong>Resource library:</strong>
+      This category is ready for your PDF or Google Drive links.
+      The individual files are not connected to these cards yet.
+    </div>
+  </div>
+</section>
 
 <section class="section" id="quiz">
-  <div class="container quiz-layout">
-    <div class="quiz-info">
-      <div class="section-label">PRACTISE SMARTER</div>
-      <h2>Test your knowledge. Build your confidence.</h2>
-      <p>
-        Choose a subject and difficulty, answer multiple-choice questions,
-        and see your score with explanations.
-      </p>
-      <ul class="feature-list">
-        <li><span>✓</span> Select your class and subject</li>
-        <li><span>✓</span> Choose Easy, Medium or Hard</li>
-        <li><span>✓</span> Receive instant feedback</li>
-        <li><span>✓</span> Review your score after the quiz</li>
-      </ul>
-    </div>
-
-```
-<div class="quiz-box">
-  <div id="quizSetup">
-    <h3>Quick Practice Quiz</h3>
-    <p class="quiz-subtitle">Try the included sample questions.</p>
-
-    <div class="form-group">
-      <label for="quizClass">Your class</label>
-      <select id="quizClass">
-        <option value="10">Class 10</option>
-        <option value="9">Class 9</option>
-        <option value="8">Class 8</option>
-        <option value="7">Class 7</option>
-        <option value="6">Class 6</option>
-        <option value="5">Class 5</option>
-        <option value="4">Class 4</option>
-        <option value="3">Class 3</option>
-        <option value="2">Class 2</option>
-        <option value="1">Class 1</option>
-        <option value="11">Class 11</option>
-        <option value="12">Class 12</option>
-      </select>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label for="quizSubject">Subject</label>
-        <select id="quizSubject">
-          <option value="Maths">Mathematics</option>
-          <option value="Science">Science</option>
-          <option value="English">English</option>
-          <option value="General Knowledge">General Knowledge</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="quizDifficulty">Difficulty</label>
-        <select id="quizDifficulty">
-          <option value="Easy">Easy</option>
-          <option value="Medium">Medium</option>
-          <option value="Hard">Hard</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="questionCount">Number of questions</label>
-      <select id="questionCount">
-        <option>5</option>
-        <option>10</option>
-        <option>20</option>
-        <option>30</option>
-        <option>50</option>
-      </select>
-    </div>
-
-    <button class="btn btn-primary full-width" id="startQuiz">
-      Start Practice Quiz →
-    </button>
-
-    <p class="quiz-subtitle" style="margin-top:13px;margin-bottom:0">
-      Note: The current question bank contains sample questions,
-      not a complete class-wise syllabus.
-    </p>
-  </div>
-
-  <div id="quizArea" hidden>
-    <div id="quizQuestion"></div>
-  </div>
-
-  <div id="quizResult" hidden></div>
-</div>
-```
-
-  </div>
-</section>
-
-<!-- TASK ORGANIZER -->
-
-<section class="section section-white" id="tasks">
   <div class="container">
     <div class="section-heading">
       <div>
-        <div class="section-label">STAY ORGANIZED</div>
-        <h2>Your personal study planner</h2>
-        <p>Add your tasks, update their status, and keep track of your work.</p>
+        <div class="section-kicker">Practice makes progress</div>
+        <h2>Try a quick quiz</h2>
+        <p>Answer a sample question and check your result.</p>
       </div>
     </div>
 
-```
-<div class="task-layout">
-  <div class="task-panel">
-    <h3>Add a study task</h3>
-    <form id="taskForm">
-      <div class="form-group">
-        <label for="taskInput">What do you need to do?</label>
-        <input id="taskInput" maxlength="180"
-          placeholder="e.g. Complete chapter 3 revision" required>
+    <div class="tool-card" style="max-width:760px;margin:auto">
+      <div class="tool-icon purple"><i class="fa-solid fa-lightbulb"></i></div>
+      <div style="color:var(--muted);font-size:12px;font-weight:700;margin-bottom:8px">
+        SAMPLE MATHEMATICS QUESTION
       </div>
-      <button class="btn btn-primary full-width" type="submit">
-        + Add Task
+      <h3 style="font-size:21px">What is 12 × 8?</h3>
+
+      <div id="quizOptions" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px">
+        <button class="btn btn-light quiz-option" data-answer="84">84</button>
+        <button class="btn btn-light quiz-option" data-answer="96">96</button>
+        <button class="btn btn-light quiz-option" data-answer="88">88</button>
+        <button class="btn btn-light quiz-option" data-answer="108">108</button>
+      </div>
+
+      <p id="quizFeedback" role="status" style="margin:17px 0 0;font-weight:700"></p>
+      <button id="quizReset" class="btn btn-primary" style="margin-top:10px;display:none">
+        Try again <i class="fa-solid fa-rotate-right"></i>
       </button>
-    </form>
-    <p class="quiz-subtitle" style="margin:14px 0 0">
-      Tasks on this homepage are saved in this browser.
-      Sign-in synchronization requires connecting the task organizer
-      to your account database.
-    </p>
-  </div>
-
-  <div class="task-panel">
-    <div class="task-stats">
-      <div class="task-stat">
-        <strong id="pendingCount">0</strong><span>Pending</span>
-      </div>
-      <div class="task-stat">
-        <strong id="remainingCount">0</strong><span>Remaining</span>
-      </div>
-      <div class="task-stat">
-        <strong id="completeCount">0</strong><span>Complete</span>
-      </div>
     </div>
-
-    <div id="taskList" class="task-list"></div>
-  </div>
-</div>
-```
-
   </div>
 </section>
 
-<!-- SENIOR CLASSES -->
-
-<section class="section" id="senior-classes">
+<section class="section" id="organizer">
   <div class="container">
     <div class="section-heading">
       <div>
-        <div class="section-label">LOOKING AHEAD</div>
-        <h2>Classes 11 & 12</h2>
-        <p>
-          Explore additional learning resources from established
-          education websites.
-        </p>
+        <div class="section-kicker">One task at a time</div>
+        <h2>Your study task organizer</h2>
+        <p>Tasks entered here are stored in this browser, not in your online account.</p>
       </div>
     </div>
 
-```
-<div class="grid material-grid">
-  <article class="material-card">
-    <div class="material-icon">📘</div>
-    <h3>NCERT</h3>
-    <p>Official textbooks and learning resources.</p>
-    <a href="https://ncert.nic.in/textbook.php"
-      target="_blank" rel="noopener noreferrer">Visit NCERT ↗</a>
-  </article>
+    <div class="tool-card" style="max-width:760px;margin:auto">
+      <form id="taskForm" style="display:flex;gap:10px;flex-wrap:wrap">
+        <input id="taskInput" maxlength="180" required
+          placeholder="e.g. Revise Chapter 3"
+          aria-label="New study task"
+          style="flex:1;min-width:180px;padding:13px;border:1px solid var(--border);border-radius:12px;outline-color:var(--primary)">
+        <button class="btn btn-primary" type="submit">
+          <i class="fa-solid fa-plus"></i> Add Task
+        </button>
+      </form>
 
-  <article class="material-card">
-    <div class="material-icon">🏫</div>
-    <h3>CBSE</h3>
-    <p>Official curriculum and academic resources.</p>
-    <a href="https://www.cbse.gov.in/"
-      target="_blank" rel="noopener noreferrer">Visit CBSE ↗</a>
-  </article>
-</div>
-```
-
+      <div id="taskList" style="display:grid;gap:10px;margin-top:20px"></div>
+      <p id="taskEmpty" style="color:var(--muted);font-size:13px">Your study tasks will appear here.</p>
+    </div>
   </div>
 </section>
 
-<!-- CTA -->
-
-<section class="section section-white">
+<section class="section" id="senior">
   <div class="container">
     <div class="cta">
       <div>
-        <h2>Make every study session count.</h2>
-        <p>Sign in to access your account and continue your learning journey.</p>
+        <div class="section-kicker" style="color:#d2caff">Keep learning</div>
+        <h2>Ready for your next chapter?</h2>
+        <p>Explore official educational resources for senior classes.</p>
       </div>
-      <a href="auth.html" class="btn btn-yellow">Get Started →</a>
+      <a class="btn btn-white" href="https://cbseacademic.nic.in/" target="_blank" rel="noopener noreferrer">
+        CBSE Academic <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
     </div>
   </div>
 </section>
 
 </main>
 
-<!-- FOOTER -->
-
-<footer>
+<footer class="footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <a class="brand" href="#home" style="color:white">
-          <span class="brand-icon">✦</span>
-          <span>Student <span>Toolkit</span></span>
+      <div>
+        <a href="index.html" class="brand">
+          <div class="brand-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div>
+            <div class="brand-name">Student<span>Toolkit</span></div>
+            <div class="brand-caption">Learn smarter every day</div>
+          </div>
         </a>
-        <p>
-          Your learning companion for study materials, revision,
-          practice and better study habits.
+        <p class="footer-about">
+          A student-focused learning workspace for study resources,
+          practice and everyday academic organisation.
         </p>
       </div>
 
-```
-  <div class="footer-col">
-    <h4>Explore</h4>
-    <a href="#classes">Classes 1–12</a>
-    <a href="#materials">Study Materials</a>
-    <a href="#quiz">Practice Quiz</a>
-    <a href="#tasks">Task Organizer</a>
-  </div>
+      <div>
+        <h4>Explore</h4>
+        <div class="footer-links">
+          <a href="#classes">Classes 1–12</a>
+          <a href="#materials">Study Materials</a>
+          <a href="#quiz">Practice Quiz</a>
+          <a href="#organizer">Task Organizer</a>
+        </div>
+      </div>
 
-  <div class="footer-col">
-    <h4>Your Account</h4>
-    <a href="auth.html">Sign In</a>
-    <a href="auth.html">Create Account</a>
-    <a href="https://ncert.nic.in/textbook.php"
-      target="_blank" rel="noopener noreferrer">NCERT Resources</a>
-  </div>
-</div>
+      <div>
+        <h4>Your Account</h4>
+        <div class="footer-links">
+          <a href="auth.html">Sign In</a>
+          <a href="auth.html#signup">Create Account</a>
+          <a href="https://cbseacademic.nic.in/" target="_blank" rel="noopener noreferrer">CBSE Academic</a>
+        </div>
+      </div>
+    </div>
 
-<div class="footer-bottom">
-  <span>© <span id="year"></span> Student Toolkit</span>
-  <span>Learn smarter. Practise better. Keep growing.</span>
-</div>
-```
-
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Student Toolkit. Built for learners.</span>
+      <span>Keep learning. Keep growing. ✨</span>
+    </div>
   </div>
 </footer>
 
 <script>
-/* MOBILE MENU */
+const navToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
 
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.getElementById("navLinks");
-
-menuToggle.addEventListener("click", () => {
-  const opened = navLinks.classList.toggle("open");
-  menuToggle.setAttribute("aria-expanded", String(opened));
+navToggle.addEventListener('click', () => {
+  const isOpen = navLinks.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', String(isOpen));
+  navToggle.innerHTML = isOpen
+    ? '<i class="fa-solid fa-xmark"></i>'
+    : '<i class="fa-solid fa-bars"></i>';
 });
 
-navLinks.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    navLinks.classList.remove("open");
-    menuToggle.setAttribute("aria-expanded", "false");
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
   });
 });
 
-document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById('year').textContent = new Date().getFullYear();
 
+const classGrid = document.getElementById('classGrid');
 
-/* CLASS SELECTION */
-
-document.querySelectorAll("[data-class]").forEach(card => {
-  card.addEventListener("click", () => {
-    const classValue = card.dataset.class;
-    const resourceClass = document.getElementById("resourceClass");
-    const quizClass = document.getElementById("quizClass");
-
-    if (resourceClass) resourceClass.value = classValue;
-    if (quizClass) quizClass.value = classValue;
-  });
-});
-
-
-/* MATERIAL CATEGORY SELECTOR */
-
-const resourceCategory = document.getElementById("resourceCategory");
-const resourceClass = document.getElementById("resourceClass");
-const resourceMessage = document.getElementById("resourceMessage");
-
-const categoryNames = {
-  "textbooks": "Textbooks",
-  "sample-papers": "Sample Papers",
-  "pyqs": "Previous Year Questions",
-  "revision-notes": "Revision Notes"
-};
-
-function updateResourceMessage() {
-  const grade = resourceClass.value;
-  const category = resourceCategory.value;
-
-  resourceMessage.replaceChildren();
-
-  const heading = document.createElement("h3");
-  heading.textContent = "Class " + grade + " — " + categoryNames[category];
-
-  const paragraph = document.createElement("p");
-  paragraph.textContent =
-    "Add the actual PDF or Google Drive links for this class and " +
-    "category in the resource configuration before offering downloads.";
-
-  resourceMessage.append(heading, paragraph);
+for (let n = 1; n <= 12; n++) {
+  const card = document.createElement('a');
+  card.className = 'class-card';
+  card.href = n <= 10 ? '#materials' : '#senior';
+  card.dataset.search = `class ${n} grade ${n} study materials`;
+  card.innerHTML = `
+    <div class="class-number">${n}</div>
+    <strong>Class ${n}</strong>
+    <small>${n <= 10 ? 'School Resources' : 'Senior Learning'}</small>
+  `;
+  classGrid.appendChild(card);
 }
 
-resourceClass.addEventListener("change", updateResourceMessage);
-resourceCategory.addEventListener("change", updateResourceMessage);
+const searchInput = document.getElementById('siteSearch');
+const searchNotice = document.getElementById('searchNotice');
 
-document.querySelectorAll("[data-category]").forEach(link => {
-  link.addEventListener("click", () => {
-    resourceCategory.value = link.dataset.category;
-    updateResourceMessage();
-  });
-});
+function performSearch() {
+  const query = searchInput.value.trim().toLowerCase();
+  const searchable = [
+    ...document.querySelectorAll('.class-card'),
+    ...document.querySelectorAll('.material-card'),
+    ...document.querySelectorAll('.tool-card')
+  ];
 
-
-/* SEARCH
-   Searches the resource categories and website sections.
-   Add individual PDF links to the resource catalog to search files too.
-*/
-
-const searchableItems = [
-  {
-    title: "Textbooks",
-    description: "Textbook and chapter learning resources",
-    target: "#resource-list",
-    terms: "book books textbook textbooks chapters ncert"
-  },
-  {
-    title: "Sample Papers",
-    description: "Practice exam-style papers",
-    target: "#resource-list",
-    terms: "sample papers model papers practice exam"
-  },
-  {
-    title: "Previous Year Questions",
-    description: "Past examination questions",
-    target: "#resource-list",
-    terms: "pyq previous year questions past papers"
-  },
-  {
-    title: "Revision Notes",
-    description: "Last-minute revision and quick summaries",
-    target: "#resource-list",
-    terms: "notes revision last minute quick revision"
-  },
-  {
-    title: "Practice Quiz",
-    description: "Answer sample multiple-choice questions",
-    target: "#quiz",
-    terms: "quiz questions mcq practice test"
-  },
-  {
-    title: "Task Organizer",
-    description: "Plan and track study tasks",
-    target: "#tasks",
-    terms: "tasks planner organizer pending complete"
-  }
-];
-
-document.getElementById("searchForm").addEventListener("submit", event => {
-  event.preventDefault();
-
-  const query = document.getElementById("siteSearch").value
-    .trim().toLowerCase();
-
-  const resultsBox = document.getElementById("searchResults");
-  resultsBox.replaceChildren();
+  searchable.forEach(item => item.style.outline = 'none');
 
   if (!query) {
-    resultsBox.textContent = "Enter a search term to get started.";
+    searchNotice.style.display = 'block';
+    searchNotice.textContent = 'Type something to search, such as Class 10, PYQs or Quiz.';
     return;
   }
 
-  const matches = searchableItems.filter(item =>
-    (item.title + " " + item.description + " " + item.terms)
-      .toLowerCase().includes(query)
+  const matches = searchable.filter(item =>
+    (item.innerText + ' ' + (item.dataset.search || '') + ' ' +
+    (item.dataset.category || '')).toLowerCase().includes(query)
   );
 
-  if (!matches.length) {
-    resultsBox.textContent =
-      "No matching categories found. Try textbooks, sample papers, PYQs, notes, quiz or tasks.";
-    return;
-  }
+  searchNotice.style.display = 'block';
 
-  const grid = document.createElement("div");
-  grid.className = "search-results";
-
-  matches.forEach(item => {
-    const card = document.createElement("article");
-    card.className = "search-result";
-
-    const title = document.createElement("h3");
-    title.textContent = item.title;
-
-    const description = document.createElement("p");
-    description.textContent = item.description;
-
-    const link = document.createElement("a");
-    link.href = item.target;
-    link.textContent = "Open →";
-
-    card.append(title, description, link);
-    grid.append(card);
-  });
-
-  resultsBox.append(grid);
-});
-
-
-/* SAMPLE QUIZ QUESTION BANK
-   This is a working demonstration, not a complete syllabus or AI quiz.
-*/
-
-const questionBank = [
-  {
-    subject: "Maths",
-    difficulty: "Easy",
-    question: "What is 25% of 200?",
-    options: ["25", "40", "50", "75"],
-    answer: 2,
-    explanation: "25% of 200 = 25/100 × 200 = 50."
-  },
-  {
-    subject: "Maths",
-    difficulty: "Easy",
-    question: "What is 12 × 8?",
-    options: ["86", "96", "108", "88"],
-    answer: 1,
-    explanation: "12 multiplied by 8 equals 96."
-  },
-  {
-    subject: "Maths",
-    difficulty: "Medium",
-    question: "If 3x = 27, what is x?",
-    options: ["6", "8", "9", "12"],
-    answer: 2,
-    explanation: "Divide both sides by 3: x = 27 ÷ 3 = 9."
-  },
-  {
-    subject: "Maths",
-    difficulty: "Hard",
-    question: "What is the square of 15?",
-    options: ["125", "200", "225", "250"],
-    answer: 2,
-    explanation: "15 × 15 = 225."
-  },
-  {
-    subject: "Science",
-    difficulty: "Easy",
-    question: "Which gas do plants absorb during photosynthesis?",
-    options: ["Oxygen", "Carbon dioxide", "Hydrogen", "Nitrogen"],
-    answer: 1,
-    explanation: "Plants use carbon dioxide, water and light during photosynthesis."
-  },
-  {
-    subject: "Science",
-    difficulty: "Easy",
-    question: "Which planet is known as the Red Planet?",
-    options: ["Venus", "Jupiter", "Mars", "Saturn"],
-    answer: 2,
-    explanation: "Mars appears reddish because of iron oxide on its surface."
-  },
-  {
-    subject: "Science",
-    difficulty: "Medium",
-    question: "What is the SI unit of electric current?",
-    options: ["Volt", "Ohm", "Watt", "Ampere"],
-    answer: 3,
-    explanation: "Electric current is measured in amperes."
-  },
-  {
-    subject: "Science",
-    difficulty: "Hard",
-    question: "Which part of a cell contains most of its genetic material?",
-    options: ["Ribosome", "Nucleus", "Cell membrane", "Vacuole"],
-    answer: 1,
-    explanation: "In typical eukaryotic cells, most genetic material is in the nucleus."
-  },
-  {
-    subject: "English",
-    difficulty: "Easy",
-    question: "Which word is a noun?",
-    options: ["Quickly", "Beautiful", "Teacher", "Run"],
-    answer: 2,
-    explanation: "A teacher is a person, so the word is a noun."
-  },
-  {
-    subject: "English",
-    difficulty: "Medium",
-    question: "Choose the correct plural of 'child'.",
-    options: ["Childs", "Childes", "Children", "Childrens"],
-    answer: 2,
-    explanation: "The plural form of child is children."
-  },
-  {
-    subject: "English",
-    difficulty: "Hard",
-    question: "Which sentence uses the past perfect tense?",
-    options: [
-      "I eat breakfast.",
-      "I had finished before noon.",
-      "I am eating now.",
-      "I will eat later."
-    ],
-    answer: 1,
-    explanation: "Past perfect uses had + past participle."
-  },
-  {
-    subject: "General Knowledge",
-    difficulty: "Easy",
-    question: "What is the capital of India?",
-    options: ["Mumbai", "Kolkata", "New Delhi", "Chennai"],
-    answer: 2,
-    explanation: "New Delhi is the capital of India."
-  },
-  {
-    subject: "General Knowledge",
-    difficulty: "Medium",
-    question: "How many sides does a hexagon have?",
-    options: ["Five", "Six", "Seven", "Eight"],
-    answer: 1,
-    explanation: "A hexagon is a polygon with six sides."
-  },
-  {
-    subject: "General Knowledge",
-    difficulty: "Hard",
-    question: "Which is the largest ocean on Earth?",
-    options: ["Atlantic", "Indian", "Arctic", "Pacific"],
-    answer: 3,
-    explanation: "The Pacific Ocean is the largest ocean on Earth."
-  }
-];
-
-let activeQuestions = [];
-let currentQuestion = 0;
-let quizScore = 0;
-let answeredCurrent = false;
-
-const quizSetup = document.getElementById("quizSetup");
-const quizArea = document.getElementById("quizArea");
-const quizQuestion = document.getElementById("quizQuestion");
-const quizResult = document.getElementById("quizResult");
-
-document.getElementById("startQuiz").addEventListener("click", () => {
-  const subject = document.getElementById("quizSubject").value;
-  const difficulty = document.getElementById("quizDifficulty").value;
-  const requested = Number(document.getElementById("questionCount").value);
-
-  const filtered = questionBank.filter(q =>
-    q.subject === subject && q.difficulty === difficulty
-  );
-
-  if (!filtered.length) {
-    alert(
-      "There are no sample questions for this subject and difficulty yet. " +
-      "Choose another subject or difficulty."
-    );
-    return;
-  }
-
-  activeQuestions = [...filtered].sort(() => Math.random() - 0.5)
-    .slice(0, requested);
-
-  currentQuestion = 0;
-  quizScore = 0;
-  answeredCurrent = false;
-
-  quizSetup.hidden = true;
-  quizResult.hidden = true;
-  quizArea.hidden = false;
-
-  renderQuestion();
-});
-
-function renderQuestion() {
-  answeredCurrent = false;
-  const q = activeQuestions[currentQuestion];
-
-  quizQuestion.replaceChildren();
-
-  const progress = document.createElement("div");
-  progress.className = "quiz-progress";
-  progress.textContent =
-    "Question " + (currentQuestion + 1) + " of " + activeQuestions.length;
-
-  const heading = document.createElement("h4");
-  heading.textContent = q.question;
-
-  const optionsBox = document.createElement("div");
-
-  q.options.forEach((option, index) => {
-    const button = document.createElement("button");
-    button.className = "answer-option";
-    button.type = "button";
-    button.textContent = String.fromCharCode(65 + index) + ". " + option;
-
-    button.addEventListener("click", () => chooseAnswer(index, button));
-
-    optionsBox.append(button);
-  });
-
-  const feedback = document.createElement("p");
-  feedback.className = "quiz-feedback";
-  feedback.id = "quizFeedback";
-  feedback.setAttribute("aria-live", "polite");
-
-  const actions = document.createElement("div");
-  actions.className = "quiz-actions";
-
-  const quitButton = document.createElement("button");
-  quitButton.className = "btn btn-outline";
-  quitButton.textContent = "Exit Quiz";
-  quitButton.addEventListener("click", resetQuiz);
-
-  const nextButton = document.createElement("button");
-  nextButton.className = "btn btn-primary";
-  nextButton.id = "nextQuestion";
-  nextButton.textContent =
-    currentQuestion === activeQuestions.length - 1 ? "See Results" : "Next →";
-  nextButton.disabled = true;
-
-  nextButton.addEventListener("click", () => {
-    if (!answeredCurrent) return;
-
-    currentQuestion++;
-
-    if (currentQuestion >= activeQuestions.length) {
-      showQuizResult();
-    } else {
-      renderQuestion();
-    }
-  });
-
-  actions.append(quitButton, nextButton);
-  quizQuestion.append(progress, heading, optionsBox, feedback, actions);
-}
-
-function chooseAnswer(selectedIndex, selectedButton) {
-  if (answeredCurrent) return;
-
-  answeredCurrent = true;
-
-  const q = activeQuestions[currentQuestion];
-  const buttons = quizQuestion.querySelectorAll(".answer-option");
-
-  buttons.forEach(button => {
-    button.disabled = true;
-  });
-
-  const feedback = document.getElementById("quizFeedback");
-
-  if (selectedIndex === q.answer) {
-    quizScore++;
-    selectedButton.classList.add("correct");
-    feedback.textContent = "Correct! " + q.explanation;
+  if (matches.length) {
+    searchNotice.textContent = `Found ${matches.length} matching item(s). Scroll down to see the highlighted results.`;
+    matches.forEach(item => item.style.outline = '2px solid #8a7bff');
+    matches[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
   } else {
-    selectedButton.classList.add("incorrect");
-    buttons[q.answer].classList.add("correct");
-    feedback.textContent =
-      "Not quite. Correct answer: " + q.options[q.answer] +
-      ". " + q.explanation;
+    searchNotice.textContent = 'No matching item found. Try “Class 10”, “Textbooks”, “PYQ” or “Quiz”.';
   }
-
-  document.getElementById("nextQuestion").disabled = false;
 }
 
-function showQuizResult() {
-  quizArea.hidden = true;
-  quizResult.hidden = false;
-  quizResult.replaceChildren();
+document.getElementById('searchButton').addEventListener('click', performSearch);
+searchInput.addEventListener('keydown', event => {
+  if (event.key === 'Enter') performSearch();
+});
 
-  const percentage = Math.round(
-    (quizScore / activeQuestions.length) * 100
-  );
+document.querySelectorAll('.material-card[data-category]').forEach(card => {
+  card.addEventListener('click', event => {
+    event.preventDefault();
+    const help = document.getElementById('resourceHelp');
+    help.style.display = 'block';
+    help.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+});
 
-  const heading = document.createElement("h3");
-  heading.textContent = "Quiz complete!";
+const quizOptions = document.querySelectorAll('.quiz-option');
+const quizFeedback = document.getElementById('quizFeedback');
+const quizReset = document.getElementById('quizReset');
 
-  const score = document.createElement("strong");
-  score.textContent = quizScore + " / " + activeQuestions.length;
+quizOptions.forEach(button => {
+  button.addEventListener('click', () => {
+    quizOptions.forEach(option => option.disabled = true);
 
-  const details = document.createElement("p");
-  details.textContent = "Your score: " + percentage + "%";
+    if (button.dataset.answer === '96') {
+      quizFeedback.textContent = 'Excellent! 12 × 8 = 96.';
+      quizFeedback.style.color = '#208453';
+    } else {
+      quizFeedback.textContent = 'Not quite. The correct answer is 96 because 12 × 8 = 96.';
+      quizFeedback.style.color = '#c05b40';
+    }
 
-  const message = document.createElement("p");
-  message.textContent = percentage >= 80
-    ? "Excellent work! Keep practising."
-    : "Good effort! Review the explanations and try again.";
+    quizReset.style.display = 'inline-flex';
+  });
+});
 
-  const restart = document.createElement("button");
-  restart.className = "btn btn-primary";
-  restart.style.marginTop = "15px";
-  restart.textContent = "Try Again";
-  restart.addEventListener("click", resetQuiz);
+quizReset.addEventListener('click', () => {
+  quizOptions.forEach(option => option.disabled = false);
+  quizFeedback.textContent = '';
+  quizReset.style.display = 'none';
+});
 
-  quizResult.append(heading, score, details, message, restart);
-}
-
-function resetQuiz() {
-  quizArea.hidden = true;
-  quizResult.hidden = true;
-  quizSetup.hidden = false;
-}
-
-
-/* TASK ORGANIZER
-   Tasks are saved in this browser's localStorage.
-*/
-
-const TASK_STORAGE_KEY = "studentToolkitTasksV1";
-const taskForm = document.getElementById("taskForm");
-const taskInput = document.getElementById("taskInput");
-const taskList = document.getElementById("taskList");
+const taskForm = document.getElementById('taskForm');
+const taskInput = document.getElementById('taskInput');
+const taskList = document.getElementById('taskList');
+const taskEmpty = document.getElementById('taskEmpty');
 
 let tasks = [];
 
 try {
-  const savedTasks = JSON.parse(localStorage.getItem(TASK_STORAGE_KEY) || "[]");
-  if (Array.isArray(savedTasks)) tasks = savedTasks;
-} catch (error) {
+  tasks = JSON.parse(localStorage.getItem('studentToolkitTasks') || '[]');
+  if (!Array.isArray(tasks)) tasks = [];
+} catch {
   tasks = [];
 }
 
 function saveTasks() {
   try {
-    localStorage.setItem(TASK_STORAGE_KEY, JSON.stringify(tasks));
-  } catch (error) {
-    console.warn("Tasks could not be saved in this browser.", error);
+    localStorage.setItem('studentToolkitTasks', JSON.stringify(tasks));
+    renderTasks();
+  } catch {
+    alert('Your browser could not save the tasks. Check its storage settings.');
   }
 }
-
-taskForm.addEventListener("submit", event => {
-  event.preventDefault();
-
-  const title = taskInput.value.trim();
-  if (!title) return;
-
-  tasks.unshift({
-    id: Date.now().toString() + Math.random().toString(16).slice(2),
-    title,
-    status: "Pending"
-  });
-
-  saveTasks();
-  taskInput.value = "";
-  renderTasks();
-});
 
 function renderTasks() {
   taskList.replaceChildren();
+  taskEmpty.style.display = tasks.length ? 'none' : 'block';
 
-  const counts = {
-    Pending: 0,
-    Remaining: 0,
-    Complete: 0
-  };
+  tasks.forEach((task, index) => {
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:13px;background:#f8f7ff;border-radius:13px';
 
-  tasks.forEach(task => {
-    if (counts[task.status] !== undefined) counts[task.status]++;
-  });
-
-  document.getElementById("pendingCount").textContent = counts.Pending;
-  document.getElementById("remainingCount").textContent = counts.Remaining;
-  document.getElementById("completeCount").textContent = counts.Complete;
-
-  if (!tasks.length) {
-    const empty = document.createElement("p");
-    empty.className = "empty-state";
-    empty.textContent = "No tasks yet. Add your first study task!";
-    taskList.append(empty);
-    return;
-  }
-
-  tasks.forEach(task => {
-    const row = document.createElement("div");
-    row.className = "task-item" +
-      (task.status === "Complete" ? " is-complete" : "");
-
-    const title = document.createElement("span");
-    title.className = "task-title";
+    const title = document.createElement('span');
     title.textContent = task.title;
+    title.style.cssText = 'flex:1;min-width:130px;font-size:13px;font-weight:650;overflow-wrap:anywhere';
 
-    const status = document.createElement("select");
-    status.setAttribute("aria-label", "Task status");
+    const status = document.createElement('select');
+    status.setAttribute('aria-label', 'Task status');
+    status.style.cssText = 'padding:8px;border:1px solid #e5e1fa;border-radius:9px;background:white;font-size:12px';
 
-    ["Pending", "Remaining", "Complete"].forEach(value => {
-      const option = document.createElement("option");
+    ['Pending', 'Remaining', 'Complete'].forEach(value => {
+      const option = document.createElement('option');
       option.value = value;
       option.textContent = value;
-      status.append(option);
+      option.selected = task.status === value;
+      status.appendChild(option);
     });
 
-    status.value = task.status;
-
-    status.addEventListener("change", () => {
-      task.status = status.value;
+    status.addEventListener('change', () => {
+      tasks[index].status = status.value;
       saveTasks();
-      renderTasks();
     });
 
-    const edit = document.createElement("button");
-    edit.type = "button";
-    edit.textContent = "Edit";
-    edit.setAttribute("aria-label", "Edit task");
-
-    edit.addEventListener("click", () => {
-      const updated = prompt("Edit your task:", task.title);
-      if (updated === null) return;
-
-      if (!updated.trim()) {
-        alert("A task cannot be empty.");
-        return;
-      }
-
-      task.title = updated.trim();
+    const remove = document.createElement('button');
+    remove.className = 'btn btn-light';
+    remove.style.padding = '8px 10px';
+    remove.setAttribute('aria-label', 'Delete task');
+    remove.innerHTML = '<i class="fa-solid fa-trash"></i>';
+    remove.addEventListener('click', () => {
+      tasks.splice(index, 1);
       saveTasks();
-      renderTasks();
     });
 
-    const remove = document.createElement("button");
-    remove.type = "button";
-    remove.textContent = "Delete";
-    remove.setAttribute("aria-label", "Delete task");
-
-    remove.addEventListener("click", () => {
-      if (!confirm("Delete this task?")) return;
-
-      tasks = tasks.filter(item => item.id !== task.id);
-      saveTasks();
-      renderTasks();
-    });
-
-    row.append(title, status, edit, remove);
-    taskList.append(row);
+    row.append(title, status, remove);
+    taskList.appendChild(row);
   });
 }
 
+taskForm.addEventListener('submit', event => {
+  event.preventDefault();
+  const title = taskInput.value.trim();
+  if (!title) return;
+
+  tasks.push({ title, status: 'Pending' });
+  taskInput.value = '';
+  saveTasks();
+});
+
 renderTasks();
-updateResourceMessage();
 </script>
 
 </body>
