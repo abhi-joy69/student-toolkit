@@ -261,6 +261,19 @@ section{scroll-margin-top:100px}
 .notice.show{display:block}
 .notice.success{background:#e1f5e8;color:#176c46}
 .notice.error{background:#ffebeb;color:#a52f3d}
+.resource-controls{display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin:0 0 18px;padding:14px 16px;background:#fff;border:1px solid var(--border);border-radius:15px}
+.resource-controls label{display:grid;gap:5px;font-size:11px;font-weight:800;color:var(--heading)}
+.resource-controls select{min-width:170px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--heading)}
+.book-browser{display:none;margin-top:18px;padding:20px;background:#fff;border:1px solid var(--border);border-radius:17px}
+.book-browser.open{display:block}
+.book-browser h3{margin:0 0 7px;font-size:18px}
+.book-browser p{font-size:12px;color:var(--muted)}
+.book-browser-actions{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}
+.book-file-list{display:grid;gap:9px;margin-top:14px}
+.book-file-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px;border:1px solid var(--border);border-radius:12px;background:#fbfdfb}
+.book-file-name{font-size:12px;font-weight:800;color:var(--heading);overflow-wrap:anywhere}
+.book-file-meta{font-size:10px;color:var(--muted)}
+@media(max-width:760px){.resource-controls{align-items:stretch}.resource-controls label{flex:1}.resource-controls select{width:100%;min-width:0}.book-browser{padding:15px}}
 
 .cta{
   padding:38px;border-radius:25px;
@@ -485,7 +498,15 @@ section{scroll-margin-top:100px}
       </button>
     </div>
 
+    <div class="resource-controls" id="resourceControls">
+      <label for="resourceGrade">Choose grade
+        <select id="resourceGrade">
+          <option value="1">Grade 1</option><option value="2">Grade 2</option><option value="3">Grade 3</option><option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option><option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option><option value="10">Grade 10</option>
+        </select>
+      </label>
+    </div>
     <div class="grid material-grid" id="materialGrid"></div>
+    <div class="book-browser" id="bookBrowser" aria-live="polite"></div>
     <div class="notice" id="resourceNotice" role="status"></div>
   </div>
 </section>
@@ -803,19 +824,20 @@ let selectedClass = null;
 let currentProfile = null;
 
 const classResources = {
-  1: ["Textbooks", "NCERT Solutions", "Test Papers"],
-  2: ["Textbooks", "NCERT Solutions", "Test Papers"],
-  3: ["Textbooks", "NCERT Solutions", "Test Papers"],
-  4: ["Textbooks", "NCERT Solutions", "Test Papers"],
-  5: ["Textbooks", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"],
-  6: ["Textbooks", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"],
-  7: ["Textbooks", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"],
-  8: ["Textbooks", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"],
-  9: ["Textbooks", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"],
-  10: ["Textbooks", "NCERT Solutions", "Test Papers", "Sample Question Papers (SQPs)", "PYQs", "Last-Minute Revision Notes", "Question Bank"]
+  1: ["NCERT Books", "NCERT Solutions", "Test Papers"],
+  2: ["NCERT Books", "NCERT Solutions", "Test Papers"],
+  3: ["NCERT Books", "NCERT Solutions", "Test Papers"],
+  4: ["NCERT Books", "NCERT Solutions", "Test Papers"],
+  5: ["NCERT Books", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"],
+  6: ["NCERT Books", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"],
+  7: ["NCERT Books", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"],
+  8: ["NCERT Books", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"],
+  9: ["NCERT Books", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"],
+  10: ["NCERT Books", "NCERT Solutions", "Test Papers", "Sample Question Papers (SQPs)", "PYQs", "Last-Minute Revision Notes", "Question Bank"]
 };
 
 const resourceIcons = {
+  "NCERT Books": ["fa-book", "purple"],
   "Textbooks": ["fa-book", "purple"],
   "NCERT Solutions": ["fa-book-open", "green"],
   "Test Papers": ["fa-file-lines", "orange"],
@@ -824,6 +846,13 @@ const resourceIcons = {
   "Last-Minute Revision Notes": ["fa-bolt", "orange"],
   "Question Bank": ["fa-layer-group", "green"]
 };
+
+const COMING_SOON_RESOURCES = new Set(["NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"]);
+const STORAGE_BUCKET = "study-resources";
+const resourceGradeSelect = document.getElementById("resourceGrade");
+const bookBrowser = document.getElementById("bookBrowser");
+let resourceSelectedClass = "1";
+let bookBrowserRequest = 0;
 
 function showNotice(element, message, type = "") {
   element.textContent = message;
@@ -841,122 +870,231 @@ function showLibraryMessage(title, message) {
   materialGrid.replaceChildren();
 }
 
+function makeResourceCard(name, classNumber) {
+  const card = document.createElement("article");
+  card.className = "material-card";
+  card.dataset.search = (name + " class " + classNumber).toLowerCase();
+  card.tabIndex = 0;
+  card.setAttribute("role", "button");
+  const info = resourceIcons[name] || ["fa-folder-open", "purple"];
+  const icon = document.createElement("div");
+  icon.className = "material-icon " + info[1];
+  icon.innerHTML = '<i class="fa-solid ' + info[0] + '"></i>';
+  const content = document.createElement("div");
+  const title = document.createElement("h3");
+  title.textContent = name;
+  const description = document.createElement("p");
+  description.textContent = "Grade " + classNumber + " • Study resources";
+  const status = document.createElement("span");
+  status.className = "resource-status";
+  status.textContent = COMING_SOON_RESOURCES.has(name) ? "COMING SOON" : (name === "NCERT Books" ? "BROWSE & DOWNLOAD" : "OPEN CATEGORY");
+  content.append(title, description, status);
+  card.append(icon, content);
+  const activate = () => {
+    if (COMING_SOON_RESOURCES.has(name)) {
+      showNotice(resourceNotice, name + " are coming soon. The rest of Student Toolkit remains available.");
+      return;
+    }
+    if (name === "NCERT Books") {
+      openBookBrowser(classNumber);
+      return;
+    }
+    showNotice(resourceNotice, name + " will be connected when its files are added to the resource catalogue.");
+  };
+  card.addEventListener("click", activate);
+  card.addEventListener("keydown", event => {
+    if (event.key === "Enter" || event.key === " ") { event.preventDefault(); activate(); }
+  });
+  return card;
+}
+
 function renderResources() {
   materialGrid.replaceChildren();
   hideNotice(resourceNotice);
+  if (bookBrowser) { bookBrowser.classList.remove("open"); bookBrowser.replaceChildren(); }
 
-  if (!currentUser) {
-    showLibraryMessage(
-      "Your Study Library",
-      "Sign in and save your profile to see your personalised class resources."
-    );
-
-    const button = document.createElement("a");
-    button.className = "material-card";
-    button.href = "auth.html";
-    button.innerHTML =
-      '<div class="material-icon green"><i class="fa-solid fa-user-lock"></i></div>' +
-      '<div><h3>Sign in to continue</h3><p>Access your personalised study library.</p></div>';
-
-    materialGrid.appendChild(button);
-    return;
-  }
-
-  if (!currentProfile || !currentProfile.class) {
-    showLibraryMessage(
-      "Complete Your Profile",
-      "Save your class in your profile to see the right study resources."
-    );
-
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "material-card";
-    button.innerHTML =
-      '<div class="material-icon green"><i class="fa-solid fa-user-pen"></i></div>' +
-      '<div><h3>Complete your student profile</h3><p>Choose your class once to personalise this library.</p></div>';
-
-    button.addEventListener("click", () => openProfile(currentProfile || {}));
-    materialGrid.appendChild(button);
-    return;
-  }
-
-  const classValue = String(currentProfile.class);
+  let classValue = String(resourceGradeSelect?.value || resourceSelectedClass || currentProfile?.class || "1");
+  resourceSelectedClass = classValue;
   selectedClass = classValue;
-
-  if (classValue === "senior") {
-    showLibraryMessage(
-      "Senior Classes Study Library",
-      "Your profile is set to Senior Classes."
-    );
-
-    const link = document.createElement("a");
-    link.className = "material-card";
-    link.href = "https://cbseacademic.nic.in/";
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.innerHTML =
-      '<div class="material-icon green"><i class="fa-solid fa-graduation-cap"></i></div>' +
-      '<div><h3>CBSE Academic Resources</h3><p>Open the official CBSE Academic website.</p></div>';
-
-    materialGrid.appendChild(link);
-    return;
-  }
-
   const classNumber = Number(classValue);
   const resources = classResources[classNumber];
 
   if (!resources) {
-    showLibraryMessage(
-      "Your Study Library",
-      "Please update your class in your profile."
-    );
+    showLibraryMessage("Your Study Library", "Choose a grade to browse its available resources.");
     return;
   }
 
-  showLibraryMessage(
-    "Class " + classNumber + " Study Library",
-    "These resources are personalised for the class saved in your profile."
-  );
+  showLibraryMessage("Grade " + classNumber + " Study Library", "Choose a resource. NCERT Books can be browsed and downloaded without signing in.");
+  resources.forEach(name => materialGrid.appendChild(makeResourceCard(name, classNumber)));
+}
 
-  resources.forEach(name => {
-    const card = document.createElement("article");
-    card.className = "material-card";
-    card.dataset.search = (
-      name + " class " + classNumber
-    ).toLowerCase();
-
-    const info = resourceIcons[name] || ["fa-folder-open", "purple"];
-
-    const icon = document.createElement("div");
-    icon.className = "material-icon " + info[1];
-    icon.innerHTML = '<i class="fa-solid ' + info[0] + '"></i>';
-
-    const content = document.createElement("div");
-
-    const title = document.createElement("h3");
-    title.textContent = name;
-
-    const description = document.createElement("p");
-    description.textContent = "Class " + classNumber + " • Study resources";
-
-    const status = document.createElement("span");
-    status.className = "resource-status";
-    status.textContent = "RESOURCE LINK NEEDED";
-
-    content.append(title, description, status);
-    card.append(icon, content);
-
-    card.addEventListener("click", () => {
-      if (!requireLogin()) return;
-
-      showNotice(
-        resourceNotice,
-        "The " + name + " category is ready, but its actual PDF or download link has not been added yet."
-      );
-    });
-
-    materialGrid.appendChild(card);
+if (resourceGradeSelect) {
+  resourceGradeSelect.addEventListener("change", () => {
+    resourceSelectedClass = resourceGradeSelect.value;
+    renderResources();
   });
+}
+
+function addBookBrowserMessage(message, type = "") {
+  const p = document.createElement("p");
+  p.textContent = message;
+  if (type === "error") p.style.color = "#a52f3d";
+  bookBrowser.appendChild(p);
+}
+
+function publicDownloadUrl(path) {
+  const { data } = supabaseClient.storage.from(STORAGE_BUCKET).getPublicUrl(path);
+  return data?.publicUrl || "";
+}
+
+function makeDownloadLink(path, label, primary = false) {
+  const a = document.createElement("a");
+  a.className = "btn " + (primary ? "btn-primary" : "btn-light");
+  a.href = publicDownloadUrl(path);
+  a.target = "_blank";
+  a.rel = "noopener noreferrer";
+  a.innerHTML = '<i class="fa-solid fa-download"></i> ';
+  a.appendChild(document.createTextNode(label));
+  if (a.href) {
+    const url = new URL(a.href);
+    url.searchParams.set("download", "");
+    a.href = url.toString();
+  }
+  return a;
+}
+
+async function listStorageFolder(path) {
+  if (!supabaseClient) throw new Error("The resource connection could not initialise. Please refresh the page.");
+  const { data, error } = await supabaseClient.storage.from(STORAGE_BUCKET).list(path, {
+    limit: 1000,
+    sortBy: { column: "name", order: "asc" }
+  });
+  if (error) throw error;
+  return Array.isArray(data) ? data : [];
+}
+
+async function openBookBrowser(initialClass) {
+  const requestId = ++bookBrowserRequest;
+  hideNotice(resourceNotice);
+  bookBrowser.replaceChildren();
+  bookBrowser.classList.add("open");
+  const heading = document.createElement("h3");
+  heading.textContent = "NCERT Books & Chapter Downloads";
+  const intro = document.createElement("p");
+  intro.textContent = "Choose a grade and subject. Download the complete book or any individual chapter that has been uploaded.";
+  bookBrowser.append(heading, intro);
+
+  const selectors = document.createElement("div");
+  selectors.className = "resource-controls";
+  selectors.style.margin = "12px 0";
+  const gradeLabel = document.createElement("label");
+  gradeLabel.textContent = "Grade";
+  const gradeSelect = document.createElement("select");
+  for (let n = 1; n <= 10; n++) {
+    const option = document.createElement("option");
+    option.value = String(n);
+    option.textContent = "Grade " + n;
+    option.selected = String(n) === String(initialClass);
+    gradeSelect.appendChild(option);
+  }
+  gradeLabel.appendChild(gradeSelect);
+  const subjectLabel = document.createElement("label");
+  subjectLabel.textContent = "Subject";
+  const subjectSelect = document.createElement("select");
+  subjectSelect.innerHTML = '<option value="">Loading subjects…</option>';
+  subjectLabel.appendChild(subjectSelect);
+  selectors.append(gradeLabel, subjectLabel);
+  bookBrowser.appendChild(selectors);
+
+  const fileArea = document.createElement("div");
+  fileArea.className = "book-file-list";
+  bookBrowser.appendChild(fileArea);
+
+  async function loadSubjects() {
+    const localRequest = ++bookBrowserRequest;
+    const folder = "GRADE " + gradeSelect.value;
+    subjectSelect.replaceChildren(new Option("Loading subjects…", ""));
+    subjectSelect.disabled = true;
+    fileArea.replaceChildren();
+    try {
+      const items = await listStorageFolder(folder);
+      if (localRequest !== bookBrowserRequest) return;
+      const folders = items.filter(item => item && item.id === null && item.name && !item.name.startsWith("."));
+      subjectSelect.replaceChildren();
+      if (!folders.length) {
+        subjectSelect.appendChild(new Option("No subject folders found", ""));
+        addBookBrowserMessage("No subject folders were found in " + folder + ". Check the folder names in Supabase.");
+        return;
+      }
+      subjectSelect.appendChild(new Option("Choose subject", ""));
+      folders.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true, sensitivity:"base"}));
+      folders.forEach(item => subjectSelect.appendChild(new Option(item.name, item.name)));
+      subjectSelect.disabled = false;
+      const maths = folders.find(item => item.name.toLowerCase() === "maths" || item.name.toLowerCase() === "mathematics");
+      if (maths) { subjectSelect.value = maths.name; await loadFiles(); }
+    } catch (error) {
+      if (localRequest !== bookBrowserRequest) return;
+      subjectSelect.replaceChildren(new Option("Could not load subjects", ""));
+      addBookBrowserMessage("Could not list files in Supabase Storage. Public download links and folder listing are different permissions. Add a SELECT policy for the study-resources bucket, then refresh. Details: " + (error.message || "Storage listing failed."), "error");
+    }
+  }
+
+  async function loadFiles() {
+    const localRequest = ++bookBrowserRequest;
+    const path = "GRADE " + gradeSelect.value + "/" + subjectSelect.value;
+    fileArea.replaceChildren();
+    if (!subjectSelect.value) return;
+    const loading = document.createElement("p");
+    loading.textContent = "Loading PDFs…";
+    fileArea.appendChild(loading);
+    try {
+      const items = await listStorageFolder(path);
+      if (localRequest !== bookBrowserRequest) return;
+      fileArea.replaceChildren();
+      const pdfs = items.filter(item => item && item.id !== null && item.name && item.name.toLowerCase().endsWith(".pdf"));
+      pdfs.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true, sensitivity:"base"}));
+      const complete = pdfs.filter(item => /complete|full.?book|whole.?book|complete.?book/i.test(item.name));
+      const chapters = pdfs.filter(item => !complete.includes(item));
+      if (!pdfs.length) {
+        addBookBrowserMessage("No PDF files were found in " + path + ". Upload the complete book and/or chapter PDFs into this subject folder.");
+        return;
+      }
+      if (complete.length) {
+        const row = document.createElement("div");
+        row.className = "book-file-row";
+        const info = document.createElement("div");
+        const name = document.createElement("div"); name.className = "book-file-name"; name.textContent = "Complete Book";
+        const meta = document.createElement("div"); meta.className = "book-file-meta"; meta.textContent = complete.map(item => item.name).join(" · ");
+        info.append(name, meta);
+        row.append(info, makeDownloadLink(path + "/" + complete[0].name, "Download Complete Book", true));
+        fileArea.appendChild(row);
+      } else {
+        addBookBrowserMessage("No complete-book PDF is uploaded for this subject yet. To show that button, upload a full-book PDF with a name such as COMPLETE BOOK.pdf.");
+      }
+      if (chapters.length) {
+        const chapterHeading = document.createElement("h3"); chapterHeading.textContent = "Individual Chapters"; chapterHeading.style.marginTop = "12px";
+        fileArea.appendChild(chapterHeading);
+        chapters.forEach(item => {
+          const row = document.createElement("div"); row.className = "book-file-row";
+          const info = document.createElement("div");
+          const name = document.createElement("div"); name.className = "book-file-name"; name.textContent = item.name.replace(/\.pdf$/i, "");
+          const meta = document.createElement("div"); meta.className = "book-file-meta"; meta.textContent = path + "/" + item.name;
+          info.append(name, meta);
+          row.append(info, makeDownloadLink(path + "/" + item.name, "Download PDF"));
+          fileArea.appendChild(row);
+        });
+      }
+    } catch (error) {
+      if (localRequest !== bookBrowserRequest) return;
+      fileArea.replaceChildren();
+      addBookBrowserMessage("Could not load PDFs for " + path + ". Check the Storage listing policy and exact folder path. Details: " + (error.message || "Unknown error."), "error");
+    }
+  }
+
+  gradeSelect.addEventListener("change", loadSubjects);
+  subjectSelect.addEventListener("change", loadFiles);
+  await loadSubjects();
+  bookBrowser.scrollIntoView({behavior:"smooth", block:"nearest"});
 }
 
 /* =========================================================
@@ -973,7 +1111,7 @@ function performSearch() {
   });
 
   if (!query) {
-    showNotice(notice, "Type a search term, such as Textbooks, NCERT Solutions, PYQs or Class 10.");
+    showNotice(notice, "Type a search term, such as NCERT Books, PYQs or Grade 10.");
     return;
   }
 
@@ -989,7 +1127,7 @@ function performSearch() {
   );
 
   if (!matches.length) {
-    showNotice(notice, "No matching item found. Try Textbooks, NCERT, PYQs or Revision Notes.");
+    showNotice(notice, "No matching item found. Try NCERT Books, PYQs or Grade 10.");
     return;
   }
 
@@ -1179,6 +1317,7 @@ function storeProfile(profile) {
   }
 
   updateProfileName(currentProfile?.name);
+  if (currentProfile?.class && Number(currentProfile.class) >= 1 && Number(currentProfile.class) <= 10 && resourceGradeSelect) resourceGradeSelect.value = String(currentProfile.class);
   renderResources();
 }
 
