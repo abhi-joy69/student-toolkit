@@ -287,9 +287,37 @@ section{scroll-margin-top:100px}
 }
 .task-row{
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-  padding:12px;background:#f0f7f1;border-radius:12px;
+  padding:12px;background:#f0f7f1;border:1px solid var(--border);border-radius:12px;
 }
 .task-title{flex:1;min-width:110px;font-size:12px;font-weight:700;overflow-wrap:anywhere}
+.task-status-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0}
+.task-stat{padding:13px;border:1px solid var(--border);border-radius:13px;background:#fbfdfb}
+.task-stat strong{display:block;color:var(--heading);font-size:22px;line-height:1.2}
+.task-stat span{font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.6px}
+.ai-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.ai-panel{background:#fff;border:1px solid var(--border);border-radius:20px;padding:22px;box-shadow:var(--shadow);min-width:0}
+.ai-panel h3{margin:0 0 6px;font-size:18px}
+.ai-panel>p{font-size:12px;color:var(--muted);margin:0 0 17px}
+.ai-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ai-field{display:grid;gap:6px;min-width:0}
+.ai-field.full{grid-column:1/-1}
+.ai-field label{font-size:11px;font-weight:800;color:var(--heading)}
+.ai-field input,.ai-field select,.ai-field textarea{width:100%;min-width:0;border:1px solid var(--border);border-radius:10px;padding:11px;background:#fff;color:var(--heading);outline-color:var(--primary)}
+.ai-field textarea{min-height:135px;resize:vertical;line-height:1.55}
+.ai-hint{font-size:10px;color:var(--muted);line-height:1.5}
+.ai-result{margin-top:16px;padding:15px;border-radius:13px;background:#f4faf6;border:1px solid var(--border);font-size:13px;overflow-wrap:anywhere}
+.ai-result:empty{display:none}
+.ai-question{padding:15px;background:white;border:1px solid var(--border);border-radius:13px;margin:12px 0}
+.ai-question h4{font-size:13px;margin:0 0 10px}
+.ai-option{display:flex;gap:9px;align-items:flex-start;padding:9px;border:1px solid var(--border);border-radius:9px;margin:7px 0;font-size:12px;cursor:pointer}
+.ai-option:has(input:checked){border-color:var(--primary);background:var(--primary-light)}
+.ai-feedback{font-size:11px;line-height:1.65;margin-top:10px;padding:10px;border-radius:9px;background:#e8f7ed;color:#185d3c}
+.ai-progress{font-size:11px;font-weight:800;color:var(--primary);margin-bottom:8px}
+.ai-status{font-size:12px;margin-top:12px}
+.ai-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.ai-actions .btn{min-height:42px}
+@media(max-width:760px){.ai-layout{grid-template-columns:1fr}.task-status-summary{gap:7px}.task-stat{padding:10px}.task-stat strong{font-size:19px}}
+@media(max-width:430px){.ai-form{grid-template-columns:1fr}.ai-field.full{grid-column:auto}.task-status-summary{grid-template-columns:1fr 1fr}.task-status-summary .task-stat:last-child{grid-column:1/-1}}
 
 .modal-backdrop{
   display:none;position:fixed;inset:0;z-index:3000;
@@ -386,6 +414,8 @@ section{scroll-margin-top:100px}
       <a href="#home"><i class="fa-solid fa-house"></i> Home</a>
       <a href="#materials"><i class="fa-solid fa-book-open"></i> My Materials</a>
       <a href="#tools"><i class="fa-solid fa-wand-magic-sparkles"></i> Study Tools</a>
+      <a href="#quiz"><i class="fa-solid fa-circle-question"></i> AI Quiz</a>
+      <a href="#doubt"><i class="fa-solid fa-lightbulb"></i> Doubt Solver</a>
       <a href="#organizer"><i class="fa-solid fa-list-check"></i> My Tasks</a>
       <a href="#senior"><i class="fa-solid fa-arrow-up-right-from-square"></i> CBSE</a>
     </nav>
@@ -491,6 +521,68 @@ section{scroll-margin-top:100px}
         <p>View and update your name, class, board and learning preferences.</p>
         <a href="#profile" class="card-action" id="accountToolLink">Sign in to your account <i class="fa-solid fa-arrow-right"></i></a>
       </article>
+
+      <article class="tool-card">
+        <div class="tool-icon blue"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+        <h3>AI Quiz Generator</h3>
+        <p>Generate a fresh practice quiz from your chapter notes or PDF, then check your answers and explanations.</p>
+        <a href="#quiz" class="card-action">Create a quiz <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+
+      <article class="tool-card">
+        <div class="tool-icon orange"><i class="fa-solid fa-lightbulb"></i></div>
+        <h3>AI Doubt Solver</h3>
+        <p>Ask a question about your chapter material and get a clear, step-by-step explanation.</p>
+        <a href="#doubt" class="card-action">Solve a doubt <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="quiz">
+  <div class="container">
+    <div class="section-heading">
+      <div><div class="section-kicker">Practice with AI</div><h2>AI Quiz Generator</h2><p>Use text from your chapter or upload a text-based PDF to create a practice quiz.</p></div>
+    </div>
+    <div class="ai-panel">
+      <form id="quizForm" class="ai-form">
+        <div class="ai-field"><label for="quizClass">Class</label><select id="quizClass" required><option value="">Select class</option><option>Class 1</option><option>Class 2</option><option>Class 3</option><option>Class 4</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Senior Classes</option></select></div>
+        <div class="ai-field"><label for="quizSubject">Subject</label><input id="quizSubject" required maxlength="80" placeholder="e.g. Science"></div>
+        <div class="ai-field"><label for="quizBook">Book name</label><input id="quizBook" required maxlength="120" placeholder="e.g. NCERT Science"></div>
+        <div class="ai-field"><label for="quizChapter">Chapter name</label><input id="quizChapter" required maxlength="160" placeholder="e.g. Chemical Reactions"></div>
+        <div class="ai-field"><label for="quizDifficulty">Difficulty</label><select id="quizDifficulty"><option>Mixed</option><option>Easy</option><option>Medium</option><option>Hard</option></select></div>
+        <div class="ai-field"><label for="quizCount">Number of questions</label><select id="quizCount"><option value="5">5 questions</option><option value="10" selected>10 questions</option><option value="15">15 questions</option><option value="20">20 questions</option></select></div>
+        <div class="ai-field"><label for="quizType">Question type</label><select id="quizType"><option value="mixed">Mixed (MCQ + True/False)</option><option value="mcq">MCQ only</option><option value="true_false">True/False only</option></select></div>
+        <div class="ai-field"><label for="quizPdf">Upload chapter PDF (optional)</label><input id="quizPdf" type="file" accept="application/pdf,.pdf"><span class="ai-hint">Text-based PDFs work best. Scanned/image-only PDFs may not extract text.</span></div>
+        <div class="ai-field full"><label for="quizMaterial">Chapter material / notes</label><textarea id="quizMaterial" maxlength="100000" placeholder="Paste your chapter text or notes here. If you upload a PDF, its extracted text will be added here."></textarea><span class="ai-hint">The AI uses the material you provide. Don't paste passwords or private information.</span></div>
+        <div class="ai-field full"><button class="btn btn-primary" id="generateQuizBtn" type="submit"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate My Quiz</button></div>
+      </form>
+      <div id="quizStatus" class="ai-status" role="status" aria-live="polite"></div>
+      <div id="quizResult" class="ai-result"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="doubt">
+  <div class="container">
+    <div class="section-heading"><div><div class="section-kicker">Understand your chapter</div><h2>AI Doubt Solver</h2><p>Ask a question and get help grounded in the material you provide.</p></div></div>
+    <div class="ai-layout">
+      <div class="ai-panel">
+        <h3><i class="fa-solid fa-book-open purple" style="padding:8px;border-radius:9px"></i> Your chapter material</h3>
+        <p>Paste your textbook extract, class notes, or chapter content below.</p>
+        <form id="doubtForm" class="ai-form">
+          <div class="ai-field"><label for="doubtClass">Class</label><select id="doubtClass" required><option value="">Select class</option><option>Class 1</option><option>Class 2</option><option>Class 3</option><option>Class 4</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Senior Classes</option></select></div>
+          <div class="ai-field"><label for="doubtSubject">Subject</label><input id="doubtSubject" required maxlength="80" placeholder="e.g. Mathematics"></div>
+          <div class="ai-field"><label for="doubtBook">Book name</label><input id="doubtBook" required maxlength="120" placeholder="e.g. NCERT Mathematics"></div>
+          <div class="ai-field"><label for="doubtChapter">Chapter name</label><input id="doubtChapter" required maxlength="160" placeholder="e.g. Linear Equations"></div>
+          <div class="ai-field full"><label for="doubtMaterial">Chapter text / notes</label><textarea id="doubtMaterial" maxlength="100000" placeholder="Paste the material related to your doubt..."></textarea></div>
+          <div class="ai-field full"><label for="doubtPdf">Or upload a chapter PDF</label><input id="doubtPdf" type="file" accept="application/pdf,.pdf"><span class="ai-hint">Uploading a PDF extracts its text in your browser before sending it to the AI.</span></div>
+          <div class="ai-field full"><label for="doubtQuestion">What is your doubt?</label><textarea id="doubtQuestion" required maxlength="2000" style="min-height:90px" placeholder="Write your question here..."></textarea></div>
+          <div class="ai-field full"><button class="btn btn-primary" id="solveDoubtBtn" type="submit"><i class="fa-solid fa-lightbulb"></i> Solve My Doubt</button></div>
+        </form>
+        <div id="doubtStatus" class="ai-status" role="status" aria-live="polite"></div>
+      </div>
+      <div class="ai-panel"><h3><i class="fa-solid fa-comments purple" style="padding:8px;border-radius:9px"></i> Explanation</h3><p>Your answer will appear here.</p><div id="doubtResult" class="ai-result">Ask a question to get started. If the supplied material doesn't support an answer, the AI should tell you rather than guess.</div></div>
     </div>
   </div>
 </section>
@@ -510,6 +602,11 @@ section{scroll-margin-top:100px}
         <input id="taskInput" maxlength="180" required placeholder="e.g. Revise Chapter 3" aria-label="New study task" style="flex:1;min-width:180px;padding:12px;border:1px solid var(--border);border-radius:11px">
         <button class="btn btn-primary" type="submit"><i class="fa-solid fa-plus"></i> Add Task</button>
       </form>
+      <div class="task-status-summary" aria-label="Task progress">
+        <div class="task-stat"><strong id="pendingCount">0</strong><span>Pending</span></div>
+        <div class="task-stat"><strong id="progressCount">0</strong><span>In Progress</span></div>
+        <div class="task-stat"><strong id="completeCount">0</strong><span>Completed</span></div>
+      </div>
       <div id="taskList" style="display:grid;gap:10px;margin-top:18px"></div>
       <p id="taskEmpty" style="color:var(--muted);font-size:12px">Sign in to organise your study tasks.</p>
     </div>
@@ -565,7 +662,7 @@ section{scroll-margin-top:100px}
 
     <div class="footer-bottom">
       <span>© <span id="year"></span> Student Toolkit</span>
-      <span>Keep learning. Keep growing.</span>
+      <span>Keep learning. Keep growing. <span class="footer-credit" style="display:inline-flex;align-items:center;gap:6px;margin-left:8px;padding:4px 9px;border-radius:20px;background:#16845d;color:#fff;font-weight:800"><i class="fa-solid fa-leaf"></i> Made by Abhinandan Raj</span></span>
     </div>
   </div>
 </footer>
@@ -961,6 +1058,9 @@ function renderTasks() {
   }
 
   taskEmpty.textContent = "Your study tasks will appear here.";
+  document.getElementById("pendingCount").textContent = tasks.filter(task => task.status === "Pending").length;
+  document.getElementById("progressCount").textContent = tasks.filter(task => task.status === "In Progress").length;
+  document.getElementById("completeCount").textContent = tasks.filter(task => task.status === "Complete").length;
 
   tasks.forEach((task, index) => {
     const row = document.createElement("div");
@@ -1438,33 +1538,246 @@ async function initialiseAuthentication() {
 renderResources();
 initialiseAuthentication();
 </script>
-  <script>
+<script>
+/* =========================================================
+   8. AI QUIZ GENERATOR + DOUBT SOLVER
+   API key stays on the Supabase Edge Function, never in this file.
+========================================================= */
+const STUDENT_AI_FUNCTION_URL = "https://skhgyzsnacojdljchzxr.supabase.co/functions/v1/student-ai";
+const PDFJS_VERSION = "3.11.174";
+
 async function callStudentAI(payload) {
-  const functionUrl = "https://skhgyzsnacojdljchzxr.supabase.co/functions/v1/swift-action";
+  const response = await fetch(STUDENT_AI_FUNCTION_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": SUPABASE_PUBLISHABLE_KEY,
+      "Authorization": "Bearer " + SUPABASE_PUBLISHABLE_KEY
+    },
+    body: JSON.stringify(payload)
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const detail = data.error || data.message || (response.status + " " + response.statusText);
+    throw new Error(detail + (response.status === 404 ? " — Check that the Supabase Edge Function is deployed with the exact name student-ai." : ""));
+  }
+  return data;
+}
 
-  try {
-    const response = await fetch(functionUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "apikey": "",sb_publishable_-DI-cpV_UGIgETXRPFSyCQ_gXGHIsu3
-        "Authorization": "Bearer YOUR_SUPABASE_PUBLISHABLE_KEY"
-      },
-      body: JSON.stringify(payload)
+async function extractPdfText(file) {
+  if (!file) return "";
+  if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+    throw new Error("Please choose a PDF file.");
+  }
+  if (file.size > 15 * 1024 * 1024) throw new Error("Please use a PDF smaller than 15 MB.");
+  if (!window.pdfjsLib) {
+    await new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/" + PDFJS_VERSION + "/pdf.min.js";
+      script.onload = resolve;
+      script.onerror = () => reject(new Error("Could not load the PDF reader. Please paste the chapter text instead."));
+      document.head.appendChild(script);
     });
+  }
+  window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/" + PDFJS_VERSION + "/pdf.worker.min.js";
+  const bytes = await file.arrayBuffer();
+  const pdf = await window.pdfjsLib.getDocument({data: bytes}).promise;
+  let fullText = "";
+  for (let pageNo = 1; pageNo <= pdf.numPages; pageNo++) {
+    const page = await pdf.getPage(pageNo);
+    const content = await page.getTextContent();
+    fullText += content.items.map(item => item.str || "").join(" ") + "\n";
+  }
+  if (fullText.trim().length < 20) throw new Error("I couldn't extract readable text. This may be a scanned PDF; please paste its text instead.");
+  return fullText.trim().slice(0, 100000);
+}
 
-    const data = await response.json();
+async function materialFrom(textId, fileId) {
+  const pasted = document.getElementById(textId).value.trim();
+  const file = document.getElementById(fileId).files[0];
+  let pdfText = "";
+  if (file) {
+    const statusId = textId === "quizMaterial" ? "quizStatus" : "doubtStatus";
+    document.getElementById(statusId).textContent = "Reading PDF text in your browser…";
+    pdfText = await extractPdfText(file);
+  }
+  const combined = [pasted, pdfText].filter(Boolean).join("\n\n--- PDF TEXT ---\n\n").slice(0, 100000);
+  if (combined.length < 20) throw new Error("Please paste at least 20 characters of chapter material or upload a text-based PDF.");
+  return combined;
+}
 
-    if (!response.ok) {
-      throw new Error(data.error || "AI request failed.");
+function setAIStatus(id, message, isError = false) {
+  const el = document.getElementById(id);
+  el.textContent = message;
+  el.style.color = isError ? "#a52f3d" : "var(--muted)";
+}
+
+let generatedQuiz = null;
+let quizSubmitted = false;
+
+function normaliseQuizResponse(data) {
+  let result = data.quiz ?? data;
+  if (typeof result === "string") result = JSON.parse(result);
+  if (Array.isArray(result)) result = {questions: result};
+  if (!result || !Array.isArray(result.questions)) throw new Error("The AI returned an unexpected quiz format. Please try again.");
+  return result;
+}
+
+function renderQuiz() {
+  const result = document.getElementById("quizResult");
+  result.replaceChildren();
+  if (!generatedQuiz || !generatedQuiz.questions.length) {
+    result.textContent = "Your generated quiz will appear here.";
+    return;
+  }
+  const questions = generatedQuiz.questions;
+  const form = document.createElement("form");
+  const heading = document.createElement("h3");
+  heading.textContent = generatedQuiz.title || "Your Practice Quiz";
+  result.appendChild(heading);
+  const intro = document.createElement("p");
+  intro.textContent = questions.length + " questions · Choose your answers, then check your score.";
+  result.appendChild(intro);
+  questions.forEach((q, index) => {
+    const card = document.createElement("div");
+    card.className = "ai-question";
+    const title = document.createElement("h4");
+    title.textContent = (index + 1) + ". " + (q.question || "Question");
+    card.appendChild(title);
+    const options = Array.isArray(q.options) ? q.options : [];
+    const isTF = String(q.type || "").toLowerCase().includes("true_false") || options.length === 0;
+    const choices = isTF ? ["True", "False"] : options;
+    choices.forEach((option, optionIndex) => {
+      const label = document.createElement("label");
+      label.className = "ai-option";
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "quiz-answer-" + index;
+      input.value = isTF ? option : String.fromCharCode(65 + optionIndex);
+      input.disabled = quizSubmitted;
+      const text = document.createElement("span");
+      text.textContent = typeof option === "string" ? option : String(option.label || option.text || option);
+      label.append(input, text);
+      card.appendChild(label);
+    });
+    if (quizSubmitted) {
+      const feedback = document.createElement("div");
+      feedback.className = "ai-feedback";
+      const answer = q.answer ?? q.correct_answer ?? q.correctAnswer ?? "Not provided";
+      feedback.textContent = "Correct answer: " + answer + (q.explanation ? " · " + q.explanation : "");
+      card.appendChild(feedback);
     }
-
-    return data;
-  } catch (error) {
-    console.error("Student AI error:", error);
-    throw error;
+    form.appendChild(card);
+  });
+  result.appendChild(form);
+  if (!quizSubmitted) {
+    const submit = document.createElement("button");
+    submit.type = "button";
+    submit.className = "btn btn-primary";
+    submit.textContent = "Check My Answers";
+    submit.addEventListener("click", () => {
+      let score = 0;
+      let answered = 0;
+      questions.forEach((q, index) => {
+        const chosen = form.querySelector('input[name="quiz-answer-' + index + '"]:checked');
+        if (chosen) answered++;
+        const answerRaw = String(q.answer ?? q.correct_answer ?? q.correctAnswer ?? "").trim();
+        if (!chosen || !answerRaw) return;
+        const qIsTF = String(q.type || "").toLowerCase().includes("true_false") || !Array.isArray(q.options) || q.options.length === 0;
+        let expected = answerRaw;
+        if (!qIsTF && /^[A-D]$/i.test(answerRaw)) {
+          expected = answerRaw.toUpperCase();
+        } else if (qIsTF) {
+          expected = /^true$/i.test(answerRaw) ? "True" : /^false$/i.test(answerRaw) ? "False" : answerRaw;
+        }
+        if (chosen.value.toLowerCase() === String(expected).toLowerCase()) score++;
+      });
+      quizSubmitted = true;
+      const scoreLine = document.createElement("div");
+      scoreLine.className = "ai-feedback";
+      scoreLine.textContent = "Score: " + score + "/" + questions.length + " (" + Math.round(score / questions.length * 100) + "%). You answered " + answered + " of " + questions.length + " questions. Correct answers and explanations are shown below.";
+      result.prepend(scoreLine);
+      renderQuiz();
+      result.prepend(scoreLine);
+    });
+    const actions = document.createElement("div");
+    actions.className = "ai-actions";
+    actions.appendChild(submit);
+    const reset = document.createElement("button");
+    reset.type = "button"; reset.className = "btn btn-light"; reset.textContent = "Generate Another Quiz";
+    reset.addEventListener("click", () => document.getElementById("quizForm").requestSubmit());
+    actions.appendChild(reset);
+    result.appendChild(actions);
+  } else {
+    const reset = document.createElement("button");
+    reset.type = "button"; reset.className = "btn btn-primary"; reset.textContent = "Generate Another Quiz";
+    reset.addEventListener("click", () => document.getElementById("quizForm").requestSubmit());
+    result.appendChild(reset);
   }
 }
+
+document.getElementById("quizForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  const button = document.getElementById("generateQuizBtn");
+  button.disabled = true;
+  document.getElementById("quizResult").replaceChildren();
+  try {
+    const material = await materialFrom("quizMaterial", "quizPdf");
+    setAIStatus("quizStatus", "Generating your quiz… this can take a little while.");
+    const payload = {
+      mode: "quiz",
+      className: document.getElementById("quizClass").value,
+      subject: document.getElementById("quizSubject").value.trim(),
+      bookName: document.getElementById("quizBook").value.trim(),
+      chapterName: document.getElementById("quizChapter").value.trim(),
+      difficulty: document.getElementById("quizDifficulty").value,
+      questionType: document.getElementById("quizType").value,
+      count: Number(document.getElementById("quizCount").value),
+      material
+    };
+    const data = await callStudentAI(payload);
+    generatedQuiz = normaliseQuizResponse(data);
+    quizSubmitted = false;
+    renderQuiz();
+    setAIStatus("quizStatus", "Quiz ready! Answer each question and select Check My Answers.");
+    document.getElementById("quizResult").scrollIntoView({behavior:"smooth", block:"start"});
+  } catch (error) {
+    setAIStatus("quizStatus", error.message || "Quiz generation failed. Please try again.", true);
+    document.getElementById("quizResult").textContent = "Could not generate the quiz. Check that the student-ai Edge Function is deployed and that your chapter material is readable.";
+  } finally {
+    button.disabled = false;
+  }
+});
+
+document.getElementById("doubtForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  const button = document.getElementById("solveDoubtBtn");
+  const result = document.getElementById("doubtResult");
+  button.disabled = true;
+  result.textContent = "";
+  try {
+    const material = await materialFrom("doubtMaterial", "doubtPdf");
+    setAIStatus("doubtStatus", "Reading your chapter and preparing an explanation…");
+    const payload = {
+      mode: "doubt",
+      className: document.getElementById("doubtClass").value,
+      subject: document.getElementById("doubtSubject").value.trim(),
+      bookName: document.getElementById("doubtBook").value.trim(),
+      chapterName: document.getElementById("doubtChapter").value.trim(),
+      question: document.getElementById("doubtQuestion").value.trim(),
+      material
+    };
+    const data = await callStudentAI(payload);
+    const answer = String(data.answer || data.response || data.output_text || "The AI returned no answer. Please try again.");
+    result.textContent = answer;
+    setAIStatus("doubtStatus", "Explanation received. Check it against your textbook and teacher's instructions.");
+  } catch (error) {
+    result.textContent = "I couldn't solve this doubt right now. Please check your connection and try again.";
+    setAIStatus("doubtStatus", error.message || "Doubt solving failed.", true);
+  } finally {
+    button.disabled = false;
+  }
+});
 </script>
 
 </body>
