@@ -824,283 +824,145 @@ const materialGrid = document.getElementById("materialGrid");
 const resourceNotice = document.getElementById("resourceNotice");
 const materialsTitle = document.getElementById("materialsTitle");
 const materialsSubtitle = document.getElementById("materialsSubtitle");
-
 let selectedClass = null;
 let currentProfile = null;
-
-const classResources = {
-  1: ["NCERT Books", "NCERT Solutions", "Test Papers"],
-  2: ["NCERT Books", "NCERT Solutions", "Test Papers"],
-  3: ["NCERT Books", "NCERT Solutions", "Test Papers"],
-  4: ["NCERT Books", "NCERT Solutions", "Test Papers"],
-  5: ["NCERT Books", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"],
-  6: ["NCERT Books", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"],
-  7: ["NCERT Books", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"],
-  8: ["NCERT Books", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"],
-  9: ["NCERT Books", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"],
-  10: ["NCERT Books", "NCERT Solutions", "Test Papers", "Sample Question Papers (SQPs)", "PYQs", "Last-Minute Revision Notes", "Question Bank"]
-};
-
-const resourceIcons = {
-  "NCERT Books": ["fa-book", "purple"],
-  "Textbooks": ["fa-book", "purple"],
-  "NCERT Solutions": ["fa-book-open", "green"],
-  "Test Papers": ["fa-file-lines", "orange"],
-  "Sample Question Papers (SQPs)": ["fa-file-circle-check", "blue"],
-  "PYQs": ["fa-clock-rotate-left", "purple"],
-  "Last-Minute Revision Notes": ["fa-bolt", "orange"],
-  "Question Bank": ["fa-layer-group", "green"]
-};
-
-const COMING_SOON_RESOURCES = new Set(["NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"]);
-const STORAGE_BUCKET = "study-resources";
+const DRIVE_ROOT_ID = "1XJ22yWC0P0fiNB4xeElKTCx-HSBtGCbl";
+// Paste your restricted Google Drive API key between the quotes below.
+const DRIVE_API_KEY = "PASTE_YOUR_RESTRICTED_API_KEY_HERE";
+const FOLDER_MIME = "application/vnd.google-apps.folder";
 const resourceGradeSelect = document.getElementById("resourceGrade");
 const bookBrowser = document.getElementById("bookBrowser");
 let resourceSelectedClass = "1";
 let bookBrowserRequest = 0;
-
-function showNotice(element, message, type = "") {
-  element.textContent = message;
-  element.className = "notice show" + (type ? " " + type : "");
+const resourceIcons = {
+  "NCERT Books": ["fa-book", "purple"], "NCERT Solutions": ["fa-book-open", "green"],
+  "Test Papers": ["fa-file-lines", "orange"], "Sample Question Papers (SQPs)": ["fa-file-circle-check", "blue"],
+  "PYQs": ["fa-clock-rotate-left", "purple"], "Last-Minute Revision Notes": ["fa-bolt", "orange"],
+  "Question Bank": ["fa-layer-group", "green"]
+};
+const COMING_SOON_RESOURCES = new Set(["NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"]);
+function showNotice(element, message, type = "") { element.textContent = message; element.className = "notice show" + (type ? " " + type : ""); }
+function hideNotice(element) { element.className = "notice"; element.textContent = ""; }
+function showLibraryMessage(title, message) { materialsTitle.textContent = title; materialsSubtitle.textContent = message; materialGrid.replaceChildren(); }
+function cleanName(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim(); }
+function matchesName(name, wanted) { const n = cleanName(name); return wanted.some(w => n === cleanName(w) || n.includes(cleanName(w))); }
+function driveView(id) { return "https://drive.google.com/file/d/" + encodeURIComponent(id) + "/view"; }
+function driveDownload(id) { return "https://drive.google.com/uc?export=download&id=" + encodeURIComponent(id); }
+async function listDriveFolder(folderId) {
+  if (!DRIVE_API_KEY || DRIVE_API_KEY.includes("PASTE_YOUR")) throw new Error("Drive API key is not set in the website code yet.");
+  let all = [], pageToken = "";
+  do {
+    const u = new URL("https://www.googleapis.com/drive/v3/files");
+    u.searchParams.set("q", "'" + folderId + "' in parents and trashed = false");
+    u.searchParams.set("key", DRIVE_API_KEY);
+    u.searchParams.set("pageSize", "1000");
+    u.searchParams.set("orderBy", "name_natural");
+    u.searchParams.set("fields", "nextPageToken,files(id,name,mimeType,webViewLink,size)");
+    u.searchParams.set("supportsAllDrives", "true");
+    u.searchParams.set("includeItemsFromAllDrives", "true");
+    if (pageToken) u.searchParams.set("pageToken", pageToken);
+    const response = await fetch(u.toString());
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const msg = data?.error?.message || (response.status + " " + response.statusText);
+      if (response.status === 403) throw new Error("Drive API denied the request. Check that Drive API is enabled, this folder is shared as Anyone with the link (Viewer), and the API key allows the deployed GitHub Pages referrer.");
+      if (response.status === 404) throw new Error("Drive folder not found or not publicly accessible. Check the shared folder permissions.");
+      throw new Error(msg);
+    }
+    all = all.concat(data.files || []); pageToken = data.nextPageToken || "";
+  } while (pageToken);
+  return all.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true, sensitivity:"base"}));
 }
-
-function hideNotice(element) {
-  element.className = "notice";
-  element.textContent = "";
-}
-
-function showLibraryMessage(title, message) {
-  materialsTitle.textContent = title;
-  materialsSubtitle.textContent = message;
-  materialGrid.replaceChildren();
-}
-
 function makeResourceCard(name, classNumber) {
-  const card = document.createElement("article");
-  card.className = "material-card";
-  card.dataset.search = (name + " class " + classNumber).toLowerCase();
-  card.tabIndex = 0;
-  card.setAttribute("role", "button");
+  const card = document.createElement("article"); card.className = "material-card";
+  card.dataset.search = (name + " grade " + classNumber).toLowerCase(); card.tabIndex = 0; card.setAttribute("role", "button");
   const info = resourceIcons[name] || ["fa-folder-open", "purple"];
-  const icon = document.createElement("div");
-  icon.className = "material-icon " + info[1];
-  icon.innerHTML = '<i class="fa-solid ' + info[0] + '"></i>';
-  const content = document.createElement("div");
-  const title = document.createElement("h3");
-  title.textContent = name;
-  const description = document.createElement("p");
-  description.textContent = "Grade " + classNumber + " • Study resources";
-  const status = document.createElement("span");
-  status.className = "resource-status";
-  status.textContent = COMING_SOON_RESOURCES.has(name) ? "COMING SOON" : (name === "NCERT Books" ? "BROWSE & DOWNLOAD" : "OPEN CATEGORY");
-  content.append(title, description, status);
-  card.append(icon, content);
+  const icon = document.createElement("div"); icon.className = "material-icon " + info[1]; icon.innerHTML = '<i class="fa-solid ' + info[0] + '"></i>';
+  const content = document.createElement("div"), title = document.createElement("h3"), description = document.createElement("p"), status = document.createElement("span");
+  title.textContent = name; description.textContent = "Grade " + classNumber + " • Study resources"; status.className = "resource-status";
+  status.textContent = COMING_SOON_RESOURCES.has(name) ? "COMING SOON" : "BROWSE & DOWNLOAD";
+  content.append(title, description, status); card.append(icon, content);
   const activate = () => {
-    if (COMING_SOON_RESOURCES.has(name)) {
-      showNotice(resourceNotice, name + " are coming soon. The rest of Study Sphere remains available.");
-      return;
-    }
-    if (name === "NCERT Books") {
-      openBookBrowser(classNumber);
-      return;
-    }
-    showNotice(resourceNotice, name + " will be connected when its files are added to the resource catalogue.");
+    if (COMING_SOON_RESOURCES.has(name)) { showNotice(resourceNotice, name + " are coming soon."); return; }
+    openDriveBrowser(classNumber, name);
   };
-  card.addEventListener("click", activate);
-  card.addEventListener("keydown", event => {
-    if (event.key === "Enter" || event.key === " ") { event.preventDefault(); activate(); }
-  });
+  card.addEventListener("click", activate); card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); activate(); } });
   return card;
 }
-
 function renderResources() {
-  materialGrid.replaceChildren();
-  hideNotice(resourceNotice);
-  if (bookBrowser) { bookBrowser.classList.remove("open"); bookBrowser.replaceChildren(); }
-
-  let classValue = String(resourceGradeSelect?.value || resourceSelectedClass || currentProfile?.class || "1");
-  resourceSelectedClass = classValue;
-  selectedClass = classValue;
-  const classNumber = Number(classValue);
-  const resources = classResources[classNumber];
-
-  if (!resources) {
-    showLibraryMessage("Your Study Library", "Choose a grade to browse its available resources.");
-    return;
-  }
-
-  showLibraryMessage("Grade " + classNumber + " Study Library", "Choose a resource. NCERT Books can be browsed and downloaded without signing in.");
+  materialGrid.replaceChildren(); hideNotice(resourceNotice); if (bookBrowser) { bookBrowser.classList.remove("open"); bookBrowser.replaceChildren(); }
+  const classNumber = Number(resourceGradeSelect?.value || resourceSelectedClass || currentProfile?.class || "1");
+  resourceSelectedClass = String(classNumber); selectedClass = String(classNumber);
+  const resources = classNumber === 10
+    ? ["NCERT Books", "PYQs", "Sample Question Papers (SQPs)", "Question Bank"]
+    : ["NCERT Books", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"];
+  showLibraryMessage("Grade " + classNumber + " Study Library", "Browse your resources here without leaving Study Sphere.");
   resources.forEach(name => materialGrid.appendChild(makeResourceCard(name, classNumber)));
 }
-
-if (resourceGradeSelect) {
-  resourceGradeSelect.addEventListener("change", () => {
-    resourceSelectedClass = resourceGradeSelect.value;
-    renderResources();
-  });
+if (resourceGradeSelect) resourceGradeSelect.addEventListener("change", () => { resourceSelectedClass = resourceGradeSelect.value; renderResources(); });
+function addBookBrowserMessage(message, type = "") { const p = document.createElement("p"); p.textContent = message; if (type === "error") p.style.color = "#a52f3d"; bookBrowser.appendChild(p); }
+function makeDriveFileRow(file, label) {
+  const row = document.createElement("div"); row.className = "book-file-row";
+  const info = document.createElement("div"), name = document.createElement("div"), meta = document.createElement("div");
+  name.className = "book-file-name"; name.textContent = label || file.name.replace(/\.pdf$/i, "");
+  meta.className = "book-file-meta"; meta.textContent = file.name; info.append(name, meta);
+  const actions = document.createElement("div"); actions.style.display = "flex"; actions.style.gap = "8px"; actions.style.flexWrap = "wrap";
+  const open = document.createElement("a"); open.className = "btn btn-light"; open.href = file.webViewLink || driveView(file.id); open.target = "_blank"; open.rel = "noopener noreferrer"; open.textContent = "Open PDF";
+  const dl = document.createElement("a"); dl.className = "btn btn-primary"; dl.href = driveDownload(file.id); dl.target = "_blank"; dl.rel = "noopener noreferrer"; dl.textContent = "Download PDF";
+  actions.append(open, dl); row.append(info, actions); return row;
 }
-
-function addBookBrowserMessage(message, type = "") {
-  const p = document.createElement("p");
-  p.textContent = message;
-  if (type === "error") p.style.color = "#a52f3d";
-  bookBrowser.appendChild(p);
-}
-
-function publicDownloadUrl(path) {
-  const { data } = supabaseClient.storage.from(STORAGE_BUCKET).getPublicUrl(path);
-  return data?.publicUrl || "";
-}
-
-function makeDownloadLink(path, label, primary = false) {
-  const a = document.createElement("a");
-  a.className = "btn " + (primary ? "btn-primary" : "btn-light");
-  a.href = publicDownloadUrl(path);
-  a.target = "_blank";
-  a.rel = "noopener noreferrer";
-  a.innerHTML = '<i class="fa-solid fa-download"></i> ';
-  a.appendChild(document.createTextNode(label));
-  if (a.href) {
-    const url = new URL(a.href);
-    url.searchParams.set("download", "");
-    a.href = url.toString();
-  }
-  return a;
-}
-
-async function listStorageFolder(path) {
-  if (!supabaseClient) throw new Error("The resource connection could not initialise. Please refresh the page.");
-  const { data, error } = await supabaseClient.storage.from(STORAGE_BUCKET).list(path, {
-    limit: 1000,
-    sortBy: { column: "name", order: "asc" }
-  });
-  if (error) throw error;
-  return Array.isArray(data) ? data : [];
-}
-
-async function openBookBrowser(initialClass) {
-  const requestId = ++bookBrowserRequest;
-  hideNotice(resourceNotice);
-  bookBrowser.replaceChildren();
-  bookBrowser.classList.add("open");
-  const heading = document.createElement("h3");
-  heading.textContent = "NCERT Books & Chapter Downloads";
-  const intro = document.createElement("p");
-  intro.textContent = "Choose a grade and subject. Download the complete book or any individual chapter that has been uploaded.";
-  bookBrowser.append(heading, intro);
-
-  const selectors = document.createElement("div");
-  selectors.className = "resource-controls";
-  selectors.style.margin = "12px 0";
-  const gradeLabel = document.createElement("label");
-  gradeLabel.textContent = "Grade";
-  const gradeSelect = document.createElement("select");
-  for (let n = 1; n <= 10; n++) {
-    const option = document.createElement("option");
-    option.value = String(n);
-    option.textContent = "Grade " + n;
-    option.selected = String(n) === String(initialClass);
-    gradeSelect.appendChild(option);
-  }
-  gradeLabel.appendChild(gradeSelect);
-  const subjectLabel = document.createElement("label");
-  subjectLabel.textContent = "Subject";
-  const subjectSelect = document.createElement("select");
-  subjectSelect.innerHTML = '<option value="">Loading subjects…</option>';
-  subjectLabel.appendChild(subjectSelect);
-  selectors.append(gradeLabel, subjectLabel);
-  bookBrowser.appendChild(selectors);
-
-  const fileArea = document.createElement("div");
-  fileArea.className = "book-file-list";
-  bookBrowser.appendChild(fileArea);
-
-  async function loadSubjects() {
-    const localRequest = ++bookBrowserRequest;
-    const folder = "GRADE " + gradeSelect.value;
-    subjectSelect.replaceChildren(new Option("Loading subjects…", ""));
-    subjectSelect.disabled = true;
-    fileArea.replaceChildren();
-    try {
-      const items = await listStorageFolder(folder);
-      if (localRequest !== bookBrowserRequest) return;
-      const folders = items.filter(item => item && item.id === null && item.name && !item.name.startsWith("."));
-      subjectSelect.replaceChildren();
-      if (!folders.length) {
-        subjectSelect.appendChild(new Option("No subject folders found", ""));
-        addBookBrowserMessage("No subject folders were found in " + folder + ". Check the folder names in Supabase.");
-        return;
-      }
-      subjectSelect.appendChild(new Option("Choose subject", ""));
-      folders.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true, sensitivity:"base"}));
-      folders.forEach(item => subjectSelect.appendChild(new Option(item.name, item.name)));
-      subjectSelect.disabled = false;
-      const maths = folders.find(item => item.name.toLowerCase() === "maths" || item.name.toLowerCase() === "mathematics");
-      if (maths) { subjectSelect.value = maths.name; await loadFiles(); }
-    } catch (error) {
-      if (localRequest !== bookBrowserRequest) return;
-      subjectSelect.replaceChildren(new Option("Could not load subjects", ""));
-      addBookBrowserMessage("Could not list files in Supabase Storage. Public download links and folder listing are different permissions. Add a SELECT policy for the study-resources bucket, then refresh. Details: " + (error.message || "Storage listing failed."), "error");
+async function openDriveBrowser(classNumber, category) {
+  const req = ++bookBrowserRequest; hideNotice(resourceNotice); bookBrowser.replaceChildren(); bookBrowser.classList.add("open");
+  const heading = document.createElement("h3"); heading.textContent = "Grade " + classNumber + " · " + category;
+  const intro = document.createElement("p"); intro.textContent = "Choose a subject or chapter. Files open or download from your existing Google Drive.";
+  const controls = document.createElement("div"); controls.className = "resource-controls"; controls.style.margin = "12px 0";
+  const back = document.createElement("button"); back.type = "button"; back.className = "btn btn-light"; back.textContent = "← Back to categories"; back.addEventListener("click", renderResources);
+  const crumbs = document.createElement("p"); crumbs.style.fontSize = "13px"; crumbs.style.fontWeight = "700"; crumbs.textContent = "Grade " + classNumber + " / " + category;
+  const area = document.createElement("div"); area.className = "book-file-list"; bookBrowser.append(heading, intro, controls, crumbs, area); controls.appendChild(back);
+  const loading = document.createElement("p"); loading.textContent = "Loading your folders…"; area.appendChild(loading);
+  try {
+    const rootItems = await listDriveFolder(DRIVE_ROOT_ID); if (req !== bookBrowserRequest) return;
+    const gradeFolder = rootItems.find(x => x.mimeType === FOLDER_MIME && matchesName(x.name, ["GRADE " + classNumber, "GRADE" + classNumber, "CLASS " + classNumber]));
+    if (!gradeFolder) throw new Error("Could not find the Grade " + classNumber + " folder inside the shared main folder.");
+    let categoryItems = await listDriveFolder(gradeFolder.id); if (req !== bookBrowserRequest) return;
+    let wanted = category === "NCERT Books" ? ["NCERT BOOKS", "NCERT BOOK", "TEXTBOOKS"] : category === "PYQs" ? ["PYQ", "PYQS", "PREVIOUS YEAR QUESTIONS"] : category === "Sample Question Papers (SQPs)" ? ["SQP", "SQPS", "SAMPLE QUESTION PAPERS"] : ["QUESTION BANK", "QUESTIONBANK"];
+    let selectedFolder = categoryItems.find(x => x.mimeType === FOLDER_MIME && matchesName(x.name, wanted));
+    if (selectedFolder) categoryItems = await listDriveFolder(selectedFolder.id);
+    else throw new Error("Could not find the " + category + " folder under Grade " + classNumber + ". Check that the folder exists and is shared with anyone who has the link.");
+    if (req !== bookBrowserRequest) return;
+    area.replaceChildren();
+    const folders = categoryItems.filter(x => x.mimeType === FOLDER_MIME);
+    const files = categoryItems.filter(x => x.mimeType !== FOLDER_MIME && (/\.pdf$/i.test(x.name) || x.mimeType === "application/pdf"));
+    if (folders.length) {
+      folders.forEach(folder => {
+        const row = document.createElement("div"); row.className = "book-file-row";
+        const info = document.createElement("div"), nm = document.createElement("div"), meta = document.createElement("div"); nm.className = "book-file-name"; nm.textContent = folder.name; meta.className = "book-file-meta"; meta.textContent = "Folder"; info.append(nm, meta);
+        const btn = document.createElement("button"); btn.type = "button"; btn.className = "btn btn-primary"; btn.textContent = "Open"; btn.addEventListener("click", () => openDriveSubfolder(classNumber, category, folder, area, crumbs, req)); row.append(info, btn); area.appendChild(row);
+      });
     }
-  }
-
-  async function loadFiles() {
-    const localRequest = ++bookBrowserRequest;
-    const path = "GRADE " + gradeSelect.value + "/" + subjectSelect.value;
-    fileArea.replaceChildren();
-    if (!subjectSelect.value) return;
-    const loading = document.createElement("p");
-    loading.textContent = "Loading PDFs…";
-    fileArea.appendChild(loading);
-    try {
-      const items = await listStorageFolder(path);
-      if (localRequest !== bookBrowserRequest) return;
-      fileArea.replaceChildren();
-      const pdfs = items.filter(item => item && item.id !== null && item.name && item.name.toLowerCase().endsWith(".pdf"));
-      pdfs.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true, sensitivity:"base"}));
-      const complete = pdfs.filter(item => /complete|full.?book|whole.?book|complete.?book/i.test(item.name));
-      const chapters = pdfs.filter(item => !complete.includes(item));
-      if (!pdfs.length) {
-        addBookBrowserMessage("No PDF files were found in " + path + ". Upload the complete book and/or chapter PDFs into this subject folder.");
-        return;
-      }
-      if (complete.length) {
-        const row = document.createElement("div");
-        row.className = "book-file-row";
-        const info = document.createElement("div");
-        const name = document.createElement("div"); name.className = "book-file-name"; name.textContent = "Complete Book";
-        const meta = document.createElement("div"); meta.className = "book-file-meta"; meta.textContent = complete.map(item => item.name).join(" · ");
-        info.append(name, meta);
-        row.append(info, makeDownloadLink(path + "/" + complete[0].name, "Download Complete Book", true));
-        fileArea.appendChild(row);
-      } else {
-        addBookBrowserMessage("No complete-book PDF is uploaded for this subject yet. To show that button, upload a full-book PDF with a name such as COMPLETE BOOK.pdf.");
-      }
-      if (chapters.length) {
-        const chapterHeading = document.createElement("h3"); chapterHeading.textContent = "Individual Chapters"; chapterHeading.style.marginTop = "12px";
-        fileArea.appendChild(chapterHeading);
-        chapters.forEach(item => {
-          const row = document.createElement("div"); row.className = "book-file-row";
-          const info = document.createElement("div");
-          const name = document.createElement("div"); name.className = "book-file-name"; name.textContent = item.name.replace(/\.pdf$/i, "");
-          const meta = document.createElement("div"); meta.className = "book-file-meta"; meta.textContent = path + "/" + item.name;
-          info.append(name, meta);
-          row.append(info, makeDownloadLink(path + "/" + item.name, "Download PDF"));
-          fileArea.appendChild(row);
-        });
-      }
-    } catch (error) {
-      if (localRequest !== bookBrowserRequest) return;
-      fileArea.replaceChildren();
-      addBookBrowserMessage("Could not load PDFs for " + path + ". Check the Storage listing policy and exact folder path. Details: " + (error.message || "Unknown error."), "error");
-    }
-  }
-
-  gradeSelect.addEventListener("change", loadSubjects);
-  subjectSelect.addEventListener("change", loadFiles);
-  await loadSubjects();
-  bookBrowser.scrollIntoView({behavior:"smooth", block:"nearest"});
+    const complete = files.filter(f => /complete|full.?book|whole.?book|all.?chapters/i.test(f.name));
+    if (complete.length) { const h = document.createElement("h3"); h.textContent = "Complete Book"; area.appendChild(h); complete.forEach(f => area.appendChild(makeDriveFileRow(f, "Complete Book"))); }
+    const chapters = files.filter(f => !complete.includes(f));
+    if (chapters.length) { const h = document.createElement("h3"); h.style.marginTop = "16px"; h.textContent = folders.length ? "PDF Files" : "Books & Chapters"; area.appendChild(h); chapters.forEach(f => area.appendChild(makeDriveFileRow(f))); }
+    if (!folders.length && !files.length) addBookBrowserMessage("No folders or PDFs were found here yet.");
+    bookBrowser.scrollIntoView({behavior:"smooth", block:"nearest"});
+  } catch (error) { if (req !== bookBrowserRequest) return; area.replaceChildren(); addBookBrowserMessage(error.message || "Could not load Google Drive resources.", "error"); }
 }
+async function openDriveSubfolder(classNumber, category, folder, area, crumbs, parentReq) {
+  const req = ++bookBrowserRequest; area.replaceChildren(); crumbs.textContent = "Grade " + classNumber + " / " + category + " / " + folder.name;
+  const back = document.createElement("button"); back.type = "button"; back.className = "btn btn-light"; back.textContent = "← Back"; back.addEventListener("click", () => openDriveBrowser(classNumber, category)); area.appendChild(back);
+  const loading = document.createElement("p"); loading.textContent = "Loading PDFs…"; area.appendChild(loading);
+  try {
+    const items = await listDriveFolder(folder.id); if (req !== bookBrowserRequest) return; area.replaceChildren();
+    const folders = items.filter(x => x.mimeType === FOLDER_MIME), files = items.filter(x => x.mimeType !== FOLDER_MIME && (/\.pdf$/i.test(x.name) || x.mimeType === "application/pdf"));
+    folders.forEach(f => { const row = document.createElement("div"); row.className = "book-file-row"; const label = document.createElement("div"); label.className = "book-file-name"; label.textContent = f.name; const btn = document.createElement("button"); btn.type = "button"; btn.className = "btn btn-primary"; btn.textContent = "Open"; btn.addEventListener("click", () => openDriveSubfolder(classNumber, category, f, area, crumbs, req)); row.append(label, btn); area.appendChild(row); });
+    const complete = files.filter(f => /complete|full.?book|whole.?book|all.?chapters/i.test(f.name));
+    complete.forEach(f => area.appendChild(makeDriveFileRow(f, "Complete Book")));
+    files.filter(f => !complete.includes(f)).forEach(f => area.appendChild(makeDriveFileRow(f)));
+    if (!folders.length && !files.length) addBookBrowserMessage("No PDF files were found in this folder.");
+  } catch (error) { if (req !== bookBrowserRequest) return; area.replaceChildren(); addBookBrowserMessage(error.message || "Could not load this folder.", "error"); }
+}
+renderResources();
 
 /* =========================================================
    4. SEARCH
