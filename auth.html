@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#6654e8">
-<title>Sign In | Student Toolkit</title>
+<meta name="theme-color" content="#0f766e">
+<title>Sign In | Study Sphere</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,11 +13,11 @@
 
 <style>
 :root {
-  --primary: #6554e8;
-  --dark: #28214f;
+  --primary: #0f766e;
+  --dark: #123b46;
   --ink: #25243b;
   --muted: #77788c;
-  --border: #e6e6f0;
+  --border: #dce9e8;
 }
 
 * { box-sizing: border-box; }
@@ -27,7 +27,7 @@ body {
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
   color: var(--ink);
-  background: #f7f7fc;
+  background: #f2faf9;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -57,7 +57,7 @@ button, input { font: inherit; }
   color: white;
   border-radius: 15px;
   font-size: 21px;
-  background: linear-gradient(135deg, #8172ff, #5440cf);
+  background: linear-gradient(135deg, #2dd4bf, #0f766e);
 }
 
 .brand-name {
@@ -70,7 +70,7 @@ button, input { font: inherit; }
 .brand-name span { color: var(--primary); }
 
 .back-link {
-  color: #65657a;
+  color: #536a6a;
   font-size: 13px;
   font-weight: 700;
 }
@@ -99,9 +99,9 @@ button, input { font: inherit; }
   padding: 45px;
   color: white;
   background:
-    radial-gradient(ellipse at 10% 10%, #8778ff77, transparent 45%),
-    radial-gradient(ellipse at 100% 90%, #a291ff55, transparent 40%),
-    linear-gradient(145deg, #26204f, #5140b6);
+    radial-gradient(ellipse at 10% 10%, #2dd4bf66, transparent 45%),
+    radial-gradient(ellipse at 100% 90%, #f59e0b55, transparent 40%),
+    linear-gradient(145deg, #123b46, #0f766e);
 }
 
 .visual::before,
@@ -149,7 +149,7 @@ button, input { font: inherit; }
   margin: 25px 0 16px;
 }
 
-.visual h1 span { color: #c8beff; }
+.visual h1 span { color: #fdba74; }
 
 .visual p {
   color: #e0dcf8;
@@ -173,7 +173,7 @@ button, input { font: inherit; }
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: linear-gradient(145deg, #9c8cff, #6954df);
+  background: linear-gradient(145deg, #2dd4bf, #f59e0b);
   box-shadow: 0 25px 65px #100b382e;
 }
 
@@ -185,7 +185,7 @@ button, input { font: inherit; }
   border: 1px solid #ffffff65;
   border-radius: 15px;
   background: #ffffffed;
-  color: #302951;
+  color: #123b46;
   box-shadow: 0 12px 28px #130f3c30;
   font-size: 12px;
   font-weight: 750;
@@ -241,7 +241,7 @@ button, input { font: inherit; }
   grid-template-columns: 1fr 1fr;
   padding: 5px;
   gap: 5px;
-  background: #f1f0fa;
+  background: #e8f7f5;
   border-radius: 13px;
   margin-bottom: 23px;
 }
@@ -250,7 +250,7 @@ button, input { font: inherit; }
   border: 0;
   border-radius: 10px;
   padding: 12px 7px;
-  color: #77758d;
+  color: #667085;
   background: transparent;
   font-size: 12px;
   font-weight: 750;
@@ -278,14 +278,14 @@ button, input { font: inherit; }
   top: 50%;
   left: 14px;
   transform: translateY(-50%);
-  color: #9492aa;
+  color: #6b8584;
   font-size: 14px;
 }
 
 .input-wrap input {
   width: 100%;
   height: 48px;
-  border: 1px solid #e2e1ed;
+  border: 1px solid #d5e5e4;
   outline: none;
   border-radius: 12px;
   padding: 0 43px 0 41px;
@@ -296,11 +296,11 @@ button, input { font: inherit; }
 }
 
 .input-wrap input:focus {
-  border-color: #9c90ff;
-  box-shadow: 0 0 0 4px #7161e815;
+  border-color: #2dd4bf;
+  box-shadow: 0 0 0 4px #0f766e18;
 }
 
-.input-wrap input::placeholder { color: #aaa9b8; }
+.input-wrap input::placeholder { color: #8aa2a1; }
 
 .password-toggle {
   position: absolute;
@@ -309,7 +309,7 @@ button, input { font: inherit; }
   transform: translateY(-50%);
   border: 0;
   background: transparent;
-  color: #9290a5;
+  color: #6b8584;
   padding: 5px;
 }
 
@@ -347,8 +347,8 @@ button, input { font: inherit; }
   border: 0;
   border-radius: 12px;
   color: white;
-  background: linear-gradient(120deg, #7766f1, #5540cf);
-  box-shadow: 0 8px 18px #6554e82a;
+  background: linear-gradient(120deg, #0f766e, #f59e0b);
+  box-shadow: 0 8px 18px #0f766e2a;
   font-size: 13px;
   font-weight: 800;
   transition: transform .2s;
@@ -371,7 +371,7 @@ button, input { font: inherit; }
 
 .status.error { display: block; color: #a52d40; background: #fff0f2; }
 .status.success { display: block; color: #176a48; background: #eaf9f1; }
-.status.info { display: block; color: #5948a8; background: #f0edff; }
+.status.info { display: block; color: #075e57; background: #e8f7f5; }
 
 .form-footer {
   text-align: center;
@@ -384,7 +384,7 @@ button, input { font: inherit; }
 
 .bottom-note {
   text-align: center;
-  color: #89889a;
+  color: #718786;
   font-size: 11px;
   padding: 0 15px 20px;
 }
@@ -412,6 +412,51 @@ button, input { font: inherit; }
   .form-side { padding: 29px 21px; }
   .form-side h2 { font-size: 29px; }
 }
+
+
+/* Study Sphere visual refresh: teal, aqua and warm orange; this page stays standalone. */
+body {
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+  background:
+    radial-gradient(ellipse at 8% 12%, rgba(45,212,191,.18), transparent 31%),
+    radial-gradient(ellipse at 92% 85%, rgba(245,158,11,.15), transparent 29%),
+    linear-gradient(135deg, #f4fbfa 0%, #f7fbff 52%, #fffaf2 100%);
+}
+body::before, body::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  filter: blur(2px);
+  opacity: .35;
+  pointer-events: none;
+  animation: drift 13s ease-in-out infinite alternate;
+}
+body::before { background: #5eead4; top: 13%; left: -115px; }
+body::after { background: #fdba74; right: -125px; bottom: 4%; animation-delay: -5s; }
+.topbar { background: rgba(255,255,255,.86); backdrop-filter: blur(14px); }
+.brand-icon { box-shadow: 0 9px 22px rgba(15,118,110,.24); }
+.page { border: 1px solid rgba(255,255,255,.85); box-shadow: 0 28px 85px rgba(18,59,70,.13); animation: rise-in .7s cubic-bezier(.2,.8,.2,1) both; }
+.visual { background: radial-gradient(ellipse at 10% 10%, #2dd4bf66, transparent 45%), radial-gradient(ellipse at 100% 90%, #f59e0b55, transparent 40%), linear-gradient(145deg, #123b46, #0f766e); }
+.art-circle { background: linear-gradient(145deg, #2dd4bf, #0f766e); }
+.float-card { animation: bob 4.5s ease-in-out infinite; }
+.float-two { animation-delay: -2s; }
+.tab, .submit-btn, .input-wrap input, .back-link { transition: all .22s ease; }
+.submit-btn { background: linear-gradient(115deg, #0f766e, #14b8a6 70%, #f59e0b); box-shadow: 0 10px 24px rgba(15,118,110,.2); }
+.submit-btn:hover { box-shadow: 0 14px 28px rgba(15,118,110,.28); }
+.tab.active { color: #0f766e; }
+.input-wrap input:focus { border-color: #14b8a6; box-shadow: 0 0 0 4px rgba(20,184,166,.13); }
+.form-topline, .inline-link, .brand-name span { color: #0f766e; }
+.pill { backdrop-filter: blur(8px); }
+@keyframes rise-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bob { 0%,100% { translate: 0 0; } 50% { translate: 0 -7px; } }
+@keyframes drift { from { transform: translate3d(0,0,0) scale(1); } to { transform: translate3d(25px,-18px,0) scale(1.08); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+
 </style>
 </head>
 
@@ -420,7 +465,7 @@ button, input { font: inherit; }
 <header class="topbar">
   <a href="index.html" class="brand">
     <div class="brand-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-    <div class="brand-name">Student<span>Toolkit</span></div>
+    <div class="brand-name">Study<span>Sphere</span></div>
   </a>
 
   <a href="index.html" class="back-link">
@@ -454,7 +499,7 @@ button, input { font: inherit; }
   </section>
 
   <section class="form-side">
-    <div class="form-topline">Welcome to Student Toolkit</div>
+    <div class="form-topline">Welcome to Study Sphere</div>
     <h2 id="formTitle">Welcome back!</h2>
     <p class="subheading" id="formSubtitle">
       Sign in to continue your learning journey.
@@ -516,7 +561,7 @@ button, input { font: inherit; }
 </main>
 
 <div class="bottom-note">
-  © <span id="year"></span> Student Toolkit · Learn smarter every day.
+  © <span id="year"></span> Study Sphere · Learn smarter, grow further.
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -574,7 +619,7 @@ function setMode(nextMode) {
 
   formTitle.textContent = signingUp ? 'Create your account' : 'Welcome back!';
   formSubtitle.textContent = signingUp
-    ? 'Join Student Toolkit and start your learning journey.'
+    ? 'Join Study Sphere and start your learning journey.'
     : 'Sign in to continue your learning journey.';
 
   submitButton.innerHTML = signingUp
@@ -713,7 +758,7 @@ form.addEventListener('submit', async event => {
         );
       }
     } else {
-      showStatus('Sign-in successful! Opening Student Toolkit...', 'success');
+      showStatus('Sign-in successful! Opening Study Sphere...', 'success');
       setTimeout(() => window.location.href = 'index.html', 900);
     }
   } catch (error) {
