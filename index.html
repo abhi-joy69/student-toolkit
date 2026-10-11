@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#087f73">
-<title>Student Toolkit | Learn Smarter</title>
+<title>Study Sphere | Learn Smarter</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,16 +16,18 @@
 :root{
   --primary:#087f73;
   --primary-dark:#075b53;
-  --primary-light:#dff5ef;
-  --heading:#153b38;
-  --text:#465b57;
-  --muted:#748680;
-  --background:#f5f8f3;
+  --primary-light:#e1f5f7;
+  --heading:#153746;
+  --text:#465c68;
+  --muted:#6d818b;
+  --background:#f3f8fa;
   --white:#ffffff;
-  --border:#dfe9e1;
-  --green:#16845d;
+  --border:#dce8ec;
+  --green:#087f73;
+  --blue:#2586b8;
+  --orange:#f39a4a;
   --radius:20px;
-  --shadow:0 12px 32px rgba(24,79,63,.09);
+  --shadow:0 12px 32px rgba(24,79,90,.09);
 }
 
 *{box-sizing:border-box}
@@ -45,6 +47,9 @@ a{color:inherit;text-decoration:none}
 button,input,select{font:inherit}
 button{cursor:pointer}
 button:disabled{opacity:.6;cursor:not-allowed}
+::selection{background:#bce9e8;color:#153746}
+:focus-visible{outline:3px solid #f39a4a;outline-offset:3px}
+@media (prefers-reduced-motion:no-preference){.material-card,.tool-card,.class-card{transition:transform .25s ease,box-shadow .25s ease}.material-card:hover,.tool-card:hover,.class-card:hover{transform:translateY(-4px)}}
 .container{width:min(1160px,92%);margin:auto}
 section{scroll-margin-top:100px}
 
@@ -55,7 +60,7 @@ section{scroll-margin-top:100px}
   text-align:center;
   font-size:12px;
 }
-.top-note i{color:#9ee8d1;margin-right:7px}
+.top-note i{color:#ffc27a;margin-right:7px}
 
 .navbar{
   position:sticky;
@@ -78,7 +83,7 @@ section{scroll-margin-top:100px}
   display:grid;place-items:center;
   color:white;font-size:21px;
   border-radius:14px;
-  background:linear-gradient(135deg,#25b99c,#087f73);
+  background:linear-gradient(135deg,#2586b8,#087f73);
 }
 .brand-name{
   font-size:19px;font-weight:800;
@@ -418,7 +423,7 @@ section{scroll-margin-top:100px}
     <a href="#home" class="brand">
       <div class="brand-icon"><i class="fa-solid fa-graduation-cap"></i></div>
       <div>
-        <div class="brand-name">Student<span>Toolkit</span></div>
+        <div class="brand-name">Study <span>Sphere</span></div>
         <div class="brand-caption">Learn smarter every day</div>
       </div>
     </a>
@@ -656,7 +661,7 @@ section{scroll-margin-top:100px}
         <a href="#home" class="brand">
           <div class="brand-icon"><i class="fa-solid fa-graduation-cap"></i></div>
           <div>
-            <div class="brand-name">Student<span>Toolkit</span></div>
+            <div class="brand-name">Study <span>Sphere</span></div>
             <div class="brand-caption">Learn smarter every day</div>
           </div>
         </a>
@@ -682,7 +687,7 @@ section{scroll-margin-top:100px}
     </div>
 
     <div class="footer-bottom">
-      <span>© <span id="year"></span> Student Toolkit</span>
+      <span>© <span id="year"></span> Study Sphere</span>
       <span>Keep learning. Keep growing. <span class="footer-credit" style="display:inline-flex;align-items:center;gap:6px;margin-left:8px;padding:4px 9px;border-radius:20px;background:#16845d;color:#fff;font-weight:800"><i class="fa-solid fa-leaf"></i> Made by Abhinandan Raj</span></span>
     </div>
   </div>
@@ -690,7 +695,7 @@ section{scroll-margin-top:100px}
 
 <div class="modal-backdrop" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
   <div class="modal">
-    <h2 id="profileTitle">Welcome to Student Toolkit! 🎓</h2>
+    <h2 id="profileTitle">Welcome to Study Sphere! 🎓</h2>
     <p>Tell us about yourself so we can personalise your learning experience.</p>
 
     <form id="profileForm">
@@ -742,7 +747,7 @@ section{scroll-margin-top:100px}
         </div>
 
         <div class="form-field full">
-          <label for="studentDiscovery">How did you hear about Student Toolkit?</label>
+          <label for="studentDiscovery">How did you hear about Study Sphere?</label>
           <select id="studentDiscovery" name="discovery" required>
             <option value="">Choose one</option>
             <option value="YouTube">YouTube</option>
@@ -892,7 +897,7 @@ function makeResourceCard(name, classNumber) {
   card.append(icon, content);
   const activate = () => {
     if (COMING_SOON_RESOURCES.has(name)) {
-      showNotice(resourceNotice, name + " are coming soon. The rest of Student Toolkit remains available.");
+      showNotice(resourceNotice, name + " are coming soon. The rest of Study Sphere remains available.");
       return;
     }
     if (name === "NCERT Books") {
