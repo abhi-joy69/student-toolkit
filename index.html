@@ -269,7 +269,7 @@ section{scroll-margin-top:100px}
 .resource-controls{display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin:0 0 18px;padding:14px 16px;background:#fff;border:1px solid var(--border);border-radius:15px}
 .resource-controls label{display:grid;gap:5px;font-size:11px;font-weight:800;color:var(--heading)}
 .resource-controls select{min-width:170px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--heading)}
-.book-browser{display:none;margin-top:18px;padding:20px;background:#fff;border:1px solid var(--border);border-radius:17px}
+.book-browser{display:none;margin-top:18px;padding:20px;background:#fff;border:1px solid var(--border);border-radius:17px;scroll-margin-top:105px}
 .book-browser.open{display:block}
 .book-browser h3{margin:0 0 7px;font-size:18px}
 .book-browser p{font-size:12px;color:var(--muted)}
@@ -408,6 +408,23 @@ section{scroll-margin-top:100px}
 @media(prefers-reduced-motion:reduce){
   *,*:before,*:after{scroll-behavior:auto!important;transition:none!important}
 }
+
+/* Page-style student onboarding */
+.profile-page{display:none;position:fixed;inset:0;z-index:4000;overflow-y:auto;padding:0;background:#f3f8fc;align-items:stretch;justify-content:stretch}
+.profile-page.open{display:flex}
+.profile-page-shell{width:100%;min-height:100vh;display:grid;grid-template-columns:minmax(300px,.9fr) minmax(400px,1.1fr);background:white}
+.profile-welcome-panel{position:relative;overflow:hidden;padding:clamp(28px,5vw,68px);background:linear-gradient(145deg,#087f73 0%,#139b87 52%,#56c8b0 100%);color:white;display:flex;flex-direction:column;justify-content:space-between;min-height:100vh}
+.profile-brand{display:flex;align-items:center;gap:11px;color:white;font-size:20px}.profile-brand span{width:45px;height:45px;display:grid;place-items:center;border-radius:15px;background:#ffffff25;font-size:22px}.profile-brand b{font-family:Manrope,sans-serif}.profile-brand em{font-style:normal;color:#c8fff0}
+.profile-illustration{position:relative;align-self:center;margin:36px 0 20px;width:220px;height:220px;border-radius:48% 52% 55% 45%;background:#ffffff1e;display:grid;place-items:center;box-shadow:0 0 0 20px #ffffff0c,0 0 0 40px #ffffff08}.profile-illustration>i{font-size:100px;color:white;filter:drop-shadow(0 15px 10px #064b4033)}.float-icon{position:absolute;width:52px;height:52px;display:grid;place-items:center;border-radius:17px;background:white;color:#087f73;font-size:20px;box-shadow:0 12px 25px #064b4033}.float-one{top:2px;right:-10px}.float-two{bottom:10px;left:-18px;color:#ee9b37}.float-three{bottom:-18px;right:18px;color:#3887bd}
+.profile-welcome-copy{max-width:470px}.profile-step{font-size:10px;font-weight:900;letter-spacing:2px;color:#d6fff4}.profile-welcome-copy h2{font-size:clamp(34px,4vw,54px);line-height:1.1;color:white;margin:12px 0}.profile-welcome-copy h2 span{color:#c8fff0}.profile-welcome-copy p{color:#e7fff8;font-size:14px;max-width:400px}.profile-perks{display:grid;gap:8px;margin-top:22px;font-size:12px;font-weight:700}.profile-perks i{margin-right:8px;color:#c8fff0}
+.profile-form-panel{padding:clamp(25px,5vw,66px);display:flex;flex-direction:column;justify-content:center;max-width:780px;width:100%;margin:auto}.profile-form-top{display:flex;align-items:center;gap:10px;font-size:10px;font-weight:900;letter-spacing:1.3px;color:#66828a;margin-bottom:18px}.profile-form-icon{width:38px;height:38px;display:grid;place-items:center;background:#fff1dc;color:#d78427;border-radius:12px;font-size:17px}.profile-form-panel h2{font-size:clamp(27px,3vw,36px);margin:0;color:#153746}.profile-form-intro{font-size:13px;color:#6d818b;margin:6px 0 24px}.profile-form-panel .form-field label{font-size:12px}.profile-form-panel .form-field input:not([type=checkbox]),.profile-form-panel .form-field select{padding:13px;border-radius:12px;background:#fbfdfd}.profile-form-panel .goal-options label{padding:9px 11px;border-radius:12px;background:#f7fbfa;font-size:11px}.profile-form-panel .goal-options label:has(input:checked){background:#e1f5ed;border-color:#087f73;color:#075b53}.profile-submit-row{margin-top:22px}.profile-submit{width:100%;padding:15px;font-size:13px}.profile-privacy-note{font-size:10px;color:#71878f;text-align:center;margin-top:14px}.profile-privacy-note i{color:#087f73;margin-right:5px}
+.review-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:18px}.review-highlight{padding:30px;border-radius:22px;color:white;background:linear-gradient(135deg,#087f73,#27b39b);box-shadow:var(--shadow)}.review-big-icon{width:53px;height:53px;border-radius:17px;display:grid;place-items:center;background:#ffffff25;font-size:23px}.review-highlight h3{font-size:22px;color:white;margin:17px 0 7px}.review-highlight p{font-size:13px;color:#e4fff6;margin:0 0 20px}.review-panel{background:white;border:1px solid var(--border);border-radius:22px;padding:26px}.review-stars-display{color:#f3a73e;font-size:25px;letter-spacing:4px}.review-panel h3{margin:8px 0 4px}.review-panel>p,.review-empty{font-size:12px;color:var(--muted)}.review-list{display:grid;gap:9px;margin-top:14px}.review-item{padding:12px;border-radius:12px;background:#f4faf8;border:1px solid #e0efea}.review-item strong{font-size:12px;color:var(--heading)}.review-item .review-item-stars{color:#f3a73e;margin-left:8px}.review-item p{font-size:12px;margin:5px 0 0;overflow-wrap:anywhere}
+.review-modal-backdrop,.exit-modal-backdrop{display:none;position:fixed;inset:0;z-index:5000;background:#102e2acc;align-items:center;justify-content:center;padding:18px}.review-modal-backdrop.open,.exit-modal-backdrop.open{display:flex}.review-modal-card,.exit-modal-card{position:relative;width:min(480px,100%);padding:30px;background:white;border-radius:24px;box-shadow:0 25px 80px #102b2355;text-align:center}.review-close{position:absolute;top:14px;right:14px;border:0;background:#f0f6f4;width:35px;height:35px;border-radius:11px;color:#4b6864}.review-modal-icon,.exit-icon{width:57px;height:57px;display:grid;place-items:center;margin:0 auto 14px;border-radius:18px;background:#fff1dc;color:#e59a31;font-size:24px}.review-modal-card h2,.exit-modal-card h2{font-size:24px;margin:0 0 8px}.review-modal-card>p,.exit-modal-card>p{font-size:12px;color:var(--muted)}.star-picker{display:flex;justify-content:center;gap:7px;margin:17px 0}.star-picker button{border:0;background:transparent;color:#d7dfe0;font-size:34px;padding:0 3px}.star-picker button.selected{color:#f3a73e}.review-modal-card input,.review-modal-card textarea{display:block;width:100%;margin:10px 0;padding:12px;border:1px solid var(--border);border-radius:11px;font:inherit;font-size:12px}.review-modal-card textarea{min-height:95px;resize:vertical}.review-modal-actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:13px}.review-feedback{min-height:18px;font-size:11px;color:#087f73}.exit-actions{display:grid;gap:10px;margin-top:20px}.exit-actions .btn{padding:13px}.exit-stay{border:0;background:transparent;color:#087f73;font-weight:800;padding:8px}
+/* Navigation works like tabs: only the selected page is visible */
+body.tab-navigation main>section{display:none!important}body.tab-navigation main>section.active-page{display:block!important}body.tab-navigation main>section.home-only{display:none!important}body.tab-navigation main>section.home-only.active-home-extra{display:block!important}body.tab-navigation main>section#searchSection.active-home-extra{display:block!important}body.tab-navigation main>section#reviews.active-home-extra{display:block!important}body.tab-navigation main>section#home.active-page{display:block!important}body.tab-navigation .footer{display:block}
+.nav-links a.active-tab{color:#087f73;background:#e7f7f1;border-radius:9px;padding:8px 9px}.nav-links a.active-tab i{color:#e59a31}
+@media(max-width:760px){.profile-page-shell{grid-template-columns:1fr}.profile-welcome-panel{min-height:auto;padding:24px 22px 26px}.profile-illustration{width:100px;height:100px;margin:24px auto 18px;box-shadow:0 0 0 10px #ffffff0c}.profile-illustration>i{font-size:47px}.float-icon{width:34px;height:34px;border-radius:11px;font-size:13px}.profile-welcome-copy h2{font-size:32px}.profile-welcome-copy p{font-size:12px}.profile-perks{display:none}.profile-form-panel{padding:26px 20px}.profile-form-panel .modal-form{grid-template-columns:1fr}.profile-form-panel .form-field.full{grid-column:auto}.review-layout{grid-template-columns:1fr}.nav-links a.active-tab{background:transparent;padding:11px}}
+
 </style>
 </head>
 
@@ -481,7 +498,19 @@ section{scroll-margin-top:100px}
   </div>
 </section>
 
-<section class="container" aria-label="Search study resources">
+<section class="section home-only" id="reviews">
+  <div class="container">
+    <div class="section-heading">
+      <div><div class="section-kicker">Your voice matters</div><h2>Reviews from our learning community</h2><p>Tell us how Study Sphere is helping you learn better.</p></div>
+    </div>
+    <div class="review-layout">
+      <div class="review-highlight"><div class="review-big-icon"><i class="fa-solid fa-heart"></i></div><h3>Enjoying Study Sphere?</h3><p>Your feedback helps us make this study space more useful for every student.</p><button class="btn btn-white" type="button" id="openReviewBtn"><i class="fa-solid fa-star"></i> Write a Review</button></div>
+      <div class="review-panel"><div class="review-stars-display" aria-label="Five stars">★★★★★</div><h3>Help us improve</h3><p>Rate your experience and share what you would like to see next.</p><div id="reviewList" class="review-list"><p class="review-empty">Be the first to leave a review!</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="container" id="searchSection" aria-label="Search study resources">
   <div class="search-panel">
     <i class="fa-solid fa-magnifying-glass"></i>
     <input id="siteSearch" type="search" placeholder="Search textbooks, NCERT, PYQs, revision notes..." aria-label="Search resources">
@@ -693,10 +722,17 @@ section{scroll-margin-top:100px}
   </div>
 </footer>
 
-<div class="modal-backdrop" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
-  <div class="modal">
-    <h2 id="profileTitle">Welcome to Study Sphere! 🎓</h2>
-    <p>Tell us about yourself so we can personalise your learning experience.</p>
+<div class="modal-backdrop profile-page" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+  <div class="profile-page-shell">
+    <aside class="profile-welcome-panel">
+      <a href="#home" class="profile-brand"><span><i class="fa-solid fa-graduation-cap"></i></span><b>Study <em>Sphere</em></b></a>
+      <div class="profile-illustration"><i class="fa-solid fa-user-graduate"></i><span class="float-icon float-one"><i class="fa-solid fa-book-open"></i></span><span class="float-icon float-two"><i class="fa-solid fa-star"></i></span><span class="float-icon float-three"><i class="fa-solid fa-lightbulb"></i></span></div>
+      <div class="profile-welcome-copy"><span class="profile-step">YOUR LEARNING JOURNEY STARTS HERE</span><h2>Make learning<br><span>your own.</span></h2><p>A few quick details will help us personalise your Study Sphere experience.</p><div class="profile-perks"><span><i class="fa-solid fa-circle-check"></i> Your class resources</span><span><i class="fa-solid fa-circle-check"></i> Your learning goals</span><span><i class="fa-solid fa-circle-check"></i> Your study space</span></div></div>
+    </aside>
+    <div class="profile-form-panel">
+      <div class="profile-form-top"><span class="profile-form-icon"><i class="fa-solid fa-sparkles"></i></span><span>STUDENT PROFILE · STEP 1 OF 1</span></div>
+      <h2 id="profileTitle">Welcome to Study Sphere!</h2>
+      <p class="profile-form-intro">Let's get to know you. Fill in your details below.</p>
 
     <form id="profileForm">
       <div class="modal-form">
@@ -762,13 +798,20 @@ section{scroll-margin-top:100px}
 
       <div class="notice" id="profileNotice" role="status"></div>
 
-      <div class="modal-actions">
-        <button type="button" class="btn btn-light" id="profileLater">Close</button>
-        <button type="submit" class="btn btn-primary" id="profileSave">Save Profile <i class="fa-solid fa-arrow-right"></i></button>
+      <div class="modal-actions profile-submit-row">
+        <button type="submit" class="btn btn-primary profile-submit" id="profileSave"><i class="fa-solid fa-check-circle"></i> Save My Profile <i class="fa-solid fa-arrow-right"></i></button>
       </div>
+      <p class="profile-privacy-note"><i class="fa-solid fa-shield-halved"></i> Your profile helps personalise your learning experience.</p>
     </form>
+    </div>
   </div>
 </div>
+
+<div class="review-modal-backdrop" id="reviewModal" aria-modal="true" role="dialog" aria-labelledby="reviewModalTitle">
+  <div class="review-modal-card"><button type="button" class="review-close" id="closeReviewBtn" aria-label="Close review"><i class="fa-solid fa-xmark"></i></button><div class="review-modal-icon"><i class="fa-solid fa-star"></i></div><h2 id="reviewModalTitle">How was your Study Sphere experience?</h2><p>Your feedback helps us build a better study space.</p><form id="reviewForm"><div class="star-picker" role="radiogroup" aria-label="Choose a rating"><button type="button" data-rating="1" aria-label="1 star">★</button><button type="button" data-rating="2" aria-label="2 stars">★</button><button type="button" data-rating="3" aria-label="3 stars">★</button><button type="button" data-rating="4" aria-label="4 stars">★</button><button type="button" data-rating="5" aria-label="5 stars">★</button></div><input id="reviewName" maxlength="60" placeholder="Your name (optional)"><textarea id="reviewText" maxlength="500" placeholder="What did you like, or what can we improve? (optional)"></textarea><div class="review-modal-actions"><button type="button" class="btn btn-light" id="reviewLaterBtn">Later</button><button type="submit" class="btn btn-primary" id="submitReviewBtn"><i class="fa-solid fa-paper-plane"></i> Submit Review</button></div></form><p class="review-feedback" id="reviewFeedback" role="status"></p></div>
+</div>
+
+<div class="exit-modal-backdrop" id="exitModal" role="dialog" aria-modal="true" aria-labelledby="exitTitle"><div class="exit-modal-card"><div class="exit-icon"><i class="fa-solid fa-heart"></i></div><h2 id="exitTitle">Before you go…</h2><p>Would you like to rate your Study Sphere experience?</p><div class="exit-actions"><button class="btn btn-primary" id="exitRateBtn"><i class="fa-solid fa-star"></i> Rate now</button><button class="btn btn-light" id="exitLaterBtn">Later</button><button class="exit-stay" id="exitStayBtn">Go back to Study Sphere</button></div></div></div>
 
 <script>
 /* =========================================================
@@ -828,7 +871,7 @@ let selectedClass = null;
 let currentProfile = null;
 const DRIVE_ROOT_ID = "1XJ22yWC0P0fiNB4xeElKTCx-HSBtGCbl";
 // Paste your restricted Google Drive API key between the quotes below.
-const DRIVE_API_KEY = " AIzaSyBrhE51WjfOW_JSJcT_xD4gL6B4a7HDSbs";
+const DRIVE_API_KEY = "PASTE_YOUR_RESTRICTED_API_KEY_HERE";
 const FOLDER_MIME = "application/vnd.google-apps.folder";
 const resourceGradeSelect = document.getElementById("resourceGrade");
 const bookBrowser = document.getElementById("bookBrowser");
@@ -880,10 +923,11 @@ function makeResourceCard(name, classNumber) {
   const icon = document.createElement("div"); icon.className = "material-icon " + info[1]; icon.innerHTML = '<i class="fa-solid ' + info[0] + '"></i>';
   const content = document.createElement("div"), title = document.createElement("h3"), description = document.createElement("p"), status = document.createElement("span");
   title.textContent = name; description.textContent = "Grade " + classNumber + " • Study resources"; status.className = "resource-status";
-  status.textContent = COMING_SOON_RESOURCES.has(name) ? "COMING SOON" : "BROWSE & DOWNLOAD";
+  const isComingSoon = Number(classNumber) !== 10 && COMING_SOON_RESOURCES.has(name);
+  status.textContent = isComingSoon ? "COMING SOON" : "BROWSE & DOWNLOAD";
   content.append(title, description, status); card.append(icon, content);
   const activate = () => {
-    if (COMING_SOON_RESOURCES.has(name)) { showNotice(resourceNotice, name + " are coming soon."); return; }
+    if (Number(classNumber) !== 10 && COMING_SOON_RESOURCES.has(name)) { showNotice(resourceNotice, name + " are coming soon for this grade."); return; }
     openDriveBrowser(classNumber, name);
   };
   card.addEventListener("click", activate); card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); activate(); } });
@@ -894,7 +938,7 @@ function renderResources() {
   const classNumber = Number(resourceGradeSelect?.value || resourceSelectedClass || currentProfile?.class || "1");
   resourceSelectedClass = String(classNumber); selectedClass = String(classNumber);
   const resources = classNumber === 10
-    ? ["NCERT Books", "PYQs", "Sample Question Papers (SQPs)", "Question Bank"]
+    ? ["NCERT Books", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes", "PYQs", "Sample Question Papers (SQPs)", "Question Bank"]
     : ["NCERT Books", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"];
   showLibraryMessage("Grade " + classNumber + " Study Library", "Browse your resources here without leaving Study Sphere.");
   resources.forEach(name => materialGrid.appendChild(makeResourceCard(name, classNumber)));
@@ -914,42 +958,71 @@ function makeDriveFileRow(file, label) {
 async function openDriveBrowser(classNumber, category) {
   const req = ++bookBrowserRequest; hideNotice(resourceNotice); bookBrowser.replaceChildren(); bookBrowser.classList.add("open");
   const heading = document.createElement("h3"); heading.textContent = "Grade " + classNumber + " · " + category;
-  const intro = document.createElement("p"); intro.textContent = "Choose a subject or chapter. Files open or download from your existing Google Drive.";
+  const intro = document.createElement("p");
+  const pathHints = {
+    "NCERT Books": "Folder path: Grade → Subject → Book Name → PDF files.",
+    "PYQs": "Folder path: Grade → Subject → Year → PDF files.",
+    "Sample Question Papers (SQPs)": "Folder path: Grade → Subject → PDF files.",
+    "Question Bank": "Folder path: Grade → Subject → PDF files.",
+    "NCERT Solutions": "Folder path: Grade → Subject → files.",
+    "Test Papers": "Folder path: Grade → Subject → files.",
+    "Last-Minute Revision Notes": "Folder path: Grade → Subject → files."
+  };
+  intro.textContent = (pathHints[category] || "Choose a subject and then open its folders or files.") + " Browse and download PDFs without leaving Study Sphere.";
   const controls = document.createElement("div"); controls.className = "resource-controls"; controls.style.margin = "12px 0";
   const back = document.createElement("button"); back.type = "button"; back.className = "btn btn-light"; back.textContent = "← Back to categories"; back.addEventListener("click", renderResources);
   const crumbs = document.createElement("p"); crumbs.style.fontSize = "13px"; crumbs.style.fontWeight = "700"; crumbs.textContent = "Grade " + classNumber + " / " + category;
   const area = document.createElement("div"); area.className = "book-file-list"; bookBrowser.append(heading, intro, controls, crumbs, area); controls.appendChild(back);
+  // Move the visitor straight to the opened resource browser so it is immediately visible.
+  requestAnimationFrame(() => bookBrowser.scrollIntoView({ behavior: "smooth", block: "start" }));
   const loading = document.createElement("p"); loading.textContent = "Loading your folders…"; area.appendChild(loading);
   try {
     const rootItems = await listDriveFolder(DRIVE_ROOT_ID); if (req !== bookBrowserRequest) return;
     const gradeFolder = rootItems.find(x => x.mimeType === FOLDER_MIME && matchesName(x.name, ["GRADE " + classNumber, "GRADE" + classNumber, "CLASS " + classNumber]));
     if (!gradeFolder) throw new Error("Could not find the Grade " + classNumber + " folder inside the shared main folder.");
-    let categoryItems = await listDriveFolder(gradeFolder.id); if (req !== bookBrowserRequest) return;
-    let wanted = category === "NCERT Books" ? ["NCERT BOOKS", "NCERT BOOK", "TEXTBOOKS"] : category === "PYQs" ? ["PYQ", "PYQS", "PREVIOUS YEAR QUESTIONS"] : category === "Sample Question Papers (SQPs)" ? ["SQP", "SQPS", "SAMPLE QUESTION PAPERS"] : ["QUESTION BANK", "QUESTIONBANK"];
-    let selectedFolder = categoryItems.find(x => x.mimeType === FOLDER_MIME && matchesName(x.name, wanted));
-    if (selectedFolder) categoryItems = await listDriveFolder(selectedFolder.id);
-    else throw new Error("Could not find the " + category + " folder under Grade " + classNumber + ". Check that the folder exists and is shared with anyone who has the link.");
+    const gradeItems = await listDriveFolder(gradeFolder.id); if (req !== bookBrowserRequest) return;
+
+    // Some Drive folders have a category folder (for example, PYQs); others place
+    // the subject folders directly under the Grade folder. Support both layouts.
+    const categoryNames = {
+      "NCERT Books": ["NCERT BOOKS", "NCERT BOOK", "TEXTBOOKS", "BOOKS"],
+      "PYQs": ["PYQ", "PYQS", "PREVIOUS YEAR QUESTIONS", "PREVIOUS YEAR QUESTION PAPERS"],
+      "Sample Question Papers (SQPs)": ["SQP", "SQPS", "SAMPLE QUESTION PAPERS", "SAMPLE PAPERS"],
+      "Question Bank": ["QUESTION BANK", "QUESTIONBANK", "QUESTION BANKS"],
+      "NCERT Solutions": ["NCERT SOLUTIONS", "SOLUTIONS"],
+      "Test Papers": ["TEST PAPERS", "TEST PAPER", "TESTS"],
+      "Last-Minute Revision Notes": ["LAST MINUTE REVISION NOTES", "LAST TIME REVISION NOTES", "REVISION NOTES"]
+    };
+    const categoryFolder = gradeItems.find(x => x.mimeType === FOLDER_MIME && matchesName(x.name, categoryNames[category] || [category]));
+    let categoryItems = categoryFolder ? await listDriveFolder(categoryFolder.id) : gradeItems;
     if (req !== bookBrowserRequest) return;
     area.replaceChildren();
     const folders = categoryItems.filter(x => x.mimeType === FOLDER_MIME);
     const files = categoryItems.filter(x => x.mimeType !== FOLDER_MIME && (/\.pdf$/i.test(x.name) || x.mimeType === "application/pdf"));
+    const firstLevelLabel = category === "NCERT Books" || category === "PYQs" || category === "Sample Question Papers (SQPs)" || category === "Question Bank" ? "Subjects" : "Folders / Subjects";
     if (folders.length) {
+      const h = document.createElement("h3"); h.textContent = firstLevelLabel; area.appendChild(h);
       folders.forEach(folder => {
         const row = document.createElement("div"); row.className = "book-file-row";
-        const info = document.createElement("div"), nm = document.createElement("div"), meta = document.createElement("div"); nm.className = "book-file-name"; nm.textContent = folder.name; meta.className = "book-file-meta"; meta.textContent = "Folder"; info.append(nm, meta);
-        const btn = document.createElement("button"); btn.type = "button"; btn.className = "btn btn-primary"; btn.textContent = "Open"; btn.addEventListener("click", () => openDriveSubfolder(classNumber, category, folder, area, crumbs, req)); row.append(info, btn); area.appendChild(row);
+        const info = document.createElement("div"), nm = document.createElement("div"), meta = document.createElement("div");
+        nm.className = "book-file-name"; nm.textContent = folder.name; meta.className = "book-file-meta";
+        meta.textContent = category === "NCERT Books" || category === "PYQs" || category === "Sample Question Papers (SQPs)" || category === "Question Bank" ? "Subject · Open to continue" : "Folder · Open to continue";
+        info.append(nm, meta);
+        const btn = document.createElement("button"); btn.type = "button"; btn.className = "btn btn-primary"; btn.textContent = "Open";
+        btn.addEventListener("click", () => openDriveSubfolder(classNumber, category, folder, area, crumbs, req)); row.append(info, btn); area.appendChild(row);
       });
     }
     const complete = files.filter(f => /complete|full.?book|whole.?book|all.?chapters/i.test(f.name));
     if (complete.length) { const h = document.createElement("h3"); h.textContent = "Complete Book"; area.appendChild(h); complete.forEach(f => area.appendChild(makeDriveFileRow(f, "Complete Book"))); }
-    const chapters = files.filter(f => !complete.includes(f));
-    if (chapters.length) { const h = document.createElement("h3"); h.style.marginTop = "16px"; h.textContent = folders.length ? "PDF Files" : "Books & Chapters"; area.appendChild(h); chapters.forEach(f => area.appendChild(makeDriveFileRow(f))); }
-    if (!folders.length && !files.length) addBookBrowserMessage("No folders or PDFs were found here yet.");
-    bookBrowser.scrollIntoView({behavior:"smooth", block:"nearest"});
+    const otherFiles = files.filter(f => !complete.includes(f));
+    if (otherFiles.length) { const h = document.createElement("h3"); h.style.marginTop = "16px"; h.textContent = folders.length ? "PDF Files" : "Books & PDFs"; area.appendChild(h); otherFiles.forEach(f => area.appendChild(makeDriveFileRow(f))); }
+    if (!folders.length && !files.length) addBookBrowserMessage("No folders or PDFs were found here. Check that the Drive folder names and sharing permissions are correct.");
+    bookBrowser.scrollIntoView({behavior:"smooth", block:"start"});
   } catch (error) { if (req !== bookBrowserRequest) return; area.replaceChildren(); addBookBrowserMessage(error.message || "Could not load Google Drive resources.", "error"); }
 }
 async function openDriveSubfolder(classNumber, category, folder, area, crumbs, parentReq) {
   const req = ++bookBrowserRequest; area.replaceChildren(); crumbs.textContent = "Grade " + classNumber + " / " + category + " / " + folder.name;
+  requestAnimationFrame(() => bookBrowser.scrollIntoView({ behavior: "smooth", block: "start" }));
   const back = document.createElement("button"); back.type = "button"; back.className = "btn btn-light"; back.textContent = "← Back"; back.addEventListener("click", () => openDriveBrowser(classNumber, category)); area.appendChild(back);
   const loading = document.createElement("p"); loading.textContent = "Loading PDFs…"; area.appendChild(loading);
   try {
@@ -1210,15 +1283,13 @@ function closeProfile() {
   profileModal.classList.remove("open");
 }
 
-document.getElementById("profileLater").addEventListener("click", closeProfile);
+
 
 document.getElementById("editProfileTop").addEventListener("click", () => {
   if (requireLogin()) openProfile(currentProfile || {});
 });
 
-profileModal.addEventListener("click", event => {
-  if (event.target === profileModal) closeProfile();
-});
+
 
 async function loadProfile(user) {
   if (!user || !supabaseClient) return null;
@@ -1543,6 +1614,78 @@ async function initialiseAuthentication() {
 
 renderResources();
 initialiseAuthentication();
+
+/* =========================================================
+   9. SECTION TABS, REVIEWS AND EXIT-INTENT RATING
+========================================================= */
+(function setupSectionTabs(){
+  const mainSections=[...document.querySelectorAll("main>section")];
+  const navItems=[...document.querySelectorAll('#navLinks a[href^="#"]')];
+  const homeExtras=[document.getElementById("searchSection"),document.getElementById("reviews")].filter(Boolean);
+  function activatePage(id, updateHash=true){
+    let target=document.getElementById(id);
+    if(!target || !mainSections.includes(target)) target=document.getElementById("home");
+    document.body.classList.add("tab-navigation");
+    mainSections.forEach(section=>{section.classList.remove("active-page","active-home-extra");});
+    target.classList.add("active-page");
+    if(target.id==="home") homeExtras.forEach(section=>section.classList.add("active-home-extra"));
+    navItems.forEach(link=>link.classList.toggle("active-tab",link.getAttribute("href")==="#"+target.id));
+    if(updateHash && location.hash!=="#"+target.id) history.replaceState({tab:target.id},"","#"+target.id);
+    window.scrollTo({top:0,behavior:"smooth"});
+    document.getElementById("navLinks")?.classList.remove("open");
+    document.getElementById("menuToggle")?.setAttribute("aria-expanded","false");
+  }
+  navItems.forEach(link=>link.addEventListener("click",event=>{
+    const id=link.getAttribute("href").slice(1);
+    if(document.getElementById(id) && mainSections.includes(document.getElementById(id))){event.preventDefault();activatePage(id);}
+  }));
+  document.querySelectorAll('a[href^="#"]').forEach(link=>{
+    if(link.closest("#navLinks")) return;
+    link.addEventListener("click",event=>{
+      const id=link.getAttribute("href").slice(1);
+      if(id==="logout"||id==="profile") return;
+      if(id==="materials"||id==="tools"||id==="quiz"||id==="doubt"||id==="organizer"||id==="senior"||id==="home"){
+        event.preventDefault();activatePage(id);
+      }
+    });
+  });
+  const initial=location.hash.slice(1);
+  activatePage(mainSections.some(s=>s.id===initial)?initial:"home",false);
+})();
+
+let chosenReviewRating=0;
+const reviewModal=document.getElementById("reviewModal");
+const exitModal=document.getElementById("exitModal");
+const reviewForm=document.getElementById("reviewForm");
+function openReview(){reviewModal.classList.add("open");exitModal.classList.remove("open");document.getElementById("reviewFeedback").textContent="";}
+function closeReview(){reviewModal.classList.remove("open");}
+function getReviews(){try{return JSON.parse(localStorage.getItem("studySphereReviews")||"[]")}catch{return []}}
+function renderReviews(){
+ const list=document.getElementById("reviewList");if(!list)return;const reviews=getReviews().slice(-4).reverse();list.replaceChildren();
+ if(!reviews.length){
+   list.innerHTML='<article class="review-item"><strong>Example student review</strong><span class="review-item-stars">★★★★★</span><p>“A helpful place to organise study materials and find resources.”</p><small style="color:#6b8580;font-size:10px">Illustrative example — not a submitted review</small></article><article class="review-item"><strong>Example student review</strong><span class="review-item-stars">★★★★☆</span><p>“I like having my learning tools together in one place.”</p><small style="color:#6b8580;font-size:10px">Illustrative example — not a submitted review</small></article><p class="review-empty">Real reviews submitted on this device will appear here.</p>';return;
+ }
+ reviews.forEach(review=>{const item=document.createElement("article");item.className="review-item";const head=document.createElement("div");const name=document.createElement("strong");name.textContent=review.name||"Study Sphere Student";const stars=document.createElement("span");stars.className="review-item-stars";stars.textContent="★".repeat(review.rating);head.append(name,stars);item.append(head);if(review.text){const p=document.createElement("p");p.textContent=review.text;item.append(p);}list.append(item);});
+}
+document.getElementById("openReviewBtn")?.addEventListener("click",openReview);
+document.getElementById("closeReviewBtn")?.addEventListener("click",closeReview);
+document.getElementById("reviewLaterBtn")?.addEventListener("click",closeReview);
+document.querySelectorAll(".star-picker button").forEach(button=>button.addEventListener("click",()=>{chosenReviewRating=Number(button.dataset.rating);document.querySelectorAll(".star-picker button").forEach(star=>star.classList.toggle("selected",Number(star.dataset.rating)<=chosenReviewRating));}));
+reviewForm?.addEventListener("submit",event=>{event.preventDefault();if(!chosenReviewRating){document.getElementById("reviewFeedback").textContent="Please choose a star rating first.";return;}const reviews=getReviews();reviews.push({rating:chosenReviewRating,name:document.getElementById("reviewName").value.trim(),text:document.getElementById("reviewText").value.trim(),date:new Date().toISOString()});try{localStorage.setItem("studySphereReviews",JSON.stringify(reviews.slice(-30)));}catch{}renderReviews();document.getElementById("reviewFeedback").textContent="Thank you! Your review has been saved on this device.";reviewForm.reset();chosenReviewRating=0;document.querySelectorAll(".star-picker button").forEach(star=>star.classList.remove("selected"));setTimeout(()=>{closeReview();if(window.pendingExternalHref){const destination=window.pendingExternalHref;window.pendingExternalHref=null;sessionStorage.setItem("studySphereExitPromptSeen","1");window.location.href=destination;}},1300);});
+renderReviews();
+document.getElementById("exitRateBtn")?.addEventListener("click",openReview);
+document.getElementById("exitLaterBtn")?.addEventListener("click",()=>{sessionStorage.setItem("studySphereExitPromptSeen","1");exitModal.classList.remove("open");if(window.pendingExternalHref){const destination=window.pendingExternalHref;window.pendingExternalHref=null;window.location.href=destination;}});
+document.getElementById("exitStayBtn")?.addEventListener("click",()=>{exitModal.classList.remove("open");window.pendingExternalHref=null;sessionStorage.setItem("studySphereExitPromptSeen","1");});
+// Offer a rating before leaving through an external link. Browsers do not permit a custom dialog on tab-close itself.
+document.querySelectorAll('a[href^="http"]:not([href*="abhi-joy69.github.io/studysphere"])').forEach(link=>link.addEventListener("click",event=>{
+ if(sessionStorage.getItem("studySphereExitPromptSeen")==="1")return;
+ event.preventDefault();window.pendingExternalHref=link.href;exitModal.classList.add("open");
+}));
+// Desktop exit-intent and browser Back: provide a respectful, dismissible rating prompt.
+document.addEventListener("mouseout",event=>{if(event.clientY<=0&&event.relatedTarget===null&&!sessionStorage.getItem("studySphereExitPromptSeen")&&!reviewModal.classList.contains("open"))exitModal.classList.add("open");});
+window.addEventListener("popstate",()=>{if(!sessionStorage.getItem("studySphereExitPromptSeen")){exitModal.classList.add("open");history.pushState({studySphere:true},"",location.href);}});
+history.pushState({studySphere:true},"",location.href);
+
 </script>
 <script>
 /* =========================================================
