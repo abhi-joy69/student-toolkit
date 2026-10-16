@@ -8,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -34,13 +34,13 @@
 html{scroll-behavior:smooth;scroll-padding-top:100px}
 body{
   margin:0;
-  font-family:'DM Sans',sans-serif;
+  font-family:'Plus Jakarta Sans',sans-serif;
   background:var(--background);
   color:var(--text);
   line-height:1.65;
 }
 h1,h2,h3,h4,.brand-name{
-  font-family:'Manrope',sans-serif;
+  font-family:'Plus Jakarta Sans',sans-serif;
   color:var(--heading);
 }
 a{color:inherit;text-decoration:none}
@@ -50,6 +50,25 @@ button:disabled{opacity:.6;cursor:not-allowed}
 ::selection{background:#bce9e8;color:#153746}
 :focus-visible{outline:3px solid #f39a4a;outline-offset:3px}
 @media (prefers-reduced-motion:no-preference){.material-card,.tool-card,.class-card{transition:transform .25s ease,box-shadow .25s ease}.material-card:hover,.tool-card:hover,.class-card:hover{transform:translateY(-4px)}}
+/* Polished motion, focus and selection states */
+.btn{position:relative;overflow:hidden;will-change:transform}
+.btn:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 20%,#ffffff35 45%,transparent 70%);transform:translateX(-130%);transition:transform .55s ease;pointer-events:none}
+.btn:hover:after{transform:translateX(130%)}
+.material-card,.tool-card,.review-panel,.review-highlight,.quick-link-card{box-shadow:0 8px 24px rgba(24,79,90,.055);transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}
+.material-card:hover,.tool-card:hover,.quick-link-card:hover{box-shadow:0 18px 38px rgba(8,127,115,.13);border-color:#a8dcd2}
+.quick-access-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.quick-link-card{display:flex;align-items:center;gap:13px;min-height:92px;padding:17px;background:white;border:1px solid var(--border);border-radius:17px;cursor:pointer;text-align:left;color:var(--heading)}
+.quick-link-card .quick-icon{width:46px;height:46px;flex-shrink:0;display:grid;place-items:center;border-radius:14px;background:#e1f5ed;color:var(--primary);font-size:19px}
+.quick-link-card:nth-child(2) .quick-icon{background:#e9f2ff;color:#2879ba}.quick-link-card:nth-child(3) .quick-icon{background:#fff1dc;color:#d8872c}.quick-link-card:nth-child(4) .quick-icon{background:#f1eaff;color:#7958c7}.quick-link-card:nth-child(5) .quick-icon{background:#e5f7f4;color:#087f73}.quick-link-card:nth-child(6) .quick-icon{background:#fff0f0;color:#d35b67}.quick-link-card:nth-child(7) .quick-icon{background:#eaf4ff;color:#397eb3}.quick-link-card:nth-child(8) .quick-icon{background:#f8f1dc;color:#a77718}
+.quick-link-card strong{display:block;font-size:13px;line-height:1.35}.quick-link-card small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+[data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1)}
+[data-reveal].revealed{opacity:1;transform:translateY(0)}
+.book-file-row{animation:rowEnter .32s ease both}
+@keyframes rowEnter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.star-picker button{transition:transform .18s ease,color .18s ease}.star-picker button:hover{transform:scale(1.2)}.star-picker button.selected{color:#f3a73e;filter:drop-shadow(0 2px 3px #f3a73e55);transform:scale(1.12)}
+@media(max-width:900px){.quick-access-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:430px){.quick-access-grid{grid-template-columns:1fr}.quick-link-card{min-height:76px}}
+@media(prefers-reduced-motion:reduce){[data-reveal]{opacity:1;transform:none;transition:none}.btn:after{display:none}}
 .container{width:min(1160px,92%);margin:auto}
 section{scroll-margin-top:100px}
 
@@ -414,17 +433,30 @@ section{scroll-margin-top:100px}
 .profile-page.open{display:flex}
 .profile-page-shell{width:100%;min-height:100vh;display:grid;grid-template-columns:minmax(300px,.9fr) minmax(400px,1.1fr);background:white}
 .profile-welcome-panel{position:relative;overflow:hidden;padding:clamp(28px,5vw,68px);background:linear-gradient(145deg,#087f73 0%,#139b87 52%,#56c8b0 100%);color:white;display:flex;flex-direction:column;justify-content:space-between;min-height:100vh}
-.profile-brand{display:flex;align-items:center;gap:11px;color:white;font-size:20px}.profile-brand span{width:45px;height:45px;display:grid;place-items:center;border-radius:15px;background:#ffffff25;font-size:22px}.profile-brand b{font-family:Manrope,sans-serif}.profile-brand em{font-style:normal;color:#c8fff0}
+.profile-brand{display:flex;align-items:center;gap:11px;color:white;font-size:20px}.profile-brand span{width:45px;height:45px;display:grid;place-items:center;border-radius:15px;background:#ffffff25;font-size:22px}.profile-brand b{font-family:"Plus Jakarta Sans",sans-serif}.profile-brand em{font-style:normal;color:#c8fff0}
 .profile-illustration{position:relative;align-self:center;margin:36px 0 20px;width:220px;height:220px;border-radius:48% 52% 55% 45%;background:#ffffff1e;display:grid;place-items:center;box-shadow:0 0 0 20px #ffffff0c,0 0 0 40px #ffffff08}.profile-illustration>i{font-size:100px;color:white;filter:drop-shadow(0 15px 10px #064b4033)}.float-icon{position:absolute;width:52px;height:52px;display:grid;place-items:center;border-radius:17px;background:white;color:#087f73;font-size:20px;box-shadow:0 12px 25px #064b4033}.float-one{top:2px;right:-10px}.float-two{bottom:10px;left:-18px;color:#ee9b37}.float-three{bottom:-18px;right:18px;color:#3887bd}
 .profile-welcome-copy{max-width:470px}.profile-step{font-size:10px;font-weight:900;letter-spacing:2px;color:#d6fff4}.profile-welcome-copy h2{font-size:clamp(34px,4vw,54px);line-height:1.1;color:white;margin:12px 0}.profile-welcome-copy h2 span{color:#c8fff0}.profile-welcome-copy p{color:#e7fff8;font-size:14px;max-width:400px}.profile-perks{display:grid;gap:8px;margin-top:22px;font-size:12px;font-weight:700}.profile-perks i{margin-right:8px;color:#c8fff0}
 .profile-form-panel{padding:clamp(25px,5vw,66px);display:flex;flex-direction:column;justify-content:center;max-width:780px;width:100%;margin:auto}.profile-form-top{display:flex;align-items:center;gap:10px;font-size:10px;font-weight:900;letter-spacing:1.3px;color:#66828a;margin-bottom:18px}.profile-form-icon{width:38px;height:38px;display:grid;place-items:center;background:#fff1dc;color:#d78427;border-radius:12px;font-size:17px}.profile-form-panel h2{font-size:clamp(27px,3vw,36px);margin:0;color:#153746}.profile-form-intro{font-size:13px;color:#6d818b;margin:6px 0 24px}.profile-form-panel .form-field label{font-size:12px}.profile-form-panel .form-field input:not([type=checkbox]),.profile-form-panel .form-field select{padding:13px;border-radius:12px;background:#fbfdfd}.profile-form-panel .goal-options label{padding:9px 11px;border-radius:12px;background:#f7fbfa;font-size:11px}.profile-form-panel .goal-options label:has(input:checked){background:#e1f5ed;border-color:#087f73;color:#075b53}.profile-submit-row{margin-top:22px}.profile-submit{width:100%;padding:15px;font-size:13px}.profile-privacy-note{font-size:10px;color:#71878f;text-align:center;margin-top:14px}.profile-privacy-note i{color:#087f73;margin-right:5px}
 .review-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:18px}.review-highlight{padding:30px;border-radius:22px;color:white;background:linear-gradient(135deg,#087f73,#27b39b);box-shadow:var(--shadow)}.review-big-icon{width:53px;height:53px;border-radius:17px;display:grid;place-items:center;background:#ffffff25;font-size:23px}.review-highlight h3{font-size:22px;color:white;margin:17px 0 7px}.review-highlight p{font-size:13px;color:#e4fff6;margin:0 0 20px}.review-panel{background:white;border:1px solid var(--border);border-radius:22px;padding:26px}.review-stars-display{color:#f3a73e;font-size:25px;letter-spacing:4px}.review-panel h3{margin:8px 0 4px}.review-panel>p,.review-empty{font-size:12px;color:var(--muted)}.review-list{display:grid;gap:9px;margin-top:14px}.review-item{padding:12px;border-radius:12px;background:#f4faf8;border:1px solid #e0efea}.review-item strong{font-size:12px;color:var(--heading)}.review-item .review-item-stars{color:#f3a73e;margin-left:8px}.review-item p{font-size:12px;margin:5px 0 0;overflow-wrap:anywhere}
-.review-modal-backdrop,.exit-modal-backdrop{display:none;position:fixed;inset:0;z-index:5000;background:#102e2acc;align-items:center;justify-content:center;padding:18px}.review-modal-backdrop.open,.exit-modal-backdrop.open{display:flex}.review-modal-card,.exit-modal-card{position:relative;width:min(480px,100%);padding:30px;background:white;border-radius:24px;box-shadow:0 25px 80px #102b2355;text-align:center}.review-close{position:absolute;top:14px;right:14px;border:0;background:#f0f6f4;width:35px;height:35px;border-radius:11px;color:#4b6864}.review-modal-icon,.exit-icon{width:57px;height:57px;display:grid;place-items:center;margin:0 auto 14px;border-radius:18px;background:#fff1dc;color:#e59a31;font-size:24px}.review-modal-card h2,.exit-modal-card h2{font-size:24px;margin:0 0 8px}.review-modal-card>p,.exit-modal-card>p{font-size:12px;color:var(--muted)}.star-picker{display:flex;justify-content:center;gap:7px;margin:17px 0}.star-picker button{border:0;background:transparent;color:#d7dfe0;font-size:34px;padding:0 3px}.star-picker button.selected{color:#f3a73e}.review-modal-card input,.review-modal-card textarea{display:block;width:100%;margin:10px 0;padding:12px;border:1px solid var(--border);border-radius:11px;font:inherit;font-size:12px}.review-modal-card textarea{min-height:95px;resize:vertical}.review-modal-actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:13px}.review-feedback{min-height:18px;font-size:11px;color:#087f73}.exit-actions{display:grid;gap:10px;margin-top:20px}.exit-actions .btn{padding:13px}.exit-stay{border:0;background:transparent;color:#087f73;font-weight:800;padding:8px}
+.review-modal-backdrop,.exit-modal-backdrop{display:none;position:fixed;inset:0;z-index:5000;background:#102e2acc;align-items:center;justify-content:center;padding:18px}.review-modal-backdrop.open,.exit-modal-backdrop.open{display:flex}.review-modal-card,.exit-modal-card{position:relative;width:min(480px,100%);padding:30px;background:white;border-radius:24px;box-shadow:0 25px 80px #102b2355;text-align:center}.review-close{position:absolute;top:14px;right:14px;border:0;background:#f0f6f4;width:35px;height:35px;border-radius:11px;color:#4b6864}.review-modal-icon,.exit-icon{width:57px;height:57px;display:grid;place-items:center;margin:0 auto 14px;border-radius:18px;background:#fff1dc;color:#e59a31;font-size:24px}.review-modal-card h2,.exit-modal-card h2{font-size:24px;margin:0 0 8px}.review-modal-card>p,.exit-modal-card>p{font-size:12px;color:var(--muted)}.star-picker{display:flex;justify-content:center;gap:7px;margin:17px 0}.star-picker button{border:0;background:transparent;color:#d7dfe0;font-size:34px;padding:0 3px}.star-picker button.selected{color:#f3a73e}.rating-hint{margin:-8px 0 10px!important;font-size:11px!important;color:#7b8d91!important}.review-modal-card input,.review-modal-card textarea{display:block;width:100%;margin:10px 0;padding:12px;border:1px solid var(--border);border-radius:11px;font:inherit;font-size:12px}.review-modal-card textarea{min-height:95px;resize:vertical}.review-modal-actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:13px}.review-feedback{min-height:18px;font-size:11px;color:#087f73}.exit-actions{display:grid;gap:10px;margin-top:20px}.exit-actions .btn{padding:13px}.exit-stay{border:0;background:transparent;color:#087f73;font-weight:800;padding:8px}
 /* Navigation works like tabs: only the selected page is visible */
-body.tab-navigation main>section{display:none!important}body.tab-navigation main>section.active-page{display:block!important}body.tab-navigation main>section.home-only{display:none!important}body.tab-navigation main>section.home-only.active-home-extra{display:block!important}body.tab-navigation main>section#searchSection.active-home-extra{display:block!important}body.tab-navigation main>section#reviews.active-home-extra{display:block!important}body.tab-navigation main>section#home.active-page{display:block!important}body.tab-navigation .footer{display:block}
+body.tab-navigation main>section{display:none!important}body.tab-navigation main>section.active-page{display:block!important}body.tab-navigation main>section.home-only{display:none!important}body.tab-navigation main>section.home-only.active-home-extra{display:block!important}body.tab-navigation main>section#searchSection.active-home-extra{display:block!important}body.tab-navigation main>section#home.active-page{display:block!important}body.tab-navigation .footer{display:block}
 .nav-links a.active-tab{color:#087f73;background:#e7f7f1;border-radius:9px;padding:8px 9px}.nav-links a.active-tab i{color:#e59a31}
 @media(max-width:760px){.profile-page-shell{grid-template-columns:1fr}.profile-welcome-panel{min-height:auto;padding:24px 22px 26px}.profile-illustration{width:100px;height:100px;margin:24px auto 18px;box-shadow:0 0 0 10px #ffffff0c}.profile-illustration>i{font-size:47px}.float-icon{width:34px;height:34px;border-radius:11px;font-size:13px}.profile-welcome-copy h2{font-size:32px}.profile-welcome-copy p{font-size:12px}.profile-perks{display:none}.profile-form-panel{padding:26px 20px}.profile-form-panel .modal-form{grid-template-columns:1fr}.profile-form-panel .form-field.full{grid-column:auto}.review-layout{grid-template-columns:1fr}.nav-links a.active-tab{background:transparent;padding:11px}}
 
+
+.home-grade-control{border-radius:14px}
+.quick-card-status{display:block;margin-top:4px;font-size:11px;font-weight:700;color:var(--muted)}
+.ncert-result-area{padding-top:4px}
+.ncert-result-area .book-file-list{gap:10px}
+.ncert-result-area .book-file-row{background:var(--surface, #fff)}
+@media(max-width:760px){.home-grade-control{align-items:stretch!important}.home-grade-control>span{display:block}}
+#searchSection{display:none!important}
+.search-panel{display:none!important}
+</style>
+
+<style>
+section[data-home-hidden="true"] { display: none !important; }
 </style>
 </head>
 
@@ -452,7 +484,7 @@ body.tab-navigation main>section{display:none!important}body.tab-navigation main
       <a href="#quiz"><i class="fa-solid fa-circle-question"></i> AI Quiz</a>
       <a href="#doubt"><i class="fa-solid fa-lightbulb"></i> Doubt Solver</a>
       <a href="#organizer"><i class="fa-solid fa-list-check"></i> My Tasks</a>
-      <a href="#senior"><i class="fa-solid fa-arrow-up-right-from-square"></i> CBSE</a>
+      <a href="https://cbseacademic.nic.in/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> CBSE</a>
     </nav>
 
     <div class="nav-actions" id="navActions">
@@ -486,6 +518,7 @@ body.tab-navigation main>section{display:none!important}body.tab-navigation main
         <div class="hero-buttons">
           <a href="#materials" class="btn btn-white"><i class="fa-solid fa-book-open"></i> My Study Library</a>
           <a href="#tools" class="btn btn-glass"><i class="fa-solid fa-rocket"></i> Explore Study Tools</a>
+          <a href="https://cbseacademic.nic.in/" class="btn btn-white" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit CBSE Academic</a>
         </div>
 
         <div class="hero-trust">
@@ -498,28 +531,112 @@ body.tab-navigation main>section{display:none!important}body.tab-navigation main
   </div>
 </section>
 
-<section class="section home-only" id="reviews">
+<section class="section home-only" id="quickAccess">
   <div class="container">
     <div class="section-heading">
-      <div><div class="section-kicker">Your voice matters</div><h2>Reviews from our learning community</h2><p>Tell us how Study Sphere is helping you learn better.</p></div>
+      <div><div class="section-kicker">Jump right in</div><h2>Quick access to your study space</h2><p>Choose a tool to get started.</p></div>
+    </div>
+    <div class="resource-controls home-grade-control" style="margin:0 0 18px;align-items:center">
+      <label for="homeGradeSelect">Choose your class
+        <select id="homeGradeSelect" aria-label="Choose your class">
+          <option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option>
+          <option value="4">Class 4</option><option value="5">Class 5</option><option value="6">Class 6</option>
+          <option value="7">Class 7</option><option value="8" selected>Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option>
+        </select>
+      </label>
+      <span style="font-size:12px;color:var(--muted)">Choose your class to find the right books and resources.</span>
+    </div>
+    <div class="quick-access-grid">
+      <button class="quick-link-card" type="button" data-resource-shortcut="NCERT Books"><span class="quick-icon"><i class="fa-solid fa-book-open"></i></span><span><strong>NCERT Books</strong></span></button>
+      <button class="quick-link-card class10-resource-shortcut" type="button" data-resource-shortcut="PYQs" hidden><span class="quick-icon"><i class="fa-solid fa-clock-rotate-left"></i></span><span><strong>PYQs</strong></span></button>
+      <button class="quick-link-card class10-resource-shortcut" type="button" data-resource-shortcut="Sample Question Papers (SQPs)" hidden><span class="quick-icon"><i class="fa-solid fa-file-circle-check"></i></span><span><strong>Sample Papers</strong></span></button>
+      <button class="quick-link-card class10-resource-shortcut" type="button" data-resource-shortcut="Question Bank" hidden><span class="quick-icon"><i class="fa-solid fa-layer-group"></i></span><span><strong>Question Bank</strong></span></button>
+      <button class="quick-link-card class10-resource-shortcut" type="button" data-resource-shortcut="NCERT Solutions" hidden><span class="quick-icon"><i class="fa-solid fa-book-open-reader"></i></span><span><strong>NCERT Solutions</strong><small class="quick-card-status">Coming Soon</small></span></button>
+      <button class="quick-link-card class10-resource-shortcut" type="button" data-resource-shortcut="Last-Minute Revision Notes" hidden><span class="quick-icon"><i class="fa-solid fa-bolt"></i></span><span><strong>Last-Minute Revision Notes</strong><small class="quick-card-status">Coming Soon</small></span></button>
+      <a class="quick-link-card" href="#quiz"><span class="quick-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span><span><strong>AI Quiz</strong></span></a>
+      <a class="quick-link-card" href="#doubt"><span class="quick-icon"><i class="fa-solid fa-lightbulb"></i></span><span><strong>Doubt Solver</strong></span></a>
+      <a class="quick-link-card" href="#organizer"><span class="quick-icon"><i class="fa-solid fa-list-check"></i></span><span><strong>My Tasks</strong></span></a>
+      <button class="quick-link-card" type="button" id="quickRateBtn"><span class="quick-icon"><i class="fa-solid fa-star"></i></span><span><strong>Rate Study Sphere</strong></span></button>
+    </div>
+  </div>
+</section>
+<script>
+  (() => {
+    const homeGradeSelect = document.getElementById("homeGradeSelect");
+    if (!homeGradeSelect) return;
+    homeGradeSelect.addEventListener("change", () => {
+      // The selected class must control the resource menus, even when a profile
+      // has a different saved class.
+      window.resourceSelectedClass = homeGradeSelect.value;
+      resourceSelectedClass = homeGradeSelect.value;
+      selectedClass = homeGradeSelect.value;
+      if (typeof renderResources === "function") renderResources();
+      document.querySelectorAll(".class10-resource-shortcut").forEach(card => {
+        card.hidden = homeGradeSelect.value !== "10";
+        card.style.display = homeGradeSelect.value === "10" ? "" : "none";
+      });
+      const helper = document.querySelector("#quickAccess .home-grade-control > span");
+      if (helper) helper.textContent = homeGradeSelect.value === "10"
+        ? "Class 10 selected. PYQs, Sample Papers, Question Bank, NCERT Solutions and Last-Minute Revision Notes are shown below."
+        : "Class " + homeGradeSelect.value + " selected. NCERT Books and study tools are available for this class.";
+    });
+    document.querySelectorAll(".class10-resource-shortcut").forEach(card => {
+      card.hidden = homeGradeSelect.value !== "10";
+      card.style.display = homeGradeSelect.value === "10" ? "" : "none";
+    });
+  })();
+</script>
+
+
+
+<section class="section home-only" id="communityReviews">
+  <div class="container">
+    <div class="section-heading">
+      <div><div class="section-kicker">Student feedback</div><h2>Reviews from our learning community</h2><p>Share your experience and help make Study Sphere better.</p></div>
+      <button class="btn btn-primary" type="button" id="openReviewBtn"><i class="fa-solid fa-star"></i> Write a Review</button>
     </div>
     <div class="review-layout">
-      <div class="review-highlight"><div class="review-big-icon"><i class="fa-solid fa-heart"></i></div><h3>Enjoying Study Sphere?</h3><p>Your feedback helps us make this study space more useful for every student.</p><button class="btn btn-white" type="button" id="openReviewBtn"><i class="fa-solid fa-star"></i> Write a Review</button></div>
-      <div class="review-panel"><div class="review-stars-display" aria-label="Five stars">★★★★★</div><h3>Help us improve</h3><p>Rate your experience and share what you would like to see next.</p><div id="reviewList" class="review-list"><p class="review-empty">Be the first to leave a review!</p></div></div>
+      <div class="review-highlight">
+        <div class="review-big-icon"><i class="fa-solid fa-heart"></i></div>
+        <h3>Your feedback matters</h3>
+        <p>Tell us what is helpful and what we can improve for students.</p>
+        <button class="btn btn-white" type="button" id="communityWriteReviewBtn"><i class="fa-solid fa-pen"></i> Share Your Review</button>
+      </div>
+      <div class="review-panel">
+        <div class="review-stars-display" aria-label="Five star rating">★★★★★</div>
+        <h3>From our learning community</h3>
+        <p>Reviews submitted on this device will appear below.</p>
+        <div class="review-list" id="reviewList" aria-live="polite"></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="container" id="searchSection" aria-label="Search study resources">
-  <div class="search-panel">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input id="siteSearch" type="search" placeholder="Search textbooks, NCERT, PYQs, revision notes..." aria-label="Search resources">
-    <button class="btn btn-primary" id="searchButton">Search <i class="fa-solid fa-arrow-right"></i></button>
+<section class="section home-only" id="homeCbseLink">
+  <div class="container">
+    <div class="cta">
+      <div><div class="section-kicker" style="color:#c5f3e3">Official academic resources</div><h2>Need official CBSE updates?</h2><p>Visit the CBSE Academic website for curriculum, syllabus and academic resources.</p></div>
+      <a class="btn btn-white" href="https://cbseacademic.nic.in/" target="_blank" rel="noopener noreferrer">Visit CBSE Academic <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+    </div>
   </div>
-  <div class="notice" id="searchNotice" role="status"></div>
 </section>
 
-<section class="section" id="materials">
+
+<section class="section" id="tools" data-home-hidden="true">
+  <div class="container">
+    <div class="section-heading">
+      <div><div class="section-kicker">Your learning workspace</div><h2>Study Tools</h2><p>Choose a tool to open its own page.</p></div>
+    </div>
+    <div class="grid tool-grid">
+      <a class="tool-card" href="#quiz"><div class="material-icon purple"><i class="fa-solid fa-wand-magic-sparkles"></i></div><h3>AI Quiz Generator</h3><p>Create practice questions from your chapter material.</p><span class="resource-status">OPEN TOOL →</span></a>
+      <a class="tool-card" href="#doubt"><div class="material-icon green"><i class="fa-solid fa-lightbulb"></i></div><h3>AI Doubt Solver</h3><p>Get a step-by-step explanation for a chapter question.</p><span class="resource-status">OPEN TOOL →</span></a>
+      <a class="tool-card" href="#organizer"><div class="material-icon orange"><i class="fa-solid fa-list-check"></i></div><h3>Task Organizer</h3><p>Add study tasks and track their status.</p><span class="resource-status">OPEN TOOL →</span></a>
+    </div>
+    <button class="btn btn-light" type="button" data-go-home><i class="fa-solid fa-arrow-left"></i> Back to Home</button>
+  </div>
+</section>
+
+<section class="section" id="materials" data-home-hidden="true">
   <div class="container">
     <div class="section-heading">
       <div>
@@ -532,69 +649,15 @@ body.tab-navigation main>section{display:none!important}body.tab-navigation main
       </button>
     </div>
 
-    <div class="resource-controls" id="resourceControls">
-      <label for="resourceGrade">Choose grade
-        <select id="resourceGrade">
-          <option value="1">Grade 1</option><option value="2">Grade 2</option><option value="3">Grade 3</option><option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option><option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option><option value="10">Grade 10</option>
-        </select>
-      </label>
-    </div>
     <div class="grid material-grid" id="materialGrid"></div>
     <div class="book-browser" id="bookBrowser" aria-live="polite"></div>
     <div class="notice" id="resourceNotice" role="status"></div>
   </div>
 </section>
 
-<section class="section" id="tools">
-  <div class="container">
-    <div class="section-heading">
-      <div>
-        <div class="section-kicker">Your learning workspace</div>
-        <h2>Everything to study better</h2>
-        <p>Helpful tools to organise your learning and find the right resources.</p>
-      </div>
-    </div>
 
-    <div class="grid tools-grid">
-      <article class="tool-card">
-        <div class="tool-icon purple"><i class="fa-solid fa-book-open-reader"></i></div>
-        <h3>Study Materials</h3>
-        <p>Explore textbooks, NCERT solutions, test papers and revision categories for your class.</p>
-        <a href="#materials" class="card-action">Explore my materials <i class="fa-solid fa-arrow-right"></i></a>
-      </article>
 
-      <article class="tool-card">
-        <div class="tool-icon green"><i class="fa-solid fa-list-check"></i></div>
-        <h3>Task Organizer</h3>
-        <p>Add study tasks, update their status and keep track of what you need to complete.</p>
-        <a href="#organizer" class="card-action protected-link">Organise tasks <i class="fa-solid fa-arrow-right"></i></a>
-      </article>
-
-      <article class="tool-card">
-        <div class="tool-icon orange"><i class="fa-solid fa-user-graduate"></i></div>
-        <h3>Your Account</h3>
-        <p>View and update your name, class, board and learning preferences.</p>
-        <a href="#profile" class="card-action" id="accountToolLink">Sign in to your account <i class="fa-solid fa-arrow-right"></i></a>
-      </article>
-
-      <article class="tool-card">
-        <div class="tool-icon blue"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-        <h3>AI Quiz Generator</h3>
-        <p>Generate a fresh practice quiz from your chapter notes or PDF, then check your answers and explanations.</p>
-        <a href="#quiz" class="card-action">Create a quiz <i class="fa-solid fa-arrow-right"></i></a>
-      </article>
-
-      <article class="tool-card">
-        <div class="tool-icon orange"><i class="fa-solid fa-lightbulb"></i></div>
-        <h3>AI Doubt Solver</h3>
-        <p>Ask a question about your chapter material and get a clear, step-by-step explanation.</p>
-        <a href="#doubt" class="card-action">Solve a doubt <i class="fa-solid fa-arrow-right"></i></a>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="quiz">
+<section class="section" id="quiz" data-home-hidden="true">
   <div class="container">
     <div class="section-heading">
       <div><div class="section-kicker">Practice with AI</div><h2>AI Quiz Generator</h2><p>Use text from your chapter or upload a text-based PDF to create a practice quiz.</p></div>
@@ -618,7 +681,7 @@ body.tab-navigation main>section{display:none!important}body.tab-navigation main
   </div>
 </section>
 
-<section class="section" id="doubt">
+<section class="section" id="doubt" data-home-hidden="true">
   <div class="container">
     <div class="section-heading"><div><div class="section-kicker">Understand your chapter</div><h2>AI Doubt Solver</h2><p>Ask a question and get help grounded in the material you provide.</p></div></div>
     <div class="ai-layout">
@@ -642,7 +705,7 @@ body.tab-navigation main>section{display:none!important}body.tab-navigation main
   </div>
 </section>
 
-<section class="section" id="organizer">
+<section class="section" id="organizer" data-home-hidden="true">
   <div class="container">
     <div class="section-heading">
       <div>
@@ -668,18 +731,7 @@ body.tab-navigation main>section{display:none!important}body.tab-navigation main
   </div>
 </section>
 
-<section class="section" id="senior">
-  <div class="container">
-    <div class="cta">
-      <div>
-        <div class="section-kicker" style="color:#c5f3e3">Keep learning</div>
-        <h2>Ready for your next chapter?</h2>
-        <p>Visit the official CBSE Academic website for curriculum and academic resources.</p>
-      </div>
-      <a class="btn btn-white" href="https://cbseacademic.nic.in/" target="_blank" rel="noopener noreferrer">CBSE Academic <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-    </div>
-  </div>
-</section>
+
 
 </main>
 
@@ -702,7 +754,7 @@ body.tab-navigation main>section{display:none!important}body.tab-navigation main
         <div class="footer-links">
           <a href="#materials">My Study Materials</a>
           <a href="#organizer" class="protected-link">Task Organizer</a>
-          <a href="#senior">CBSE Academic</a>
+          <a href="https://cbseacademic.nic.in/" target="_blank" rel="noopener noreferrer">CBSE Academic</a>
         </div>
       </div>
 
@@ -808,7 +860,7 @@ body.tab-navigation main>section{display:none!important}body.tab-navigation main
 </div>
 
 <div class="review-modal-backdrop" id="reviewModal" aria-modal="true" role="dialog" aria-labelledby="reviewModalTitle">
-  <div class="review-modal-card"><button type="button" class="review-close" id="closeReviewBtn" aria-label="Close review"><i class="fa-solid fa-xmark"></i></button><div class="review-modal-icon"><i class="fa-solid fa-star"></i></div><h2 id="reviewModalTitle">How was your Study Sphere experience?</h2><p>Your feedback helps us build a better study space.</p><form id="reviewForm"><div class="star-picker" role="radiogroup" aria-label="Choose a rating"><button type="button" data-rating="1" aria-label="1 star">★</button><button type="button" data-rating="2" aria-label="2 stars">★</button><button type="button" data-rating="3" aria-label="3 stars">★</button><button type="button" data-rating="4" aria-label="4 stars">★</button><button type="button" data-rating="5" aria-label="5 stars">★</button></div><input id="reviewName" maxlength="60" placeholder="Your name (optional)"><textarea id="reviewText" maxlength="500" placeholder="What did you like, or what can we improve? (optional)"></textarea><div class="review-modal-actions"><button type="button" class="btn btn-light" id="reviewLaterBtn">Later</button><button type="submit" class="btn btn-primary" id="submitReviewBtn"><i class="fa-solid fa-paper-plane"></i> Submit Review</button></div></form><p class="review-feedback" id="reviewFeedback" role="status"></p></div>
+  <div class="review-modal-card"><button type="button" class="review-close" id="closeReviewBtn" aria-label="Close review"><i class="fa-solid fa-xmark"></i></button><div class="review-modal-icon"><i class="fa-solid fa-star"></i></div><h2 id="reviewModalTitle">How was your Study Sphere experience?</h2><p>Your feedback helps us build a better study space.</p><form id="reviewForm"><div class="star-picker" role="radiogroup" aria-label="Choose a rating"><button type="button" data-rating="1" aria-label="1 star" aria-pressed="false">★</button><button type="button" data-rating="2" aria-label="2 stars" aria-pressed="false">★</button><button type="button" data-rating="3" aria-label="3 stars" aria-pressed="false">★</button><button type="button" data-rating="4" aria-label="4 stars" aria-pressed="false">★</button><button type="button" data-rating="5" aria-label="5 stars" aria-pressed="false">★</button></div><p id="ratingHint" class="rating-hint" aria-live="polite">Tap a star to rate your experience.</p><input id="reviewName" maxlength="60" placeholder="Your name (optional)"><textarea id="reviewText" maxlength="500" placeholder="What did you like, or what can we improve? (optional)"></textarea><div class="review-modal-actions"><button type="button" class="btn btn-light" id="reviewLaterBtn">Later</button><button type="submit" class="btn btn-primary" id="submitReviewBtn"><i class="fa-solid fa-paper-plane"></i> Submit Review</button></div></form><p class="review-feedback" id="reviewFeedback" role="status"></p></div>
 </div>
 
 <div class="exit-modal-backdrop" id="exitModal" role="dialog" aria-modal="true" aria-labelledby="exitTitle"><div class="exit-modal-card"><div class="exit-icon"><i class="fa-solid fa-heart"></i></div><h2 id="exitTitle">Before you go…</h2><p>Would you like to rate your Study Sphere experience?</p><div class="exit-actions"><button class="btn btn-primary" id="exitRateBtn"><i class="fa-solid fa-star"></i> Rate now</button><button class="btn btn-light" id="exitLaterBtn">Later</button><button class="exit-stay" id="exitStayBtn">Go back to Study Sphere</button></div></div></div>
@@ -873,9 +925,9 @@ const DRIVE_ROOT_ID = "1XJ22yWC0P0fiNB4xeElKTCx-HSBtGCbl";
 // Paste your restricted Google Drive API key between the quotes below.
 const DRIVE_API_KEY = "PASTE_YOUR_RESTRICTED_API_KEY_HERE";
 const FOLDER_MIME = "application/vnd.google-apps.folder";
-const resourceGradeSelect = document.getElementById("resourceGrade");
+const resourceGradeSelect = null;
 const bookBrowser = document.getElementById("bookBrowser");
-let resourceSelectedClass = "1";
+let resourceSelectedClass = "8";
 let bookBrowserRequest = 0;
 const resourceIcons = {
   "NCERT Books": ["fa-book", "purple"], "NCERT Solutions": ["fa-book-open", "green"],
@@ -883,7 +935,7 @@ const resourceIcons = {
   "PYQs": ["fa-clock-rotate-left", "purple"], "Last-Minute Revision Notes": ["fa-bolt", "orange"],
   "Question Bank": ["fa-layer-group", "green"]
 };
-const COMING_SOON_RESOURCES = new Set(["NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"]);
+const COMING_SOON_RESOURCES = new Set(["NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"]); // These cards must remain visible for Grade 10 even before PDFs are uploaded.
 function showNotice(element, message, type = "") { element.textContent = message; element.className = "notice show" + (type ? " " + type : ""); }
 function hideNotice(element) { element.className = "notice"; element.textContent = ""; }
 function showLibraryMessage(title, message) { materialsTitle.textContent = title; materialsSubtitle.textContent = message; materialGrid.replaceChildren(); }
@@ -923,27 +975,35 @@ function makeResourceCard(name, classNumber) {
   const icon = document.createElement("div"); icon.className = "material-icon " + info[1]; icon.innerHTML = '<i class="fa-solid ' + info[0] + '"></i>';
   const content = document.createElement("div"), title = document.createElement("h3"), description = document.createElement("p"), status = document.createElement("span");
   title.textContent = name; description.textContent = "Grade " + classNumber + " • Study resources"; status.className = "resource-status";
-  const isComingSoon = Number(classNumber) !== 10 && COMING_SOON_RESOURCES.has(name);
+  const isComingSoon = COMING_SOON_RESOURCES.has(name);
   status.textContent = isComingSoon ? "COMING SOON" : "BROWSE & DOWNLOAD";
+  description.textContent = name === "NCERT Books" ? "Choose grade, subject, book and chapter" : "Open this resource category";
   content.append(title, description, status); card.append(icon, content);
   const activate = () => {
-    if (Number(classNumber) !== 10 && COMING_SOON_RESOURCES.has(name)) { showNotice(resourceNotice, name + " are coming soon for this grade."); return; }
-    openDriveBrowser(classNumber, name);
+    if (COMING_SOON_RESOURCES.has(name)) { showNotice(resourceNotice, name + " are coming soon."); return; }
+    const activeGrade = Number(document.getElementById("homeGradeSelect")?.value || resourceSelectedClass || currentProfile?.class || "8");
+    if (["PYQs", "Sample Question Papers (SQPs)", "Question Bank"].includes(name) && activeGrade !== 10) {
+      showNotice(resourceNotice, name + " are available for Class 10 students."); return;
+    }
+    if (name === "NCERT Books") openStorageBrowser(Number(document.getElementById("homeGradeSelect")?.value || activeGrade), name);
+    else openSupabaseResourceBrowser(Number(document.getElementById("homeGradeSelect")?.value || activeGrade), name);
   };
   card.addEventListener("click", activate); card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); activate(); } });
   return card;
 }
 function renderResources() {
   materialGrid.replaceChildren(); hideNotice(resourceNotice); if (bookBrowser) { bookBrowser.classList.remove("open"); bookBrowser.replaceChildren(); }
-  const classNumber = Number(resourceGradeSelect?.value || resourceSelectedClass || currentProfile?.class || "1");
+  // Prefer the class currently selected by the student on the homepage.
+  // Do not let the saved profile class silently override their selection.
+  const classNumber = Number(document.getElementById("homeGradeSelect")?.value || resourceSelectedClass || currentProfile?.class || "8");
   resourceSelectedClass = String(classNumber); selectedClass = String(classNumber);
   const resources = classNumber === 10
     ? ["NCERT Books", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes", "PYQs", "Sample Question Papers (SQPs)", "Question Bank"]
     : ["NCERT Books", "NCERT Solutions", "Test Papers", "Last-Minute Revision Notes"];
-  showLibraryMessage("Grade " + classNumber + " Study Library", "Browse your resources here without leaving Study Sphere.");
+  showLibraryMessage("Your Study Library", "Choose a resource. For NCERT Books, select your grade first, then subject, book and chapter.");
   resources.forEach(name => materialGrid.appendChild(makeResourceCard(name, classNumber)));
 }
-if (resourceGradeSelect) resourceGradeSelect.addEventListener("change", () => { resourceSelectedClass = resourceGradeSelect.value; renderResources(); });
+
 function addBookBrowserMessage(message, type = "") { const p = document.createElement("p"); p.textContent = message; if (type === "error") p.style.color = "#a52f3d"; bookBrowser.appendChild(p); }
 function makeDriveFileRow(file, label) {
   const row = document.createElement("div"); row.className = "book-file-row";
@@ -1035,6 +1095,691 @@ async function openDriveSubfolder(classNumber, category, folder, area, crumbs, p
     if (!folders.length && !files.length) addBookBrowserMessage("No PDF files were found in this folder.");
   } catch (error) { if (req !== bookBrowserRequest) return; area.replaceChildren(); addBookBrowserMessage(error.message || "Could not load this folder.", "error"); }
 }
+/* =========================================================
+   SUPABASE STORAGE NCERT BOOK BROWSER
+   Bucket-relative paths are used exactly as stored in Supabase.
+========================================================= */
+const SUPABASE_STORAGE_BUCKET = "study-resources";
+const STORAGE_PAGE_SIZE = 100;
+
+function isStorageFolder(item) {
+  return Boolean(item) && !item.id && !item.metadata;
+}
+
+async function listStorageFolder(path) {
+  if (!supabaseClient) throw new Error("Supabase is not initialized. Check the project URL and publishable key in index.html.");
+  const bucket = supabaseClient.storage.from(SUPABASE_STORAGE_BUCKET);
+  let all = [];
+  let offset = 0;
+  while (true) {
+    const { data, error } = await bucket.list(path, {
+      limit: STORAGE_PAGE_SIZE,
+      offset,
+      sortBy: { column: "name", order: "asc" }
+    });
+    if (error) {
+      const message = error.message || "Storage request failed.";
+      if (/permission|policy|row-level security|not allowed|unauthorized|forbidden/i.test(message)) {
+        throw new Error("Supabase Storage could not list this folder. In Supabase, open Storage → Policies and allow SELECT on storage.objects for public/anon reads for the study-resources bucket. A public bucket alone may not allow folder listing.");
+      }
+      throw new Error("Could not list Supabase Storage folder " + (path || "(bucket root)") + ": " + message);
+    }
+    const page = Array.isArray(data) ? data : [];
+    all = all.concat(page);
+    if (page.length < STORAGE_PAGE_SIZE) break;
+    offset += STORAGE_PAGE_SIZE;
+  }
+  return all.sort((a, b) => String(a.name).localeCompare(String(b.name), undefined, { numeric: true, sensitivity: "base" }));
+}
+
+function normalizeStorageLabel(value) {
+  return cleanName(String(value || "")).replace(/\b(previous year questions?|pyqs?|sample question papers?|sample papers?|question bank|marking scheme)\b/g, " ").replace(/\s+/g, " ").trim();
+}
+function storageFolderMatches(name, aliases) {
+  const n = cleanName(name);
+  return aliases.some(alias => n === cleanName(alias) || n.includes(cleanName(alias)));
+}
+async function findStorageFolderPath(parentPath, aliases) {
+  const items = await listStorageFolder(parentPath);
+  const folder = items.find(item => isStorageFolder(item) && storageFolderMatches(item.name, aliases));
+  return folder ? (parentPath ? parentPath + "/" : "") + folder.name : null;
+}
+function storageSubjectAllowed(category, name) {
+  const n = cleanName(name);
+  if (category === "Question Bank") return /^(math|maths|mathematics|science|english)$/.test(n) || /^(math|maths|mathematics|science|english) /.test(n);
+  if (["PYQs", "Sample Question Papers (SQPs)"].includes(category)) {
+    return !/(physical education|information technology|computer applications|artificial intelligence|vocational|skill subject)/i.test(n);
+  }
+  return true;
+}
+function makeStorageOpenRow(name, meta, onOpen) {
+  const row = document.createElement("div"); row.className = "book-file-row";
+  const info = document.createElement("div"), title = document.createElement("div"), sub = document.createElement("div");
+  title.className = "book-file-name"; title.textContent = name;
+  sub.className = "book-file-meta"; sub.textContent = meta || "Open to continue";
+  info.append(title, sub);
+  const btn = document.createElement("button"); btn.type = "button"; btn.className = "btn btn-primary"; btn.textContent = "Open"; btn.addEventListener("click", onOpen);
+  row.append(info, btn); return row;
+}
+async function openSupabaseResourceBrowser(classNumber, category) {
+  const req = ++bookBrowserRequest;
+  hideNotice(resourceNotice);
+  bookBrowser.replaceChildren();
+  bookBrowser.classList.add("open");
+
+  const heading = document.createElement("h3");
+  heading.textContent = "Class " + classNumber + " · " + category;
+  const intro = document.createElement("p");
+  intro.textContent = category === "PYQs"
+    ? "Use the selection menus to choose a subject, year, and paper type where available."
+    : category === "Sample Question Papers (SQPs)"
+      ? "Choose a subject, then Question Paper or Marking Scheme, and select the PDF."
+      : "Choose a subject and its available Question Bank PDF.";
+  const controls = document.createElement("div");
+  controls.className = "resource-controls";
+  controls.style.margin = "12px 0 18px";
+  const back = document.createElement("button");
+  back.type = "button"; back.className = "btn btn-light"; back.textContent = "← Back to categories";
+  back.addEventListener("click", renderResources);
+  controls.appendChild(back);
+  const crumbs = document.createElement("p");
+  crumbs.className = "book-file-meta";
+  crumbs.textContent = "Class " + classNumber + " / " + category;
+  const selects = document.createElement("div");
+  selects.className = "resource-controls";
+  selects.style.margin = "14px 0";
+  selects.style.alignItems = "end";
+  const area = document.createElement("div");
+  area.className = "book-file-list";
+  bookBrowser.append(heading, intro, controls, crumbs, selects, area);
+  requestAnimationFrame(() => bookBrowser.scrollIntoView({behavior:"smooth", block:"start"}));
+
+  const gradePath = "GRADE " + classNumber;
+  const selectDefs = [];
+  const makeSelect = (labelText, placeholder) => {
+    const label = document.createElement("label");
+    label.textContent = labelText;
+    const select = document.createElement("select");
+    select.setAttribute("aria-label", labelText);
+    const first = document.createElement("option"); first.value = ""; first.textContent = placeholder;
+    select.appendChild(first); label.appendChild(select); selects.appendChild(label);
+    selectDefs.push(select); return select;
+  };
+  const subjectSelect = makeSelect("Select Subject", "Select Subject");
+  const yearSelect = category === "PYQs" ? makeSelect("Select Year", "Select Year") : null;
+  const typeSelect = category === "PYQs"
+    ? makeSelect("Select Paper Type", "Select Paper Type")
+    : category === "Sample Question Papers (SQPs)"
+      ? makeSelect("Select Resource", "Question Paper or Marking Scheme") : null;
+  const pdfSelect = makeSelect("Select PDF", "Select PDF");
+  const setOptions = (select, placeholder, options) => {
+    if (!select) return;
+    select.replaceChildren();
+    const first = document.createElement("option"); first.value = ""; first.textContent = placeholder; select.appendChild(first);
+    options.forEach(item => {
+      const opt = document.createElement("option");
+      opt.value = item.value; opt.textContent = item.label; select.appendChild(opt);
+    });
+  };
+  const setLoading = msg => { area.replaceChildren(); const p = document.createElement("p"); p.textContent = msg; area.appendChild(p); };
+  const setMessage = (msg, isError=false) => { area.replaceChildren(); const p = document.createElement("p"); p.textContent = msg; if (isError) p.style.color = "#a52f3d"; area.appendChild(p); };
+  const pdfItems = new Map();
+  let subjectMap = new Map();
+  let selectedSubjectPath = "";
+  let selectedYearPath = "";
+  let selectedResourcePath = "";
+  let currentPdfPath = "";
+
+  const getPdfsAndFolders = async path => {
+    const items = await listStorageFolder(path);
+    return {
+      items,
+      folders: items.filter(isStorageFolder),
+      pdfs: items.filter(x => !isStorageFolder(x) && (/\.pdf$/i.test(x.name) || String(x.metadata?.mimetype || "").toLowerCase() === "application/pdf"))
+    };
+  };
+  const folderHasPdf = async (path, depth = 2) => {
+    const {pdfs, folders} = await getPdfsAndFolders(path);
+    if (pdfs.length) return true;
+    if (depth <= 0) return false;
+    for (const folder of folders) {
+      if (await folderHasPdf(path + "/" + folder.name, depth - 1)) return true;
+    }
+    return false;
+  };
+  const findFolder = async (parent, aliases) => findStorageFolderPath(parent, aliases);
+  const getCategorySubjectPath = async (subjectPath) => {
+    if (category === "PYQs") return findFolder(subjectPath, ["Previous Year Question", "Previous Year Questions", "PYQ", "PYQs"]);
+    if (category === "Sample Question Papers (SQPs)") return findFolder(subjectPath, ["SQP", "SQPs", "Sample Question Papers", "Sample Papers", "Sample Question Paper"]);
+    return findFolder(subjectPath, ["Question Bank", "QuestionBank", "Question Banks"]);
+  };
+  const subjectIsAllowed = name => {
+    const n = cleanName(name);
+    if (category === "Question Bank") return /^(math|maths|mathematics|science|english)( |$)/.test(n);
+    // Avoid unrelated subjects and folders; only actual resources are shown below.
+    if (category === "PYQs") return !/(physical education|information technology|computer applications|artificial intelligence|vocational|skill subject)/.test(n);
+    return !/(physical education|information technology|computer applications|artificial intelligence|vocational|skill subject)/.test(n);
+  };
+  const loadSubjects = async () => {
+    setOptions(subjectSelect, "Select Subject", []);
+    if (yearSelect) setOptions(yearSelect, "Select Year", []);
+    if (typeSelect) setOptions(typeSelect, category === "PYQs" ? "Select Paper Type" : "Question Paper or Marking Scheme", []);
+    setOptions(pdfSelect, "Select PDF", []); pdfItems.clear(); subjectMap = new Map();
+    selectedSubjectPath = selectedYearPath = selectedResourcePath = currentPdfPath = "";
+    setLoading("Checking which subjects have available PDFs…");
+    try {
+      const gradeItems = await listStorageFolder(gradePath);
+      if (req !== bookBrowserRequest) return;
+      const folders = gradeItems.filter(isStorageFolder).filter(f => subjectIsAllowed(f.name));
+      const checks = await Promise.all(folders.map(async subject => {
+        const path = gradePath + "/" + subject.name;
+        try {
+          const resourcePath = await getCategorySubjectPath(path);
+          if (!resourcePath) return null;
+          const {folders: subfolders, pdfs} = await getPdfsAndFolders(resourcePath);
+          let hasFiles = pdfs.length > 0;
+          if (category === "PYQs") {
+            const yearFolders = subfolders.filter(f => /^(2019|2020|2022|2023|2024)$/.test(f.name.trim()));
+            hasFiles = false;
+            for (const yearFolder of yearFolders) {
+              if (await folderHasPdf(resourcePath + "/" + yearFolder.name, 3)) { hasFiles = true; break; }
+            }
+          }
+          else if (category === "Sample Question Papers (SQPs)") {
+            const marking = await findFolder(path, ["Marking Scheme", "Marking Schemes", "MS", "Marking Scheme SQP"]);
+            hasFiles = hasFiles || (subfolders.length > 0 && await folderHasPdf(resourcePath, 3)) || (marking ? await folderHasPdf(marking, 3) : false);
+          } else if (category === "Question Bank") {
+            hasFiles = hasFiles || await folderHasPdf(resourcePath, 2);
+          }
+          return hasFiles ? {name:subject.name, path, resourcePath} : null;
+        } catch (_) { return null; }
+      }));
+      if (req !== bookBrowserRequest) return;
+      const valid = checks.filter(Boolean).sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:"base"}));
+      valid.forEach(x => subjectMap.set(x.name, x));
+      setOptions(subjectSelect, "Select Subject", valid.map(x=>({value:x.name,label:x.name})));
+      setMessage(valid.length ? "Select a subject to continue." : "No subjects with available PDFs were found for this resource.");
+    } catch (error) { setMessage(error.message || "Could not load available subjects.", true); }
+  };
+  const updatePdfOptions = async path => {
+    setOptions(pdfSelect, "Select PDF", []); pdfItems.clear(); currentPdfPath = "";
+    if (!path) return;
+    setLoading("Loading available PDFs…");
+    try {
+      const {pdfs, folders} = await getPdfsAndFolders(path);
+      if (req !== bookBrowserRequest) return;
+      // Some storage layouts place papers one folder deeper. Include PDFs from the selected type's child folders.
+      let choices = pdfs.map(file => ({label:file.name.replace(/\.pdf$/i,""), path:path + "/" + file.name, file}));
+      for (const folder of folders) {
+        const nested = await getPdfsAndFolders(path + "/" + folder.name);
+        nested.pdfs.forEach(file => choices.push({label:folder.name + " — " + file.name.replace(/\.pdf$/i,""), path:path + "/" + folder.name + "/" + file.name, file}));
+      }
+      if (req !== bookBrowserRequest) return;
+      choices.sort((a,b)=>a.label.localeCompare(b.label,undefined,{numeric:true,sensitivity:"base"}));
+      choices.forEach((x,i)=>pdfItems.set(String(i+1),x));
+      setOptions(pdfSelect, "Select PDF", choices.map((x,i)=>({value:String(i+1),label:x.label})));
+      setMessage(choices.length ? "Select a PDF, then use Open PDF or Download PDF." : "No PDF files were found in this selection.");
+    } catch (error) { setMessage(error.message || "Could not load PDFs.", true); }
+  };
+  const showPdfActions = () => {
+    area.replaceChildren();
+    const item = pdfItems.get(pdfSelect.value);
+    if (!item) { setMessage("Please select a PDF from the menu."); return; }
+    const h = document.createElement("h3"); h.textContent = item.label; area.appendChild(h);
+    const row = document.createElement("div"); row.className = "book-file-row";
+    const info = document.createElement("div"); const title = document.createElement("div"); title.className="book-file-name"; title.textContent=item.label;
+    const meta = document.createElement("div"); meta.className="book-file-meta"; meta.textContent="Class " + classNumber + " / " + category; info.append(title,meta);
+    const actions = document.createElement("div"); actions.style.display="flex"; actions.style.gap="8px"; actions.style.flexWrap="wrap";
+    const open = document.createElement("a"); open.className="btn btn-light"; open.href=storagePublicUrl(item.path,false); open.target="_blank"; open.rel="noopener noreferrer"; open.textContent="Open PDF";
+    const download = document.createElement("a"); download.className="btn btn-primary"; download.href=storagePublicUrl(item.path,true); download.textContent="Download PDF"; download.setAttribute("download", item.file.name);
+    actions.append(open,download); row.append(info,actions); area.appendChild(row);
+  };
+
+  subjectSelect.addEventListener("change", async () => {
+    if (yearSelect) setOptions(yearSelect,"Select Year",[]);
+    if (typeSelect) setOptions(typeSelect, category === "PYQs" ? "Select Paper Type" : "Question Paper or Marking Scheme",[]);
+    setOptions(pdfSelect,"Select PDF",[]); pdfItems.clear(); selectedYearPath=selectedResourcePath="";
+    const subject = subjectMap.get(subjectSelect.value);
+    selectedSubjectPath = subject ? subject.path : "";
+    if (!subject) { setMessage("Select a subject to continue."); return; }
+    if (category === "PYQs") {
+      setLoading("Loading available years…");
+      try {
+        const {folders} = await getPdfsAndFolders(subject.resourcePath);
+        const years = folders.filter(f=>/^(2019|2020|2022|2023|2024)$/.test(f.name.trim())).sort((a,b)=>Number(a.name)-Number(b.name));
+        setOptions(yearSelect,"Select Year",years.map(y=>({value:y.name,label:y.name})));
+        setMessage(years.length ? "Now select a year." : "No supported PYQ years were found.");
+      } catch(e) { setMessage(e.message || "Could not load years.",true); }
+    } else if (category === "Question Bank") {
+      selectedResourcePath = subject.resourcePath;
+      await updatePdfOptions(selectedResourcePath);
+    } else {
+      const markingPath = await findFolder(subject.path,["Marking Scheme","Marking Schemes","MS","Marking Scheme SQP"]);
+      const sqpData = await getPdfsAndFolders(subject.resourcePath);
+      const opts=[];
+      if (sqpData.pdfs.length || (sqpData.folders.length && await folderHasPdf(subject.resourcePath, 2))) opts.push({value:"papers",label:"Question Papers"});
+      if (markingPath) {
+        const ms = await getPdfsAndFolders(markingPath);
+        if (ms.pdfs.length || (ms.folders.length && await folderHasPdf(markingPath, 2))) opts.push({value:"marking",label:"Marking Schemes"});
+      }
+      setOptions(typeSelect,"Question Paper or Marking Scheme",opts);
+      setMessage(opts.length ? "Choose Question Papers or Marking Schemes." : "No SQP PDFs or marking schemes were found.");
+    }
+  });
+  if (yearSelect) yearSelect.addEventListener("change", async () => {
+    setOptions(typeSelect,"Select Paper Type",[]); setOptions(pdfSelect,"Select PDF",[]); pdfItems.clear(); selectedYearPath="";
+    if (!yearSelect.value || !selectedSubjectPath) { setMessage("Select a year to continue."); return; }
+    const subject = subjectMap.get(subjectSelect.value);
+    selectedYearPath = subject.resourcePath + "/" + yearSelect.value;
+    setLoading("Checking papers for " + yearSelect.value + "…");
+    try {
+      const {folders,pdfs} = await getPdfsAndFolders(selectedYearPath);
+      const sn = cleanName(subjectSelect.value), year = yearSelect.value;
+      let variants = folders;
+      if (/^(math|maths|mathematics)$/.test(sn) && ["2020","2022","2023"].includes(year)) variants=folders.filter(f=>/basic|standard/i.test(f.name));
+      else if (/hindi/.test(sn) && year !== "2019") variants=folders.filter(f=>/hindi\s*a|course\s*a|hindi\s*b|course\s*b/i.test(f.name));
+      if (variants.length) {
+        setOptions(typeSelect,"Select Paper Type",variants.map(f=>({value:f.name,label:f.name})));
+        setMessage("Select the paper type/course.");
+      } else {
+        selectedResourcePath = selectedYearPath;
+        setOptions(typeSelect,"Select Paper Type",[{value:"direct",label:"Question Paper"}]);
+        typeSelect.value="direct";
+        await updatePdfOptions(selectedResourcePath);
+      }
+    } catch(e) { setMessage(e.message || "Could not load papers for this year.",true); }
+  });
+  if (typeSelect) typeSelect.addEventListener("change", async () => {
+    setOptions(pdfSelect,"Select PDF",[]); pdfItems.clear();
+    if (category === "PYQs") {
+      if (!typeSelect.value || !selectedYearPath) { setMessage("Select a paper type to continue."); return; }
+      selectedResourcePath = typeSelect.value === "direct" ? selectedYearPath : selectedYearPath + "/" + typeSelect.value;
+      await updatePdfOptions(selectedResourcePath);
+    } else if (category === "Sample Question Papers (SQPs)") {
+      const subject = subjectMap.get(subjectSelect.value);
+      if (!subject || !typeSelect.value) { setMessage("Select a resource type to continue."); return; }
+      if (typeSelect.value === "papers") selectedResourcePath=subject.resourcePath;
+      else selectedResourcePath=await findFolder(subject.path,["Marking Scheme","Marking Schemes","MS","Marking Scheme SQP"]);
+      await updatePdfOptions(selectedResourcePath);
+    }
+  });
+  pdfSelect.addEventListener("change", showPdfActions);
+  await loadSubjects();
+}
+
+function storagePublicUrl(path, download = false) {
+  const options = download ? { download: path.split("/").pop() } : undefined;
+  const result = supabaseClient.storage.from(SUPABASE_STORAGE_BUCKET).getPublicUrl(path, options);
+  return result && result.data ? result.data.publicUrl : "";
+}
+
+function findVerifiedChapterTitle(fileName, bookPath) {
+  // Only identify a chapter when the filename itself clearly matches a known title.
+  // Random filenames (for example, jeff101.pdf) are deliberately not guessed.
+  const normalizedFile = cleanName(String(fileName || "").replace(/\.pdf$/i, ""));
+  const book = cleanName(bookPath || "");
+  const verifiedTitles = [];
+  if (/first flight/.test(book)) {
+    verifiedTitles.push(
+      "A Letter to God", "Nelson Mandela Long Walk to Freedom", "Two Stories About Flying",
+      "From the Diary of Anne Frank", "The Hundred Dresses I", "The Hundred Dresses II",
+      "Glimpses of India", "Mijbil the Otter", "Madam Rides the Bus", "The Sermon at Benares",
+      "The Proposal", "Dust of Snow", "Fire and Ice", "A Tiger in the Zoo", "How to Tell Wild Animals",
+      "The Ball Poem", "Amanda", "The Trees", "Fog", "The Tale of Custard the Dragon", "For Anne Gregory"
+    );
+  }
+  if (/footprints without feet/.test(book)) {
+    verifiedTitles.push(
+      "A Triumph of Surgery", "The Thief's Story", "The Midnight Visitor", "A Question of Trust",
+      "Footprints Without Feet", "The Making of a Scientist", "The Necklace", "Bholi",
+      "The Book That Saved the Earth"
+    );
+  }
+  return verifiedTitles.find(title => {
+    const normalizedTitle = cleanName(title);
+    return normalizedFile === normalizedTitle || normalizedFile.includes(normalizedTitle);
+  }) || null;
+}
+
+function makeStorageFileRow(file, fullPath, bookPath) {
+  const row = document.createElement("div");
+  row.className = "book-file-row";
+  const info = document.createElement("div");
+  const name = document.createElement("div");
+  name.className = "book-file-name";
+  const verifiedTitle = findVerifiedChapterTitle(file.name, bookPath);
+  name.textContent = verifiedTitle || file.name.replace(/\.pdf$/i, "");
+  info.append(name);
+
+  const actions = document.createElement("div");
+  actions.style.display = "flex";
+  actions.style.gap = "8px";
+  actions.style.flexWrap = "wrap";
+  const openUrl = storagePublicUrl(fullPath, false);
+  const downloadUrl = storagePublicUrl(fullPath, true);
+  const open = document.createElement("a");
+  open.className = "btn btn-light";
+  open.href = openUrl;
+  open.target = "_blank";
+  open.rel = "noopener noreferrer";
+  open.textContent = "Open PDF";
+  const download = document.createElement("a");
+  download.className = "btn btn-primary";
+  download.href = downloadUrl;
+  download.target = "_blank";
+  download.rel = "noopener noreferrer";
+  download.textContent = "Download PDF";
+  actions.append(open, download);
+  row.append(info, actions);
+  return row;
+}
+
+async function openStorageBrowser(classNumber = null, category = "NCERT Books") {
+  const req = ++bookBrowserRequest;
+  hideNotice(resourceNotice);
+  bookBrowser.replaceChildren();
+  bookBrowser.classList.add("open");
+  bookBrowser.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  const heading = document.createElement("h3");
+  heading.textContent = "NCERT Textbooks";
+  const intro = document.createElement("p");
+  intro.textContent = "Select your class, subject and book, then press Go to see its chapters.";
+  bookBrowser.append(heading, intro);
+
+  const controls = document.createElement("div");
+  controls.className = "resource-controls";
+  controls.style.margin = "14px 0 18px";
+  const makeSelect = (labelText, id, placeholder) => {
+    const label = document.createElement("label");
+    label.textContent = labelText;
+    const select = document.createElement("select");
+    select.id = id;
+    const first = document.createElement("option");
+    first.value = "";
+    first.textContent = placeholder;
+    select.appendChild(first);
+    label.appendChild(select);
+    controls.appendChild(label);
+    return select;
+  };
+  const gradeSelect = makeSelect("Select Class", "ncertClassSelect", "Select Class");
+  const subjectSelect = makeSelect("Select Subject", "ncertSubjectSelect", "Select Subject");
+  const bookSelect = makeSelect("Select Book Title", "ncertBookSelect", "Select Book Title");
+  for (let grade = 1; grade <= 10; grade++) {
+    const option = document.createElement("option");
+    option.value = String(grade);
+    option.textContent = "Class " + grade;
+    gradeSelect.appendChild(option);
+  }
+  gradeSelect.value = classNumber ? String(classNumber) : (document.getElementById("homeGradeSelect")?.value || "");
+  const go = document.createElement("button");
+  go.type = "button";
+  go.className = "btn btn-primary";
+  go.textContent = "Go";
+  controls.appendChild(go);
+
+  const resultArea = document.createElement("div");
+  resultArea.className = "ncert-result-area";
+  const crumbs = document.createElement("p");
+  crumbs.className = "book-file-meta";
+  resultArea.appendChild(crumbs);
+  const content = document.createElement("div");
+  content.className = "book-file-list";
+  resultArea.appendChild(content);
+  bookBrowser.append(controls, resultArea);
+  const showResultMessage = (message, type = "") => {
+    const p = document.createElement("p");
+    p.textContent = message;
+    if (type === "error") p.style.color = "#a52f3d";
+    content.appendChild(p);
+  };
+
+  let gradeFolders = [];
+  let subjectFolders = [];
+  let bookFolders = [];
+  let chosenGradeFolder = "";
+
+  const setOptions = (select, placeholder, names) => {
+    select.replaceChildren();
+    const first = document.createElement("option");
+    first.value = "";
+    first.textContent = placeholder;
+    select.appendChild(first);
+    names.forEach(name => {
+      const opt = document.createElement("option");
+      opt.value = name;
+      opt.textContent = name;
+      select.appendChild(opt);
+    });
+  };
+  const setLoading = message => {
+    content.replaceChildren();
+    const p = document.createElement("p");
+    p.textContent = message;
+    content.appendChild(p);
+  };
+  const gradeFolderName = async value => {
+    const roots = await listStorageFolder("");
+    const folder = roots.find(item => isStorageFolder(item) && new RegExp("^(GRADE|CLASS)\\s*" + value + "$", "i").test(item.name.trim()));
+    if (!folder) throw new Error("Could not find the folder for Class " + value + " in the study-resources bucket.");
+    return folder.name;
+  };
+
+  async function loadSubjects() {
+    setOptions(subjectSelect, "Select Subject", []);
+    setOptions(bookSelect, "Select Book Title", []);
+    subjectFolders = []; bookFolders = []; chosenGradeFolder = "";
+    content.replaceChildren(); crumbs.textContent = "";
+    if (!gradeSelect.value) return;
+    setLoading("Loading subjects…");
+    try {
+      chosenGradeFolder = await gradeFolderName(gradeSelect.value);
+      const items = await listStorageFolder(chosenGradeFolder);
+      if (req !== bookBrowserRequest) return;
+      subjectFolders = items.filter(isStorageFolder)
+        .filter(x => !/(pyq|previous.?year|sqps?|sample.?papers?|question.?banks?|marking.?schemes?|ncert.?solutions?|test.?papers?|question.?papers?)/i.test(x.name.trim()))
+        .map(x => x.name).sort((a,b)=>a.localeCompare(b));
+      setOptions(subjectSelect, "Select Subject", subjectFolders);
+      content.replaceChildren();
+      if (!subjectFolders.length) showResultMessage("No subjects were found for this class.");
+    } catch (error) {
+      setLoading(error.message || "Could not load subjects.");
+    }
+  }
+  async function loadBooks() {
+    setOptions(bookSelect, "Select Book Title", []);
+    bookFolders = []; content.replaceChildren(); crumbs.textContent = "";
+    if (!chosenGradeFolder || !subjectSelect.value) return;
+    setLoading("Loading books…");
+    try {
+      const path = chosenGradeFolder + "/" + subjectSelect.value;
+      const items = await listStorageFolder(path);
+      if (req !== bookBrowserRequest) return;
+      bookFolders = items.filter(isStorageFolder)
+        .filter(x => !/(pyq|previous.?year|sqps?|sample.?papers?|question.?banks?|marking.?schemes?|ncert.?solutions?|test.?papers?|question.?papers?)/i.test(x.name.trim()))
+        .map(x => x.name).sort((a,b)=>a.localeCompare(b));
+      // If PDFs are directly inside a subject folder, expose the subject as a selectable item.
+      if (!bookFolders.length && items.some(x => !isStorageFolder(x) && /\.pdf$/i.test(x.name))) bookFolders = [subjectSelect.value];
+      setOptions(bookSelect, "Select Book Title", bookFolders);
+      content.replaceChildren();
+      if (!bookFolders.length) showResultMessage("No books were found for this subject.");
+    } catch (error) {
+      setLoading(error.message || "Could not load books.");
+    }
+  }
+  async function showSelectedBook() {
+    content.replaceChildren(); crumbs.textContent = "";
+    if (!gradeSelect.value || !subjectSelect.value || !bookSelect.value) {
+      showResultMessage("Please select a class, subject and book title first.");
+      return;
+    }
+    const bookName = bookSelect.value;
+    const basePath = chosenGradeFolder + "/" + subjectSelect.value;
+    const bookPath = bookName === subjectSelect.value ? basePath : basePath + "/" + bookName;
+    crumbs.textContent = "Class " + gradeSelect.value + "  /  " + subjectSelect.value + "  /  " + bookName;
+    setLoading("Loading chapters…");
+    try {
+      const items = await listStorageFolder(bookPath);
+      if (req !== bookBrowserRequest) return;
+      content.replaceChildren();
+      const folders = items.filter(isStorageFolder);
+      const pdfs = items.filter(item => !isStorageFolder(item) && /\.pdf$/i.test(item.name));
+      const images = items.filter(item => !isStorageFolder(item) && /\.(png|jpe?g|webp)$/i.test(item.name));
+      const layout = document.createElement("div");
+      layout.style.display = "grid";
+      layout.style.gridTemplateColumns = "minmax(0,1fr)";
+      layout.style.gap = "18px";
+      const cover = document.createElement("div");
+      cover.style.display = "flex";
+      cover.style.alignItems = "center";
+      cover.style.gap = "14px";
+      cover.style.padding = "14px";
+      cover.style.border = "1px solid var(--border)";
+      cover.style.borderRadius = "14px";
+      cover.style.background = "var(--surface, #fff)";
+      if (images.length) {
+        const img = document.createElement("img");
+        img.src = storagePublicUrl(bookPath + "/" + images[0].name, false);
+        img.alt = bookName + " cover";
+        img.style.width = "100px"; img.style.maxHeight = "140px"; img.style.objectFit = "contain";
+        cover.appendChild(img);
+      } else {
+        const icon = document.createElement("div");
+        icon.innerHTML = '<i class="fa-solid fa-book-open"></i>';
+        icon.style.width = "90px"; icon.style.height = "120px"; icon.style.display = "grid";
+        icon.style.placeItems = "center"; icon.style.borderRadius = "8px";
+        icon.style.background = "linear-gradient(145deg,#f1eaff,#e1f5ed)";
+        icon.style.color = "var(--primary)"; icon.style.fontSize = "32px";
+        cover.appendChild(icon);
+      }
+      const bookInfo = document.createElement("div");
+      const title = document.createElement("h3"); title.textContent = bookName;
+      const subtitle = document.createElement("p"); subtitle.textContent = "Class " + gradeSelect.value + " · " + subjectSelect.value;
+      bookInfo.append(title, subtitle); cover.appendChild(bookInfo);
+      layout.appendChild(cover); content.appendChild(layout);
+
+      if (pdfs.length) {
+        const label = document.createElement("h3"); label.textContent = "Chapters and PDFs"; label.style.marginTop = "18px";
+        content.appendChild(label);
+        pdfs.forEach(file => content.appendChild(makeStorageFileRow(file, file.name.replace(/\.pdf$/i, ""), bookPath)));
+      }
+      if (folders.length) {
+        const label = document.createElement("h3"); label.textContent = "Chapters"; label.style.marginTop = "18px";
+        content.appendChild(label);
+        folders.forEach(folder => {
+          const row = document.createElement("div"); row.className = "book-file-row";
+          const name = document.createElement("div"); name.className = "book-file-name"; name.textContent = folder.name;
+          const actions = document.createElement("div"); actions.style.display = "flex"; actions.style.gap = "8px"; actions.style.flexWrap = "wrap";
+          const openFolder = document.createElement("button"); openFolder.type = "button"; openFolder.className = "btn btn-light"; openFolder.textContent = "Open chapter";
+          openFolder.addEventListener("click", async () => {
+            try {
+              const chapterItems = await listStorageFolder(bookPath + "/" + folder.name);
+              content.replaceChildren();
+              const back = document.createElement("button"); back.type = "button"; back.className = "btn btn-light"; back.textContent = "← Back to book";
+              back.addEventListener("click", showSelectedBook); content.appendChild(back);
+              const chapterTitle = document.createElement("h3"); chapterTitle.textContent = folder.name; content.appendChild(chapterTitle);
+              chapterItems.filter(item => !isStorageFolder(item) && /\.pdf$/i.test(item.name)).forEach(file => content.appendChild(makeStorageFileRow(file, file.name.replace(/\.pdf$/i, ""), bookPath + "/" + folder.name)));
+            } catch (error) { setLoading(error.message || "Could not load this chapter."); }
+          });
+          actions.appendChild(openFolder); row.append(name, actions); content.appendChild(row);
+        });
+      }
+      if (!pdfs.length && !folders.length) showResultMessage("No chapter PDFs were found in this book folder.");
+      const completeBook = pdfs.find(file => /complete|full.?book|whole.?book/i.test(file.name));
+      if (completeBook) {
+        const note = document.createElement("p"); note.textContent = "A complete-book PDF is available in the list above."; content.appendChild(note);
+      }
+    } catch (error) {
+      setLoading(error.message || "Could not load this book.");
+    }
+  }
+  gradeSelect.addEventListener("change", loadSubjects);
+  subjectSelect.addEventListener("change", loadBooks);
+  go.addEventListener("click", showSelectedBook);
+  if (gradeSelect.value) await loadSubjects();
+}
+async function renderStoragePath(classNumber, category, pathParts, area, crumbs, parentRequest) {
+  const req = ++bookBrowserRequest;
+  const currentPath = pathParts.join("/");
+  crumbs.textContent = pathParts.join(" / ");
+  area.replaceChildren();
+
+  if (pathParts.length > 1) {
+    const back = document.createElement("button");
+    back.type = "button";
+    back.className = "btn btn-light";
+    back.textContent = "← Back";
+    back.addEventListener("click", () => renderStoragePath(classNumber, category, pathParts.slice(0, -1), area, crumbs, req));
+    area.appendChild(back);
+  }
+  const loading = document.createElement("p");
+  loading.textContent = "Loading folders and PDFs…";
+  area.appendChild(loading);
+
+  try {
+    const items = await listStorageFolder(currentPath);
+    if (req !== bookBrowserRequest) return;
+    area.replaceChildren();
+    if (pathParts.length > 1) {
+      const back = document.createElement("button");
+      back.type = "button";
+      back.className = "btn btn-light";
+      back.textContent = "← Back";
+      back.addEventListener("click", () => renderStoragePath(classNumber, category, pathParts.slice(0, -1), area, crumbs, req));
+      area.appendChild(back);
+    }
+
+    const folders = items.filter(isStorageFolder);
+    const files = items.filter(item => !isStorageFolder(item) && (/\.pdf$/i.test(item.name) || String(item.metadata?.mimetype || "").toLowerCase() === "application/pdf"));
+    if (folders.length) {
+      const label = document.createElement("h3");
+      label.textContent = pathParts.length === 1 ? "Select a subject" : (pathParts.length === 2 ? "Select a book" : "Select a chapter");
+      area.appendChild(label);
+      folders.forEach(folder => {
+        const row = document.createElement("div");
+        row.className = "book-file-row";
+        const info = document.createElement("div");
+        const name = document.createElement("div");
+        name.className = "book-file-name";
+        name.textContent = folder.name;
+        info.append(name);
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "btn btn-primary";
+        button.textContent = "Open";
+        button.addEventListener("click", () => renderStoragePath(classNumber, category, pathParts.concat(folder.name), area, crumbs, req));
+        row.append(info, button);
+        area.appendChild(row);
+      });
+    }
+    if (files.length) {
+      const complete = files.filter(file => /complete|full.?book|whole.?book|all.?chapters/i.test(file.name));
+      if (complete.length) {
+        const label = document.createElement("h3");
+        label.textContent = "Complete Book";
+        area.appendChild(label);
+        complete.forEach(file => area.appendChild(makeStorageFileRow(file, currentPath + "/" + file.name, currentPath)));
+      }
+      const otherFiles = files.filter(file => !complete.includes(file));
+      if (otherFiles.length) {
+        const label = document.createElement("h3");
+        label.style.marginTop = "16px";
+        label.textContent = folders.length ? "PDF Files" : "Books & PDFs";
+        area.appendChild(label);
+        otherFiles.forEach(file => area.appendChild(makeStorageFileRow(file, currentPath + "/" + file.name, currentPath)));
+      }
+    }
+    if (!folders.length && !files.length) {
+      addBookBrowserMessage("No folders or PDFs were found in this location.");
+    }
+  } catch (error) {
+    if (req !== bookBrowserRequest) return;
+    area.replaceChildren();
+    addBookBrowserMessage(error.message || "Could not load this Supabase Storage folder.", "error");
+  }
+}
+
 renderResources();
 
 /* =========================================================
@@ -1067,7 +1812,7 @@ function performSearch() {
   );
 
   if (!matches.length) {
-    showNotice(notice, "No matching item found. Try NCERT Books, PYQs or Grade 10.");
+    showNotice(notice, "No matching item found. Try NCERT Books or another resource name.");
     return;
   }
 
@@ -1257,7 +2002,11 @@ function storeProfile(profile) {
   }
 
   updateProfileName(currentProfile?.name);
-  if (currentProfile?.class && Number(currentProfile.class) >= 1 && Number(currentProfile.class) <= 10 && resourceGradeSelect) resourceGradeSelect.value = String(currentProfile.class);
+  if (currentProfile?.class && Number(currentProfile.class) >= 1 && Number(currentProfile.class) <= 10) {
+    resourceSelectedClass = String(currentProfile.class);
+    const homeGradeSelect = document.getElementById("homeGradeSelect");
+    if (homeGradeSelect) homeGradeSelect.value = String(currentProfile.class);
+  }
   renderResources();
 }
 
@@ -1621,20 +2370,27 @@ initialiseAuthentication();
 (function setupSectionTabs(){
   const mainSections=[...document.querySelectorAll("main>section")];
   const navItems=[...document.querySelectorAll('#navLinks a[href^="#"]')];
-  const homeExtras=[document.getElementById("searchSection"),document.getElementById("reviews")].filter(Boolean);
+  const homeExtras=[document.getElementById("quickAccess"),document.getElementById("communityReviews"),document.getElementById("homeCbseLink"),document.getElementById("searchSection")].filter(Boolean);
   function activatePage(id, updateHash=true){
     let target=document.getElementById(id);
     if(!target || !mainSections.includes(target)) target=document.getElementById("home");
     document.body.classList.add("tab-navigation");
     mainSections.forEach(section=>{section.classList.remove("active-page","active-home-extra");});
+    target.removeAttribute("data-home-hidden");
     target.classList.add("active-page");
     if(target.id==="home") homeExtras.forEach(section=>section.classList.add("active-home-extra"));
     navItems.forEach(link=>link.classList.toggle("active-tab",link.getAttribute("href")==="#"+target.id));
-    if(updateHash && location.hash!=="#"+target.id) history.replaceState({tab:target.id},"","#"+target.id);
-    window.scrollTo({top:0,behavior:"smooth"});
+    if(updateHash && location.hash!=="#"+target.id) history.pushState({tab:target.id},"","#"+target.id);
+    window.scrollTo({top:0,behavior:"auto"});
     document.getElementById("navLinks")?.classList.remove("open");
     document.getElementById("menuToggle")?.setAttribute("aria-expanded","false");
   }
+  window.addEventListener("popstate",()=>activatePage(location.hash.slice(1)||"home",false));
+  window.addEventListener("hashchange",()=>{
+    const id=location.hash.slice(1)||"home";
+    if(mainSections.some(section=>section.id===id)) activatePage(id,false);
+  });
+  document.querySelectorAll("[data-go-home]").forEach(button=>button.addEventListener("click",()=>activatePage("home")));
   navItems.forEach(link=>link.addEventListener("click",event=>{
     const id=link.getAttribute("href").slice(1);
     if(document.getElementById(id) && mainSections.includes(document.getElementById(id))){event.preventDefault();activatePage(id);}
@@ -1649,8 +2405,32 @@ initialiseAuthentication();
       }
     });
   });
+  document.querySelectorAll("[data-resource-shortcut]").forEach(button=>button.addEventListener("click",()=>{
+    activatePage("materials");
+    const wanted=button.dataset.resourceShortcut;
+    window.setTimeout(()=>{
+      const card=[...document.querySelectorAll(".material-card")].find(item=>item.querySelector("h3")?.textContent===wanted);
+      if(card) card.click();
+      else showNotice(resourceNotice, wanted + " are currently available for Grade 10 only. Choose NCERT Books to browse books for Grades 1–10.");
+    },80);
+  }));
   const initial=location.hash.slice(1);
   activatePage(mainSections.some(s=>s.id===initial)?initial:"home",false);
+})();
+
+/* Gentle scroll-in animations, with reduced-motion support */
+(function setupRevealAnimations(){
+  if(!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const targets=".section-heading,.quick-link-card,.tool-card,.material-card,.review-layout,.search-panel,.hero-content";
+  const reveal=new IntersectionObserver(entries=>entries.forEach(entry=>{
+    if(entry.isIntersecting){entry.target.classList.add("revealed");reveal.unobserve(entry.target);}
+  }),{threshold:.12,rootMargin:"0px 0px -25px 0px"});
+  const scan=root=>root.querySelectorAll?.(targets).forEach((element,index)=>{
+    if(element.dataset.revealBound) return;
+    element.dataset.revealBound="1";element.setAttribute("data-reveal","");element.style.transitionDelay=(Math.min(index%4,3)*65)+"ms";reveal.observe(element);
+  });
+  scan(document);
+  new MutationObserver(mutations=>mutations.forEach(m=>m.addedNodes.forEach(node=>{if(node.nodeType===1){if(node.matches?.(targets))scan(node.parentElement||document);scan(node);}}))).observe(document.body,{childList:true,subtree:true});
 })();
 
 let chosenReviewRating=0;
@@ -1668,9 +2448,11 @@ function renderReviews(){
  reviews.forEach(review=>{const item=document.createElement("article");item.className="review-item";const head=document.createElement("div");const name=document.createElement("strong");name.textContent=review.name||"Study Sphere Student";const stars=document.createElement("span");stars.className="review-item-stars";stars.textContent="★".repeat(review.rating);head.append(name,stars);item.append(head);if(review.text){const p=document.createElement("p");p.textContent=review.text;item.append(p);}list.append(item);});
 }
 document.getElementById("openReviewBtn")?.addEventListener("click",openReview);
+document.getElementById("communityWriteReviewBtn")?.addEventListener("click",openReview);
+document.getElementById("quickRateBtn")?.addEventListener("click",openReview);
 document.getElementById("closeReviewBtn")?.addEventListener("click",closeReview);
 document.getElementById("reviewLaterBtn")?.addEventListener("click",closeReview);
-document.querySelectorAll(".star-picker button").forEach(button=>button.addEventListener("click",()=>{chosenReviewRating=Number(button.dataset.rating);document.querySelectorAll(".star-picker button").forEach(star=>star.classList.toggle("selected",Number(star.dataset.rating)<=chosenReviewRating));}));
+document.querySelectorAll(".star-picker button").forEach(button=>button.addEventListener("click",()=>{chosenReviewRating=Number(button.dataset.rating);document.querySelectorAll(".star-picker button").forEach(star=>{const active=Number(star.dataset.rating)<=chosenReviewRating;star.classList.toggle("selected",active);star.setAttribute("aria-pressed",String(Number(star.dataset.rating)===chosenReviewRating));});const labels={1:"Needs improvement",2:"Could be better",3:"It was okay",4:"Really good",5:"Excellent!"};const hint=document.getElementById("ratingHint");if(hint)hint.textContent=labels[chosenReviewRating];}));
 reviewForm?.addEventListener("submit",event=>{event.preventDefault();if(!chosenReviewRating){document.getElementById("reviewFeedback").textContent="Please choose a star rating first.";return;}const reviews=getReviews();reviews.push({rating:chosenReviewRating,name:document.getElementById("reviewName").value.trim(),text:document.getElementById("reviewText").value.trim(),date:new Date().toISOString()});try{localStorage.setItem("studySphereReviews",JSON.stringify(reviews.slice(-30)));}catch{}renderReviews();document.getElementById("reviewFeedback").textContent="Thank you! Your review has been saved on this device.";reviewForm.reset();chosenReviewRating=0;document.querySelectorAll(".star-picker button").forEach(star=>star.classList.remove("selected"));setTimeout(()=>{closeReview();if(window.pendingExternalHref){const destination=window.pendingExternalHref;window.pendingExternalHref=null;sessionStorage.setItem("studySphereExitPromptSeen","1");window.location.href=destination;}},1300);});
 renderReviews();
 document.getElementById("exitRateBtn")?.addEventListener("click",openReview);
@@ -1928,6 +2710,8 @@ document.getElementById("doubtForm").addEventListener("submit", async event => {
   }
 });
 </script>
+
+
 
 </body>
 </html>
